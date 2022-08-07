@@ -2,4 +2,4 @@
 
 ## C++
 
-[Effective Modern C++](effective_cpp)
+[Effective Modern C++](cpp/effective_cpp/)

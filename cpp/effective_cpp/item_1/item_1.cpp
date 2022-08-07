@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
   f_ref(cx);   // ParamType: int const&, T: int const
   f_ref(rx);   // ParamType: int const&, T: int const
   f_ref(px);   // ParamType: int const*&, T: int const*
+  // f_ref(27);   // Does not compile
 
   std::cout << std::endl;
 
@@ -50,6 +51,7 @@ int main(int argc, char **argv) {
   f_ptr(&cx);  // ParamType: int const*, T: int const
   f_ptr(&rx);  // ParamType: int const*, T: int const
   f_ptr(px);   // ParamType: int const*, T: int const
+  // f_ptr(27);   // Does not compile
 
   std::cout << std::endl;
   std::cout << "Case 2:" << std::endl;
@@ -67,6 +69,7 @@ int main(int argc, char **argv) {
   f_byval(cx); // ParamType: int, T: int
   f_byval(rx); // ParamType: int, T: int
   f_byval(px); // ParamType: int const*, T: int const*
+  f_byval(27); // ParamType: int, T: int
 
   return 0;
 }

@@ -39,24 +39,24 @@ int main(int argc, char **argv) {
 
   std::cout << "Case 1:" << std::endl;
 
-  f_ref(x);      // ParamType: int&, T: int
-  f_ref(cx);  // ParamType: int const&, T: int const
-  f_ref(rx);  // ParamType: int const&, T: int const
-  f_ref(px);     // ParamType: int const*&, T: int const*
+  f_ref(x);    // ParamType: int&, T: int
+  f_ref(cx);   // ParamType: int const&, T: int const
+  f_ref(rx);   // ParamType: int const&, T: int const
+  f_ref(px);   // ParamType: int const*&, T: int const*
 
   std::cout << std::endl;
 
-  f_ptr(&x);  // ParamType: int*, T: int
-  f_ptr(&cx); // ParamType: int const*, T: int const
-  f_ptr(&rx); // ParamType: int const*, T: int const
-  f_ptr(px);  // ParamType: int const*, T: int const
+  f_ptr(&x);   // ParamType: int*, T: int
+  f_ptr(&cx);  // ParamType: int const*, T: int const
+  f_ptr(&rx);  // ParamType: int const*, T: int const
+  f_ptr(px);   // ParamType: int const*, T: int const
 
   std::cout << std::endl;
   std::cout << "Case 2:" << std::endl;
 
-  f_uref(x);  // ParamType: int&, T: int&
-  f_uref(cx); // ParamType: int const&, T: int const&
-  f_uref(rx); // ParamType: int const&, T: int const&
+  f_uref(x);   // ParamType: int&, T: int&
+  f_uref(cx);  // ParamType: int const&, T: int const&
+  f_uref(rx);  // ParamType: int const&, T: int const&
   f_uref(px);  // ParamType: int const*&, T: int const*&
   f_uref(27);  // ParamType: int&&, T: int
 
@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
   f_byval(x);  // ParamType: int, T: int
   f_byval(cx); // ParamType: int, T: int
   f_byval(rx); // ParamType: int, T: int
-  f_byval(px);  // ParamType: int const*, T: int const*
+  f_byval(px); // ParamType: int const*, T: int const*
 
   return 0;
 }

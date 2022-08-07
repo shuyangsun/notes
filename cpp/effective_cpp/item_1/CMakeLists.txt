@@ -1,1 +1,11 @@
-add_executable(item_1 "item_1/item_1.cpp")
+SET(Boost_USE_STATIC_LIBS OFF)
+SET(Boost_USE_MULTITHREADED ON)
+SET(Boost_USE_STATIC_RUNTIME OFF)
+
+FIND_PACKAGE(Boost 1.79.0 REQUIRED)
+
+IF(Boost_FOUND)
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+    ADD_EXECUTABLE(item_1 "item_1/item_1.cpp")
+    TARGET_LINK_LIBRARIES(item_1 ${Boost_LIBRARIES})
+ENDIF()

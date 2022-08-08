@@ -14,7 +14,7 @@ Deduced type for `T` and `ParamType` varies based on how they are specified and 
 2. Universal reference (`T&&`).
 3. Neither a pointer nor a reference (`T`).
 
-## Case 1: Ref or Pointer
+## Case 1: `ParamType` is Reference or Pointer
 
 1. If `expr`'s type is a reference, ignore the reference part.
 2. Pattern-match `expr`'s type against `ParamType` to determine `T`.

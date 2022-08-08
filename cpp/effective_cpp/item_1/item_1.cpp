@@ -36,6 +36,11 @@ void f_byval(T param) {
   PRINT_DEDUCED_TYPE();
 }
 
+template<typename T>
+void f_cbyval(const T param) {
+  PRINT_DEDUCED_TYPE();
+}
+
 int main(int argc, char **argv) {
   int x = 27;
   const int cx = x;
@@ -83,6 +88,14 @@ int main(int argc, char **argv) {
   f_byval(rx); // ParamType: int, T: int
   f_byval(px); // ParamType: int const*, T: int const*
   f_byval(27); // ParamType: int, T: int
+
+  std::cout << std::endl;
+
+  f_cbyval(x);  // ParamType: int const, T: int
+  f_cbyval(cx); // ParamType: int const, T: int
+  f_cbyval(rx); // ParamType: int const, T: int
+  f_cbyval(px); // ParamType: int const* const, T: int const*
+  f_cbyval(27); // ParamType: int const, T: int
 
   return 0;
 }

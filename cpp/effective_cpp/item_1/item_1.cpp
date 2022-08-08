@@ -108,6 +108,7 @@ int main(int argc, char **argv) {
   f_byval(pc); // ParamType: char const*, T: char const*
   f_byval(ac); // ParamType: char const*, T: char const*
   f_byval(MyFunc); // ParamType: void (*)(int, double), T: void (*)(int, double)
+  // f_byval({1, 2, 3}); // Does not compile
 
   std::cout << std::endl;
 

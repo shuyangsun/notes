@@ -25,11 +25,11 @@ MACRO(SUBDIRLIST result curdir)
     SET(${result} ${dirlist})
 ENDMACRO()
 
-SUBDIRLIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR})
+SUBDIRLIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR}/items)
 
 FOREACH(subdir ${SUBDIRS})
     STRING(REGEX MATCH "^item_[0-9]+$" item_loc "${subdir}")
-    SET(cmake_loc "${CMAKE_CURRENT_SOURCE_DIR}/${subdir}/CMakeLists.txt")
+    SET(cmake_loc "${CMAKE_CURRENT_SOURCE_DIR}/items/${subdir}/CMakeLists.txt")
     IF(NOT "${item_loc}" STREQUAL "" AND EXISTS ${cmake_loc})
         INCLUDE(${cmake_loc})
     ENDIF()

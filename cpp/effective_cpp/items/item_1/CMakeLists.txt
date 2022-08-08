@@ -6,6 +6,6 @@ FIND_PACKAGE(Boost 1.79.0 REQUIRED)
 
 IF(Boost_FOUND)
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-    ADD_EXECUTABLE(item_2 "item_2/item_2.cpp")
-    TARGET_LINK_LIBRARIES(item_2 ${Boost_LIBRARIES})
+    ADD_EXECUTABLE(item_1 "items/item_1/item_1.cpp")
+    TARGET_LINK_LIBRARIES(item_1 ${Boost_LIBRARIES})
 ENDIF()

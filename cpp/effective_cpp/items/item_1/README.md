@@ -93,4 +93,4 @@ void f(T param);
 ## Summary
 `ParamType` determines how types get deduced. Simple cases like `T` and `T&` behave as expected intuitively: `T` always makes a copy (thus the lost of `const` and `volatile`) and `T&` just does pattern matching. The tricky scenario is when `ParamType` is `T&&` (universal reference) and `expr` is an lvalue reference. In this case, both `ParamType` and `T` are deduced to lvalue reference type, this is also the only situation where `T` is deduced to be reference type.
 
-Refer to [item_1.cpp](./item_1.cpp) for actual program output in different situations.
+Refer to [item_1.cpp](item_1.cpp) for actual program output in different situations.

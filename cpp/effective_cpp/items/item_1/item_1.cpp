@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   PLN<__LINE__>(); f_cref(cx);   // ParamType: int const&, T: int
   PLN<__LINE__>(); f_cref(rx);   // ParamType: int const&, T: int
   PLN<__LINE__>(); f_cref(rcx);   // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(27);   // int const&, T: int
+  PLN<__LINE__>(); f_cref(27);   // ParamType: int const&, T: int
   PLN<__LINE__>(); f_cref(pc);   // ParamType: char const* const&, T: char const*
   PLN<__LINE__>(); f_cref(ac);   // ParamType: char const (&) [20], T: char [20]
   PLN<__LINE__>(); f_cref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)

@@ -29,6 +29,11 @@ void f_uref(T&& param) {
   PRINT_DEDUCED_TYPE();
 }
 
+template<typename T>
+void f_curef(const T&& param) {
+  PRINT_DEDUCED_TYPE();
+}
+
 // Case 3:
 
 template<typename T>
@@ -97,6 +102,16 @@ int main(int argc, char **argv) {
   f_uref(pc);  // ParamType: char const* const&, T: char const* const&
   f_uref(ac);  // ParamType: char const (&) [20], T: char const (&) [20]
   f_uref(MyFunc);  // ParamType: void (&)(int, double), T: void (&)(int, double)
+
+  std::cout << std::endl;
+
+  // f_curef(x);   // Does not compile
+  // f_curef(cx);  // Does not compile
+  // f_curef(rx);  // Does not compile
+  f_curef(27);  // ParamType: int const&&, T: int
+  // f_curef(pc);  // Does not compile
+  // f_curef(ac);  // Does not compile
+  f_curef(MyFunc);  // ParamType: void (&&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
   std::cout << "Case 3:" << std::endl;

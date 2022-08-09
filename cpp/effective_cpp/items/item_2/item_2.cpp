@@ -54,15 +54,15 @@ int main(int argc, char **argv) {
   auto x4{27}; // int
   PRINT_TYPE(x4);
 
-  // std::vector<int> vec1 = InitVec();  // Does not compile
+  // std::vector<int> vec1 = InitVec();  // *** COMPILE ERROR ***
   auto vec2 = InitVec<std::vector<int>>();
 
   std::vector<int> v;
   auto reset_v = [&v](const auto& new_value) { v = new_value; };
-  // resetV({1, 2, 3});  // Does not compile
+  // resetV({1, 2, 3});  // *** COMPILE ERROR ***
   reset_v(std::vector<int>{1, 2, 3});
 
-  // ResetV({1, 2, 3});  // Does not compile
+  // ResetV({1, 2, 3});  // *** COMPILE ERROR ***
   ResetV(std::vector<int>{1, 2, 3});
 
   return 0;

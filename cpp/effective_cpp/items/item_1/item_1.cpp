@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
   PLN<__LINE__>(); f_ref(cx);   // ParamType: int const&, T: int const
   PLN<__LINE__>(); f_ref(rx);   // ParamType: int&, T: int
   PLN<__LINE__>(); f_ref(rcx);   // ParamType: int const&, T: int const
-  // PLN<__LINE__>(); f_ref(27);   // Does not compile
+  // PLN<__LINE__>(); f_ref(27);   // *** COMPILE ERROR ***
   PLN<__LINE__>(); f_ref(pc);   // ParamType: char const* const&, T: char const* const
   PLN<__LINE__>(); f_ref(ac);   // ParamType: char const (&) [20], T: char const [20]
   PLN<__LINE__>(); f_ref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
@@ -103,8 +103,8 @@ int main(int argc, char **argv) {
   PLN<__LINE__>(); f_ptr(&cx);  // ParamType: int const*, T: int const
   PLN<__LINE__>(); f_ptr(&rx);  // ParamType: int*, T: int
   PLN<__LINE__>(); f_ptr(&rcx);  // ParamType: int const*, T: int const
-  // PLN<__LINE__>(); f_ptr(27);   // Does not compile
-  // PLN<__LINE__>(); f_ptr(&27);  // Does not compile
+  // PLN<__LINE__>(); f_ptr(27);   // *** COMPILE ERROR ***
+  // PLN<__LINE__>(); f_ptr(&27);  // *** COMPILE ERROR ***
   PLN<__LINE__>(); f_ptr(pc);   // ParamType: char const*, T: char const
   PLN<__LINE__>(); f_ptr(ac);   // ParamType: char const*, T: char const
   PLN<__LINE__>(); f_ptr(MyFunc);   // ParamType: void (*)(int, double), T: void (int, double)
@@ -123,20 +123,20 @@ int main(int argc, char **argv) {
 
   std::cout << std::endl;
 
-  // PLN<__LINE__>(); f_curef(x);   // Does not compile
-  // PLN<__LINE__>(); f_curef(cx);  // Does not compile
-  // PLN<__LINE__>(); f_curef(rx);  // Does not compile
-  // PLN<__LINE__>(); f_curef(rcx);  // Does not compile
+  // PLN<__LINE__>(); f_curef(x);   // *** COMPILE ERROR ***
+  // PLN<__LINE__>(); f_curef(cx);  // *** COMPILE ERROR ***
+  // PLN<__LINE__>(); f_curef(rx);  // *** COMPILE ERROR ***
+  // PLN<__LINE__>(); f_curef(rcx);  // *** COMPILE ERROR ***
   PLN<__LINE__>(); f_curef(27);  // ParamType: int const&&, T: int
-  // PLN<__LINE__>(); f_curef(pc);  // Does not compile
-  // PLN<__LINE__>(); f_curef(ac);  // Does not compile
+  // PLN<__LINE__>(); f_curef(pc);  // *** COMPILE ERROR ***
+  // PLN<__LINE__>(); f_curef(ac);  // *** COMPILE ERROR ***
   PLN<__LINE__>(); f_curef(MyFunc);  // ParamType: void (&&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
-  // f_uref_with_init(x, __LINE__);  // Does not compile
+  // f_uref_with_init(x, __LINE__);  // *** COMPILE ERROR ***
   f_uref_with_init(cx, __LINE__);  // ParamType: int const&, T: int const&
-  // f_uref_with_init(rx, __LINE__);  // Does not compile
+  // f_uref_with_init(rx, __LINE__);  // *** COMPILE ERROR ***
   f_uref_with_init(rcx, __LINE__);  // ParamType: int const&, T: int const&
 
   std::cout << std::endl;
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
   PLN<__LINE__>(); f_byval(pc); // ParamType: char const*, T: char const*
   PLN<__LINE__>(); f_byval(ac); // ParamType: char const*, T: char const*
   PLN<__LINE__>(); f_byval(MyFunc); // ParamType: void (*)(int, double), T: void (*)(int, double)
-  // PLN<__LINE__>(); f_byval({1, 2, 3}); // Does not compile
+  // PLN<__LINE__>(); f_byval({1, 2, 3}); // *** COMPILE ERROR ***
 
   std::cout << std::endl;
 

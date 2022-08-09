@@ -1,15 +1,11 @@
 #include <iostream>
-#include <cstddef>
 #include <boost/type_index.hpp>
+
+#include "cpp_notes/util/print.h"
 
 #define PRINT_DEDUCED_TYPE() std::cout << \
   "ParamType: " << boost::typeindex::type_id_with_cvr<decltype(param)>().pretty_name() << ", " << \
   "T: " << boost::typeindex::type_id_with_cvr<T>().pretty_name() << std::endl;
-
-template<std::size_t N>
-void PLN() { // Print Line Number
-  std::cout << N << ": ";
-}
 
 // Case 1:
 

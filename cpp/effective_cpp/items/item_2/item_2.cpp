@@ -1,7 +1,21 @@
 #include <iostream>
+#include <vector>
+
 #include <boost/type_index.hpp>
 
 #define PRINT_TYPE(x) std::cout << boost::typeindex::type_id_with_cvr<decltype(x)>() << std::endl
+
+std::vector<int> v_global;
+
+template<typename T>
+void ResetV(const T& new_value) {
+  v_global = new_value;
+}
+
+template<typename T>
+T InitVec() {
+  return {1,2, 3};
+}
 
 int main(int argc, char **argv) {
   auto x = 27;  // int
@@ -39,6 +53,17 @@ int main(int argc, char **argv) {
 
   auto x4{27}; // int
   PRINT_TYPE(x4);
+
+  // std::vector<int> vec1 = InitVec();  // Does not compile
+  auto vec2 = InitVec<std::vector<int>>();
+
+  std::vector<int> v;
+  auto reset_v = [&v](const auto& new_value) { v = new_value; };
+  // resetV({1, 2, 3});  // Does not compile
+  reset_v(std::vector<int>{1, 2, 3});
+
+  // ResetV({1, 2, 3});  // Does not compile
+  ResetV(std::vector<int>{1, 2, 3});
 
   return 0;
 }

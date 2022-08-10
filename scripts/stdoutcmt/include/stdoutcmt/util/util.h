@@ -32,6 +32,13 @@ namespace {
 
 } // anonymous namespace
 
+[[nodiscard]] std::string ToLower(const std::string_view& str) {
+  std::string result{str};
+  std::transform(result.begin(), result.end(), result.begin(),
+                 [](unsigned char c){ return std::tolower(c); });
+  return result;
+}
+
 [[nodiscard]] std::vector<std::string_view> ToLines(const std::string_view& content) {
   std::vector<std::string_view> result{};
   std::size_t i{0};

@@ -1,11 +1,11 @@
-#ifndef STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_I_SRC_PARSER_H_
-#define STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_I_SRC_PARSER_H_
+#ifndef STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_INTERFACE_H_
+#define STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_INTERFACE_H_
 
 #include <cstdint>
 #include <string_view>
 #include <unordered_map>
 
-namespace outcmt::parser {
+namespace outcmt::src {
 
 using LineOffsetMap = typename std::unordered_map<std::size_t, int64_t>;
 
@@ -16,6 +16,6 @@ class ISrcParser {
   [[nodiscard]] virtual LineOffsetMap GetCmtLineOffset(const std::vector<std::string_view>& lines) const = 0;
 };
 
-}  // namespace outcmt::parser
+}  // namespace outcmt::src
 
-#endif  // STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_I_SRC_PARSER_H_
+#endif  // STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_INTERFACE_H_

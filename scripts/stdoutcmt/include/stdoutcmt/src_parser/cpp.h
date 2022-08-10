@@ -9,18 +9,21 @@
 #include <string>
 #include <string_view>
 
-#include "stdoutcmt/src_parser/i_src_parser.h"
+#include "stdoutcmt/src_parser/interface.h"
 #include "stdoutcmt/util/util.h"
 
-namespace outcmt::parser {
+namespace outcmt::src {
 
 namespace {
 constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma notes cmtbeg"};
 constexpr std::string_view STDOUT_COMMENT_END{"#pragma notes cmtend"};
 }  // anonymous namespace
 
-class SrcParserCpp: ISrcParser {
+class SrcParserCpp: public ISrcParser {
  public:
+  SrcParserCpp() = default;
+  ~SrcParserCpp() override = default;
+
   [[nodiscard]] LineOffsetMap GetCmtLineOffset(const std::vector<std::string_view>& lines) const final {
     LineOffsetMap result{};
     std::stack<int64_t> s{};
@@ -52,6 +55,6 @@ class SrcParserCpp: ISrcParser {
   }
 };
 
-}  // namespace outcmt::parser
+}  // namespace outcmt::src
 
 #endif  // STDOUTCMT_INCLUDE_STDOUTCMT_SRC_PARSER_CPP_H_

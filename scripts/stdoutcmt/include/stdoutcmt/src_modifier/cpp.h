@@ -6,10 +6,10 @@
 #include <string>
 #include <string_view>
 
-#include "stdoutcmt/src_modifier/i_src_modifier.h"
+#include "stdoutcmt/src_modifier/interface.h"
 #include "stdoutcmt/util/util.h"
 
-namespace outcmt::modifier {
+namespace outcmt::src {
 
 namespace {
 
@@ -44,10 +44,13 @@ constexpr std::string_view IOSTREAM_INCLUSION{"#include<iostream>"};
 
 }  // anonymous namespace
 
-class SrcModifierCpp: ISrcModifier {
+class SrcModifierCpp: public ISrcModifier {
  public:
+  SrcModifierCpp() = default;
+  ~SrcModifierCpp() override = default;
+
   [[nodiscard]] std::vector<std::string> ModifiedLines(const std::vector<std::string_view> &lines,
-                                                       const parser::LineOffsetMap &line_to_offset) const final {
+                                                       const LineOffsetMap &line_to_offset) const final {
     const bool has_iostream{DidIncludeIOStream(lines)};
     int offset_padding{0};
     std::vector<std::string> result{};
@@ -70,6 +73,6 @@ class SrcModifierCpp: ISrcModifier {
   }
 };
 
-}  // namespace outcmt::modifer
+}  // namespace outcmt::src
 
 #endif  // STDOUTCMT_INCLUDE_STDOUTCMT_SRC_MODIFIER_CPP_H_

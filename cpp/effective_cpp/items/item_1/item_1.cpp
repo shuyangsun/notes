@@ -73,60 +73,61 @@ int main(int argc, char **argv) {
 
   std::cout << "Case 1:" << std::endl;
 
-  PLN<__LINE__>(); f_ref(x);    // ParamType: int&, T: int
-  PLN<__LINE__>(); f_ref(cx);   // ParamType: int const&, T: int const
-  PLN<__LINE__>(); f_ref(rx);   // ParamType: int&, T: int
-  PLN<__LINE__>(); f_ref(rcx);   // ParamType: int const&, T: int const
-  // PLN<__LINE__>(); f_ref(27);   // *** COMPILE ERROR ***
-  PLN<__LINE__>(); f_ref(pc);   // ParamType: char const* const&, T: char const* const
-  PLN<__LINE__>(); f_ref(ac);   // ParamType: char const (&) [20], T: char const [20]
-  PLN<__LINE__>(); f_ref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+  #pragma notes cmtbeg
+  f_ref(x);    // ParamType: int&, T: int
+  f_ref(cx);   // ParamType: int const&, T: int const
+  f_ref(rx);   // ParamType: int&, T: int
+  f_ref(rcx);   // ParamType: int const&, T: int const
+  // f_ref(27);   // *** COMPILE ERROR ***
+  f_ref(pc);   // ParamType: char const* const&, T: char const* const
+  f_ref(ac);   // ParamType: char const (&) [20], T: char const [20]
+  f_ref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
-  PLN<__LINE__>(); f_cref(x);    // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(cx);   // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(rx);   // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(rcx);   // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(27);   // ParamType: int const&, T: int
-  PLN<__LINE__>(); f_cref(pc);   // ParamType: char const* const&, T: char const*
-  PLN<__LINE__>(); f_cref(ac);   // ParamType: char const (&) [20], T: char [20]
-  PLN<__LINE__>(); f_cref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+  f_cref(x);    // ParamType: int const&, T: int
+  f_cref(cx);   // ParamType: int const&, T: int
+  f_cref(rx);   // ParamType: int const&, T: int
+  f_cref(rcx);   // ParamType: int const&, T: int
+  f_cref(27);   // ParamType: int const&, T: int
+  f_cref(pc);   // ParamType: char const* const&, T: char const*
+  f_cref(ac);   // ParamType: char const (&) [20], T: char [20]
+  f_cref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
-  PLN<__LINE__>(); f_ptr(&x);   // ParamType: int*, T: int
-  PLN<__LINE__>(); f_ptr(&cx);  // ParamType: int const*, T: int const
-  PLN<__LINE__>(); f_ptr(&rx);  // ParamType: int*, T: int
-  PLN<__LINE__>(); f_ptr(&rcx);  // ParamType: int const*, T: int const
-  // PLN<__LINE__>(); f_ptr(27);   // *** COMPILE ERROR ***
-  // PLN<__LINE__>(); f_ptr(&27);  // *** COMPILE ERROR ***
-  PLN<__LINE__>(); f_ptr(pc);   // ParamType: char const*, T: char const
-  PLN<__LINE__>(); f_ptr(ac);   // ParamType: char const*, T: char const
-  PLN<__LINE__>(); f_ptr(MyFunc);   // ParamType: void (*)(int, double), T: void (int, double)
+  f_ptr(&x);   // ParamType: int*, T: int
+  f_ptr(&cx);  // ParamType: int const*, T: int const
+  f_ptr(&rx);  // ParamType: int*, T: int
+  f_ptr(&rcx);  // ParamType: int const*, T: int const
+  // f_ptr(27);   // *** COMPILE ERROR ***
+  // f_ptr(&27);  // *** COMPILE ERROR ***
+  f_ptr(pc);   // ParamType: char const*, T: char const
+  f_ptr(ac);   // ParamType: char const*, T: char const
+  f_ptr(MyFunc);   // ParamType: void (*)(int, double), T: void (int, double)
 
   std::cout << std::endl;
   std::cout << "Case 2:" << std::endl;
 
-  PLN<__LINE__>(); f_uref(x);   // ParamType: int&, T: int&
-  PLN<__LINE__>(); f_uref(cx);  // ParamType: int const&, T: int const&
-  PLN<__LINE__>(); f_uref(rx);  // ParamType: int&, T: int&
-  PLN<__LINE__>(); f_uref(rcx);  // ParamType: int const&, T: int const&
-  PLN<__LINE__>(); f_uref(27);  // ParamType: int&&, T: int
-  PLN<__LINE__>(); f_uref(pc);  // ParamType: char const* const&, T: char const* const&
-  PLN<__LINE__>(); f_uref(ac);  // ParamType: char const (&) [20], T: char const (&) [20]
-  PLN<__LINE__>(); f_uref(MyFunc);  // ParamType: void (&)(int, double), T: void (&)(int, double)
+  f_uref(x);   // ParamType: int&, T: int&
+  f_uref(cx);  // ParamType: int const&, T: int const&
+  f_uref(rx);  // ParamType: int&, T: int&
+  f_uref(rcx);  // ParamType: int const&, T: int const&
+  f_uref(27);  // ParamType: int&&, T: int
+  f_uref(pc);  // ParamType: char const* const&, T: char const* const&
+  f_uref(ac);  // ParamType: char const (&) [20], T: char const (&) [20]
+  f_uref(MyFunc);  // ParamType: void (&)(int, double), T: void (&)(int, double)
 
   std::cout << std::endl;
 
-  // PLN<__LINE__>(); f_curef(x);   // *** COMPILE ERROR ***
-  // PLN<__LINE__>(); f_curef(cx);  // *** COMPILE ERROR ***
-  // PLN<__LINE__>(); f_curef(rx);  // *** COMPILE ERROR ***
-  // PLN<__LINE__>(); f_curef(rcx);  // *** COMPILE ERROR ***
-  PLN<__LINE__>(); f_curef(27);  // ParamType: int const&&, T: int
-  // PLN<__LINE__>(); f_curef(pc);  // *** COMPILE ERROR ***
-  // PLN<__LINE__>(); f_curef(ac);  // *** COMPILE ERROR ***
-  PLN<__LINE__>(); f_curef(MyFunc);  // ParamType: void (&&)(int, double), T: void (int, double)
+  // f_curef(x);   // *** COMPILE ERROR ***
+  // f_curef(cx);  // *** COMPILE ERROR ***
+  // f_curef(rx);  // *** COMPILE ERROR ***
+  // f_curef(rcx);  // *** COMPILE ERROR ***
+  f_curef(27);  // ParamType: int const&&, T: int
+  // f_curef(pc);  // *** COMPILE ERROR ***
+  // f_curef(ac);  // *** COMPILE ERROR ***
+  f_curef(MyFunc);  // ParamType: void (&&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
@@ -138,26 +139,27 @@ int main(int argc, char **argv) {
   std::cout << std::endl;
   std::cout << "Case 3:" << std::endl;
 
-  PLN<__LINE__>(); f_byval(x);  // ParamType: int, T: int
-  PLN<__LINE__>(); f_byval(cx); // ParamType: int, T: int
-  PLN<__LINE__>(); f_byval(rx); // ParamType: int, T: int
-  PLN<__LINE__>(); f_byval(rcx); // ParamType: int, T: int
-  PLN<__LINE__>(); f_byval(27); // ParamType: int, T: int
-  PLN<__LINE__>(); f_byval(pc); // ParamType: char const*, T: char const*
-  PLN<__LINE__>(); f_byval(ac); // ParamType: char const*, T: char const*
-  PLN<__LINE__>(); f_byval(MyFunc); // ParamType: void (*)(int, double), T: void (*)(int, double)
-  // PLN<__LINE__>(); f_byval({1, 2, 3}); // *** COMPILE ERROR ***
+  f_byval(x);  // ParamType: int, T: int
+  f_byval(cx); // ParamType: int, T: int
+  f_byval(rx); // ParamType: int, T: int
+  f_byval(rcx); // ParamType: int, T: int
+  f_byval(27); // ParamType: int, T: int
+  f_byval(pc); // ParamType: char const*, T: char const*
+  f_byval(ac); // ParamType: char const*, T: char const*
+  f_byval(MyFunc); // ParamType: void (*)(int, double), T: void (*)(int, double)
+  // f_byval({1, 2, 3}); // *** COMPILE ERROR ***
 
   std::cout << std::endl;
 
-  PLN<__LINE__>(); f_cbyval(x);  // ParamType: int const, T: int
-  PLN<__LINE__>(); f_cbyval(cx); // ParamType: int const, T: int
-  PLN<__LINE__>(); f_cbyval(rx); // ParamType: int const, T: int
-  PLN<__LINE__>(); f_cbyval(rcx); // ParamType: int const, T: int
-  PLN<__LINE__>(); f_cbyval(27); // ParamType: int const, T: int
-  PLN<__LINE__>(); f_cbyval(pc); // ParamType: char const* const, T: char const*
-  PLN<__LINE__>(); f_cbyval(ac); // ParamType: char const* const, T: char const*
-  PLN<__LINE__>(); f_cbyval(MyFunc); // ParamType: void (* const)(int, double), T: void (*)(int, double)
+  f_cbyval(x);  // ParamType: int const, T: int
+  f_cbyval(cx); // ParamType: int const, T: int
+  f_cbyval(rx); // ParamType: int const, T: int
+  f_cbyval(rcx); // ParamType: int const, T: int
+  f_cbyval(27); // ParamType: int const, T: int
+  f_cbyval(pc); // ParamType: char const* const, T: char const*
+  f_cbyval(ac); // ParamType: char const* const, T: char const*
+  f_cbyval(MyFunc); // ParamType: void (* const)(int, double), T: void (*)(int, double)
+  #pragma notes cmtend
 
   std::cout << std::endl;
   std::cout << "Array size deduction:" << std::endl;

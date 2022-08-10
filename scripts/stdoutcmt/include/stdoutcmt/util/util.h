@@ -1,0 +1,55 @@
+#ifndef STDOUTCMT_INCLUDE_STDOUTCMT_UTIL_UTIL_H_
+#define STDOUTCMT_INCLUDE_STDOUTCMT_UTIL_UTIL_H_
+
+#include <string_view>
+#include <unordered_set>
+#include <vector>
+
+namespace outcmt::util {
+
+namespace {
+
+[[nodiscard]] std::string_view TrimWS(const std::string_view& str) {
+  constexpr std::string_view ws_chars{" \t\n\r"};
+  std::string_view result{str};
+  const std::string_view::size_type first_non_space{result.find_first_not_of(ws_chars)};
+  result.remove_prefix(first_non_space);
+  const std::string_view::size_type last_non_space{result.find_last_not_of(ws_chars)};
+  result.remove_suffix(result.size() - last_non_space - 1);
+  return result;
+}
+
+[[nodiscard]] uint8_t NewLineCharLen(const std::string_view &content, std::size_t pos) {
+  const char &ch{content.at(pos)};
+  if (ch != '\n' && ch != '\r') {
+    return 0;
+  }
+  if (ch == '\r' && pos < content.length() - 1 && content[pos + 1] == '\n') {
+    return 2;
+  }
+  return 1;
+}
+
+} // anonymous namespace
+
+[[nodiscard]] std::vector<std::string_view> ToLines(const std::string_view& content) {
+  std::vector<std::string_view> result{};
+  std::size_t i{0};
+  std::size_t line_start{0};
+  while (i < content.length()) {
+    const uint8_t newline_len{NewLineCharLen(content, i)};
+    if (newline_len <= 0) {
+      ++i;
+      continue;
+    }
+    result.emplace_back(content.substr(line_start, i - line_start));
+    i += newline_len;
+    line_start = i;
+  }
+  result.emplace_back(content.substr(line_start, i - line_start));
+  return result;
+}
+
+}  // namespace outcmt::util
+
+#endif  // STDOUTCMT_INCLUDE_STDOUTCMT_UTIL_UTIL_H_

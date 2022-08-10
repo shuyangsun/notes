@@ -44,7 +44,7 @@ class SrcParserCpp: public ISrcParser {
           throw std::invalid_argument("Found extra source code comment block end on line " + std::to_string(i) + ".");
         }
         s.pop();
-      } else if (!s.empty()) {
+      } else if (!s.empty() && !cur_line.empty()) {
         result.emplace(i, s.top());
       }
     }

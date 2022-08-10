@@ -1,8 +1,6 @@
 #include <iostream>
 #include <boost/type_index.hpp>
 
-#include "cpp_notes/util/print.h"
-
 #define PRINT_DEDUCED_TYPE() std::cout << \
   "ParamType: " << boost::typeindex::type_id_with_cvr<decltype(param)>().pretty_name() << ", " << \
   "T: " << boost::typeindex::type_id_with_cvr<T>().pretty_name() << std::endl;

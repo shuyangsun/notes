@@ -20,12 +20,6 @@ int main(int argc, char** argv) {
   const std::vector<std::string_view> lines{outcmt::util::ToLines(content)};
   const outcmt::src::LineOffsetMap offset_map{parser->GetCmtLineOffset(lines)};
 
-  for (const auto& [key, value]: offset_map) {
-    std::cout << key << ": " << value << std::endl;
-  }
-
-  std::cout << "***************" << std::endl;
-
   const std::vector<std::string> modified{modifier->ModifiedLines(lines, offset_map)};
   for (const std::string& line: modified) {
     std::cout << line << std::endl;

@@ -3,8 +3,6 @@
 
 #include <boost/type_index.hpp>
 
-#include "cpp_notes/util/print.h"
-
 #define PRINT_TYPE(x) std::cout << boost::typeindex::type_id_with_cvr<decltype(x)>() << std::endl
 
 std::vector<int> v_global;

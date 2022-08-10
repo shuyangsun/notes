@@ -38,7 +38,7 @@ constexpr std::string_view IOSTREAM_INCLUSION{"#include<iostream>"};
   } else {
     result += "(__LINE__ + " + std::to_string(offset) + ")";
   }
-  result += " << \"]:\"; ";
+  result += " << \"]\"; ";
   return result;
 }
 

@@ -16,3 +16,7 @@ add_definitions(${CPP_STANDARD_COMPILE_FLAGS})
 include_directories("include")
 
 add_executable(stdout_cmt "src/main.cpp")
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt")
+    include(${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)
+endif ()

@@ -15,8 +15,43 @@
 namespace outcmt::src {
 
 namespace {
+
 constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma notes cmtbeg"};
 constexpr std::string_view STDOUT_COMMENT_END{"#pragma notes cmtend"};
+
+std::string_view LineWithoutTrailingComment(const std::string_view& line) {
+  if (line.length() > 1 && line.substr(0, 2) == "//") {
+    return line.substr(0, 0);
+  }
+  std::size_t res{0};
+  bool is_in_str{false};
+  for (std::size_t i{0}; i < line.length(); ++i) {
+    const char ch{line[i]};
+    switch (ch) {
+      case '/':
+        if (i < line.length() - 1 && line[i + 1] == '/' && !is_in_str) {
+          return line.substr(0, i);
+        }
+        break;
+      case '"':
+        if (!is_in_str) {
+          is_in_str = true;
+        } else if (i > 0 && line[i - 1] != '\\') {
+          is_in_str = false;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return line;
+}
+
+bool DidLineEndInSemicolon(const std::string_view& line) {
+  const std::string_view no_comment{util::TrimWS(LineWithoutTrailingComment(line))};
+  return !no_comment.empty() && no_comment[no_comment.length() - 1] == ';';
+}
+
 }  // anonymous namespace
 
 class SrcParserCpp: public ISrcParser {
@@ -33,7 +68,8 @@ class SrcParserCpp: public ISrcParser {
         int64_t offset{0};
         if (cur_line.length() > STDOUT_COMMENT_BEG.length()) {
           const std::size_t offset_str_len{cur_line.length() - STDOUT_COMMENT_BEG.length()};
-          const char * const offset_str{cur_line.substr(STDOUT_COMMENT_BEG.length(), offset_str_len).data()};
+          const std::string tmp_str{std::string{cur_line.substr(STDOUT_COMMENT_BEG.length(), offset_str_len)}};
+          const char * const offset_str{tmp_str.c_str()};
           char * pEnd;
           offset = std::strtol(offset_str, &pEnd, 10);
         }

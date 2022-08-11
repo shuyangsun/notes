@@ -13,6 +13,9 @@ namespace {
   constexpr std::string_view ws_chars{" \t\n\r"};
   std::string_view result{str};
   const std::string_view::size_type first_non_space{result.find_first_not_of(ws_chars)};
+  if (first_non_space == std::string_view::npos) {
+    return str.substr(0, 0);
+  }
   result.remove_prefix(first_non_space);
   const std::string_view::size_type last_non_space{result.find_last_not_of(ws_chars)};
   result.remove_suffix(result.size() - last_non_space - 1);
@@ -31,6 +34,10 @@ namespace {
 }
 
 } // anonymous namespace
+
+[[nodiscard]] bool StartsWith(const std::string_view& str, const std::string_view& prefix) {
+  return str.length() >= prefix.length() && str.substr(0, prefix.length()) == prefix;
+}
 
 [[nodiscard]] std::string ToLower(const std::string_view& str) {
   std::string result{str};

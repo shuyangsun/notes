@@ -16,8 +16,9 @@ namespace outcmt::src {
 
 namespace {
 
-constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma notes cmtbeg"};
-constexpr std::string_view STDOUT_COMMENT_END{"#pragma notes cmtend"};
+constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma cmt beg"};
+constexpr std::string_view STDOUT_COMMENT_END{"#pragma cmt end"};
+constexpr std::string_view STDOUT_COMMENT_IGNORE_ONCE{"#pragma cmt ignore_once"};
 
 std::string_view LineWithoutTrailingComment(const std::string_view& line) {
   if (line.length() > 1 && line.substr(0, 2) == "//") {
@@ -62,9 +63,11 @@ class SrcParserCpp: public ISrcParser {
   [[nodiscard]] LineOffsetMap GetCmtLineOffset(const std::vector<std::string_view>& lines) const final {
     LineOffsetMap result{};
     std::stack<int64_t> s{};
+    bool should_ignore{false};
+    std::optional<std::size_t> last_line_non_stmt{};
     for (std::size_t i{0}; i < lines.size(); ++i) {
       const std::string_view cur_line{util::TrimWS(lines[i])};
-      if (cur_line.length() >= STDOUT_COMMENT_BEG.length() && cur_line.substr(0, STDOUT_COMMENT_BEG.length()) == STDOUT_COMMENT_BEG) {
+      if (util::StartsWith(cur_line, STDOUT_COMMENT_BEG)) {
         int64_t offset{0};
         if (cur_line.length() > STDOUT_COMMENT_BEG.length()) {
           const std::size_t offset_str_len{cur_line.length() - STDOUT_COMMENT_BEG.length()};
@@ -75,13 +78,35 @@ class SrcParserCpp: public ISrcParser {
         }
         s.push(offset);
         continue;
-      } else if (cur_line.length() >= STDOUT_COMMENT_END.length() && cur_line.substr(0, STDOUT_COMMENT_END.length()) == STDOUT_COMMENT_END) {
+      } else if (util::StartsWith(cur_line, STDOUT_COMMENT_END)) {
         if (s.empty()) {
           throw std::invalid_argument("Found extra source code comment block end on line " + std::to_string(i) + ".");
         }
         s.pop();
+      } else if (util::StartsWith(cur_line, STDOUT_COMMENT_IGNORE_ONCE)) {
+        should_ignore = true;
       } else if (!s.empty() && !cur_line.empty()) {
-        result.emplace(i, s.top());
+        const bool is_line_stmt{DidLineEndInSemicolon(cur_line)};
+        std::size_t stmt_beg_line_idx{i};
+        int64_t offset{s.top()};
+        if (is_line_stmt) {
+          if (last_line_non_stmt.has_value()) {
+            stmt_beg_line_idx = last_line_non_stmt.value();
+            if (offset >= 0) {
+              offset += static_cast<int64_t>(i - stmt_beg_line_idx);
+            }
+          }
+          last_line_non_stmt.reset();
+        } else {
+          if (!last_line_non_stmt.has_value()) {
+            last_line_non_stmt = i;
+          }
+          continue;
+        }
+        if (!should_ignore) {
+          result.emplace(stmt_beg_line_idx, offset);
+        }
+        should_ignore = false;
       }
     }
     if (!s.empty()) {

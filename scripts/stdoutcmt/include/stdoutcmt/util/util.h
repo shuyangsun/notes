@@ -9,7 +9,10 @@ namespace outcmt::util {
 
 namespace {
 
-[[nodiscard]] std::string_view TrimWS(const std::string_view& str) {
+[[nodiscard]] std::string_view TrimPrefixWS(const std::string_view& str) {
+  if (str.empty()) {
+    return str;
+  }
   constexpr std::string_view ws_chars{" \t\n\r"};
   std::string_view result{str};
   const std::string_view::size_type first_non_space{result.find_first_not_of(ws_chars)};
@@ -17,9 +20,25 @@ namespace {
     return str.substr(0, 0);
   }
   result.remove_prefix(first_non_space);
+  return result;
+}
+
+[[nodiscard]] std::string_view TrimPostfixWS(const std::string_view& str) {
+  if (str.empty()) {
+    return str;
+  }
+  constexpr std::string_view ws_chars{" \t\n\r"};
+  std::string_view result{str};
   const std::string_view::size_type last_non_space{result.find_last_not_of(ws_chars)};
+  if (last_non_space == std::string_view::npos) {
+    return str.substr(0, 0);
+  }
   result.remove_suffix(result.size() - last_non_space - 1);
   return result;
+}
+
+[[nodiscard]] std::string_view TrimWS(const std::string_view& str) {
+  return TrimPostfixWS(TrimPrefixWS(str));
 }
 
 [[nodiscard]] uint8_t NewLineCharLen(const std::string_view &content, std::size_t pos) {

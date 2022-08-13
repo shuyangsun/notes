@@ -2,8 +2,11 @@
 #define STDOUTCMT_INCLUDE_STDOUTCMT_UTIL_UTIL_H_
 
 #include <string_view>
+#include <string>
 #include <unordered_set>
 #include <vector>
+#include <filesystem>
+#include <fstream>
 
 namespace outcmt::util {
 
@@ -81,6 +84,40 @@ namespace {
   }
   result.emplace_back(content.substr(line_start, i - line_start));
   return result;
+}
+
+[[nodiscard]] std::string_view LineWithoutTrailingComment(const std::string_view& line, const std::string_view& comment_header) {
+  const std::size_t cmt_len{comment_header.length()};
+  if (cmt_len <= 0) {
+    throw std::invalid_argument("Comments cannot start with empty string.");
+  }
+  if (line.length() >= cmt_len && line.substr(0, cmt_len) == comment_header) {
+    return line.substr(0, 0);
+  }
+  std::size_t res{0};
+  bool is_in_str{false};
+  for (std::size_t i{0}; i < line.length(); ++i) {
+    const char ch{line[i]};
+    if (ch == comment_header[0]) {
+      if (i <= line.length() - cmt_len && line.substr(i, cmt_len) == comment_header && !is_in_str) {
+        return line.substr(0, i);
+      }
+    } else if (ch == '"') {
+      if (!is_in_str) {
+        is_in_str = true;
+      } else if (i > 0 && line[i - 1] != '\\') {
+        is_in_str = false;
+      }
+    }
+  }
+  return line;
+}
+
+
+[[nodiscard]] std::string Read(const std::filesystem::path& path) {
+  std::ifstream ifs{path};
+  std::string content{(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())};
+  return content;
 }
 
 }  // namespace outcmt::util

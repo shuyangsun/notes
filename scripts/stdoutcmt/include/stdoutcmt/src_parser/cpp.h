@@ -20,36 +20,8 @@ constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma cmt beg"};
 constexpr std::string_view STDOUT_COMMENT_END{"#pragma cmt end"};
 constexpr std::string_view STDOUT_COMMENT_IGNORE_ONCE{"#pragma cmt ignore_once"};
 
-std::string_view LineWithoutTrailingComment(const std::string_view& line) {
-  if (line.length() > 1 && line.substr(0, 2) == "//") {
-    return line.substr(0, 0);
-  }
-  std::size_t res{0};
-  bool is_in_str{false};
-  for (std::size_t i{0}; i < line.length(); ++i) {
-    const char ch{line[i]};
-    switch (ch) {
-      case '/':
-        if (i < line.length() - 1 && line[i + 1] == '/' && !is_in_str) {
-          return line.substr(0, i);
-        }
-        break;
-      case '"':
-        if (!is_in_str) {
-          is_in_str = true;
-        } else if (i > 0 && line[i - 1] != '\\') {
-          is_in_str = false;
-        }
-        break;
-      default:
-        break;
-    }
-  }
-  return line;
-}
-
 bool DidLineEndInSemicolon(const std::string_view& line) {
-  const std::string_view no_comment{util::TrimWS(LineWithoutTrailingComment(line))};
+  const std::string_view no_comment{util::TrimWS(util::LineWithoutTrailingComment(line, "//"))};
   return !no_comment.empty() && no_comment[no_comment.length() - 1] == ';';
 }
 

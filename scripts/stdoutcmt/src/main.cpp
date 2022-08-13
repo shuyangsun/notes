@@ -4,21 +4,17 @@
 #include "stdoutcmt/util/util.h"
 
 #include <iostream>
-#include <fstream>
 #include <string>
 
 int main(int argc, char** argv) {
-  const std::string_view path{"/Users/shuyang/developer/notes/cpp/effective_cpp"};
+  const std::string_view path{"/Users/shuyang/developer/notes/"};
 
   const outcmt::src::SrcCopierFactory copier_factory{};
   const std::unique_ptr<outcmt::src::ISrcCopier> copier{copier_factory.BuildSrcCopier()};
   std::filesystem::path tmp_path{copier->DuplicateDirToTmp(path, false)};
-  tmp_path /= "items/item_1/item_1.cpp";
-  std::cout << "Tmp path: " << tmp_path <<  std::endl;
+  tmp_path /= "cpp/effective_cpp/items/item_1/item_1.cpp";
 
-  std::ifstream ifs(tmp_path);
-  std::string content( (std::istreambuf_iterator<char>(ifs) ),
-                       (std::istreambuf_iterator<char>()    ) );
+  const std::string content{outcmt::util::Read(tmp_path)};
   const outcmt::src::FileType file_type{outcmt::src::GetFileType(tmp_path)};
 
   const outcmt::src::SrcParserFactory parser_factory{};
@@ -30,9 +26,10 @@ int main(int argc, char** argv) {
   const outcmt::src::LineOffsetMap offset_map{parser->GetCmtLineOffset(lines)};
 
   const std::vector<std::string> modified{modifier->ModifiedLines(lines, offset_map)};
-  for (const std::string& line: modified) {
-    std::cout << line << std::endl;
-  }
+  std::cout << modified.size() << std::endl;
+  // for (const std::string& line: modified) {
+  //   std::cout << line << std::endl;
+  // }
 
   return 0;
 }

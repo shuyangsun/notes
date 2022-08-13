@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 
   std::cout << "Case 1:" << std::endl;
 
-  #pragma notes cmtbeg
+  #pragma cmt beg
   f_ref(x);    // ParamType: int&, T: int
   f_ref(cx);   // ParamType: int const&, T: int const
   f_ref(rx);   // ParamType: int&, T: int
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
   f_cbyval(pc); // ParamType: char const* const, T: char const*
   f_cbyval(ac); // ParamType: char const* const, T: char const*
   f_cbyval(MyFunc); // ParamType: void (* const)(int, double), T: void (*)(int, double)
-  #pragma notes cmtend
+  #pragma cmt end
 
   std::cout << std::endl;
   std::cout << "Array size deduction:" << std::endl;

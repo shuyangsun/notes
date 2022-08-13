@@ -113,11 +113,45 @@ namespace {
   return line;
 }
 
+bool Replace(std::string& str, const std::string_view& from, const std::string_view& to) {
+  const std::size_t start_pos{str.find(from)};
+  if (start_pos == std::string::npos) {
+    return false;
+  }
+  str.replace(start_pos, from.length(), to);
+  return true;
+}
 
 [[nodiscard]] std::string Read(const std::filesystem::path& path) {
   std::ifstream ifs{path};
   std::string content{(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())};
+  ifs.close();
   return content;
+}
+
+void ClearContent(const std::filesystem::path& path) {
+  std::ofstream ofs;
+  ofs.open(path, std::ofstream::out | std::ofstream::trunc);
+  ofs.close();
+}
+
+void Write(const std::filesystem::path& path, const std::string_view& content) {
+  std::ofstream ofs;
+  ofs.open (path);
+  ofs << content;
+  ofs.close();
+}
+
+template<typename T>
+[[nodiscard]] std::string Join(const std::vector<T>& strs, const std::string_view& delim) {
+  std::string result{};
+  for (std::size_t i{0}; i < strs.size(); ++i) {
+    result += strs[i];
+    if (i < strs.size() - 1) {
+      result += delim;
+    }
+  }
+  return result;
 }
 
 }  // namespace outcmt::util

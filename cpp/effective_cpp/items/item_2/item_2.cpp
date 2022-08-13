@@ -19,7 +19,7 @@ T InitVec() {
 
 int main(int argc, char **argv) {
 
-  #pragma notes cmtbeg -1
+  #pragma cmt beg -1
   auto x = 27;  // int
   PRINT_TYPE(x);
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   // std::vector<int> vec1 = InitVec();  // *** COMPILE ERROR ***
   auto vec2 = InitVec<std::vector<int>>();
   PRINT_TYPE(vec2);
-  #pragma notes cmtend
+  #pragma cmt end
 
   std::vector<int> v;
   auto reset_v = [&v](const auto& new_value) { v = new_value; };

@@ -1,6 +1,7 @@
 #ifndef STDOUTCMT_INCLUDE_STDOUTCMT_SRC_MODIFIER_CPP_H_
 #define STDOUTCMT_INCLUDE_STDOUTCMT_SRC_MODIFIER_CPP_H_
 
+#include <cmath>
 #include <cstdint>
 #include <optional>
 #include <string>
@@ -31,12 +32,14 @@ constexpr std::string_view IOSTREAM_INCLUSION{"#include<iostream>"};
   return false;
 }
 
-[[nodiscard]] std::string FileAndLinePrintStmt(const std::size_t offset) {
+[[nodiscard]] std::string FileAndLinePrintStmt(const int64_t offset) {
   std::string result{"std::cout << '[' << __FILE__ << ':' << "};
   if (offset == 0) {
     result += "__LINE__";
-  } else {
+  } else if (offset > 0) {
     result += "(__LINE__ + " + std::to_string(offset) + ")";
+  } else {
+    result += "(__LINE__ - " + std::to_string(std::abs(offset)) + ")";
   }
   result += " << \"]:\"; ";
   return result;

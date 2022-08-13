@@ -57,6 +57,18 @@ TEST(Utility, TrimWS_7) {
   EXPECT_STREQ(res.c_str(), "Hello");
 }
 
+TEST(Utility, CommentRemoval_1) {
+  const std::string str{"// f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
+  const std::string res{util::LineWithoutTrailingComment(str, "//")};
+  EXPECT_STREQ(res.c_str(), "");
+}
+
+TEST(Utility, CommentRemoval_2) {
+  const std::string str{"  // f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
+  const std::string res{util::LineWithoutTrailingComment(str, "//")};
+  EXPECT_STREQ(res.c_str(), "  ");
+}
+
 TEST(Parser, Cpp_1) {
   const std::vector<std::string_view> lines{
       "int main(int argc, char** argv) {",

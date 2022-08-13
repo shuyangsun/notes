@@ -6,6 +6,7 @@
 
 #include "stdoutcmt/src_copier/common.h"
 #include "stdoutcmt/src_copier/modifier_wrapper.h"
+#include "stdoutcmt/src_parser/factory.h"
 #include "stdoutcmt/src_modifier/factory.h"
 #include "stdoutcmt/src_type/src_type.h"
 
@@ -23,13 +24,16 @@ class SrcCopierFactory {
   [[nodiscard]] std::unique_ptr<ISrcCopier> BuildSrcCopierWithModifiers() const {
     auto res = std::make_unique<SrcModifyThenCopy>(this->BuildSrcCopier());
 
-    std::unordered_map<FileType, std::unique_ptr<ISrcModifier>> modifier_map{};
+    SrcParserFactory parser_factory{};
     SrcModifierFactory modifier_factory{};
     const std::array<FileType, 1> file_types{FileType::Cpp};
     for (const auto& ele: file_types) {
-      modifier_map.emplace(ele, modifier_factory.BuildSrcModifier(ele));
+      ParserAndModifier cur{
+          parser_factory.BuildSrcParser(ele),
+        modifier_factory.BuildSrcModifier(ele)
+      };
+      res->AddModifiers(ele, std::move(cur));
     }
-    res->AddModifiers(std::move(modifier_map));
 
     return res;
   }

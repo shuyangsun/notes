@@ -20,9 +20,9 @@ constexpr std::string_view STDOUT_COMMENT_BEG{"#pragma cmt beg"};
 constexpr std::string_view STDOUT_COMMENT_END{"#pragma cmt end"};
 constexpr std::string_view STDOUT_COMMENT_IGNORE_ONCE{"#pragma cmt ignore_once"};
 
-bool DidLineEndInSemicolon(const std::string_view& line) {
+bool IsLineEndingStmt(const std::string_view& line) {
   const std::string_view no_comment{util::TrimWS(util::LineWithoutTrailingComment(line, "//"))};
-  return !no_comment.empty() && no_comment[no_comment.length() - 1] == ';';
+  return no_comment.empty() || no_comment[no_comment.length() - 1] == ';';
 }
 
 }  // anonymous namespace
@@ -58,7 +58,7 @@ class SrcParserCpp: public ISrcParser {
       } else if (util::StartsWith(cur_line, STDOUT_COMMENT_IGNORE_ONCE)) {
         should_ignore = true;
       } else if (!s.empty() && !cur_line.empty()) {
-        const bool is_line_stmt{DidLineEndInSemicolon(cur_line)};
+        const bool is_line_stmt{IsLineEndingStmt(cur_line)};
         std::size_t stmt_beg_line_idx{i};
         int64_t offset{s.top()};
         if (is_line_stmt) {

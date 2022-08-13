@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <cctype>
 #include <filesystem>
-#include <string_view>
 
 #include "stdoutcmt/util/util.h"
 
@@ -15,8 +14,7 @@ enum class FileType {
   Cpp,
 };
 
-[[nodiscard]] FileType GetFileType(const std::string_view& file_name) {
-  std::filesystem::path path{file_name};
+[[nodiscard]] FileType GetFileType(const std::filesystem::path& path) {
   std::string extension{util::ToLower(path.extension().c_str())};
   if (extension == ".h"
       || extension == ".hpp"

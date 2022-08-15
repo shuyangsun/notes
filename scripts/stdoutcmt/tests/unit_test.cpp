@@ -5,10 +5,12 @@
 
 #include "stdoutcmt/util/util.h"
 #include "stdoutcmt/src_parser/factory.h"
+#include "stdoutcmt/output_parser/parser.h"
 
 using namespace outcmt;
 
-const std::unique_ptr<src::SrcParserCpp> PARSER_CPP{};
+const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
+const output::OutputParser OUTPUT_PARSER_CPP{};
 
 TEST(Utility, TrimWS_1) {
   const std::string str{};
@@ -69,7 +71,7 @@ TEST(Utility, CommentRemoval_2) {
   EXPECT_STREQ(res.c_str(), "  ");
 }
 
-TEST(Parser, Cpp_1) {
+TEST(SrcParser, Cpp_1) {
   const std::vector<std::string_view> lines{
       "int main(int argc, char** argv) {",
       "  #pragma cmt beg",
@@ -79,12 +81,12 @@ TEST(Parser, Cpp_1) {
       "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(2), 0);
 }
 
-TEST(Parser, Cpp_3) {
+TEST(SrcParser, Cpp_3) {
   const std::vector<std::string_view> lines{
       "#include <iostream>",
       "",
@@ -96,13 +98,13 @@ TEST(Parser, Cpp_3) {
       "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(4), 0);
 }
 
 
-TEST(Parser, Cpp_4) {
+TEST(SrcParser, Cpp_4) {
   const std::vector<std::string_view> lines{
       "#include <iostream>",
       "",
@@ -115,13 +117,13 @@ TEST(Parser, Cpp_4) {
       "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 2);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
 }
 
-TEST(Parser, Cpp_5) {
+TEST(SrcParser, Cpp_5) {
   const std::vector<std::string_view> lines{
       "#include <iostream>",
       "",
@@ -137,13 +139,13 @@ TEST(Parser, Cpp_5) {
       "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 2);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
 }
 
-TEST(Parser, Cpp_6) {
+TEST(SrcParser, Cpp_6) {
   const std::vector<std::string_view> lines{
       /*  0 */ "#include <iostream>",
       /*  1 */ "",
@@ -164,7 +166,7 @@ TEST(Parser, Cpp_6) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
@@ -172,7 +174,7 @@ TEST(Parser, Cpp_6) {
   EXPECT_EQ(res.at(13), -1);
 }
 
-TEST(Parser, Cpp_7) {
+TEST(SrcParser, Cpp_7) {
   const std::vector<std::string_view> lines{
       /*  0 */ "#include <iostream>",
       /*  1 */ "",
@@ -193,7 +195,7 @@ TEST(Parser, Cpp_7) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), 0);
   EXPECT_EQ(res.at(5), 3);
@@ -201,7 +203,7 @@ TEST(Parser, Cpp_7) {
   EXPECT_EQ(res.at(13), 0);
 }
 
-TEST(Parser, Cpp_8) {
+TEST(SrcParser, Cpp_8) {
   const std::vector<std::string_view> lines{
       /*  0 */ "#include <iostream>",
       /*  1 */ "",
@@ -222,10 +224,27 @@ TEST(Parser, Cpp_8) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), 0);
   EXPECT_EQ(res.at(10), 0);
   EXPECT_EQ(res.at(11), 0);
   EXPECT_EQ(res.at(13), 0);
+}
+
+TEST(OutputParser, Cpp_1) {
+  const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
+  // TODO
+}
+
+TEST(OutputParser, Cpp_Unix_1) {
+  const output::OutputParser parser{"/private/var/src_code"};
+  const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
+  // TODO
+}
+
+TEST(OutputParser, Cpp_Windows_1) {
+  const output::OutputParser parser{R"(C:\Windows\Program Files\SourceCode)"};
+  const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
+  // TODO
 }

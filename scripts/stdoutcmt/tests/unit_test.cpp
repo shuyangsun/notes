@@ -244,7 +244,7 @@ TEST(OutputParser, Cpp_Unix_1) {
 }
 
 TEST(OutputParser, Cpp_Windows_1) {
-  const output::OutputParser parser{R"(C:\Windows\Program Files\SourceCode)"};
+  const output::OutputParser parser{"C:\\Windows\\Program Files\\SourceCode"};
   const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
   // TODO
 }

@@ -19,7 +19,7 @@ class OutputParser{
   OutputParser(): cmt_regex_{"\\[.+:[1-9][0-9]*\\]:"} {};
   OutputParser(const std::filesystem::path& tmp_dir_path) {
     std::string escaped{tmp_dir_path};
-    // util::Replace(escaped, "\\", "\\\\");
+    util::Replace(escaped, "\\", "\\\\");
     util::Replace(escaped, "/", "\\/");
     std::stringstream ss;
     ss << "\\[";

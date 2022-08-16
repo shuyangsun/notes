@@ -123,6 +123,21 @@ void Replace(std::string& str, const std::string_view& from, const std::string_v
   }
 }
 
+std::vector<std::string_view> Split(const std::string_view& str, const std::string_view& delim) {
+  std::vector<std::string_view> result{};
+  std::size_t start_pos{0};
+  std::size_t search_pos{str.find(delim, start_pos)};
+  while (search_pos != std::string::npos) {
+    result.emplace_back(str.substr(start_pos, search_pos));
+    start_pos = search_pos + delim.length();
+    search_pos = str.find(delim, start_pos);
+  }
+  if (start_pos < str.length()) {
+    result.emplace_back(str.substr(start_pos, str.length() - start_pos));
+  }
+  return result;
+}
+
 [[nodiscard]] std::string Read(const std::filesystem::path& path) {
   std::ifstream ifs{path};
   std::string content{(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())};

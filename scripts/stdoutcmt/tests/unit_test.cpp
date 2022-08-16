@@ -233,8 +233,16 @@ TEST(SrcParser, Cpp_8) {
 }
 
 TEST(OutputParser, Cpp_1) {
-  const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
-  // TODO
+  const output::CommentMap result{OUTPUT_PARSER_CPP.Parse(
+      "int const&, T: int const&\n"
+      "Value of T{}: 0\n"
+      "[/tmp/src_code/items/item_1/item_1.cpp:137]:\n"
+      "[/tmp/src_code/items/item_1/item_1.cpp:138]:Case 3:\n"
+      "[/tmp/src_code/items/item_1/item_1.cpp:140]:ParamType: int, T: int"
+  )};
+  EXPECT_EQ(result.size(), 1);
+  const auto& item_1{result.at("/tmp/src_code/items/item_1/item_1.cpp")};
+  EXPECT_EQ(item_1.size(), 2);
 }
 
 TEST(OutputParser, Cpp_Unix_1) {

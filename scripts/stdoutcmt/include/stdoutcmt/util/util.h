@@ -113,13 +113,14 @@ namespace {
   return line;
 }
 
-bool Replace(std::string& str, const std::string_view& from, const std::string_view& to) {
-  const std::size_t start_pos{str.find(from)};
-  if (start_pos == std::string::npos) {
-    return false;
+void Replace(std::string& str, const std::string_view& from, const std::string_view& to) {
+  std::size_t start_pos{0};
+  std::size_t search_pos{str.find(from, start_pos)};
+  while (search_pos != std::string::npos) {
+    str.replace(search_pos, from.length(), to);
+    start_pos = search_pos + to.length();
+    search_pos = str.find(from, start_pos);
   }
-  str.replace(start_pos, from.length(), to);
-  return true;
 }
 
 [[nodiscard]] std::string Read(const std::filesystem::path& path) {

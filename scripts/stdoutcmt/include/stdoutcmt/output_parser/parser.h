@@ -57,17 +57,17 @@ class OutputParser{
           continue;
         }
       }
-      std::size_t newline_pos{content.find('\r', cmt_start_pos)};
-      if (newline_pos == std::string::npos) {
-        newline_pos = content.find('\n', cur_pos + cur_len);
+      std::size_t cmt_end_pos{content.find('\r', cmt_start_pos)};
+      if (cmt_end_pos == std::string::npos) {
+        cmt_end_pos = content.find('\n', cur_pos + cur_len);
       }
-      if (newline_pos == std::string::npos) {
-        newline_pos = content.length();
+      if (cmt_end_pos == std::string::npos) {
+        cmt_end_pos = content.length();
       }
       if (next_match_pos.has_value()) {
-        newline_pos = std::min(newline_pos, next_match_pos.value());
+        cmt_end_pos = std::min(cmt_end_pos, next_match_pos.value());
       }
-      const std::string_view cur_cmt{content.substr(cmt_start_pos, newline_pos - cmt_start_pos)};
+      const std::string_view cur_cmt{content.substr(cmt_start_pos, cmt_end_pos - cmt_start_pos)};
       if (cur_cmt.empty()) {
         continue;
       }

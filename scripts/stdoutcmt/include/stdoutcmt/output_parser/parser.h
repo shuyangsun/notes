@@ -7,6 +7,8 @@
 #include <map>
 #include <regex>
 #include <sstream>
+#include <optional>
+#include <cmath>
 
 #include "stdoutcmt/util/util.h"
 
@@ -48,9 +50,10 @@ class OutputParser{
       const std::size_t cur_pos{std::get<0>(match_pos[i])};
       const std::size_t cur_len{std::get<1>(match_pos[i])};
       const std::size_t cmt_start_pos{cur_pos + cur_len};
+      std::optional<std::size_t> next_match_pos{};
       if (i < match_pos.size() - 1) {
-        const std::size_t next_pos{std::get<0>(match_pos[i + 1])};
-        if (cmt_start_pos == next_pos) {
+        next_match_pos = std::get<0>(match_pos[i + 1]);
+        if (cmt_start_pos == next_match_pos) {
           continue;
         }
       }
@@ -60,6 +63,9 @@ class OutputParser{
       }
       if (newline_pos == std::string::npos) {
         newline_pos = content.length();
+      }
+      if (next_match_pos.has_value()) {
+        newline_pos = std::min(newline_pos, next_match_pos.value());
       }
       const std::string_view cur_cmt{content.substr(cmt_start_pos, newline_pos - cmt_start_pos)};
       if (cur_cmt.empty()) {

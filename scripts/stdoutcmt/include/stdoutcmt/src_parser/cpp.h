@@ -21,7 +21,7 @@ constexpr std::string_view STDOUT_COMMENT_END{"#pragma cmt end"};
 constexpr std::string_view STDOUT_COMMENT_IGNORE_ONCE{"#pragma cmt ignore_once"};
 
 bool IsLineEndingStmt(const std::string_view& line) {
-  const std::string_view no_comment{util::TrimWS(util::LineWithoutTrailingComment(line, "//"))};
+  const std::string_view no_comment{util::TrimWS(std::get<0>(util::LineToCodeCmt(line, "//")))};
   return no_comment.empty() || no_comment[no_comment.length() - 1] == ';';
 }
 

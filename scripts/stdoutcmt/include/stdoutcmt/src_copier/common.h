@@ -34,7 +34,7 @@ using IgnoreSet = typename std::vector<std::unordered_set<std::string>>;
   std::unordered_set<std::string> result{};
   const std::string content{util::Read(ignore_path)};
   for (const auto& line: util::ToLines(content)) {
-    const std::string_view& line_no_comment{util::TrimWS(util::LineWithoutTrailingComment(line, "#"))};
+    const std::string_view& line_no_comment{util::TrimWS(std::get<0>(util::LineToCodeCmt(line, "#")))};
     if (!line_no_comment.empty()) {
       result.emplace(line_no_comment);
     }

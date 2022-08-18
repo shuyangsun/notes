@@ -1,25 +1,27 @@
 #ifndef STDOUTCMT_INCLUDE_STDOUTCMT_OUTPUT_PARSER_PARSER_H_
 #define STDOUTCMT_INCLUDE_STDOUTCMT_OUTPUT_PARSER_PARSER_H_
 
-#include <string_view>
+#include <cmath>
 #include <filesystem>
-#include <unordered_map>
 #include <map>
+#include <optional>
 #include <regex>
 #include <sstream>
-#include <optional>
-#include <cmath>
+#include <string_view>
+#include <unordered_map>
 
 #include "stdoutcmt/util/util.h"
 
 namespace outcmt::output {
 
-using CommentMap = typename std::unordered_map<std::string, std::map<std::size_t, std::string_view>>;
+using CommentMap =
+    typename std::unordered_map<std::string,
+                                std::map<std::size_t, std::string_view>>;
 
-class OutputParser{
+class OutputParser {
  public:
-  OutputParser(): cmt_regex_{"\\[.+:[1-9][0-9]*\\]:"} {};
-  OutputParser(const std::filesystem::path& tmp_dir_path) {
+  OutputParser() : cmt_regex_{"\\[.+:[1-9][0-9]*\\]:"} {};
+  explicit OutputParser(const std::filesystem::path& tmp_dir_path) {
     std::string escaped{tmp_dir_path};
     util::Replace(escaped, "\\", "\\\\");
     util::Replace(escaped, "/", "\\/");
@@ -67,19 +69,23 @@ class OutputParser{
       if (next_match_pos.has_value()) {
         cmt_end_pos = std::min(cmt_end_pos, next_match_pos.value());
       }
-      const std::string_view cur_cmt{content.substr(cmt_start_pos, cmt_end_pos - cmt_start_pos)};
+      const std::string_view cur_cmt{
+          content.substr(cmt_start_pos, cmt_end_pos - cmt_start_pos)};
       if (cur_cmt.empty()) {
         continue;
       }
-      const std::vector<std::string_view> fname_linenum{util::Split(content.substr(cur_pos + 1, cur_len - 3), ":")};
+      const std::vector<std::string_view> fname_linenum{
+          util::Split(content.substr(cur_pos + 1, cur_len - 3), ":")};
       std::string file_name{fname_linenum.at(0)};
       std::string line_number{fname_linenum.at(1)};
-      const char * const line_number_str{line_number.c_str()};
-      char * pEnd{nullptr};
-      const std::size_t line_num{static_cast<std::size_t>(std::strtol(line_number_str, &pEnd, 10))};
+      const char* const line_number_str{line_number.c_str()};
+      char* pEnd{nullptr};
+      const std::size_t line_num{
+          static_cast<std::size_t>(std::strtol(line_number_str, &pEnd, 10))};
 
       if (result.find(file_name) == result.end()) {
-        result.emplace(file_name, std::map<std::size_t, std::string_view>{{line_num, cur_cmt}});
+        result.emplace(file_name, std::map<std::size_t, std::string_view>{
+                                      {line_num, cur_cmt}});
       } else {
         result[file_name].emplace(line_num, cur_cmt);
       }

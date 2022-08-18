@@ -7,6 +7,7 @@
 #include <vector>
 #include <filesystem>
 #include <fstream>
+#include <utility>
 
 namespace outcmt::util {
 
@@ -86,13 +87,14 @@ namespace {
   return result;
 }
 
-[[nodiscard]] std::string_view LineWithoutTrailingComment(const std::string_view& line, const std::string_view& comment_header) {
+[[nodiscard]] std::pair<std::string_view, std::string_view> LineToCodeCmt(const std::string_view& line, const std::string_view& comment_header, const std::unordered_set<char>& str_quotes = {'"'}) {
   const std::size_t cmt_len{comment_header.length()};
   if (cmt_len <= 0) {
     throw std::invalid_argument("Comments cannot start with empty string.");
   }
+  std::string_view empty_str{line.substr(0, 0)};
   if (line.length() >= cmt_len && line.substr(0, cmt_len) == comment_header) {
-    return line.substr(0, 0);
+    return std::make_pair(empty_str, empty_str);
   }
   std::size_t res{0};
   bool is_in_str{false};
@@ -100,9 +102,9 @@ namespace {
     const char ch{line[i]};
     if (ch == comment_header[0]) {
       if (i <= line.length() - cmt_len && line.substr(i, cmt_len) == comment_header && !is_in_str) {
-        return line.substr(0, i);
+        return std::make_pair(line.substr(0, i), line.substr(i, line.length() - i));
       }
-    } else if (ch == '"') {
+    } else if (str_quotes.find(ch) != str_quotes.end()) {  // TODO: need to track first char to handle " a ' # fake cmt ' c " in Python
       if (!is_in_str) {
         is_in_str = true;
       } else if (i > 0 && line[i - 1] != '\\') {
@@ -110,7 +112,7 @@ namespace {
       }
     }
   }
-  return line;
+  return std::make_pair(line.substr(0, line.length()), empty_str);
 }
 
 void Replace(std::string& str, const std::string_view& from, const std::string_view& to) {

@@ -5,11 +5,11 @@
 #include "stdoutcmt/util/util.h"
 
 int main(int argc, char** argv) {
-
   if (argc == 3 && std::strcmp(argv[1], "--copy") == 0) {
     const std::string_view path{argv[2]};
     const outcmt::src::SrcCopierFactory copier_factory{};
-    const std::unique_ptr<outcmt::src::ISrcCopier> copier{copier_factory.BuildSrcCopierWithModifiers()};
+    const std::unique_ptr<outcmt::src::ISrcCopier> copier{
+        copier_factory.BuildSrcCopierWithModifiers()};
     std::filesystem::path tmp_path{copier->DuplicateDirToTmp(path, true)};
 
     std::cout << tmp_path.string();

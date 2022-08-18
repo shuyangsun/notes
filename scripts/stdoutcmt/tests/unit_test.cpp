@@ -3,14 +3,16 @@
 #include <memory>
 #include <string_view>
 
-#include "stdoutcmt/util/util.h"
-#include "stdoutcmt/src_parser/factory.h"
 #include "stdoutcmt/output_parser/parser.h"
+#include "stdoutcmt/src_parser/factory.h"
+#include "stdoutcmt/cmt_modifier/factory.h"
+#include "stdoutcmt/util/util.h"
 
 using namespace outcmt;
 
 const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
 const output::OutputParser OUTPUT_PARSER_CPP{};
+const src::CmtModifier CMT_MODIFIER_CPP{src::CmtModifierFactory{}.BuildModifier(src::FileType::Cpp)};
 
 TEST(Utility, TrimWS_1) {
   const std::string str{};
@@ -61,13 +63,13 @@ TEST(Utility, TrimWS_7) {
 
 TEST(Utility, CommentRemoval_1) {
   const std::string str{"// f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{util::LineWithoutTrailingComment(str, "//")};
+  const std::string res{std::get<0>(util::LineToCodeCmt(str, "//"))};
   EXPECT_STREQ(res.c_str(), "");
 }
 
 TEST(Utility, CommentRemoval_2) {
   const std::string str{"  // f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{util::LineWithoutTrailingComment(str, "//")};
+  const std::string res{std::get<0>(util::LineToCodeCmt(str, "//"))};
   EXPECT_STREQ(res.c_str(), "  ");
 }
 
@@ -81,7 +83,7 @@ TEST(SrcParser, Cpp_1) {
       "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(2), 0);
 }
@@ -98,11 +100,10 @@ TEST(SrcParser, Cpp_3) {
       "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(4), 0);
 }
-
 
 TEST(SrcParser, Cpp_4) {
   const std::vector<std::string_view> lines{
@@ -117,7 +118,7 @@ TEST(SrcParser, Cpp_4) {
       "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 2);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
@@ -139,7 +140,7 @@ TEST(SrcParser, Cpp_5) {
       "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 2);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
@@ -151,7 +152,7 @@ TEST(SrcParser, Cpp_6) {
       /*  1 */ "",
       /*  2 */ "int main(int argc, char** argv) {",
       /*  3 */ "  #pragma cmt beg -1",
-      /*  4 */ "  const int x{0};",  // <--
+      /*  4 */ "  const int x{0};",                // <--
       /*  5 */ "  std::cout  // Random comment.",  // <--
       /*  6 */ "    << x",
       /*  7 */ "    << std::e\\",
@@ -166,7 +167,7 @@ TEST(SrcParser, Cpp_6) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), -1);
   EXPECT_EQ(res.at(5), -1);
@@ -180,7 +181,7 @@ TEST(SrcParser, Cpp_7) {
       /*  1 */ "",
       /*  2 */ "int main(int argc, char** argv) {",
       /*  3 */ "  #pragma cmt beg",
-      /*  4 */ "  const int x{0};",  // <--
+      /*  4 */ "  const int x{0};",                // <--
       /*  5 */ "  std::cout  // Random comment.",  // <--
       /*  6 */ "    << x",
       /*  7 */ "    << std::e\\",
@@ -195,7 +196,7 @@ TEST(SrcParser, Cpp_7) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), 0);
   EXPECT_EQ(res.at(5), 3);
@@ -215,7 +216,7 @@ TEST(SrcParser, Cpp_8) {
       /*  7 */ "    << x",
       /*  8 */ "    << std::e\\",
       /*  9 */ "ndl;",
-      /* 10 */ "  const int y{0};",  // <--
+      /* 10 */ "  const int y{0};",               // <--
       /* 11 */ "  std::cout << y << std::endl;",  // <--
       /* 12 */ "",
       /* 13 */ "  const int _dymmy{};",  // <--
@@ -224,7 +225,7 @@ TEST(SrcParser, Cpp_8) {
       /* 16 */ "}",
   };
 
-  const src::LineOffsetMap res {SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
   EXPECT_EQ(res.size(), 4);
   EXPECT_EQ(res.at(4), 0);
   EXPECT_EQ(res.at(10), 0);
@@ -238,8 +239,7 @@ TEST(OutputParser, Cpp_1) {
       "Value of T{}: 0\n"
       "[/tmp/src_code/items/item_1/item_1.cpp:137]:\n"
       "[/tmp/src_code/items/item_1/item_1.cpp:138]:Case 3:\n"
-      "[/tmp/src_code/items/item_1/item_1.cpp:140]:ParamType: int, T: int"
-  )};
+      "[/tmp/src_code/items/item_1/item_1.cpp:140]:ParamType: int, T: int")};
   EXPECT_EQ(result.size(), 1);
   const auto& item_1{result.at("/tmp/src_code/items/item_1/item_1.cpp")};
   EXPECT_EQ(item_1.size(), 2);
@@ -255,4 +255,31 @@ TEST(OutputParser, Cpp_Windows_1) {
   const output::OutputParser parser{"C:\\Windows\\Program Files\\SourceCode"};
   const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
   // TODO
+}
+
+TEST(CmtModifier, Cpp_1) {
+  const std::string content{
+      "#include <iostream>"
+      ""
+      "int main(int argc, char** argv) {"
+      "  #pragma cmt beg"
+      "  const int x{0}; std::cout << x << std::endl;"
+      "  #pragma cmt end"
+      "  return 0;"
+      "}"
+  };
+  const std::string result{CMT_MODIFIER_CPP.ParseAndReplaceComments(content, {
+      {5, "example comment"}
+  }, true)};
+  const std::string expected{
+      "#include <iostream>"
+      ""
+      "int main(int argc, char** argv) {"
+      "  #pragma cmt beg"
+      "  const int x{0}; std::cout << x << std::endl; //> example comment"
+      "  #pragma cmt end"
+      "  return 0;"
+      "}"
+  };
+  EXPECT_STREQ(result.c_str(), expected.c_str());
 }

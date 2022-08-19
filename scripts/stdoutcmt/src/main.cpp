@@ -2,6 +2,8 @@
 #include <string>
 
 #include "stdoutcmt/src_copier/factory.h"
+#include "stdoutcmt/output_parser/parser.h"
+#include "stdoutcmt/cmt_modifier/factory.h"
 #include "stdoutcmt/util/util.h"
 
 int main(int argc, char** argv) {
@@ -21,6 +23,20 @@ int main(int argc, char** argv) {
     std::cout << src_path << std::endl;
     std::cout << tmp_path << std::endl;
     std::cout << output << std::endl;
+
+    const outcmt::output::OutputParser output_parser{tmp_path};
+    outcmt::output::CommentMap parsed_output{output_parser.Parse(output)};
+    for (auto&& [file_name, lines]: parsed_output) {
+      std::string original_file_name{file_name};
+      outcmt::util::Replace(original_file_name, tmp_path, src_path);
+      const outcmt::src::FileType file_type{outcmt::src::GetFileType(original_file_name)};
+      const outcmt::src::CmtModifierFactory factory{};
+      const outcmt::src::CmtModifier cmt_modifier{factory.BuildModifier(file_type)};
+      const std::string content{outcmt::util::Read(original_file_name)};
+      const std::string new_content{cmt_modifier.ParseAndReplaceComments(content, lines, true)};
+      outcmt::util::Write(original_file_name, new_content);
+      std::cout << "Modified file " << original_file_name << std::endl;
+    }
   }
 
   return 0;

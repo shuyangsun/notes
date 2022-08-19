@@ -103,7 +103,7 @@ class CmtModifierFactory {
   CmtModifierFactory() = default;
   ~CmtModifierFactory() = default;
 
-  [[nodiscard]] CmtModifier BuildModifier(const FileType file_type) const {
+  [[nodiscard]] CmtModifier BuildModifier(const FileType& file_type) const {
     switch (file_type) {
       case FileType::Cpp:
         return CmtModifier(std::make_unique<CmtParserCpp>(), "//> ");

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(stdout_cmt)
+project(stdoutcmt)
 set(effective_cpp_VERSION_MAJOR 0)
 set(effective_cpp_VERSION_MINOR 1)
 set(effective_cpp_VERSION_PATCH 0)
@@ -15,7 +15,7 @@ add_definitions(${CPP_STANDARD_COMPILE_FLAGS})
 
 include_directories("include")
 
-ADD_EXECUTABLE(stdout_cmt "src/main.cpp")
+ADD_EXECUTABLE(stdoutcmt "src/main.cpp")
 
 if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt")
     include(${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt)

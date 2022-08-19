@@ -62,6 +62,10 @@ namespace {
   return str.length() >= prefix.length() && str.substr(0, prefix.length()) == prefix;
 }
 
+[[nodiscard]] bool EndsWith(const std::string_view& str, const std::string_view& postfix) {
+  return str.length() >= postfix.length() && str.substr(str.length() - postfix.length(), postfix.length()) == postfix;
+}
+
 [[nodiscard]] std::string ToLower(const std::string_view& str) {
   std::string result{str};
   std::transform(result.begin(), result.end(), result.begin(),
@@ -96,7 +100,6 @@ namespace {
   if (line.length() >= cmt_len && line.substr(0, cmt_len) == comment_header) {
     return std::make_pair(empty_str, empty_str);
   }
-  std::size_t res{0};
   bool is_in_str{false};
   for (std::size_t i{0}; i < line.length(); ++i) {
     const char ch{line[i]};

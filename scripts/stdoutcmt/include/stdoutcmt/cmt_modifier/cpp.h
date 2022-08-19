@@ -15,7 +15,8 @@ class CmtParserCpp: public ICmtParser {
 
   [[nodiscard]] ParsedComments ParseComments(const std::string_view& content) const final {
     std::vector<std::string_view> lines{util::ToLines(content)};
-    ParsedComments result{lines.size()};
+    ParsedComments result{};
+    result.reserve(lines.size());
     for (auto&& line: std::move(lines)) {
       result.emplace_back(util::LineToCodeCmt(line, "//"));
     }

@@ -252,34 +252,34 @@ TEST(OutputParser, Cpp_Unix_1) {
 }
 
 TEST(OutputParser, Cpp_Windows_1) {
-  const output::OutputParser parser{"C:\\Windows\\Program Files\\SourceCode"};
+  const output::OutputParser parser{R"(C:\Windows\Program Files\SourceCode)"};
   const output::CommentMap result{OUTPUT_PARSER_CPP.Parse("")};
   // TODO
 }
 
 TEST(CmtModifier, Cpp_1) {
   const std::string content{
-      "#include <iostream>"
-      ""
-      "int main(int argc, char** argv) {"
-      "  #pragma cmt beg"
-      "  const int x{0}; std::cout << x << std::endl;"
-      "  #pragma cmt end"
-      "  return 0;"
-      "}"
+      "#include <iostream>\n"
+      "\n"
+      "int main(int argc, char** argv) {\n"
+      "  #pragma cmt beg\n"
+      "  const int x{0}; std::cout << x << std::endl;\n"
+      "  #pragma cmt end\n"
+      "  return 0;\n"
+      "}\n"
   };
   const std::string result{CMT_MODIFIER_CPP.ParseAndReplaceComments(content, {
-      {5, "example comment"}
+      {4, "example comment"}
   }, true)};
   const std::string expected{
-      "#include <iostream>"
-      ""
-      "int main(int argc, char** argv) {"
-      "  #pragma cmt beg"
-      "  const int x{0}; std::cout << x << std::endl; //> example comment"
-      "  #pragma cmt end"
-      "  return 0;"
-      "}"
+      "#include <iostream>\n"
+      "\n"
+      "int main(int argc, char** argv) {\n"
+      "  #pragma cmt beg\n"
+      "  const int x{0}; std::cout << x << std::endl; //> example comment\n"
+      "  #pragma cmt end\n"
+      "  return 0;\n"
+      "}\n"
   };
   EXPECT_STREQ(result.c_str(), expected.c_str());
 }

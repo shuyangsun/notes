@@ -81,7 +81,7 @@ class OutputParser {
       const char* const line_number_str{line_number.c_str()};
       char* pEnd{nullptr};
       const std::size_t line_num{
-          static_cast<std::size_t>(std::strtol(line_number_str, &pEnd, 10))};
+          static_cast<std::size_t>(std::strtol(line_number_str, &pEnd, 10) - 1)};
 
       if (result.find(file_name) == result.end()) {
         result.emplace(file_name, std::map<std::size_t, std::string_view>{

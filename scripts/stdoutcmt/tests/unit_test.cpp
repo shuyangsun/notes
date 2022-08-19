@@ -283,3 +283,30 @@ TEST(CmtModifier, Cpp_1) {
   };
   EXPECT_STREQ(result.c_str(), expected.c_str());
 }
+
+TEST(CmtModifier, Cpp_2) {
+  const std::string content{
+      "#include <iostream>\n"
+      "\n"
+      "int main(int argc, char** argv) {\n"
+      "  #pragma cmt beg\n"
+      "  const int x{0}; std::cout << x << std::endl; // old comment\n"
+      "  #pragma cmt end\n"
+      "  return 0;\n"
+      "}\n"
+  };
+  const std::string result{CMT_MODIFIER_CPP.ParseAndReplaceComments(content, {
+      {4, "example comment"}
+  }, true)};
+  const std::string expected{
+      "#include <iostream>\n"
+      "\n"
+      "int main(int argc, char** argv) {\n"
+      "  #pragma cmt beg\n"
+      "  const int x{0}; std::cout << x << std::endl; //> example comment\n"
+      "  #pragma cmt end\n"
+      "  return 0;\n"
+      "}\n"
+  };
+  EXPECT_STREQ(result.c_str(), expected.c_str());
+}

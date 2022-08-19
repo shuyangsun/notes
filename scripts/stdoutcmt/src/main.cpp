@@ -20,10 +20,6 @@ int main(int argc, char** argv) {
     const std::string_view tmp_path{argv[3]};
     const std::string_view output{argv[4]};
 
-    std::cout << src_path << std::endl;
-    std::cout << tmp_path << std::endl;
-    std::cout << output << std::endl;
-
     const outcmt::output::OutputParser output_parser{tmp_path};
     outcmt::output::CommentMap parsed_output{output_parser.Parse(output)};
     for (auto&& [file_name, lines]: parsed_output) {

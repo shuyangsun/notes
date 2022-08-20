@@ -22,6 +22,9 @@ namespace {
   if (align_comments) {
     // TODO: align comments
     for (const auto& [line_num, cmt]: new_comments) {
+      if (util::TrimWS(cmt).length() <= 0) {
+        continue;
+      }
       const auto& cur_line = comments[line_num];
       if (!util::EndsWith(std::get<0>(cur_line), " ")) {
         space_count.emplace(line_num, 1);
@@ -29,6 +32,9 @@ namespace {
     }
   } else {
     for (const auto& [line_num, cmt]: new_comments) {
+      if (util::TrimWS(cmt).length() <= 0) {
+        continue;
+      }
       const auto& cur_line = comments[line_num];
       if (!util::EndsWith(std::get<0>(cur_line), " ")) {
         space_count.emplace(line_num, 1);

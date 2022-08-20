@@ -86,8 +86,6 @@ TEST(SrcParser, Cpp_1) {
   const std::string input{util::Read(GetDataPath("src_parsing/001_input.txt"))};
   const std::string output{util::Read(GetDataPath("src_parsing/001_output.json"))};
 
-  EXPECT_TRUE(input.length() > 0);
-
   const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(util::ToLines(input))};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(2), 0);

@@ -20,9 +20,10 @@ int main(int argc, char** argv) {
     const std::string_view tmp_path{argv[3]};
     const std::string_view output{argv[4]};
 
-    const outcmt::output::OutputParser output_parser{tmp_path};
-    outcmt::output::CommentMap parsed_output{output_parser.Parse(output)};
-    for (auto&& [file_name, lines]: parsed_output) {
+    const outcmt::output::OutputParser output_parser{};  // TODO: initialize with tmp_path, not working now
+    const outcmt::output::CommentMap parsed_output{output_parser.Parse(output)};
+
+    for (const auto& [file_name, lines]: parsed_output) {
       std::string original_file_name{file_name};
       outcmt::util::Replace(original_file_name, tmp_path, src_path);
       const outcmt::src::FileType file_type{outcmt::src::GetFileType(original_file_name)};
@@ -31,7 +32,7 @@ int main(int argc, char** argv) {
       const std::string content{outcmt::util::Read(original_file_name)};
       const std::string new_content{cmt_modifier.ParseAndReplaceComments(content, lines, true)};
       outcmt::util::Write(original_file_name, new_content);
-      std::cout << "Modified file " << original_file_name << std::endl;
+      std::cout << "Modified file \"" << original_file_name << '"' << std::endl;
     }
   }
 

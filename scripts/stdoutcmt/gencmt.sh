@@ -41,4 +41,3 @@ PROGRAM_OUTPUT=$(recursive_walk "$TMP_SRC_DIR")
 
 # "$SCRIPT_DIR/$CLEAN_FILE"
 "$SCRIPT_DIR/$BUILD_FILE" && "$SCRIPT_DIR/build/stdoutcmt" --gencmt "$1" "$TMP_SRC_DIR" "$PROGRAM_OUTPUT"
-

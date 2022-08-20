@@ -71,7 +71,7 @@ class OutputParser {
       }
       const std::string_view cur_cmt{
           content.substr(cmt_start_pos, cmt_end_pos - cmt_start_pos)};
-      if (cur_cmt.empty()) {
+      if (util::TrimWS(cur_cmt).empty()) {
         continue;
       }
       const std::vector<std::string_view> fname_linenum{

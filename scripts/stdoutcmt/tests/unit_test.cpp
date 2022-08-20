@@ -1,11 +1,12 @@
 #include <gtest/gtest.h>
 
 #include <memory>
+#include <cstdint>
 #include <string_view>
-#include <cstdlib>
-#include <iostream>
 #include <filesystem>
-#include <optional>
+#include <fstream>
+
+#include <nlohmann/json.hpp>
 
 #include "stdoutcmt/output_parser/parser.h"
 #include "stdoutcmt/src_parser/factory.h"
@@ -13,6 +14,7 @@
 #include "stdoutcmt/util/util.h"
 
 using namespace outcmt;
+using json = nlohmann::json;
 
 static const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
 static const output::OutputParser OUTPUT_PARSER_CPP{};
@@ -82,13 +84,18 @@ TEST(Utility, CommentRemoval_2) {
   EXPECT_STREQ(res.c_str(), "  ");
 }
 
-TEST(SrcParser, Cpp_1) {
+TEST(SrcParser, Cpp_001) {
   const std::string input{util::Read(GetDataPath("src_parsing/001_input.txt"))};
-  const std::string output{util::Read(GetDataPath("src_parsing/001_output.json"))};
+  std::ifstream out_file(GetDataPath("src_parsing/001_output.json"));
+  json data = json::parse(out_file);
 
   const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(util::ToLines(input))};
-  EXPECT_EQ(res.size(), 1);
-  EXPECT_EQ(res.at(2), 0);
+  EXPECT_EQ(res.size(), data["cmt_offset"].size());
+  for (auto&& [line, offset]: data["cmt_offset"].items()) {
+    const uint64_t line_num{util::FromStr<uint64_t>(line).value()};
+    EXPECT_TRUE(res.find(line_num) != res.end());
+    EXPECT_EQ(res.at(line_num), offset);
+  }
 }
 
 TEST(SrcParser, Cpp_3) {

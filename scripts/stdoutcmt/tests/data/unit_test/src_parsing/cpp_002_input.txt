@@ -1,0 +1,6 @@
+int main(int argc, char** argv) {
+  #pragma cmt beg
+  const int x{0}; std::cout << x << std::endl;
+  #pragma cmt end
+  return 0;
+}

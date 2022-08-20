@@ -1,0 +1,17 @@
+#include <iostream>
+
+int main(int argc, char** argv) {
+  #pragma cmt beg
+  const int x{0};                // <--
+  std::cout  // Random comment.  // <--
+    << x
+    << std::e\\
+ndl;
+  const int y{0};  // <--
+  #pragma cmt ignore_once
+  std::cout << y << std::endl;
+
+  const int _dymmy{};  // <--
+  #pragma cmt end
+  return 0;
+}

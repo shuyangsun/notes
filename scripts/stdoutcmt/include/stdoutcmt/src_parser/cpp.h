@@ -76,7 +76,7 @@ class SrcParserCpp: public ISrcParser {
           continue;
         }
         if (!should_ignore) {
-          result.emplace(stmt_beg_line_idx, offset);
+          result.emplace(stmt_beg_line_idx + 1, offset);
         }
         should_ignore = false;
       }

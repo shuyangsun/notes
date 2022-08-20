@@ -9,7 +9,10 @@
 #include "stdoutcmt/src_parser/factory.h"
 #include "stdoutcmt/util/util.h"
 
-static const std::unique_ptr<outcmt::src::SrcParserCpp> SRC_PARSER_CPP{};
+static const outcmt::src::SrcParserFactory factory{};
+static const std::unique_ptr<outcmt::src::ISrcParser> SRC_PARSER_CPP{
+  factory.BuildSrcParser(outcmt::src::FileType::Cpp)
+};
 
 std::filesystem::path GetDataPath(const std::filesystem::path& path) {
   const std::filesystem::path data_path{"tests/data/unit_test"};

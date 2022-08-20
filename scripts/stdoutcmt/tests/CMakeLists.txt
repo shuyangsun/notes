@@ -11,10 +11,10 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/tests")
+
 include_directories("../tests")
-
 add_executable(unit_test tests/unit_test.cpp)
-
 target_link_libraries(unit_test gtest_main ${EXTRA_LIBS})
 
 include(GoogleTest)

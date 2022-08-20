@@ -3,6 +3,8 @@
 
 #include <string_view>
 #include <string>
+#include <cstdlib>
+#include <exception>
 #include <unordered_set>
 #include <vector>
 #include <filesystem>
@@ -144,6 +146,12 @@ std::vector<std::string_view> Split(const std::string_view& str, const std::stri
 }
 
 [[nodiscard]] std::string Read(const std::filesystem::path& path) {
+  if (!std::filesystem::exists(path)) {
+    throw std::invalid_argument("File \"" + path.string() + "\" does not exist.");
+  }
+  if (std::filesystem::is_directory(path)) {
+    throw std::invalid_argument("Cannot read directory \"" + path.string() + "\".");
+  }
   std::ifstream ifs{path};
   std::string content{(std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>())};
   ifs.close();
@@ -173,6 +181,14 @@ template<typename T>
     }
   }
   return result;
+}
+
+[[nodiscard]] std::optional<std::string> GetEnvSafe(const std::string_view& env_var) {
+  char const * const result{std::getenv(env_var.data())};
+  if (result == nullptr) {
+    return {};
+  }
+  return {std::string{*result}};
 }
 
 }  // namespace outcmt::util

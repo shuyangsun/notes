@@ -2,6 +2,10 @@
 
 #include <memory>
 #include <string_view>
+#include <cstdlib>
+#include <iostream>
+#include <filesystem>
+#include <optional>
 
 #include "stdoutcmt/output_parser/parser.h"
 #include "stdoutcmt/src_parser/factory.h"
@@ -10,9 +14,14 @@
 
 using namespace outcmt;
 
-const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
-const output::OutputParser OUTPUT_PARSER_CPP{};
-const src::CmtModifier CMT_MODIFIER_CPP{src::CmtModifierFactory{}.BuildModifier(src::FileType::Cpp)};
+static const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
+static const output::OutputParser OUTPUT_PARSER_CPP{};
+static const src::CmtModifier CMT_MODIFIER_CPP{src::CmtModifierFactory{}.BuildModifier(src::FileType::Cpp)};
+
+std::filesystem::path GetDataPath(const std::filesystem::path& path) {
+  const std::filesystem::path data_path{"tests/data/unit_test"};
+  return data_path/path;
+}
 
 TEST(Utility, TrimWS_1) {
   const std::string str{};
@@ -74,16 +83,12 @@ TEST(Utility, CommentRemoval_2) {
 }
 
 TEST(SrcParser, Cpp_1) {
-  const std::vector<std::string_view> lines{
-      "int main(int argc, char** argv) {",
-      "  #pragma cmt beg",
-      "  const int x{0};",
-      "  #pragma cmt end",
-      "  return 0;",
-      "}",
-  };
+  const std::string input{util::Read(GetDataPath("src_parsing/001_input.txt"))};
+  const std::string output{util::Read(GetDataPath("src_parsing/001_output.json"))};
 
-  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(lines)};
+  EXPECT_TRUE(input.length() > 0);
+
+  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(util::ToLines(input))};
   EXPECT_EQ(res.size(), 1);
   EXPECT_EQ(res.at(2), 0);
 }

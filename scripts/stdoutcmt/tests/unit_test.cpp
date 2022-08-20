@@ -84,9 +84,9 @@ TEST(Utility, CommentRemoval_2) {
   EXPECT_STREQ(res.c_str(), "  ");
 }
 
-TEST(SrcParser, Cpp_001) {
-  const std::string input{util::Read(GetDataPath("src_parsing/001_input.txt"))};
-  std::ifstream out_file(GetDataPath("src_parsing/001_output.json"));
+TEST(SrcParser, cpp_001) {
+  const std::string input{util::Read(GetDataPath("src_parsing/cpp_001_input.txt"))};
+  std::ifstream out_file(GetDataPath("src_parsing/cpp_001_output.json"));
   json data = json::parse(out_file);
 
   const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(util::ToLines(input))};

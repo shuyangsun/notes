@@ -15,8 +15,19 @@ find_package(nlohmann_json 3.11.2 REQUIRED)
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/tests")
 
 include_directories("../tests")
-add_executable(unit_test tests/unit_test.cpp)
-target_link_libraries(unit_test gtest_main nlohmann_json::nlohmann_json)
+add_executable(src_parsing tests/unit/src_parsing.cpp)
+target_link_libraries(src_parsing gtest_main nlohmann_json::nlohmann_json)
+add_executable(utility tests/unit/utility.cpp)
+target_link_libraries(utility gtest_main nlohmann_json::nlohmann_json)
 
 include(GoogleTest)
-gtest_discover_tests(unit_test)
+
+gtest_discover_tests(
+    src_parsing
+    TEST_PREFIX unit::
+)
+
+gtest_discover_tests(
+        utility
+        TEST_PREFIX unit::
+)

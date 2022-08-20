@@ -6,6 +6,7 @@
 build
 cmake-build-debug
 cmake-build-release
+Testing
 
 # macOS
 # From: https://github.com/github/gitignore/blob/main/Global/macOS.gitignore

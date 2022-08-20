@@ -1,114 +1,18 @@
 #include <gtest/gtest.h>
 
 #include <memory>
-#include <cstdint>
-#include <string_view>
-#include <filesystem>
-#include <fstream>
 
 #include <nlohmann/json.hpp>
 
 #include "stdoutcmt/output_parser/parser.h"
 #include "stdoutcmt/src_parser/factory.h"
 #include "stdoutcmt/cmt_modifier/factory.h"
-#include "stdoutcmt/util/util.h"
 
 using namespace outcmt;
 using json = nlohmann::json;
 
-static const std::unique_ptr<src::SrcParserCpp> SRC_PARSER_CPP{};
 static const output::OutputParser OUTPUT_PARSER_CPP{};
 static const src::CmtModifier CMT_MODIFIER_CPP{src::CmtModifierFactory{}.BuildModifier(src::FileType::Cpp)};
-
-std::filesystem::path GetDataPath(const std::filesystem::path& path) {
-  const std::filesystem::path data_path{"tests/data/unit_test"};
-  return data_path/path;
-}
-
-TEST(Utility, TrimWS_1) {
-  const std::string str{};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_TRUE(res.empty());
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, TrimWS_2) {
-  const std::string str{" "};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_TRUE(res.empty());
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, TrimWS_3) {
-  const std::string str{"\t"};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_TRUE(res.empty());
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, TrimWS_4) {
-  const std::string str{"\n"};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_TRUE(res.empty());
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, TrimWS_5) {
-  const std::string str{"\r\n"};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_TRUE(res.empty());
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, TrimWS_6) {
-  const std::string str{" Hello"};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_STREQ(res.c_str(), "Hello");
-}
-
-TEST(Utility, TrimWS_7) {
-  const std::string str{"Hello "};
-  const std::string res{util::TrimWS(str)};
-  EXPECT_STREQ(res.c_str(), "Hello");
-}
-
-TEST(Utility, CommentRemoval_1) {
-  const std::string str{"// f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{std::get<0>(util::LineToCodeCmt(str, "//"))};
-  EXPECT_STREQ(res.c_str(), "");
-}
-
-TEST(Utility, CommentRemoval_2) {
-  const std::string str{"  // f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{std::get<0>(util::LineToCodeCmt(str, "//"))};
-  EXPECT_STREQ(res.c_str(), "  ");
-}
-
-#define SRC_PARSER_TEST(TEST_NAME); \
-TEST(SrcParser, TEST_NAME) {        \
-  const std::string test_name{#TEST_NAME}; \
-  const std::string input{util::Read(GetDataPath("src_parsing/" + test_name + "_input.txt"))}; \
-  std::ifstream out_file(GetDataPath("src_parsing/" + test_name + "_output.json")); \
-  json data = json::parse(out_file); \
-  const src::LineOffsetMap res{SRC_PARSER_CPP->GetCmtLineOffset(util::ToLines(input))}; \
-  EXPECT_EQ(res.size(), data["cmt_offset"].size()); \
-  for (auto&& [line, offset]: data["cmt_offset"].items()) { \
-    const uint64_t line_num{util::FromStr<uint64_t>(line).value()}; \
-    const int64_t offset_num{offset.get<int64_t>()}; \
-    const std::string err_msg{"Expecting line " + std::to_string(line_num) + " to have offset " + std::to_string(offset_num) + "."}; \
-    EXPECT_TRUE(res.find(line_num) != res.end()) << err_msg; \
-    EXPECT_EQ(res.at(line_num), offset_num) << err_msg; \
-  } \
-}
-
-SRC_PARSER_TEST(cpp_001);
-SRC_PARSER_TEST(cpp_002);
-SRC_PARSER_TEST(cpp_003);
-SRC_PARSER_TEST(cpp_004);
-SRC_PARSER_TEST(cpp_005);
-SRC_PARSER_TEST(cpp_006);
-SRC_PARSER_TEST(cpp_007);
-SRC_PARSER_TEST(cpp_008);
 
 TEST(OutputParser, Cpp_1) {
   const output::CommentMap result{OUTPUT_PARSER_CPP.Parse(

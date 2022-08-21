@@ -36,7 +36,10 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-"$SCRIPT_DIR/$BUILD_FILE" -DTESTS=OFF && \
+if [ ! -f "$SCRIPT_DIR/build/stdoutcmt" ]; then
+ "$SCRIPT_DIR/$BUILD_FILE" -DTESTS=OFF
+fi
+
 TMP_SRC_DIR=$("$SCRIPT_DIR/build/stdoutcmt" --copy "$1") && \
 PROGRAM_OUTPUT=$(recursive_walk "$TMP_SRC_DIR") && \
 "$SCRIPT_DIR/build/stdoutcmt" --gencmt "$1" "$TMP_SRC_DIR" "$PROGRAM_OUTPUT"

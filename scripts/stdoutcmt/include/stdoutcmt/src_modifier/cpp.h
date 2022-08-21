@@ -63,8 +63,8 @@ class SrcModifierCpp: public ISrcModifier {
     }
     for (std::size_t i{0}; i < lines.size(); ++i) {
       const std::string_view cur_line{lines.at(i)};
-      if (line_to_offset.find(i) != line_to_offset.end()) {
-        const int64_t final_line_offset{line_to_offset.at(i) + offset_padding};
+      if (line_to_offset.find(i + 1) != line_to_offset.end()) {
+        const int64_t final_line_offset{line_to_offset.at(i + 1) + offset_padding};
         std::string line_with_print{FileAndLinePrintStmt(final_line_offset)};
         line_with_print += cur_line;
         result.emplace_back(line_with_print);

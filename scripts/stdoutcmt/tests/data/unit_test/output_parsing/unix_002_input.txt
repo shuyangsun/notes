@@ -2,5 +2,5 @@ int const&, T: int const&
 Value of T{}: 0
 [/tmp/src_code/items/item_1/item_1.cpp:137]:
 [/tmp/src_code/items/item_1/item_1.cpp:138]:Case 3:
-[/tmp/src_code/items/item_1/item_1.cpp:139][/tmp/src_code/items/item_1/item_1.cpp:140]:ParamType: int, T: int
+[/tmp/src_code/items/item_1/item_1.cpp:139]:[/tmp/src_code/items/item_1/item_1.cpp:140]:ParamType: int, T: int
 int const

@@ -1,8 +1,11 @@
 #ifndef STDOUTCMT_INCLUDE_STDOUTCMT_CMT_MODIFIER_FACTORY_H_
 #define STDOUTCMT_INCLUDE_STDOUTCMT_CMT_MODIFIER_FACTORY_H_
 
-#include <utility>
+#include <cassert>
+#include <cmath>
 #include <memory>
+#include <utility>
+#include <tuple>
 
 #include "stdoutcmt/cmt_modifier/interface.h"
 #include "stdoutcmt/cmt_modifier/cpp.h"
@@ -47,8 +50,53 @@ namespace {
   return result;
 }
 
+auto FindCommentBlocks(const std::vector<std::pair<std::string_view, std::string>>& lines) -> std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> {
+  std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> res{}; // start_pos, stop_pos, max_len
+  std::optional<std::size_t> block_start;
+  std::optional<std::size_t> block_max;
+  for (std::size_t i{0}; i < lines.size(); ++i) {
+    const std::string_view& code{std::get<0>(lines[i])};
+    const std::string_view& cmt{std::get<1>(lines[i])};
+    const std::string_view code_no_ws{util::TrimWS(code)};
+    const std::string_view cmt_no_ws{util::TrimWS(cmt)};
+    const bool is_end_of_block{code_no_ws.empty() || cmt_no_ws.empty()};
+    if (is_end_of_block) {
+      if (block_start.has_value()) {
+        res.emplace_back(std::make_tuple(block_start.value(), i, block_max.value()));
+        block_start.reset();
+        block_max.reset();
+      }
+      continue;
+    }
+    const std::size_t code_len{util::TrimPostfixWS(code).length()};
+    if (!block_start.has_value()) {
+      block_start = i;
+      block_max = code_len;
+    }
+    block_max = std::max(block_max.value(), code_len);
+  }
+  if (block_start.has_value()) {
+    res.emplace_back(std::make_tuple(block_start.value(), lines.size(), block_max.value()));
+  }
+  return res;
+}
+
 void UpdateCommentsToBeAligned(std::vector<std::pair<std::string_view, std::string>>& lines) {
-  // TODO: impl
+  std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> blocks{FindCommentBlocks((lines))};
+  for (const auto& [start_pos, stop_pos, max_len]: blocks) {
+    for (std::size_t i{start_pos}; i < stop_pos; ++i) {
+      const std::string_view code{util::TrimPostfixWS(std::get<0>(lines[i]))};
+      assert(code.length() <= max_len);
+      const std::size_t space_count{max_len + 1 - code.length()};
+      std::stringstream ss{};
+      for (std::size_t j{0}; j < space_count; ++j) {
+        ss << ' ';
+      }
+      ss << util::TrimWS(std::get<1>(lines[i]));
+      const std::string cmt{ss.str()};
+      lines[i] = std::make_pair(code, cmt);
+    }
+  }
 }
 
 }  // anonymous namespace

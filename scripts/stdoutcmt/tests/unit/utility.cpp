@@ -51,16 +51,20 @@ TEST(Utility, TrimWS_7) {
   EXPECT_STREQ(res.c_str(), "Hello");
 }
 
-TEST(Utility, CommentRemoval_1) {
+TEST(Utility, CmtParse_1) {
   const std::string str{"// f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{std::get<0>(outcmt::util::LineToCodeCmt(str, "//"))};
-  EXPECT_STREQ(res.c_str(), "");
+  const std::pair<std::string_view, std::string_view> parsed{outcmt::util::LineToCodeCmt(str, "//")};
+  const std::string code{std::get<0>(parsed)};
+  const std::string cmt{std::get<1>(parsed)};
+  EXPECT_TRUE(code.empty());
+  EXPECT_STREQ(str.c_str(), cmt.c_str());
 }
 
-TEST(Utility, CommentRemoval_2) {
+TEST(Utility, CmtParse_2) {
   const std::string str{"  // f_byval({1, 2, 3}); // *** COMPILE ERROR ***"};
-  const std::string res{std::get<0>(outcmt::util::LineToCodeCmt(str, "//"))};
-  EXPECT_STREQ(res.c_str(), "  ");
+  const std::pair<std::string_view, std::string_view> parsed{outcmt::util::LineToCodeCmt(str, "//")};
+  const std::string code{std::get<0>(parsed)};
+  const std::string cmt{std::get<1>(parsed)};
+  EXPECT_STREQ(code.c_str(), "  ");
+  EXPECT_STREQ(cmt.c_str(), "// f_byval({1, 2, 3}); // *** COMPILE ERROR ***");
 }
-
-

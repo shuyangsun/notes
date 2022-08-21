@@ -24,7 +24,7 @@ namespace outcmt::util {
   }
   std::string_view empty_str{line.substr(0, 0)};
   if (line.length() >= cmt_len && line.substr(0, cmt_len) == comment_header) {
-    return std::make_pair(empty_str, empty_str);
+    return std::make_pair(empty_str, line);
   }
   bool is_in_str{false};
   for (std::size_t i{0}; i < line.length(); ++i) {

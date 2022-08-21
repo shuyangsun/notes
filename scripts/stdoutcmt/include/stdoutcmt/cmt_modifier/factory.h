@@ -22,17 +22,17 @@ namespace {
   if (align_comments) {
     // TODO: align comments
     for (const auto& [line_num, cmt]: new_comments) {
-      if (util::TrimWS(cmt).length() <= 0) {
+      if (util::TrimWS(cmt).empty()) {
         continue;
       }
-      const auto& cur_line = comments[line_num];
+      const auto& cur_line = comments[line_num - 1];
       if (!util::EndsWith(std::get<0>(cur_line), " ")) {
         space_count.emplace(line_num, 1);
       }
     }
   } else {
     for (const auto& [line_num, cmt]: new_comments) {
-      if (util::TrimWS(cmt).length() <= 0) {
+      if (util::TrimWS(cmt).empty()) {
         continue;
       }
       const auto& cur_line = comments[line_num - 1];

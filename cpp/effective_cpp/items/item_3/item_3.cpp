@@ -12,7 +12,7 @@ auto AccessEle_1(Container& c, Index i) -> decltype(c[i]) {
 }
 
 template<typename Container, typename Index>
-auto AccessEle_2(Container& c, Index i) {
+auto AccessEle_2(Container& c, Index i) {  // "auto" strips off the reference.
   return c[i];
 }
 

@@ -1,0 +1,78 @@
+Case 1:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:75]:ParamType: int&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:76]:ParamType: int const&, T: int const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:77]:ParamType: int&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:78]:ParamType: int const&, T: int const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:79]:[/tmp/effective_cpp/items/item_1/item_1.cpp:80]:ParamType: char const* const&, T: char const* const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:81]:ParamType: char const (&) [20], T: char const [20]
+[/tmp/effective_cpp/items/item_1/item_1.cpp:82]:ParamType: void (&)(int, double), T: void (int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:84]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:86]:ParamType: int const&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:87]:ParamType: int const&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:88]:ParamType: int const&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:89]:ParamType: int const&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:90]:ParamType: int const&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:91]:ParamType: char const* const&, T: char const*
+[/tmp/effective_cpp/items/item_1/item_1.cpp:92]:ParamType: char const (&) [20], T: char [20]
+[/tmp/effective_cpp/items/item_1/item_1.cpp:93]:ParamType: void (&)(int, double), T: void (int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:95]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:97]:ParamType: int*, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:98]:ParamType: int const*, T: int const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:99]:ParamType: int*, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:100]:ParamType: int const*, T: int const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:101]:[/tmp/effective_cpp/items/item_1/item_1.cpp:102]:[/tmp/effective_cpp/items/item_1/item_1.cpp:103]:ParamType: char const*, T: char const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:104]:ParamType: char const*, T: char const
+[/tmp/effective_cpp/items/item_1/item_1.cpp:105]:ParamType: void (*)(int, double), T: void (int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:107]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:108]:Case 2:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:110]:ParamType: int&, T: int&
+[/tmp/effective_cpp/items/item_1/item_1.cpp:111]:ParamType: int const&, T: int const&
+[/tmp/effective_cpp/items/item_1/item_1.cpp:112]:ParamType: int&, T: int&
+[/tmp/effective_cpp/items/item_1/item_1.cpp:113]:ParamType: int const&, T: int const&
+[/tmp/effective_cpp/items/item_1/item_1.cpp:114]:ParamType: int&&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:115]:ParamType: char const* const&, T: char const* const&
+[/tmp/effective_cpp/items/item_1/item_1.cpp:116]:ParamType: char const (&) [20], T: char const (&) [20]
+[/tmp/effective_cpp/items/item_1/item_1.cpp:117]:ParamType: void (&)(int, double), T: void (&)(int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:119]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:121]:[/tmp/effective_cpp/items/item_1/item_1.cpp:122]:[/tmp/effective_cpp/items/item_1/item_1.cpp:123]:[/tmp/effective_cpp/items/item_1/item_1.cpp:124]:[/tmp/effective_cpp/items/item_1/item_1.cpp:125]:ParamType: int const&&, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:126]:[/tmp/effective_cpp/items/item_1/item_1.cpp:127]:[/tmp/effective_cpp/items/item_1/item_1.cpp:128]:ParamType: void (&&)(int, double), T: void (int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:130]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:132]:[/tmp/effective_cpp/items/item_1/item_1.cpp:133]:ParamType: int const&, T: int const&
+Value of T{}: 0
+[/tmp/effective_cpp/items/item_1/item_1.cpp:134]:[/tmp/effective_cpp/items/item_1/item_1.cpp:135]:ParamType: int const&, T: int const&
+Value of T{}: 0
+[/tmp/effective_cpp/items/item_1/item_1.cpp:137]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:138]:Case 3:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:140]:ParamType: int, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:141]:ParamType: int, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:142]:ParamType: int, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:143]:ParamType: int, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:144]:ParamType: int, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:145]:ParamType: char const*, T: char const*
+[/tmp/effective_cpp/items/item_1/item_1.cpp:146]:ParamType: char const*, T: char const*
+[/tmp/effective_cpp/items/item_1/item_1.cpp:147]:ParamType: void (*)(int, double), T: void (*)(int, double)
+[/tmp/effective_cpp/items/item_1/item_1.cpp:148]:[/tmp/effective_cpp/items/item_1/item_1.cpp:150]:
+[/tmp/effective_cpp/items/item_1/item_1.cpp:152]:ParamType: int const, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:153]:ParamType: int const, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:154]:ParamType: int const, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:155]:ParamType: int const, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:156]:ParamType: int const, T: int
+[/tmp/effective_cpp/items/item_1/item_1.cpp:157]:ParamType: char const* const, T: char const*
+[/tmp/effective_cpp/items/item_1/item_1.cpp:158]:ParamType: char const* const, T: char const*
+[/tmp/effective_cpp/items/item_1/item_1.cpp:159]:ParamType: void (* const)(int, double), T: void (*)(int, double)
+
+Array size deduction:
+Size of char array "Effective C++ Notes" is 20
+[/tmp/effective_cpp/items/item_2/item_2.cpp:22]:[/tmp/effective_cpp/items/item_2/item_2.cpp:23]:int
+[/tmp/effective_cpp/items/item_2/item_2.cpp:25]:[/tmp/effective_cpp/items/item_2/item_2.cpp:26]:int const
+[/tmp/effective_cpp/items/item_2/item_2.cpp:28]:[/tmp/effective_cpp/items/item_2/item_2.cpp:29]:int&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:31]:[/tmp/effective_cpp/items/item_2/item_2.cpp:32]:int const&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:34]:[/tmp/effective_cpp/items/item_2/item_2.cpp:35]:int&&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:37]:[/tmp/effective_cpp/items/item_2/item_2.cpp:38]:int&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:40]:[/tmp/effective_cpp/items/item_2/item_2.cpp:41]:int const&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:43]:[/tmp/effective_cpp/items/item_2/item_2.cpp:44]:int&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:46]:[/tmp/effective_cpp/items/item_2/item_2.cpp:47]:int const&
+[/tmp/effective_cpp/items/item_2/item_2.cpp:49]:[/tmp/effective_cpp/items/item_2/item_2.cpp:50]:int
+[/tmp/effective_cpp/items/item_2/item_2.cpp:52]:[/tmp/effective_cpp/items/item_2/item_2.cpp:53]:std::initializer_list<int>
+[/tmp/effective_cpp/items/item_2/item_2.cpp:55]:[/tmp/effective_cpp/items/item_2/item_2.cpp:56]:int
+[/tmp/effective_cpp/items/item_2/item_2.cpp:58]:[/tmp/effective_cpp/items/item_2/item_2.cpp:59]:[/tmp/effective_cpp/items/item_2/item_2.cpp:60]:std::__1::vector<int, std::__1::allocator<int> >

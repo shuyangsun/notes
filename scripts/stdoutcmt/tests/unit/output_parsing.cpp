@@ -52,3 +52,4 @@ TEST(OutputParser, TEST_NAME) {\
 }
 
 OUTPUT_PARSER_TEST(unix_001);
+OUTPUT_PARSER_TEST(unix_002);

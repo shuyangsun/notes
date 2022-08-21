@@ -1,0 +1,12 @@
+#include <iostream>
+
+int main(int argc, char** argv) {
+  #pragma cmt beg
+
+  // Case 1:
+
+  const int x{9}; std::cout << x << std::endl;
+
+  #pragma cmt end
+  return 0;
+}

@@ -35,7 +35,7 @@ namespace {
       if (util::TrimWS(cmt).length() <= 0) {
         continue;
       }
-      const auto& cur_line = comments[line_num];
+      const auto& cur_line = comments[line_num - 1];
       if (!util::EndsWith(std::get<0>(cur_line), " ")) {
         space_count.emplace(line_num, 1);
       }

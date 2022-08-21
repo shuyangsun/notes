@@ -39,3 +39,4 @@ TEST(CmtModifier, TEST_NAME) {\
 }
 
 CMT_MODIFIER_TEST(cpp_001);
+CMT_MODIFIER_TEST(cpp_002);

@@ -1,0 +1,54 @@
+#include <iostream>
+#include <boost/type_index.hpp>
+
+#define PRINT_DEDUCED_TYPE() std::cout << \
+  "ParamType: " << boost::typeindex::type_id_with_cvr<decltype(param)>().pretty_name() << ", " << \
+  "T: " << boost::typeindex::type_id_with_cvr<T>().pretty_name() << std::endl;
+
+// Case 1:
+
+template<typename T>
+void f_ref(T& param) {
+  PRINT_DEDUCED_TYPE();
+}
+
+template<typename T>
+void f_cref(const T& param) {
+  PRINT_DEDUCED_TYPE();
+}
+
+void MyFunc(int, double) {}
+
+int main(int argc, char **argv) {
+  int x = 27;
+  const int cx = x;
+  int& rx = x;
+  const int& rcx = x;
+  char ch = 'a';
+  char const * const pc = &ch;
+  const char ac[] = "Effective C++ Notes";
+
+  #pragma cmt beg
+  std::cout << "Case 1:" << std::endl; // Case 1:
+
+  f_ref(x);    // ParamType: int&, T: int
+  f_ref(cx);   // ParamType: int const&, T: int const
+  f_ref(rx);   // ParamType: int&, T: int
+  f_ref(rcx);   // ParamType: int const&, T: int const
+  // f_ref(27);   // *** COMPILE ERROR ***
+  f_ref(pc);   // ParamType: char const* const&, T: char const* const
+  f_ref(ac);   // ParamType: char const (&) [20], T: char const [20]
+  f_ref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+
+  std::cout << std::endl;
+
+  f_cref(x);    // ParamType: int const&, T: int
+  f_cref(cx);   // ParamType: int const&, T: int
+  f_cref(rx);   // ParamType: int const&, T: int
+  f_cref(rcx);   // ParamType: int const&, T: int
+  f_cref(27);   // ParamType: int const&, T: int
+  f_cref(pc);   // ParamType: char const* const&, T: char const*
+  f_cref(ac);   // ParamType: char const (&) [20], T: char [20]
+  f_cref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+  #pragma cmt end
+}

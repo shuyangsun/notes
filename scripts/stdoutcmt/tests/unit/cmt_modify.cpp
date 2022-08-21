@@ -26,7 +26,7 @@ std::map<std::size_t, std::string_view> JsonToCommentsMap(const nlohmann::json& 
   return res;
 }
 
-#define CMT_MODIFIER_TEST(TEST_NAME) \
+#define CMT_MODIFIER_TEST(TEST_NAME, ALIGN_CMT) \
 TEST(CmtModifier, TEST_NAME) {\
   const std::string test_name{#TEST_NAME};\
   const std::string input_src{outcmt::util::Read(GetDataPath("cmt_modifier/" + test_name + "_input_src.txt"))};\
@@ -34,12 +34,13 @@ TEST(CmtModifier, TEST_NAME) {\
   nlohmann::json input_cmt{nlohmann::json::parse(input_cmt_stream)};\
   const std::string output{outcmt::util::Read(GetDataPath("cmt_modifier/" + test_name + "_output.txt"))};\
   std::map<std::size_t, std::string_view> comments_map{JsonToCommentsMap(input_cmt["comments"])};\
-  const std::string res{MODIFIER_CPP.ParseAndReplaceComments(input_src, comments_map, false)};\
+  const std::string res{MODIFIER_CPP.ParseAndReplaceComments(input_src, comments_map, ALIGN_CMT)};\
   EXPECT_STREQ(output.c_str(), res.c_str());\
 }
 
-CMT_MODIFIER_TEST(cpp_001);
-CMT_MODIFIER_TEST(cpp_002);
-CMT_MODIFIER_TEST(cpp_003);
-CMT_MODIFIER_TEST(cpp_004);
-CMT_MODIFIER_TEST(cpp_005);
+CMT_MODIFIER_TEST(cpp_001, false);
+CMT_MODIFIER_TEST(cpp_002, false);
+CMT_MODIFIER_TEST(cpp_003, false);
+CMT_MODIFIER_TEST(cpp_004, false);
+CMT_MODIFIER_TEST(cpp_005, false);
+CMT_MODIFIER_TEST(cpp_006, true);

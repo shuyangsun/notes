@@ -72,49 +72,49 @@ int main(int argc, char **argv) {
   #pragma cmt beg
   std::cout << "Case 1:" << std::endl; // Case 1:
 
-  f_ref(x);    // ParamType: int&, T: int
-  f_ref(cx);   // ParamType: int const&, T: int const
-  f_ref(rx);   // ParamType: int&, T: int
-  f_ref(rcx);   // ParamType: int const&, T: int const
+  f_ref(x);   // ParamType: int&, T: int
+  f_ref(cx);  // ParamType: int const&, T: int const
+  f_ref(rx);  // ParamType: int&, T: int
+  f_ref(rcx); // ParamType: int const&, T: int const
   // f_ref(27);   // *** COMPILE ERROR ***
-  f_ref(pc);   // ParamType: char const* const&, T: char const* const
-  f_ref(ac);   // ParamType: char const (&) [20], T: char const [20]
-  f_ref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+  f_ref(pc);     // ParamType: char const* const&, T: char const* const
+  f_ref(ac);     // ParamType: char const (&) [20], T: char const [20]
+  f_ref(MyFunc); // ParamType: void (&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
-  f_cref(x);    // ParamType: int const&, T: int
-  f_cref(cx);   // ParamType: int const&, T: int
-  f_cref(rx);   // ParamType: int const&, T: int
-  f_cref(rcx);   // ParamType: int const&, T: int
-  f_cref(27);   // ParamType: int const&, T: int
-  f_cref(pc);   // ParamType: char const* const&, T: char const*
-  f_cref(ac);   // ParamType: char const (&) [20], T: char [20]
-  f_cref(MyFunc);   // ParamType: void (&)(int, double), T: void (int, double)
+  f_cref(x);      // ParamType: int const&, T: int
+  f_cref(cx);     // ParamType: int const&, T: int
+  f_cref(rx);     // ParamType: int const&, T: int
+  f_cref(rcx);    // ParamType: int const&, T: int
+  f_cref(27);     // ParamType: int const&, T: int
+  f_cref(pc);     // ParamType: char const* const&, T: char const*
+  f_cref(ac);     // ParamType: char const (&) [20], T: char [20]
+  f_cref(MyFunc); // ParamType: void (&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
   f_ptr(&x);   // ParamType: int*, T: int
   f_ptr(&cx);  // ParamType: int const*, T: int const
   f_ptr(&rx);  // ParamType: int*, T: int
-  f_ptr(&rcx);  // ParamType: int const*, T: int const
+  f_ptr(&rcx); // ParamType: int const*, T: int const
   // f_ptr(27);   // *** COMPILE ERROR ***
   // f_ptr(&27);  // *** COMPILE ERROR ***
-  f_ptr(pc);   // ParamType: char const*, T: char const
-  f_ptr(ac);   // ParamType: char const*, T: char const
-  f_ptr(MyFunc);   // ParamType: void (*)(int, double), T: void (int, double)
+  f_ptr(pc);     // ParamType: char const*, T: char const
+  f_ptr(ac);     // ParamType: char const*, T: char const
+  f_ptr(MyFunc); // ParamType: void (*)(int, double), T: void (int, double)
 
   std::cout << std::endl;
   std::cout << "Case 2:" << std::endl; // Case 2:
 
-  f_uref(x);   // ParamType: int&, T: int&
-  f_uref(cx);  // ParamType: int const&, T: int const&
-  f_uref(rx);  // ParamType: int&, T: int&
-  f_uref(rcx);  // ParamType: int const&, T: int const&
-  f_uref(27);  // ParamType: int&&, T: int
-  f_uref(pc);  // ParamType: char const* const&, T: char const* const&
-  f_uref(ac);  // ParamType: char const (&) [20], T: char const (&) [20]
-  f_uref(MyFunc);  // ParamType: void (&)(int, double), T: void (&)(int, double)
+  f_uref(x);      // ParamType: int&, T: int&
+  f_uref(cx);     // ParamType: int const&, T: int const&
+  f_uref(rx);     // ParamType: int&, T: int&
+  f_uref(rcx);    // ParamType: int const&, T: int const&
+  f_uref(27);     // ParamType: int&&, T: int
+  f_uref(pc);     // ParamType: char const* const&, T: char const* const&
+  f_uref(ac);     // ParamType: char const (&) [20], T: char const (&) [20]
+  f_uref(MyFunc); // ParamType: void (&)(int, double), T: void (&)(int, double)
 
   std::cout << std::endl;
 
@@ -122,40 +122,40 @@ int main(int argc, char **argv) {
   // f_curef(cx);  // *** COMPILE ERROR ***
   // f_curef(rx);  // *** COMPILE ERROR ***
   // f_curef(rcx);  // *** COMPILE ERROR ***
-  f_curef(27);  // ParamType: int const&&, T: int
+  f_curef(27); // ParamType: int const&&, T: int
   // f_curef(pc);  // *** COMPILE ERROR ***
   // f_curef(ac);  // *** COMPILE ERROR ***
-  f_curef(MyFunc);  // ParamType: void (&&)(int, double), T: void (int, double)
+  f_curef(MyFunc); // ParamType: void (&&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
   // f_uref_with_init(x);  // *** COMPILE ERROR ***
-  f_uref_with_init(cx);  // ParamType: int const&, T: int const&
+  f_uref_with_init(cx); // ParamType: int const&, T: int const&
   // f_uref_with_init(rx);  // *** COMPILE ERROR ***
-  f_uref_with_init(rcx);  // ParamType: int const&, T: int const&
+  f_uref_with_init(rcx); // ParamType: int const&, T: int const&
 
   std::cout << std::endl;
   std::cout << "Case 3:" << std::endl; // Case 3:
 
-  f_byval(x);  // ParamType: int, T: int
-  f_byval(cx); // ParamType: int, T: int
-  f_byval(rx); // ParamType: int, T: int
-  f_byval(rcx); // ParamType: int, T: int
-  f_byval(27); // ParamType: int, T: int
-  f_byval(pc); // ParamType: char const*, T: char const*
-  f_byval(ac); // ParamType: char const*, T: char const*
+  f_byval(x);      // ParamType: int, T: int
+  f_byval(cx);     // ParamType: int, T: int
+  f_byval(rx);     // ParamType: int, T: int
+  f_byval(rcx);    // ParamType: int, T: int
+  f_byval(27);     // ParamType: int, T: int
+  f_byval(pc);     // ParamType: char const*, T: char const*
+  f_byval(ac);     // ParamType: char const*, T: char const*
   f_byval(MyFunc); // ParamType: void (*)(int, double), T: void (*)(int, double)
   // f_byval({1, 2, 3}); // *** COMPILE ERROR ***
 
   std::cout << std::endl;
 
-  f_cbyval(x);  // ParamType: int const, T: int
-  f_cbyval(cx); // ParamType: int const, T: int
-  f_cbyval(rx); // ParamType: int const, T: int
-  f_cbyval(rcx); // ParamType: int const, T: int
-  f_cbyval(27); // ParamType: int const, T: int
-  f_cbyval(pc); // ParamType: char const* const, T: char const*
-  f_cbyval(ac); // ParamType: char const* const, T: char const*
+  f_cbyval(x);      // ParamType: int const, T: int
+  f_cbyval(cx);     // ParamType: int const, T: int
+  f_cbyval(rx);     // ParamType: int const, T: int
+  f_cbyval(rcx);    // ParamType: int const, T: int
+  f_cbyval(27);     // ParamType: int const, T: int
+  f_cbyval(pc);     // ParamType: char const* const, T: char const*
+  f_cbyval(ac);     // ParamType: char const* const, T: char const*
   f_cbyval(MyFunc); // ParamType: void (* const)(int, double), T: void (*)(int, double)
   #pragma cmt end
 

@@ -21,9 +21,12 @@ add_executable(src_parsing tests/unit/src_parsing.cpp)
 target_link_libraries(src_parsing gtest_main nlohmann_json::nlohmann_json)
 add_executable(output_parsing tests/unit/output_parsing.cpp)
 target_link_libraries(output_parsing gtest_main nlohmann_json::nlohmann_json)
+add_executable(cmt_modify tests/unit/cmt_modify.cpp)
+target_link_libraries(cmt_modify gtest_main nlohmann_json::nlohmann_json)
 
 include(GoogleTest)
 
 gtest_discover_tests(utility TEST_PREFIX unit::)
 gtest_discover_tests(src_parsing TEST_PREFIX unit::)
 gtest_discover_tests(output_parsing TEST_PREFIX unit::)
+gtest_discover_tests(cmt_modify TEST_PREFIX unit::)

@@ -1,0 +1,8 @@
+#include <iostream>
+
+int main(int argc, char** argv) {
+  #pragma cmt beg
+  const int x{9}; std::cout << x << std::endl; // 9
+  #pragma cmt end
+  return 0;
+}

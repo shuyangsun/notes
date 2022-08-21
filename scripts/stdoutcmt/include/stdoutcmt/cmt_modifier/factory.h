@@ -46,20 +46,20 @@ namespace {
   for (std::size_t i{0}; i < comments.size(); ++i) {
     const std::string_view& code {std::get<0>(comments[i])};
     const std::string_view& old_cmt {std::get<1>(comments[i])};
-    if (new_comments.find(i) == new_comments.end()) {
+    if (new_comments.find(i + 1) == new_comments.end()) {
       result.emplace_back(std::make_pair(code, old_cmt));
     } else {
       std::stringstream ss{};
-      if (space_count.find(i) == space_count.end() || space_count.at(i) == 0) {
+      if (space_count.find(i + 1) == space_count.end() || space_count.at(i + 1) == 0) {
         ss << cmt_header;
-        ss << new_comments.at(i);
+        ss << new_comments.at(i + 1);
         result.emplace_back(std::make_pair(code, ss.str()));
-      } else if (space_count.at(i) > 0){
-        for (int64_t j{0}; j < space_count.at(i); ++j) {
+      } else if (space_count.at(i + 1) > 0){
+        for (int64_t j{0}; j < space_count.at(i + 1); ++j) {
           ss << ' ';
         }
         ss << cmt_header;
-        ss << new_comments.at(i);
+        ss << new_comments.at(i + 1);
         result.emplace_back(std::make_pair(code, ss.str()));
       } else {
         // TODO

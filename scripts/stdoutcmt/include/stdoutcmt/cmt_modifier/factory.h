@@ -13,60 +13,42 @@ namespace outcmt::src {
 namespace {
 
 [[nodiscard]] std::vector<std::pair<std::string_view, std::string>> ReplaceComments(
-    const ParsedComments& comments,
+    const ParsedComments& lines,
     const std::map<std::size_t, std::string_view>& new_comments,
-    const std::string_view& cmt_header,
-    const bool align_comments
+    const std::string_view& cmt_header
 ) {
-  std::unordered_map<std::size_t, int64_t> space_count{};
-  if (align_comments) {
-    // TODO: align comments
-    for (const auto& [line_num, cmt]: new_comments) {
-      if (util::TrimWS(cmt).empty()) {
-        continue;
-      }
-      const auto& cur_line = comments[line_num - 1];
-      if (!util::EndsWith(std::get<0>(cur_line), " ")) {
-        space_count.emplace(line_num, 1);
-      }
+  std::unordered_set<std::size_t> prefix_space{};
+  for (const auto& [line_num, cmt]: new_comments) {
+    if (util::TrimWS(cmt).empty()) {
+      continue;
     }
-  } else {
-    for (const auto& [line_num, cmt]: new_comments) {
-      if (util::TrimWS(cmt).empty()) {
-        continue;
-      }
-      const auto& cur_line = comments[line_num - 1];
-      if (!util::EndsWith(std::get<0>(cur_line), " ")) {
-        space_count.emplace(line_num, 1);
-      }
+    const auto& cur_line = lines[line_num - 1];
+    if (!util::EndsWith(std::get<0>(cur_line), " ")) {
+      prefix_space.emplace(line_num);
     }
   }
   std::vector<std::pair<std::string_view, std::string>> result{};
-  result.reserve(comments.size());
-  for (std::size_t i{0}; i < comments.size(); ++i) {
-    const std::string_view& code {std::get<0>(comments[i])};
-    const std::string_view& old_cmt {std::get<1>(comments[i])};
+  result.reserve(lines.size());
+  for (std::size_t i{0}; i < lines.size(); ++i) {
+    const std::string_view& code {std::get<0>(lines[i])};
+    const std::string_view& old_cmt {std::get<1>(lines[i])};
     if (new_comments.find(i + 1) == new_comments.end()) {
       result.emplace_back(std::make_pair(code, old_cmt));
     } else {
       std::stringstream ss{};
-      if (space_count.find(i + 1) == space_count.end() || space_count.at(i + 1) == 0) {
-        ss << cmt_header;
-        ss << new_comments.at(i + 1);
-        result.emplace_back(std::make_pair(code, ss.str()));
-      } else if (space_count.at(i + 1) > 0){
-        for (int64_t j{0}; j < space_count.at(i + 1); ++j) {
-          ss << ' ';
-        }
-        ss << cmt_header;
-        ss << new_comments.at(i + 1);
-        result.emplace_back(std::make_pair(code, ss.str()));
-      } else {
-        // TODO
+      if (prefix_space.find(i + 1) != prefix_space.end()) {
+        ss << ' ';
       }
+      ss << cmt_header;
+      ss << new_comments.at(i + 1);
+      result.emplace_back(std::make_pair(code, ss.str()));
     }
   }
   return result;
+}
+
+void UpdateCommentsToBeAligned(std::vector<std::pair<std::string_view, std::string>>& lines) {
+  // TODO: impl
 }
 
 }  // anonymous namespace
@@ -87,7 +69,10 @@ class CmtModifier {
       const bool align_comments
   ) const {
     const ParsedComments parsed{this->cmt_parser_->ParseComments(content)};
-    std::vector<std::pair<std::string_view, std::string>> replaced_cmt{ReplaceComments(parsed, new_comments, this->cmt_header_, align_comments)};
+    std::vector<std::pair<std::string_view, std::string>> replaced_cmt{ReplaceComments(parsed, new_comments, this->cmt_header_)};
+    if (align_comments) {
+      UpdateCommentsToBeAligned(replaced_cmt);
+    }
     std::stringstream ss{};
     std::size_t i{0};
     for (auto&& [code, cmt]: std::move(replaced_cmt)) {

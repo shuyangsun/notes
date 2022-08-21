@@ -20,7 +20,7 @@ using CommentMap =
 
 class OutputParser {
  public:
-  OutputParser() : cmt_regex_{"\\[.+:[1-9][0-9]*\\]:"} {};
+  OutputParser() : cmt_regex_{R"(\[((?!\]).)+:[1-9][0-9]*\]:)"} {};
   explicit OutputParser(const std::filesystem::path& tmp_dir_path) {
     std::string escaped{tmp_dir_path};
     util::Replace(escaped, "\\", "\\\\");
@@ -28,7 +28,7 @@ class OutputParser {
     std::stringstream ss;
     ss << "\\[";
     ss << escaped;
-    ss << ".*:[1-9][0-9]*\\]:";
+    ss << "((?!\\]).)*:[1-9][0-9]*\\]:";
     this->cmt_regex_ = std::regex{ss.str()};
   }
   ~OutputParser() = default;
@@ -46,7 +46,7 @@ class OutputParser {
       const auto pos{match.position(0)};
       const auto len{match.length(0)};
       match_pos.emplace_back(std::make_pair(pos, len));
-      const std::string cur_match{match.str()};
+      std::cout << "*** " << match.str() << std::endl;
     }
     for (std::size_t i{0}; i < match_pos.size(); ++i) {
       const std::size_t cur_pos{std::get<0>(match_pos[i])};

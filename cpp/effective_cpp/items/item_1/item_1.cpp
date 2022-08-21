@@ -69,9 +69,9 @@ int main(int argc, char **argv) {
   char const * const pc = &ch;
   const char ac[] = "Effective C++ Notes";
 
-  std::cout << "Case 1:" << std::endl;
-
   #pragma cmt beg
+  std::cout << "Case 1:" << std::endl; // Case 1:
+
   f_ref(x);    // ParamType: int&, T: int
   f_ref(cx);   // ParamType: int const&, T: int const
   f_ref(rx);   // ParamType: int&, T: int

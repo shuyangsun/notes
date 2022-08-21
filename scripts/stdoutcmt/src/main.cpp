@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
     const std::string_view src_path{argv[2]};
     const std::string_view tmp_path{argv[3]};
     const std::string_view output{argv[4]};
-    std::cout << output << std::endl;
 
     const outcmt::output::OutputParser output_parser{};  // TODO: initialize with tmp_path, not working now
     const outcmt::output::CommentMap parsed_output{output_parser.Parse(output)};

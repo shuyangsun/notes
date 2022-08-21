@@ -46,7 +46,6 @@ class OutputParser {
       const auto pos{match.position(0)};
       const auto len{match.length(0)};
       match_pos.emplace_back(std::make_pair(pos, len));
-      std::cout << "*** " << match.str() << std::endl;
     }
     for (std::size_t i{0}; i < match_pos.size(); ++i) {
       const std::size_t cur_pos{std::get<0>(match_pos[i])};

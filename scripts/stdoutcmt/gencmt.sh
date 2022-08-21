@@ -37,7 +37,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ ! -f "$SCRIPT_DIR/build/stdoutcmt" ]; then
- "$SCRIPT_DIR/$BUILD_FILE" -DTESTS=OFF
+ "$SCRIPT_DIR/$BUILD_FILE" -DCMAKE_BUILD_TYPE=Release -DTESTS=OFF
 fi
 
 TMP_SRC_DIR=$("$SCRIPT_DIR/build/stdoutcmt" --copy "$1") && \

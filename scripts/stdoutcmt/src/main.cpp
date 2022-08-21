@@ -25,7 +25,12 @@ int main(int argc, char** argv) {
 
     for (const auto& [file_name, lines]: parsed_output) {
       std::string original_file_name{file_name};
-      outcmt::util::Replace(original_file_name, tmp_path, src_path);
+      // Cannot use "Replace" here, on macOS sometimes "/private" is ignored.
+      const std::size_t pos{original_file_name.find(tmp_path)};
+      if (pos != std::string::npos) {
+        const std::size_t start_pos{pos + tmp_path.length()};
+        original_file_name = std::string{src_path} + original_file_name.substr(start_pos, original_file_name.length() - start_pos);
+      }
       const outcmt::src::FileType file_type{outcmt::src::GetFileType(original_file_name)};
       const outcmt::src::CmtModifierFactory factory{};
       const outcmt::src::CmtModifier cmt_modifier{factory.BuildModifier(file_type)};

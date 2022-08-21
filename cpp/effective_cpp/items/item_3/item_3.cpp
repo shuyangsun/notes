@@ -37,18 +37,18 @@ int main(int argc, char **argv) {
   std::vector<int> v{1, 2, 3};
 
   AccessEle_1(v, 1) = 5;
-  std::cout << v[1];
+  std::cout << v[1]; // 5
 
   // AccessEle_2(v, 1) = 10;  // *** COMPILE ERROR ***
 
   AccessEle_3(v, 1) = 7;
-  std::cout << v[1];
+  std::cout << v[1]; // 7
 
   AccessEle_4(v, 1) = 9;
-  std::cout << v[1];
+  std::cout << v[1]; // 9
 
   AccessEle_5(v, 1) = 11;
-  std::cout << v[1];
+  std::cout << v[1]; // 11
   #pragma cmt end
 
   return 0;

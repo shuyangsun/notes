@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
   PRINT_TYPE(x4);
 
   // std::vector<int> vec1 = InitVec();  // *** COMPILE ERROR ***
-  auto vec2 = InitVec<std::vector<int>>();
+  auto vec2 = InitVec<std::vector<int>>(); // std::__1::vector<int, std::__1::allocator<int> >
   PRINT_TYPE(vec2);
   #pragma cmt end
 

@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
   f_ptr(MyFunc);   // ParamType: void (*)(int, double), T: void (int, double)
 
   std::cout << std::endl;
-  std::cout << "Case 2:" << std::endl;
+  std::cout << "Case 2:" << std::endl; // Case 2:
 
   f_uref(x);   // ParamType: int&, T: int&
   f_uref(cx);  // ParamType: int const&, T: int const&
@@ -135,7 +135,7 @@ int main(int argc, char **argv) {
   f_uref_with_init(rcx);  // ParamType: int const&, T: int const&
 
   std::cout << std::endl;
-  std::cout << "Case 3:" << std::endl;
+  std::cout << "Case 3:" << std::endl; // Case 3:
 
   f_byval(x);  // ParamType: int, T: int
   f_byval(cx); // ParamType: int, T: int

@@ -51,10 +51,12 @@ void f(const T& param);
 
 ## Case 2: `ParamType` is Universal Reference
 
-Only situation where deduction depends on lvalue-ness and rvalue-ness of `expr`.
+It is declared similar to the rvalue syntax (but it's not, see [item_24](../item_24) for universal references). It is the only situation where deduction depends on lvalue-ness and rvalue-ness of `expr`.
 
 1. If `expr` is an lvalue, both `T` and `ParamType` are deduced to be lvalue references (only situation `T` is deduced to a reference).
 2. If `expr` is a rvalue, [Case 1](#case-1-ref-or-pointer) rules apply.
+
+Note: To force an rvalue in the parameter, use `const T&&` instead. See function `f_curef` in [item_1.cpp](item_1.cpp) for example.
 
 ### Example
 

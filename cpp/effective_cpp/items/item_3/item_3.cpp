@@ -57,29 +57,29 @@ int main(int argc, char **argv) {
   std::vector<int> v{1, 2, 3};
 
   AccessEle_1(v, 1) = 5;
-  std::cout << v[1]; // 5
+  std::cout << v[1]; //> 5
 
   // AccessEle_2(v, 1) = 10; // *** COMPILE ERROR ***
 
   AccessEle_3(v, 1) = 7;
-  std::cout << v[1]; // 7
+  std::cout << v[1]; //> 7
 
   AccessEle_4(v, 1) = 9;
-  std::cout << v[1]; // 9
+  std::cout << v[1]; //> 9
 
   AccessEle_5(v, 1) = 11;
-  std::cout << v[1]; // 11
+  std::cout << v[1]; //> 11
 
   // AccessEle_6(v, 1) = 13; // *** COMPILE ERROR ***
 
-  PRINT_TYPE(f1()); // int
-  PRINT_TYPE(f2()); // int&
-  PRINT_TYPE(f3()); // int const&
+  PRINT_TYPE(f1()); //> int
+  PRINT_TYPE(f2()); //> int&
+  PRINT_TYPE(f3()); //> int const&
 
   // f1() = 3; // *** COMPILE ERROR ***
-  f2() = 3;          // Trouble! Compiles but undefined behavior.
+  f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior.
-  std::cout << f3(); // 80444886
+  std::cout << f3(); //> 35044822
 
   #pragma cmt end
 

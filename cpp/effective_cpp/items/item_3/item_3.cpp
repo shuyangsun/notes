@@ -36,6 +36,11 @@ decltype(auto) AccessEle_6(const Container&& c, Index i) {
   return std::forward<Container>(c)[i];
 }
 
+template<typename Container, typename Index>
+auto&& AccessEle_7(Container& c, Index i) {
+  return c[i];
+}
+
 decltype(auto) f1() {
   int x{9};
   return x;
@@ -72,6 +77,10 @@ int main(int argc, char **argv) {
 
   // AccessEle_6(v, 1) = 13; // *** COMPILE ERROR ***
 
+  AccessEle_7(v, 1) = 15;
+  std::cout << v[1];             //> 15
+  PRINT_TYPE(AccessEle_7(v, 1)); //> int&
+
   PRINT_TYPE(f1()); //> int
   PRINT_TYPE(f2()); //> int&
   PRINT_TYPE(f3()); //> int const&
@@ -79,7 +88,7 @@ int main(int argc, char **argv) {
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior.
-  std::cout << f3(); //> 35044822
+  std::cout << f3(); //> 70663638
 
   #pragma cmt end
 

@@ -12,7 +12,7 @@ auto AccessEle_1(Container& c, Index i) -> decltype(c[i]) {
 }
 
 template<typename Container, typename Index>
-auto AccessEle_2(Container& c, Index i) {  // "auto" strips off the reference.
+auto AccessEle_2(Container& c, Index i) { // "auto" strips off the reference.
   return c[i];
 }
 
@@ -43,12 +43,12 @@ decltype(auto) f1() {
 
 decltype(auto) f2() {
   int x{9};
-  return (x);  // Trouble! Return type is deduced to int& (to a local variable).
+  return (x); // Trouble! Return type is deduced to int& (to a local variable).
 }
 
 decltype(auto) f3() {
   const int x{9};
-  return (x);  // Trouble! Return type is deduced to const int& (to a local variable).
+  return (x); // Trouble! Return type is deduced to const int& (to a local variable).
 }
 
 int main(int argc, char **argv) {
@@ -72,13 +72,13 @@ int main(int argc, char **argv) {
 
   // AccessEle_6(v, 1) = 13; // *** COMPILE ERROR ***
 
-  PRINT_TYPE(f1());
-  PRINT_TYPE(f2());
-  PRINT_TYPE(f3());
+  PRINT_TYPE(f1()); // int
+  PRINT_TYPE(f2()); // int&
+  PRINT_TYPE(f3()); // int const&
 
   // f1() = 3; // *** COMPILE ERROR ***
-  f2() = 3;    // Trouble! Compiles but undefined behavior.
-  std::cout << f3();  // Trouble! Compiles but undefined behavior.
+  f2() = 3;          // Trouble! Compiles but undefined behavior.
+  std::cout << f3(); // 80444886
 
   #pragma cmt end
 

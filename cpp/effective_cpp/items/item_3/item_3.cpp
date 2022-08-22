@@ -4,7 +4,7 @@
 
 #include <boost/type_index.hpp>
 
-#define PRINT_TYPE(x) std::cout << boost::typeindex::type_id_with_cvr<decltype(x)>() << std::endl
+#define PRINT_TYPE(x) std::cout << boost::typeindex::type_id_with_cvr<decltype(x)>().pretty_name() << std::endl
 
 template<typename Container, typename Index>
 auto AccessEle_1(Container& c, Index i) -> decltype(c[i]) {
@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior (should return 9 instead).
-  std::cout << f3(); //> 45170134
+  std::cout << f3(); //> 14482902
 
   #pragma cmt end
 

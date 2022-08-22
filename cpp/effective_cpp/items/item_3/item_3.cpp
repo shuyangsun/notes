@@ -78,6 +78,7 @@ int main(int argc, char **argv) {
 
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3;          // Trouble! Compiles but undefined behavior.
+  // The following line will result in undefined behavior.
   std::cout << f3(); // 80444886
 
   #pragma cmt end

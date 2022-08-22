@@ -29,3 +29,7 @@ Does the amount of work our engineer must perform grows as a function of the siz
 Does the work scale up with the size of the codebase?
 
 A good engineering team should internalize changes themselves, instead of forcing the work onto consumers (e.g., providing backward-compatible updates instead of setting a deadline to stop supporting older API/library).
+
+### Policies That Scale Well
+
+"If a product experiences outages or other problems as a result of infrastructure changes, but the issue wasn't surfaced by tests in our CI system, it is not the fault of the infrastructure change." ("If you liked it, you should have put a CI test on it." - The Beyoncé Rule)

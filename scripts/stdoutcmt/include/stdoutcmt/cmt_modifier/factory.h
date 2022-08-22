@@ -145,7 +145,7 @@ class CmtModifierFactory {
   [[nodiscard]] CmtModifier BuildModifier(const FileType& file_type) const {
     switch (file_type) {
       case FileType::Cpp:
-        return CmtModifier(std::make_unique<CmtParserCpp>(), "// ");
+        return CmtModifier(std::make_unique<CmtParserCpp>(), "//> ");
       default:
         throw std::invalid_argument("Unrecognized file type.");
     }

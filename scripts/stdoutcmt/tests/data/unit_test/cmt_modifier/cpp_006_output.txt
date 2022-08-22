@@ -29,26 +29,26 @@ int main(int argc, char **argv) {
   const char ac[] = "Effective C++ Notes";
 
   #pragma cmt beg
-  std::cout << "Case 1:" << std::endl; // Case 1:
+  std::cout << "Case 1:" << std::endl; //> Case 1:
 
-  f_ref(x);   // ParamType: int&, T: int
-  f_ref(cx);  // ParamType: int const&, T: int const
-  f_ref(rx);  // ParamType: int&, T: int
-  f_ref(rcx); // ParamType: int const&, T: int const
+  f_ref(x);   //> ParamType: int&, T: int
+  f_ref(cx);  //> ParamType: int const&, T: int const
+  f_ref(rx);  //> ParamType: int&, T: int
+  f_ref(rcx); //> ParamType: int const&, T: int const
   // f_ref(27);   // *** COMPILE ERROR ***
-  f_ref(pc);     // ParamType: char const* const&, T: char const* const
-  f_ref(ac);     // ParamType: char const (&) [20], T: char const [20]
-  f_ref(MyFunc); // ParamType: void (&)(int, double), T: void (int, double)
+  f_ref(pc);     //> ParamType: char const* const&, T: char const* const
+  f_ref(ac);     //> ParamType: char const (&) [20], T: char const [20]
+  f_ref(MyFunc); //> ParamType: void (&)(int, double), T: void (int, double)
 
   std::cout << std::endl;
 
-  f_cref(x);      // ParamType: int const&, T: int
-  f_cref(cx);     // ParamType: int const&, T: int
-  f_cref(rx);     // ParamType: int const&, T: int
-  f_cref(rcx);    // ParamType: int const&, T: int
-  f_cref(27);     // ParamType: int const&, T: int
-  f_cref(pc);     // ParamType: char const* const&, T: char const*
-  f_cref(ac);     // ParamType: char const (&) [20], T: char [20]
-  f_cref(MyFunc); // ParamType: void (&)(int, double), T: void (int, double)
+  f_cref(x);      //> ParamType: int const&, T: int
+  f_cref(cx);     //> ParamType: int const&, T: int
+  f_cref(rx);     //> ParamType: int const&, T: int
+  f_cref(rcx);    //> ParamType: int const&, T: int
+  f_cref(27);     //> ParamType: int const&, T: int
+  f_cref(pc);     //> ParamType: char const* const&, T: char const*
+  f_cref(ac);     //> ParamType: char const (&) [20], T: char [20]
+  f_cref(MyFunc); //> ParamType: void (&)(int, double), T: void (int, double)
   #pragma cmt end
 }

@@ -36,8 +36,10 @@ int main(int argc, char** argv) {
       const outcmt::src::CmtModifier cmt_modifier{factory.BuildModifier(file_type)};
       const std::string content{outcmt::util::Read(original_file_name)};
       const std::string new_content{cmt_modifier.ParseAndReplaceComments(content, lines, true)};
-      outcmt::util::Write(original_file_name, new_content);
-      std::cout << "Modified file \"" << original_file_name << '"' << std::endl;
+      if (new_content != content) {
+        outcmt::util::Write(original_file_name, new_content);
+        std::cout << "Modified file \"" << original_file_name << '"' << std::endl;
+      }
     }
   }
 

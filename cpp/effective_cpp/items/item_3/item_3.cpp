@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior (should return 9 instead).
-  std::cout << f3(); //> 14482902
+  std::cout << f3(); //> 80657878
   #pragma cmt end
 
   return 0;

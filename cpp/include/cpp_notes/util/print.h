@@ -2,23 +2,12 @@
 #define CPP_NOTES_INCLUDE_CPP_NOTES_UTIL_PRINT_H_
 
 #include <iostream>
+#include <boost/type_index.hpp>
+
+#define PRINT_TYPE(x) std::cout << boost::typeindex::type_id_with_cvr<decltype(x)>().pretty_name() << std::endl;
+#define PRINTLN_TYPE(x) PRINT_TYPE(x) << std::endl;
 
 namespace cppn::util {
-
-template<std::size_t N>
-inline void PLN() {  // Print Line Number
-    std::cout << '[' << N << "]: ";
-}
-
-template<std::size_t N>
-inline void PLNA() {  // Print Line Number Above
-    PLN<N - 1>();
-}
-
-template<std::size_t N>
-inline void PLNB() {  // Print Line Number Below
-    PLN<N + 1>();
-}
 
 }  // namespace cppn::util
 

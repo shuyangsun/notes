@@ -15,6 +15,12 @@ add_definitions(${CPP_STANDARD_COMPILE_FLAGS})
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 
+SET(Boost_USE_STATIC_LIBS OFF)
+SET(Boost_USE_MULTITHREADED ON)
+SET(Boost_USE_STATIC_RUNTIME OFF)
+
+FIND_PACKAGE(Boost 1.79.0 REQUIRED)
+
 # Macro copied from: https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory
 MACRO(SUBDIRLIST result curdir)
     FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)

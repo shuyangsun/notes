@@ -1,6 +1,8 @@
 #include <iostream>
 #include <boost/type_index.hpp>
 
+#include "cpp_notes/util/print.h"
+
 #define PRINT_DEDUCED_TYPE() std::cout << \
   "ParamType: " << boost::typeindex::type_id_with_cvr<decltype(param)>().pretty_name() << ", " << \
   "T: " << boost::typeindex::type_id_with_cvr<T>().pretty_name() << std::endl;
@@ -70,6 +72,9 @@ int main(int argc, char **argv) {
   const char ac[] = "Effective C++ Notes";
 
   #pragma cmt beg
+
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+
   std::cout << "Case 1:" << std::endl; //> Case 1:
 
   f_ref(x);   //> ParamType: int&, T: int

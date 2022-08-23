@@ -57,6 +57,9 @@ decltype(auto) f3() {
 int main(int argc, char **argv) {
 
   #pragma cmt beg
+
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+
   std::vector<int> v{1, 2, 3};
 
   AccessEle_1(v, 1) = 5;
@@ -86,7 +89,7 @@ int main(int argc, char **argv) {
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior (should return 9 instead).
-  std::cout << f3(); //> 81133014
+  std::cout << f3(); //> 11861451
   #pragma cmt end
 
   return 0;

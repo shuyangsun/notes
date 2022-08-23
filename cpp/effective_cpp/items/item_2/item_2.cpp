@@ -17,6 +17,10 @@ T InitVec() {
 
 int main(int argc, char **argv) {
 
+  #pragma cmt beg
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+  #pragma cmt end
+
   #pragma cmt beg -1
   auto x = 27; //> int
   PRINT_TYPE(x);

@@ -7,16 +7,12 @@ BUILD_FILE="build.sh"
 RUN_FILE="run.sh"
 
 build_and_run () {
-    # if [ -f "$1/$CLEAN_FILE" ]; then
-    #     "$1/$CLEAN_FILE"
-    # fi
+    if [ -f "$1/$CLEAN_FILE" ]; then
+        "$1/$CLEAN_FILE"
+    fi
 
     "$1/$BUILD_FILE"
     "$1/$RUN_FILE"
-
-    # if [ -f "$1/$CLEAN_FILE" ]; then
-    #     "$1/$CLEAN_FILE"
-    # fi
 }
 
 recursive_walk () {

@@ -14,4 +14,4 @@ Effective Modern C++ by [Scott Meyers](https://www.aristeia.com/)
 ### Chapter 2
 
 5. [Prefer `auto` to explicit type declarations.](items/item_5)
-6. [Use the explicitly typed initializer idiom when auto deduces undesired types.](items/item_6)
+6. [Use the explicitly typed initializer idiom when `auto` deduces undesired types.](items/item_6)

@@ -1,0 +1,3 @@
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+ADD_EXECUTABLE(item_7 "items/item_7/item_7.cpp")
+TARGET_LINK_LIBRARIES(item_7 ${Boost_LIBRARIES})

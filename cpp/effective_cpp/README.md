@@ -1,6 +1,6 @@
 [Home](../../README.md) >> [C++](../../README.md#c++) >> [Effective Modern C++](./README.md)
 
-# Effective Modern C++ ([Scott Meyers](https://www.aristeia.com/))
+# Effective Modern C++ by [Scott Meyers](https://www.aristeia.com/)
 
 ## Chapter 1: Deducing Types
 

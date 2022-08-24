@@ -1,6 +1,6 @@
 [Home](../../README.md) >> [Software Engineering](../../README.md#software_engineering) >> [Software Engineering at Google](./README.md)
 
-# Software Engineering at Google - [Titus Winters](https://www.linkedin.com/in/tituswinters/), [Tom Manshreck](https://www.linkedin.com/in/thomas-manshreck-0111a11/) & [Hyrum Wright](https://www.linkedin.com/in/hyrum-wright-0905427/)
+# Software Engineering at Google by [Titus Winters](https://www.linkedin.com/in/tituswinters/), [Tom Manshreck](https://www.linkedin.com/in/thomas-manshreck-0111a11/) & [Hyrum Wright](https://www.linkedin.com/in/hyrum-wright-0905427/)
 
 ## Chapter 1. What is Software Engineering?
 

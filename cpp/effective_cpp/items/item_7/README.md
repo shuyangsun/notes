@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 7](./README.md)
+
 # Item 7: Distinguish between `()` and `{}` when creating objects.
 
 Three main ways to initialize a variable:

@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 1](./README.md)
+
 # Item 1: Understand template type deduction.
 
 ```c++

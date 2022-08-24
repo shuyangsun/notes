@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 2](./README.md)
+
 # Item 2: Understand `auto` type deduction.
 
 `auto` type deduction is template type deduction, with `auto` plays the role of `T` and the type specifier as `ParamType`. Refer to [Item 1: Understand template type deduction](../item_1) for detail.

@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 4](./README.md)
+
 # Item 4: Know how to view deduced types.
 
 Use `boost::typeindex`, [item_1.cpp](../item_1/item_1.cpp) and [item_2.cpp](../item_2/item_2.cpp) both used it extensively. `std::type_info::name` is unreliable.

@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 3](./README.md)
+
 # Item 3: Understand `decltype`.
 
 `decltype` is most commonly used in declaring template function return types.

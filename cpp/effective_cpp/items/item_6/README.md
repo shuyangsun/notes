@@ -1,3 +1,5 @@
+[Home](../../../../README.md) >> [C++](../../../../README.md#c++) >> [Effective Modern C++](../../README.md) >> [Item 6](./README.md)
+
 # Item 6: Use the explicitly typed initializer idiom when `auto` deduces undesired types.
 
 As a general rule, avoid using `auto` with expressions that generate an instance of an "invisible" proxy class (such as `std::vector<bool>::reference`).

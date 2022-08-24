@@ -5,6 +5,7 @@
 "C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off." - [Bjarne Stroustrup](https://www.stroustrup.com/quotes.html)
 
 [Effective Modern C++](cpp/effective_cpp/README.md) by [Scott Meyers](https://www.aristeia.com/)
+
 [The C++ Programming Language](cpp/the_cpp_prog_lang/README.md) by [Bjarne Stroustrup](https://www.stroustrup.com/index.html)
 
 ## Software Engineering

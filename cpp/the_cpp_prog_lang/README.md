@@ -6,7 +6,7 @@
 
 #### 6.3.1 The Structure of Declarations
 
-* * is prefix, **[]** and **()** are postfix; the postfix declarator operators bind tighter than the prefix ones.
+* * is prefix, `[]` and `()` are postfix; the postfix declarator operators bind tighter than the prefix ones.
 
 ```c++
 char *arr[]; // Array of pointers to char
@@ -16,12 +16,12 @@ char( *arr)[]; // Pointer to an array of char
 * When it comes to arrays and pointers, read from right to left.
 
 #### 6.3.3 Names
-* Nonlocal names starting with an underscore are reserved for special facilities in the implementation and the run-time environment, so such names should not be used in application programs. Similarly, names starting with a double underscore (__) or an underscore followed by an uppercase letter (e.g., _Foo) are reserved.
+* Nonlocal names starting with an underscore are reserved for special facilities in the implementation and the run-time environment, so such names should not be used in application programs. Similarly, names starting with a double underscore `__` or an underscore followed by an uppercase letter (e.g., `_Foo`) are reserved.
 * Use all capitals for macros and never for non-macros (not even for non-macro constants). Use underscores to separate words in an identifier.
 * Language and the standard library use lowercase for types; this can be seen as a standard.
 
 #### 6.3.4 Scope
-* A hidden global name can be referred to using the scope resolution operator **::**.
+* A hidden global name can be referred to using the scope resolution operator `::`.
 
 ```c++
 int x = 6;
@@ -35,7 +35,7 @@ void foo() {
 
 #### 6.3.5 Initialization
 
-* Initialize variables with **{}** (list initializer) instead of traditional **=** initializer.
+* Initialize variables with `{}` (list initializer) instead of traditional `=` initializer.
 * List initializers does not allow narrowing (check for precision lose and unsafe implicit type casts). They can also be customized for user defined objects.
 * When no argument is supplied to a list initializer, an object is initialized with its default constructor or default value.
 
@@ -58,11 +58,11 @@ std::cout << "age is " << p.age() << std::endl; // age is 21
 ```
 
 * Local variables and objects created on the free store are not initialized by default unless they are of user-defined types with a default constructor.
-* Prefer **=** rather than **{}** when using **auto**.
+* Prefer `=` rather than `{}` when using `auto`.
 
 #### 6.3.6 Deducing a Type: auto and decltype()
-* **auto** and **decltype()** simply report the type of an expression already known to the compiler.
-* **decltype(expr)** is the type of **expr**, return type of **expr** must can be known by the compiler.
+* `auto` and `decltype()` simply report the type of an expression already known to the compiler.
+* `decltype(expr)` is the type of `expr`, return type of `expr` must can be known by the compiler.
 
 ___
 ## 7. Pointers, Arrays, and References
@@ -104,17 +104,17 @@ std::cout << "x is " << x << std::endl; // x is 6
 	* There's no "null reference".
 
 #### 7.7.1 Lvalue References
-* **T&** lval;
+* `T&` lval;
 * The value of a reference cannot be changed after initialization.
 * Cannot define an array of references.
-* The initializer for a "plain" **T&** must be an lvalue of type **T**.
+* The initializer for a "plain" `T&` must be an lvalue of type `T`.
 
 #### 7.7.2 Rvalue References
-* **T&&** rval;
-* Both a **const** lvalue reference and a rvalue reference can bind to an rvalue, but their purposes are fundamentally different:
+* `T&&` rval;
+* Both a `const` lvalue reference and a rvalue reference can bind to an rvalue, but their purposes are fundamentally different:
 	* We use rvalue references to implement a "destructive read" for optimization of what would otherwise have required a copy.
-	* We use a **const** lvalue reference to prevent modification of an argument.
-* Use **move()** instead of **static_cast\<T&&\>(x)** to get a rvalue reference.
+	* We use a `const` lvalue reference to prevent modification of an argument.
+* Use `move()` instead of `static_cast<T&&>(x)` to get a rvalue reference.
 
 #### 7.7.4 Pointers and References
 * If you need to change which object to refer to, use a pointer.
@@ -125,8 +125,8 @@ ___
 ## 8. Structures, Unions, and Enumerations
 
 ### 8.2 Structures
-* There's a terminating **;** (semicolon) at the end of structure definition, each member is also terminated by **;**.
-* Structs can be initialized using **{}** notation.
+* There's a terminating `;` (semicolon) at the end of structure definition, each member is also terminated by `;`.
+* Structs can be initialized using `{}` notation.
 
 ```c++
 struct person {
@@ -140,9 +140,9 @@ person me {"Wolve", "Rine", 658};
 
 #### 8.2.1 struct Layout
 * Members are allocated in memory in declaration order.
-* The size of an object of a **struct** is not necessarily the sum of the sizes of it's members, because they have to be properly *aligned* in the machine memory.
+* The size of an object of a `struct` is not necessarily the sum of the sizes of it's members, because they have to be properly *aligned* in the machine memory.
 * Can minimize wasted space by simply ordering members by size (largest member first).
-* Use of multiple access specifiers (i.e., **public**, **private**, or **protected**) can affect layout.
+* Use of multiple access specifiers (i.e., `public`, `private`, or `protected`) can affect layout.
 
 ```c++
 // Allocation 1 (on Intel based macOS, assuming word size is 8 bytes)
@@ -178,7 +178,7 @@ struct product {
 
 #### 8.2.2 struct Names
 * The name of a type becomes available for use immediately after it has been encountered and not just after the complete declaration has been seen.
-* It is not possible to declare new objects of a **struct** until its complete declaration has been seen, because the compiler is not able to determine the size of that **struct** object (but is able to for the pointer to that **struct** object).
+* It is not possible to declare new objects of a `struct` until its complete declaration has been seen, because the compiler is not able to determine the size of that `struct` object (but is able to for the pointer to that `struct` object).
 
 ```c++
 struct node {
@@ -190,7 +190,7 @@ struct node_bad {
 };
 ```
 
-* To allow multiple **struct**s to refer to each other, we can declare a name to be the name of a **struct**.
+* To allow multiple `struct`s to refer to each other, we can declare a name to be the name of a `struct`.
 
 ```c++
 struct lion; // Declaration, will be defined later.
@@ -204,8 +204,8 @@ struct lion {
 };
 ```
 
-* It's possible to declare a **struct** and a non-**struct** with the same name in the same scope.
-* Use **struct** <*name*> to refer to the **struct** type, and plane <*name*> to refer to the other.
+* It's possible to declare a `struct` and a non-`struct` with the same name in the same scope.
+* Use `struct` <*name*> to refer to the `struct` type, and plane <*name*> to refer to the other.
 * Avoid overloading names.
 
 ```c++
@@ -214,7 +214,7 @@ int stat(char *name, struct stat* buf);
 ```
 
 #### 8.2.3 Structures and Classes
-* A **struct** is simply a **class** where the members are public by default. So, a **struct** can have member functions. In particular, a **struct** can have constructors.
+* A `struct` is simply a `class` where the members are public by default. So, a `struct` can have member functions. In particular, a `struct` can have constructors.
 * Use list initializer to initialize the structure with default values, even if no constructor is defined
 
 ```c++
@@ -245,12 +245,12 @@ person alien {"E", "T", 290};
 * Two structs are different even when they have the same members.
 
 #### 8.2.6 Plain Old Data
-* POD can be copied very efficiently by using block move machine instructions (e.g., **std::memcpy()**).
+* POD can be copied very efficiently by using block move machine instructions (e.g., `std::memcpy()`).
 * To be a POD, the object must:
-	* Not have a complicated layout (e.g., with a **vptr**).
+	* Not have a complicated layout (e.g., with a `vptr`).
 	* Not have nonstandard (user-defined) copy semantics.
 	* Have a trivial default constructor.
-* **is_pod** in standard-library defined in **\<type_traits\>** allows us to ask if a type is POD.
+* `is_pod` in standard-library defined in `<type_traits>` allows us to ask if a type is POD.
 
 ```c++
 struct S1 { int x; };
@@ -277,11 +277,11 @@ struct color_16 {
 };
 ```
 
-* Using fields to pack several variables into a single byte does not necessarily save space. It saves data space, but the size of the code needed to manipulate these variables increases on most machines. Programs have been known to shrink significantly when binary variables were converted from bit-fields to characters! Furthermore, it is typically much faster to access a **char** or an **int** than to access a field.
+* Using fields to pack several variables into a single byte does not necessarily save space. It saves data space, but the size of the code needed to manipulate these variables increases on most machines. Programs have been known to shrink significantly when binary variables were converted from bit-fields to characters! Furthermore, it is typically much faster to access a `char` or an `int` than to access a field.
 
 ### 8.3 Unions
-* A **union** is a **struct** in which all members are allocated at the same address so that the **union** occupies only as much space as its largest member.
-* Naturally, a **union** can hold a value for only one member at a time.
+* A `union` is a `struct` in which all members are allocated at the same address so that the `union` occupies only as much space as its largest member.
+* Naturally, a `union` can hold a value for only one member at a time.
 
 ```c++
 union value {
@@ -297,9 +297,9 @@ std::cout << val.i << std::endl; // 1
 ```
 
 #### 8.3.1 Unions and Classes
-* **union** has a lot of restrictions comparing to **class**.
-* **union** cannot have or be used as a base class.
-* If a **union** has a member with a user-defined constructor, a copy operation, a move operation, or a destructor, then that special function is deleted for that **union**; that is, it cannot be used for an object of the **union** type.
+* `union` has a lot of restrictions comparing to `class`.
+* `union` cannot have or be used as a base class.
+* If a `union` has a member with a user-defined constructor, a copy operation, a move operation, or a destructor, then that special function is deleted for that `union`; that is, it cannot be used for an object of the `union` type.
 * It is possible to specify an in-class initializer for at most one member. If so, this initializer will be used for default initialization.
 
 ```c++
@@ -318,8 +318,8 @@ zip_code ames {50010}; // error: no matching constructor for initialization of '
 ```
 
 #### 8.3.2 Anonymous unions
-* An anonymous **union** is an object, not a type, and its members can be accessed without mentioning an object name.
-* We can use members of an anonymous **union** exactly as we use other members of a class - as long as we remember that **union** members really can be used only one at a time.
+* An anonymous `union` is an object, not a type, and its members can be accessed without mentioning an object name.
+* We can use members of an anonymous `union` exactly as we use other members of a class - as long as we remember that `union` members really can be used only one at a time.
 
 ```c++
 class address {
@@ -364,10 +364,10 @@ std::cout << work.street_address() << ", " << work.zip_code() << std::endl; // N
 ### 8.4 Enumerations
 * An *enumeration* is a type that can hold a set of integer values specified by the user.
 * Some of an enumeration's possible values are named and called *enumerators*.
-* Cannot initialize an *enumerator* with list initializer (but can with **enum**s).
+* Cannot initialize an *enumerator* with list initializer (but can with `enum`s).
 * There are two kinds of enumerations:
-	1. **enum class**es, for which the enumerator names are *local* to the **enum** and their values do *not* implicitly convert to integers.
-	2. "Plain **enum**s", for which the enumerator names are in the *same scope* as the **enum** and their values implicitly convert to integers.
+	1. `enum class`es, for which the enumerator names are *local* to the `enum` and their values do *not* implicitly convert to integers.
+	2. "Plain `enum`s", for which the enumerator names are in the *same scope* as the `enum` and their values implicitly convert to integers.
 
 ```c++
 enum class color {
@@ -393,7 +393,7 @@ std::cout << order2 << std::endl; // 10
 #### 8.4.1 enum classes
 * An enumeration is represented by some integer type and each enumerator by some integer value.
 * The type used to represent an enumeration is called its *underlying type*.
-* The underlying type must be one of the signed or unsigned integer types; the default is **int**.
+* The underlying type must be one of the signed or unsigned integer types; the default is `int`.
 * Even if there is an underlying type, it will not be implicitly converted; to get the value of underlying type, use casting.
 
 ```c++
@@ -407,7 +407,7 @@ std::cout << light << std::endl;
 std::cout << static_cast<char>(light) << std::endl; // r
 ```
 
-* Using bit-wise operators (e.g., **|**, **&**) needs explicit casting of **enum class**.
+* Using bit-wise operators (e.g., `|`, `&`) needs explicit casting of `enum class`.
 
 ```c++
 enum class options {
@@ -421,7 +421,7 @@ std::cout << (opt1 | opt2) << std::endl;
 std::cout << (static_cast<int>(opt1) | static_cast<int>(opt2)) << std::endl; // 5
 ```
 
-* Even if two enumerators of **enum class**es have the same underlying value, they cannot be compared with each other (which is not true for plain **enum**).
+* Even if two enumerators of `enum class`es have the same underlying value, they cannot be compared with each other (which is not true for plain `enum`).
 
 ```c++
 enum class light {
@@ -453,10 +453,10 @@ city new_york_city {nyc};
 bool same = new_york_city == new_york_state; // true (NOT GOOD!)
 ```
 
-* Bit-wise operations for plain **enum**s does not need explicit casting, since they are implicitly converted to their underlying types.
+* Bit-wise operations for plain `enum`s does not need explicit casting, since they are implicitly converted to their underlying types.
 
 #### 8.4.3 Unnamed enums
-* A plain **enum** can be unnamed, we use that when all we need is a set of integer constants, rather than a type to use for variables.
+* A plain `enum` can be unnamed, we use that when all we need is a set of integer constants, rather than a type to use for variables.
 
 ```c++
 enum { up=1, left, down, right };
@@ -470,15 +470,15 @@ ___
 * Expressions have values, statements don't.
 
 ### 9.2 Statements Summary
-* A (possibly empty) sequence of statements within "curly braces" (i.e., **{** and **}**) is called a *block* or a *compound statement*.
+* A (possibly empty) sequence of statements within "curly braces" (i.e., `{` and `}`) is called a *block* or a *compound statement*.
 * A name declared in a block goes out of scope at the end of its block.
 
 #### 9.4.2 switch Statements
-* No need for terminating semicolon at the end of **switch**-statement.
-* **switch**-statements needs **break** at the end of each **case**, otherwise it'll fall through like C (unlike Swift).
+* No need for terminating semicolon at the end of `switch`-statement.
+* `switch`-statements needs `break` at the end of each `case`, otherwise it'll fall through like C (unlike Swift).
 
 ##### 9.4.2.1 Declarations in Cases
-* It is possible, and common, to declare variables within the block of a **switch**-statement. However, it is not possible to bypass an initialization.
+* It is possible, and common, to declare variables within the block of a `switch`-statement. However, it is not possible to bypass an initialization.
 
 ```c++
 void foo(int x) {
@@ -508,12 +508,12 @@ foo(5); // 6 289686817
 foo(0); // 9
 ```
 
-* If we need a variable within a **switch**-statement, we can limit its scope by enclosing its declaration and its use in a block.
+* If we need a variable within a `switch`-statement, we can limit its scope by enclosing its declaration and its use in a block.
 
 #### 9.4.3 Declaration in Conditions
 
 * Purpose: limit the scope of that variable to only that block.
-* A declaration in a condition must declare and initialize a single variable or **const**.
+* A declaration in a condition must declare and initialize a single variable or `const`.
 
 ```c++
 int x {5};
@@ -536,7 +536,7 @@ for (const T& x: v) { /* Use const reference for potentially large elements. */ 
 ```
 
 ### 9.6 goto Statements
-* Use **goto** only to jump forward to exit complicated loops, otherwise it's too confusing (even better: not using **goto** at all).
+* Use `goto` only to jump forward to exit complicated loops, otherwise it's too confusing (even better: not using `goto` at all).
 
 ```c++
 for (const T& x: v) {
@@ -558,7 +558,7 @@ found:
 ```
 
 ### 9.7 Comments and Indentation
-* **/*** **\*/** style comments do NOT nest (unlike Swift).
+* `/* */` style comments do NOT nest (unlike Swift).
 
 
 ___
@@ -582,7 +582,7 @@ v[i] = i++; // undefined result
 * If you start feeling the need for parentheses, you might consider breaking up the expression by using an extra variable.
 
 #### 10.3.4 Temporary Objects
-* A temporary object is created by compiler to hold an intermediate result of an expression. (e.g., **val = x + y * z**, there is a temporary project to hold the value of **y * z**)
+* A temporary object is created by compiler to hold an intermediate result of an expression. (e.g., `val = x + y * z`, there is a temporary project to hold the value of `y * z`)
 * Unless bound to a reference or used to initialize a named object, a temporary object is destroyed at the end of the full expression in which is was created. (sometimes this does not work well with certain ways of writing code)
 
 ```c++
@@ -593,17 +593,17 @@ const char *c_str = (str1 + str2).c_str();
 std::cout << c_str << std::endl;
 ```
 
-* Solution to this problem: bind the variables (in this case, **str1** and **str2**) to a **const** reference.
+* Solution to this problem: bind the variables (in this case, `str1` and `str2`) to a `const` reference.
 
 ### 10.4 Constant Expressions
 * C++ offers two related meanings of "constant":
-	* **constexpr**: Evaluate at compile time (enable and ensure compile-time evaluation).
-	* **const**: Do not modify in this scope (specify immutability in interfaces).
-* A constant expression must start out with an integral value, a floating point value, or an enumerator, and we can combine those using operators and **constexpr** functions that in turn produce values.
-* **constexpr** is a better choice for defining simple constants.
+	* `constexpr`: Evaluate at compile time (enable and ensure compile-time evaluation).
+	* `const`: Do not modify in this scope (specify immutability in interfaces).
+* A constant expression must start out with an integral value, a floating point value, or an enumerator, and we can combine those using operators and `constexpr` functions that in turn produce values.
+* `constexpr` is a better choice for defining simple constants.
 
 ### 10.4.3 Literal Types
-* A class with a **constexpr** constructor is called a *literal type*. To be simple enough to be **constexpr**, a constructor must have an empty body and all members must be initialized by potentially constant expressions.
+* A class with a `constexpr` constructor is called a *literal type*. To be simple enough to be `constexpr`, a constructor must have an empty body and all members must be initialized by potentially constant expressions.
 
 ```c++
 struct Point {
@@ -635,10 +635,10 @@ constexpr const char *p1 = "asdf";
 #### 10.5 Implicit Type Conversion
 * *promotions*: preserve value.
 * *narrowing*: not value preserving.
-* The **{}**-initializer syntax prevents narrowing.
-* **narrow_cast<>()** is a run-time checked conversion function. (use only if not avoidable or intended)
-* Any pointer to an object type can be implicitly converted to a **void***
-* Pointers, integral, and floating-point values can be implicitly converted to **true**. A nonzero value is converted to **true**, a zero value is converted to **false**.
+* The `{}`-initializer syntax prevents narrowing.
+* `narrow_cast<>()` is a run-time checked conversion function. (use only if not avoidable or intended)
+* Any pointer to an object type can be implicitly converted to a `void*`
+* Pointers, integral, and floating-point values can be implicitly converted to `true`. A nonzero value is converted to `true`, a zero value is converted to `false`.
 * When a floating-point value is converted to an integer value (that's big enough to hold the integer part), the fractional part is discarded.
 
 ___
@@ -649,31 +649,31 @@ ___
 * They can be used on integral types (signed or unsigned).
 
 ### 11.2 Free Store
-* **new** and **delete** are used to create/destroy objects on the *free store* respectively.
-* An object created by **new** exists until it is explicitly destroyed by **delete**.
-* The **delete** and **delete[]** operator may be applied only to a pointer returned by **new** or to the **nullptr**. Applying them to the **nullptr** has no effect.
-* If the deleted object is of a class with a destructor, that destructor is called by **delete** before the object's memory is released for reuse.
-* To deallocate space allocated by **new**, **delete** and **delete[]** must be able to determine the size of the object allocated (which requires extra space). This overhead is not significant when we allocate many objects or large objects, but it can matter if we allocate lots of small objects on the free store.
-* A **return** or an exception thrown before the **delete** will cause a memory leak (unless even more code is added).
+* `new` and `delete` are used to create/destroy objects on the *free store* respectively.
+* An object created by `new` exists until it is explicitly destroyed by `delete`.
+* The `delete` and `delete[]` operator may be applied only to a pointer returned by `new` or to the `nullptr`. Applying them to the `nullptr` has no effect.
+* If the deleted object is of a class with a destructor, that destructor is called by `delete` before the object's memory is released for reuse.
+* To deallocate space allocated by `new`, `delete` and `delete[]` must be able to determine the size of the object allocated (which requires extra space). This overhead is not significant when we allocate many objects or large objects, but it can matter if we allocate lots of small objects on the free store.
+* A `return` or an exception thrown before the `delete` will cause a memory leak (unless even more code is added).
 
 #### 11.2.1 Memory Management
 * Main problems with free store: *leaked objects*, *premature deletion*, and *double deletion*.
 * Don't put objects on the free store if you don't have to; prefer scoped variables.
-* When you construct an object on the free store, place its pointer into a *manager object* (*handle*) with a destructor that will destroy it. (e.g., **string**, **vector**, all standard library containers, **unique_ptr**, and **shared_ptr**)
-* Rule of thumb: no naked **new**s. **new** belongs in constructors and similar operations, **delete** belongs in destructors.
+* When you construct an object on the free store, place its pointer into a *manager object* (*handle*) with a destructor that will destroy it. (e.g., `string`, `vector`, all standard library containers, `unique_ptr`, and `shared_ptr`)
+* Rule of thumb: no naked `new`s. `new` belongs in constructors and similar operations, `delete` belongs in destructors.
 
 #### 11.2.2 Arrays
-* **delete[]** is used to delete arrays created by **new**.
+* `delete[]` is used to delete arrays created by `new`.
 
 #### 11.2.3 Getting Memory Space
-* The standard implementations of **operator new()** and **operator new\[]()** do not initialize the memory returned. They take arguments or return values of type **void***.
+* The standard implementations of `operator new()` and `operator new\[]()` do not initialize the memory returned. They take arguments or return values of type `void*`.
 
 #### 11.2.4 Overloading new
 * Placing an object in an area that is not (directly) controlled by the standard free-store manager implies that some care is required when destroying the object.
 
 ##### 11.2.4.1 nothrow new
-* Use **nothrow** version of **new** and **delete** if no exceptions must be avoided.
-* **nothrow** version of **new** returns **nullptr**, rather than throwing **bad_alloc** if the object cannot be allocated.
+* Use `nothrow` version of `new` and `delete` if no exceptions must be avoided.
+* `nothrow` version of `new` returns `nullptr`, rather than throwing `bad_alloc` if the object cannot be allocated.
 
 ```c++
 std::string* str_ptr {new(std::nothrow) std::string {}};
@@ -681,22 +681,22 @@ operator delete(str_ptr, std::nothrow);
 ```
 
 ### 11.3 Lists
-* **{}**-list can be used as expressions in many (but not all) places:
-	* *Qualified* by a type **T{...}**, meaning "create an object of type **T** initialized by **T{...}**".
-	* *Unqualified* **{...}**, for which the type must be determined from the context of use.
+* `{}`-list can be used as expressions in many (but not all) places:
+	* *Qualified* by a type `T{...}`, meaning "create an object of type `T` initialized by `T{...}`".
+	* *Unqualified* `{...}`, for which the type must be determined from the context of use.
 
 #### 11.3.1 Implementation Model
-* If the **{}**-list is used to construct an **initializer_list**, elements are typically copied from the **initializer_list** to wherever we use them. Not copied otherwise, except as by-value constructor arguments.
+* If the `{}`-list is used to construct an `initializer_list`, elements are typically copied from the `initializer_list` to wherever we use them. Not copied otherwise, except as by-value constructor arguments.
 
 #### 11.3.3 Unqualified Lists
-* When used as the initializer for a named object without the use of a **=**, an unqualified **{}**-list performs direct initialization. In all other cases, it performs copy initialization.
+* When used as the initializer for a named object without the use of a `=`, an unqualified `{}`-list performs direct initialization. In all other cases, it performs copy initialization.
 
 ```c++
 int x {8}; // initializer (direct initialization)
 int y = {9}; // initializer (copy initialization)
 ```
 
-* Use **initializer_list\<T>** to allow initializer lists for built-in or user-defined containers.
+* Use `initializer_list<T>` to allow initializer lists for built-in or user-defined containers.
 
 ```c++
 struct my_float {
@@ -729,16 +729,16 @@ const float max {max_ele({1, 2.5, - 1.0, -9.9, 3.14159})};
 std::cout << max << std::endl; // 3.14159
 ```
 
-* The type of a **{}**-list can be deduced (only) if all elements are of the same type.
+* The type of a `{}`-list can be deduced (only) if all elements are of the same type.
 * Unfortunately, C++ does NOT deduce the type of an unqualified list for a plain template argument.
 
 ### 11.4 Lambda Expressions
 * A lambda expression consists of a sequence of parts:
 	* A possibly empty capture *list*.
 	* An optional *parameter list*.
-	* An optional **mutable** specifier.
-	* An optional **noexcept** specifier.
-	* An optional return type declaration of the form **->** type.
+	* An optional `mutable` specifier.
+	* An optional `noexcept` specifier.
+	* An optional return type declaration of the form `->` type.
 	* A *body*, specifying the code to be executed.
 
 ```c++
@@ -755,22 +755,22 @@ std::cout << max << std::endl; // 3.14159
 
 #### 11.4.3 Capture
 * Lambda introducers:
-	* **[]**: an empty capture list.
-	* **[&]**: capture by reference.
-	* **[=]**: capture by value.
-	* **[***capture-list***]**: explicit capture; the *capture-list* is the list of names of local variables to be captured.
-	* **[&,** *capture-list***]**: implicitly capture by reference all local variables with names NOT mentioned in the list.
-	* **[=,** *capture-list***]**: implicitly capture by value all local variables with names NOT mentioned in the list.
-* Local name preceded by **&** is always captured by reference and a local name not preceded by **&** is always captured by value.
+	* `[]`: an empty capture list.
+	* `[&]`: capture by reference.
+	* `[=]`: capture by value.
+	* `[capture-list]`: explicit capture; the `capture-list` is the list of names of local variables to be captured.
+	* `[&, capture-list]`: implicitly capture by reference all local variables with names NOT mentioned in the list.
+	* `[=, capture-list]`: implicitly capture by value all local variables with names NOT mentioned in the list.
+* Local name preceded by `&` is always captured by reference and a local name not preceded by `&` is always captured by value.
 * Lambda might outlive its caller.
-* When passing a lambda to another thread, capturing by value (**[=]**) is typically best.
+* When passing a lambda to another thread, capturing by value (`[=]`) is typically best.
 
 ##### 11.4.3.2 Namespace Names
 * Don't need to capture namespace variables (including global variables).
 
 ##### 11.4.3.3 Lambda and this
-* Use **[this]** to capture member **this** from class.
-* Members are always captured by reference (i.e., **[this]** and **[=]** are incompatible).
+* Use `[this]` to capture member `this` from class.
+* Members are always captured by reference (i.e., `[this]` and `[=]` are incompatible).
 
 ##### 11.4.3.4 mutable Lambdas
 
@@ -780,7 +780,7 @@ std::cout << max << std::endl; // 3.14159
 
 #### 11.4.5 The Type of a Lambda
 * *Closure type* is unique to lambda, so no two lambdas have the same type.
-* **std::function\<R(AL)>** where **R** is the lambda's return type and **AL** is its argument list of types.
+* `std::function<R(AL)>` where `R` is the lambda's return type and `AL` is its argument list of types.
 
 ```c++
 // Example of a lambda function type (takes a double and an int, returns a boolean.)
@@ -790,14 +790,14 @@ std::function<bool (double, int)>
 
 ### 11.5 Explicit Type Conversion
 * Named conversions:
-	* **const_cast** for getting write access to something declared **const**
-	* **static_cast** for reversing a well-defined implicit conversion
-	* **reinterpret_cast** for changing the meaning of bit patterns
-	* **dynamic_cast** for dynamically checked class hierarchy navigation
-* Prefer **T{v}** conversions for well-behaved construction and the named casts (e.g., **static_cast**) for other conversions.
+	* `const_cast` for getting write access to something declared `const`
+	* `static_cast` for reversing a well-defined implicit conversion
+	* `reinterpret_cast` for changing the meaning of bit patterns
+	* `dynamic_cast` for dynamically checked class hierarchy navigation
+* Prefer `T{v}` conversions for well-behaved construction and the named casts (e.g., `static_cast`) for other conversions.
 
 #### 11.5.1 Construction
-* The construction of a value of type **T** from a value **e** can be expressed by the notation **T(e)**.
+* The construction of a value of type `T` from a value `e` can be expressed by the notation `T(e)`.
 
 
 ___
@@ -809,22 +809,22 @@ ___
 #### 12.1.2 Parts of a Function Declaration
 * Function specifiers and modifiers:
 	* The name of the function; required
-	* The argument list, which may be empty **()**; required
-	* The return type, which may be **void** and which may be prefix or suffix (using **auto**); required
-	* **inline**, indicating a desire to have function calls implemented by inlining the function body
-	* **constexpr**, indicating that it should be possible to evaluate the function at compile time if given constant expressions as arguments
-	* **noexcept**, indicating that the function may not throw an exception
-	* A linkage specification, for example, **static**
-	* **[[noreturn]]**, indicating that the function will not return using the normal call/return mechanism
+	* The argument list, which may be empty `()`; required
+	* The return type, which may be `void` and which may be prefix or suffix (using `auto`); required
+	* `inline`, indicating a desire to have function calls implemented by inlining the function body
+	* `constexpr`, indicating that it should be possible to evaluate the function at compile time if given constant expressions as arguments
+	* `noexcept`, indicating that the function may not throw an exception
+	* A linkage specification, for example, `static`
+	* `[[noreturn]]`, indicating that the function will not return using the normal call/return mechanism
 	* For member functions:
-		* **virtual**, indicating that it can be overridden in a derived class
-		* **override**, indicating that it must be overriding a virtual function from a base class
-		* **final**, indicating that it cannot be overridden in a derived class
-		* **static**, indicating that it is not associated with a particular object
-		* **const**, indicating that it may not modify its object
+		* `virtual`, indicating that it can be overridden in a derived class
+		* `override`, indicating that it must be overriding a virtual function from a base class
+		* `final`, indicating that it cannot be overridden in a derived class
+		* `static`, indicating that it is not associated with a particular object
+		* `const`, indicating that it may not modify its object
 
 #### 12.1.3 Function Definitions
-* A **const** is ignored at the highest level of an argument type.
+* A `const` is ignored at the highest level of an argument type.
 
 ```c++
 void foo(int); 			// type is void(int)
@@ -834,7 +834,7 @@ void bar(const int); 	// type is void(int)
 * Other things can be called:
 	* *Constructors* are technically not functions; in particular, they don't return a value, can initialize bases and members, and can't have their address taken.
 	* *Destructors* can't  be overloaded and can't have their address taken.
-	* *Function objects* are not functions (they are objects) and can't be overloaded, but their **operator()**s are functions.
+	* *Function objects* are not functions (they are objects) and can't be overloaded, but their `operator()`s are functions.
 	* *Lambda expressions* are basically a shorthand for defining function objects.
 
 #### 12.1.4 Returning Values
@@ -850,16 +850,16 @@ auto product(const vector<T>& x, const vector<U>& y) -> decltype(x * y);
 auto square(const T& x) -> decltype(x * x);
 ```
 * The semantics of function value return are identical to the semantics of copy initialization.
-* The store is reused after the function returns, so a pointer to a local non-**static** variable should never be returned.
+* The store is reused after the function returns, so a pointer to a local non-`static` variable should never be returned.
 * Five ways to exit a function:
-	* Use **return**.
-	* Falling off the end in functions return **void** and **main()**.
+	* Use `return`.
+	* Falling off the end in functions return `void` and `main()`.
 	* Throwing an exception that isn't caught locally.
-	* Terminating because an exception was thrown and not caught locally in a **noexcept** function.
+	* Terminating because an exception was thrown and not caught locally in a `noexcept` function.
 	* Directly or indirectly invoking a system function that doesn't return.
 
 #### 12.1.5 inline Functions
-* **inline** specifier tells the compiler it should attempt to generate code inline rather than actually calling the function.
+* `inline` specifier tells the compiler it should attempt to generate code inline rather than actually calling the function.
 
 ```c++
 inline auto fact(const unsigned int n) -> unsigned long long {
@@ -867,17 +867,17 @@ inline auto fact(const unsigned int n) -> unsigned long long {
 }
 ```
 * To make inlining possible in the absence of unusually clever compilation and linking facilities, the definition - and not just the declaration - of an inline function must be in scope.
-* An **inline** specifier does not affect the semantics of a function. In particular, an inline function still has a unique address, and so do **static** variables of an inline function.
+* An `inline` specifier does not affect the semantics of a function. In particular, an inline function still has a unique address, and so do `static` variables of an inline function.
 
 #### 12.1.6 constexpr Functions
 * When used in an object definition, it means "evaluate the initializer at compile time."
-* A **constexpr** function must consist of a single **return**-statement, no loops and no local variables are allowed, cannot have side effects.
+* A `constexpr` function must consist of a single `return`-statement, no loops and no local variables are allowed, cannot have side effects.
 * Allows member initialization, recursion, and conditional expressions.
-* A **constexpr** function can refer to nonlocal objects as long as it does not write to them.
+* A `constexpr` function can refer to nonlocal objects as long as it does not write to them.
 
-#### 12.1.7 [[noreturn]] Functions
-* A construct **[[...]]** is called an *attribute* and can be placed just about anywhere in the C++ syntax (e.g., in front of a declaration).
-* There are only two standard attributes: **[[noreturn]]** and **[[carries_dependency]]**.
+#### 12.1.7 `[[noreturn]]` Functions
+* A construct `[[...]]` is called an *attribute* and can be placed just about anywhere in the C++ syntax (e.g., in front of a declaration).
+* There are only two standard attributes: `[[noreturn]]` and `[[carries_dependency]]`.
 
 ```c++
 [[noreturn]] inline auto terminate() -> void {
@@ -887,21 +887,21 @@ inline auto fact(const unsigned int n) -> unsigned long long {
 ```
 
 #### 12.1.8 Local Variables
-* If a local variable is declared **static**, a single, statically allocated object will be used to represent that variable in all calls of the function.
-* Initialization of **static** local variable does not lead to a data race unless you enter the function containing it recursively or a deadlock occurs.
-* The effect of initializing a local **static** recursively is undefined.
+* If a local variable is declared `static`, a single, statically allocated object will be used to represent that variable in all calls of the function.
+* Initialization of `static` local variable does not lead to a data race unless you enter the function containing it recursively or a deadlock occurs.
+* The effect of initializing a local `static` recursively is undefined.
 
 ### 12.2 Argument Passing
 * Unless a formal argument is a reference, a copy of the actual argument is passed to the function.
 
 #### 12.2.1 Reference Arguments
-* The absence of **const** in the declaration of a reference argument is taken as a statement of intent to modify the variable.
+* The absence of `const` in the declaration of a reference argument is taken as a statement of intent to modify the variable.
 * Rule of thumb:
 	1. Use pass-by-value for small objects
-	2. Use pass-by-**const**-reference to pass large values that you don't need to modify
-	3. Return a result as a **return** value rather than modifying an object through an argument
+	2. Use pass-by-`const`-reference to pass large values that you don't need to modify
+	3. Return a result as a `return` value rather than modifying an object through an argument
 	4. Use rvalue references to implement move and forwarding
-	5. Pass a pointer if "no object (**nullptr**)" is a valid alternative
+	5. Pass a pointer if "no object (`nullptr`)" is a valid alternative
 	6. Use pass-by-reference only if you have to
 
 #### 12.2.2 Array Arguments
@@ -920,16 +920,16 @@ void foo(int(&arr)[1024]);
 ```
 
 #### 12.2.3 List Arguments
-* A **{}**-delimited list can be used as an argument to a parameter of:
-	1. Type **std::initializer_list\<T>**, where the values of the list can be implicitly converted to **T**
+* A `{}`-delimited list can be used as an argument to a parameter of:
+	1. Type `std::initializer_list<T>`, where the values of the list can be implicitly converted to `T`
 	2. A type that can be initialized with the values provided in the list
-	3. A reference to an array of **T**, where the values of the list can be implicitly converted to **T**
+	3. A reference to an array of `T`, where the values of the list can be implicitly converted to `T`
 
 #### 12.2.4 Unspecified Number of Arguments
 * Three ways to do it:
 	1. Use a variadic template
-	2. Use an **initializer_list**
-	3. Terminate the argument list with the ellipsis (**...**), and use some macros from **\<cstdarg>**
+	2. Use an `initializer_list`
+	3. Terminate the argument list with the ellipsis (`...`), and use some macros from `<cstdarg>`
 
 ```c++
 #include <cstdarg>
@@ -983,7 +983,7 @@ calculate = &half;
 calculate(3); // 1.5
 ```
 
-* Need **reinterpret_cast** to convert pointer to function types. (So don't do it!)
+* Need `reinterpret_cast` to convert pointer to function types. (So don't do it!)
 * There is no implicit conversion of argument or return types when pointers to functions are assigned or initialized.
 
 ```c++
@@ -1013,8 +1013,8 @@ int y = 2;
 
 int c = MIN(x++, y++); // Side effect: x = 3, y = 4
 ```
-* Can concatenating two strings using the **##** macro operator.
-* A single **#** before a parameter name in a replacement string means a string containing the macro argument.
+* Can concatenating two strings using the `##` macro operator.
+* A single `#` before a parameter name in a replacement string means a string containing the macro argument.
 
 ```c++
 #define NAME2(a,b) a##b
@@ -1081,8 +1081,8 @@ ___
 ### 13.1.1 Exceptions
 
 * A function that cannot cope with a problem *throws* an exception, hoping that its (direct or indirect) caller can handle the problem.
-	* A calling component indicates the kinds of failures that it is willing to handle by specifying those exceptions in a **catch**-clause of a **try**-block.
-	* A called component that cannot complete its assigned task reports its failure to do so by throwing an exception using a **throw**-expression.
+	* A calling component indicates the kinds of failures that it is willing to handle by specifying those exceptions in a `catch`-clause of a `try`-block.
+	* A called component that cannot complete its assigned task reports its failure to do so by throwing an exception using a `throw`-expression.
 
 ```c++
 auto alloc_mem(size_t size) -> void* {
@@ -1104,7 +1104,7 @@ void foo() {
 }
 ```
 
-* An exception is an object **throw**n to present the occurrence of an error. It can be of any type that can be copied, but it is strongly recommended to use only user-defined types specifically defined for that purpose.
+* An exception is an object `throw`n to present the occurrence of an error. It can be of any type that can be copied, but it is strongly recommended to use only user-defined types specifically defined for that purpose.
 
 #### 13.1.2 Traditional Error Handling
 * *Terminate the program*
@@ -1125,7 +1125,7 @@ void foo() {
 ### 13.2 Exception Guarantees
 * We call an operation *exception-free* if that operation leaves the program in a valid state when the operation is terminated by throwing an exception.
 * If pieces of nonlocal data are assumed to have a specific relationship, we must consider that an invariant and our recovery action must preserve it.
-* Before a **throw**, a function must place all constructed objects in valid states.
+* Before a `throw`, a function must place all constructed objects in valid states.
 * Three types of guarantee:
 	* *basic guarantee*: the basic invariants of all objects are maintained, and no resources such as memory, are leaked.
 	* *strong guarantee*: *basic guarantee* + either the operation succeeds, or it has no effect.
@@ -1133,7 +1133,7 @@ void foo() {
 * Violating a standard-library requirement, is logically equivalent to violating a fundamental language rule.
 
 ### 13.3 Resource Management
-* Resources can be released by using destructor, instead of remembering to release them in every **try**/**catch** call.
+* Resources can be released by using destructor, instead of remembering to release them in every `try`/`catch` call.
 * RAII (Resource Acquisition Is Initialization): Managing resources using local objects.
 
 ### 13.4 Enforcing Invariants
@@ -1142,17 +1142,17 @@ void foo() {
 	* *Terminate the program*: cannot proceed if preconditions are not met. Do this only if terminating is affordable.
 	* *Throw an exception*
 * Two standard ways for assertion:
-	* **assert(A)**: macro in **\<cassert>**, run time check.
-	* **static_assert(A, message)**: compile time assert.
+	* `assert(A)`: macro in `<cassert>`, run time check.
+	* `static_assert(A, message)`: compile time assert.
 * For general library code, reporting an error - preferably by throwing an exception - is essential.
-* Destructors should not throw, so don't use a throwing **Assert()** in a destructor.
+* Destructors should not throw, so don't use a throwing `Assert()` in a destructor.
 
 ### 13.5 Throwing and Catching Exceptions
 
 #### 13.5.1 Throwing Exceptions
 
-* We can **throw** exceptions of any type that can be copied or moved.
-* A **throw x** initializes a temporary variable of **x**'s type with **x**, which may be further copied several times before it is caught.
+* We can `throw` exceptions of any type that can be copied or moved.
+* A `throw x` initializes a temporary variable of `x`'s type with `x`, which may be further copied several times before it is caught.
 * The process of passing the exception "up the stack" from the point of throw to a handler is called *stack unwinding*.
 * In each scope exited, the destructors are invoked so that every fully constructed object is properly destroyed.
 * Objects of types with move semantics are not expensive to throw.
@@ -1163,15 +1163,15 @@ void foo() {
 void foo() noexcept;
 ```
 
-* Declaring a function **noexcept** is for logical and compiler optimization reason.
-* If an exception is thrown in a **noexcept** function, the program terminates unconditionally by invoking **std::terminate()**.
+* Declaring a function `noexcept` is for logical and compiler optimization reason.
+* If an exception is thrown in a `noexcept` function, the program terminates unconditionally by invoking `std::terminate()`.
 * It does not invoke destructors from calling functions.
-* It is implementation-defined whether destructors from scopes between **throw** and the **noexcept** are invoked.
-* By adding a **noexcept** specifier, we indicate that our code was not written to cope with a **throw**.
+* It is implementation-defined whether destructors from scopes between `throw` and the `noexcept` are invoked.
+* By adding a `noexcept` specifier, we indicate that our code was not written to cope with a `throw`.
 
 ##### 13.5.1.2 The noexcept Operator
 
-* It is possible to declare a function to be conditionally **noexcept**.
+* It is possible to declare a function to be conditionally `noexcept`.
 
 ```c++
 template<typename T>
@@ -1179,8 +1179,8 @@ void foo(T& x) noexcept(std::is_pod<T>()); // noexcept if T is POD
 void bar(T& x) noexcept(noexcept(foo(x))); // noexcept if foo(x) does not throw
 ```
 
-* The predicate in a **noexcept()** specification must be a constant expression. Plain **noexcept** means **noexcept(true)**.
-* **noexcept(expr)** does not go very deep to check whether **expr** throws, it simply look at all operations in **expr** and see if they *all* have **noexcept** evaluated to **true**.
+* The predicate in a `noexcept()` specification must be a constant expression. Plain `noexcept` means `noexcept(true)`.
+* `noexcept(expr)` does not go very deep to check whether `expr` throws, it simply look at all operations in `expr` and see if they *all* have `noexcept` evaluated to `true`.
 
 ##### 13.5.1.3 Exception Specifications
 * Deprecated, don't use. Expensive at run-time, hard to use correctly.
@@ -1193,7 +1193,7 @@ void foo() throw(MyException1, MyException2); // may only throw MyException1 or 
 
 #### 13.5.2 Catching Exceptions
 
-* C++ does not support **finally** block in **try**/**catch** semantic, because RAII (Resource Allocation is Initialization) is a better solution than using **finally** block to release resources and do cleanups.
+* C++ does not support `finally` block in `try`/`catch` semantic, because RAII (Resource Allocation is Initialization) is a better solution than using `finally` block to release resources and do cleanups.
 
 ```c++
 try {
@@ -1207,20 +1207,20 @@ try {
 }
 ```
 
-* We can add **const** to the type used to catch an exception, so it won't be modified.
+* We can add `const` to the type used to catch an exception, so it won't be modified.
 * Exceptions can be caught by reference.
 
 ##### 13.5.2.1 Rethrow
 
-* A rethrow is indicated by a **throw** without an operand.
-* A rethrow may occur in a **catch**-clause or in a function called from a **catch**-clause.
+* A rethrow is indicated by a `throw` without an operand.
+* A rethrow may occur in a `catch`-clause or in a function called from a `catch`-clause.
 * If no exception is to rethrow, the program terminates.
-* The type of exception to be thrown is the type of original exception, not just the type of exception in **catch**.
+* The type of exception to be thrown is the type of original exception, not just the type of exception in `catch`.
 
 ##### 13.5.2.2 Catch Every Exception
 
-* **<stdexcept>** provides a small hierarchy of exception classes with a common base **std::exception**
-* Use **catch (...)** to catch all exceptions, including ones that are not derived from **std::exception**.
+* `<stdexcept>` provides a small hierarchy of exception classes with a common base `std::exception`
+* Use `catch (...)` to catch all exceptions, including ones that are not derived from `std::exception`.
 
 ```c++
 try {
@@ -1242,7 +1242,7 @@ try {
 
 ##### 13.5.2.4 Function try-Blocks
 
-* The body of a function can be a **try**-block.
+* The body of a function can be a `try`-block.
 
 ```c++
 void foo()
@@ -1253,7 +1253,7 @@ try {
 }
 ```
 
-* Constructors can catch exceptions by enclosing the complete function body - including the member initializer list - in a **try**-block.
+* Constructors can catch exceptions by enclosing the complete function body - including the member initializer list - in a `try`-block.
 
 ```c++
 class my_class {
@@ -1275,20 +1275,20 @@ private:
 
 ##### 13.5.2.5 Termination
 
-* Rules for calling **std::terminate()** are:
+* Rules for calling `std::terminate()` are:
 	* When no suitable handler was found for a thrown exception
-	* When a **noexcept** function tries to exit with a **throw**
-	* When a destructor invoked during stack unwinding tries to exit with a **throw**
-	* When code invoked to propagate an exception (e.g., a copy constructor) tries to exit with a **throw**
-	* When someone tries to rethrow (**throw;**) when there is no current exception being handled
-	* When a destructor for a statically allocated or thread-local object tries to exit with a **throw**
-	* When an initializer for a statically allocated or thread-local object tries to exit with a **throw**
-	* When a function invoked as an **atexit()** function tries to exit with a **throw**
+	* When a `noexcept` function tries to exit with a `throw`
+	* When a destructor invoked during stack unwinding tries to exit with a `throw`
+	* When code invoked to propagate an exception (e.g., a copy constructor) tries to exit with a `throw`
+	* When someone tries to rethrow (`throw;`) when there is no current exception being handled
+	* When a destructor for a statically allocated or thread-local object tries to exit with a `throw`
+	* When an initializer for a statically allocated or thread-local object tries to exit with a `throw`
+	* When a function invoked as an `atexit()` function tries to exit with a `throw`
 * There is no way of catching exceptions thrown during initialization or destruction of namespace and thread-local variables.
 
 #### 13.5.3 Exceptions and Threads
 
-* If an exception is not caught on a **thread**, **std::terminate()** is called.
+* If an exception is not caught on a `thread`, `std::terminate()` is called.
 
 ### 13.6 A vector Implementation
 
@@ -1334,7 +1334,7 @@ using std::string; // use "string" for "std::string"
 using namespace std; // make every name from std accessible
 ```
 
-* **using** different namespaces with name clashes alone will not result in compile-time (or run-time) error. However, if ambiguous name is directly referenced, it will result in a compile-time error.
+* `using` different namespaces with name clashes alone will not result in compile-time (or run-time) error. However, if ambiguous name is directly referenced, it will result in a compile-time error.
 
 ```c++
 namespace my_lib { class string { public: string() {} }; }
@@ -1373,8 +1373,8 @@ void foo(const linalg::matrix& mat) {
 
 #### 14.4.1 Convenience vs. Safety
 
-* A **using**-declaration adds a name to a local scope (and hides the global one if there is one).
-* A **using**-directive does not.
+* A `using`-declaration adds a name to a local scope (and hides the global one if there is one).
+* A `using`-directive does not.
 
 #### 14.4.2 Namespace Aliases
 
@@ -1404,7 +1404,7 @@ ___
 * The amount of time spent recompiling can be significantly reduced by partitioning the program into files of suitable size.
 * Compilation process:
 	1. *source file* presented to the compiler.
-	2. Preprocessed (macro processing is done and use **#inlude**s to bring in headers) into *translation unit*.
+	2. Preprocessed (macro processing is done and use `#inlude`s to bring in headers) into *translation unit*.
 * The *linker* (*loader*) is the program that binds together the separately compiled parts.
 * New code can be added to the running program ("dynamically linked") later.
 
@@ -1415,11 +1415,11 @@ extern int x; // "extern" indicates it's just a declaration and not a definition
 ```
 
 * An object must be defined exactly once in a program. It may be declared many times, but the types must agree exactly.
-* A variable defined without an initializer in the global or a namespace scope is initialized by default. This is *not* the case for non-**static** local variables or objects created on the free store.
+* A variable defined without an initializer in the global or a namespace scope is initialized by default. This is *not* the case for non-`static` local variables or objects created on the free store.
 * *external linkage*: a name that can be used in translation units different from the one in which it was defined.
 * *internal linkage*: a name that can  be referred to only in the translation unit in which it is defined.
-* When used in namespace scope (including the global scope), the keyword **static** (somewhat illogically) means "not accessible from other source files".
-* The keyword **const** implies default internal linkage, precede definition with **extern** to make it external linkage.
+* When used in namespace scope (including the global scope), the keyword `static` (somewhat illogically) means "not accessible from other source files".
+* The keyword `const` implies default internal linkage, precede definition with `extern` to make it external linkage.
 * Names that a linker does not see, such as the names of local variables, are said to have *no linkage*.
 
 ```c++
@@ -1434,8 +1434,8 @@ void foo() {
 }
 ```
 
-* An **inline** function must be defined identically in every translation unit in which it is used.
-* Use header files to keep **inline** function definitions consistent.
+* An `inline` function must be defined identically in every translation unit in which it is used.
+* Use header files to keep `inline` function definitions consistent.
 
 ```c++
 // Illegal:
@@ -1447,29 +1447,29 @@ void foo() {
 	inline const int foo(int x) { return x + 1; }
 ```
 
-* By default, **const** objects, **constexpr** objects, type aliases, and anything declared **static** in a namespace scope have internal linkage.
-* To ensure consistency, place aliases, **const**s, **constexpr**s, and **inline**s in header files.
+* By default, `const` objects, `constexpr` objects, type aliases, and anything declared `static` in a namespace scope have internal linkage.
+* To ensure consistency, place aliases, `const`s, `constexpr`s, and `inline`s in header files.
 
 #### 15.2.1 File-Local Names
 
 * An unnamed namespace can be used to make names local to a compilation unit. The effect of an unnamed namespace is very similar to that of internal linkage.
-* **static** means "use internal linkage", it's one of the confusing leftovers from earliest days of C.
+* `static` means "use internal linkage", it's one of the confusing leftovers from earliest days of C.
 
 #### 15.2.2 Header Files
 
-* The **#include** mechanism is a text manipulation facility for gathering source program fragments together into a single unit (file) for compilation.
-* Unfortunately, spaces are significant within the **< >** or **" "** of an include directive.
+* The `#include` mechanism is a text manipulation facility for gathering source program fragments together into a single unit (file) for compilation.
+* Unfortunately, spaces are significant within the `< >` or `" "` of an include directive.
 
 ```c++
 #include < iostream > // will not find <iostream>
 ```
 
 * A header file should never contain:
-	* Ordinary function definitions: **int foo() { return 1; }**
-	* Data definitions: **int x;**
-	* Aggregate definitions: **short arr[] = {1, 2, 3};**
-	* Unnamed namespaces: **namespace { /\* ... \*/ }**
-	* **using**-directives: **using namespace bar;**
+	* Ordinary function definitions: `int foo() { return 1; }`
+	* Data definitions: `int x;`
+	* Aggregate definitions: `short arr[] = {1, 2, 3};`
+	* Unnamed namespaces: `namespace { /* ... */ }`
+	* `using`-directives: `using namespace bar;`
 
 #### 15.2.3 The One-Definition Rule (the ODR)
 
@@ -1481,8 +1481,8 @@ void foo() {
 
 #### 15.2.4 Standard-Library Headers
 
-* For each C standard-library header **<X.h>**, there is a corresponding standard C++ header **<cX>**.
-* The macro **__cplusplus** is defined by the C++ compiler and can be used to distinguish C++ code from code intended for a C compiler.
+* For each C standard-library header `<X.h>`, there is a corresponding standard C++ header `<cX>`.
+* The macro `__cplusplus` is defined by the C++ compiler and can be used to distinguish C++ code from code intended for a C compiler.
 
 ```c++
 #ifdef __cplusplus
@@ -1496,7 +1496,7 @@ namespace mylib {
 
 #### 15.2.5 Linkage to Non-C++ Code
 
-* Use **extern "C"** to specify something should be linked according to the (system-specific) C linkage conventions.
+* Use `extern "C"` to specify something should be linked according to the (system-specific) C linkage conventions.
 * Use *linkage block* to perform group linkage specification.
 
 ```c++
@@ -1533,7 +1533,7 @@ extern "C" {
 
 ### 15.4 Programs
 
-* A program can only provide one of two **main()** declarations:
+* A program can only provide one of two `main()` declarations:
 
 ```c++
 int main() { /* ... */ }
@@ -1542,8 +1542,8 @@ int main(int argc, char* argv[]) { /* ... */ }
 
 #### 15.4.1 Initialization of Nonlocal Variables
 
-* In principle, a variable defined outside any function (that is, global, namespace, and class **static** variables) is initialized before **main()** is invoked.
-* The default initializer value for built-in types and enumerations is **0**.
+* In principle, a variable defined outside any function (that is, global, namespace, and class `static` variables) is initialized before `main()` is invoked.
+* The default initializer value for built-in types and enumerations is `0`.
 * It is not possible to catch an exception thrown by the initializer of a global variable.
 * Often, a function returning a reference is a good alternative to a global variable.
 
@@ -1556,8 +1556,8 @@ unsigned int& use_count() {
 
 #### 15.4.2 Initialization and Concurrency
 
-* If a program is terminated using the standard-library function **exit()**, the destructors for constructed static objects are called. However, if a program is terminated using standard-library function **abort()**, they are not.
-* Calling **exit()** in a destructor may cause an infinite recursion.
+* If a program is terminated using the standard-library function `exit()`, the destructors for constructed static objects are called. However, if a program is terminated using standard-library function `abort()`, they are not.
+* Calling `exit()` in a destructor may cause an infinite recursion.
 
 ___
 
@@ -1569,11 +1569,11 @@ ___
 	* A class is a user-defined type.
 	* A class consists of a set of members. The most common kinds of members are data members and member functions.
 	* Member functions can define the meaning of initialization (creation), copy, move and cleanup (destruction).
-	* Members are accessed using **.** (dot) for objects and **->** (arrow) for pointers.
-	* Operators, such as **+**, **!**, and **[]**, can be defined for a class.
+	* Members are accessed using `.` (dot) for objects and `->` (arrow) for pointers.
+	* Operators, such as `+`, `!`, and `[]`, can be defined for a class.
 	* A class is a namespace containing its members.
-	* The **public** members provide the class's interface and the **private** members provide implementation details.
-	* A **struct** is a **class** where members are by default **public**.
+	* The `public` members provide the class's interface and the `private` members provide implementation details.
+	* A `struct` is a `class` where members are by default `public`.
 
 #### 16.2.2 Default Copying
 
@@ -1600,7 +1600,7 @@ public:
 
 #### 16.2.4 class and struct
 
-* By definition, a **struct** is a class in which members are by default public.
+* By definition, a `struct` is a class in which members are by default public.
 
 ```c++
 struct S { /* ... */ };
@@ -1612,13 +1612,13 @@ class S { public: /* ... */ }
 
 #### 16.2.5 Constructors
 
-* Use **{}** instead of **()** for initialization.
+* Use `{}` instead of `()` for initialization.
 
 #### 16.2.6 explicit Constructors
 
 * By default, a constructor invoked by a single argument acts as an implicit conversion from its argument type to its type.
 * We can specify that a constructor is not used as an *implicit* conversion.
-* A constructor declared with the keyword **explicit** can only be used for initialization and explicit conversions.
+* A constructor declared with the keyword `explicit` can only be used for initialization and explicit conversions.
 
 ```c++
 class person {
@@ -1632,10 +1632,10 @@ person him = {25}; // Not OK (would be if constructor is not explicit)
 person her = 22; // Not OK (would be if constructor is not explicit)
 ```
 
-* An initialization with an **=** is considered a *copy initialization*.
-* Leaving out the **=** makes the initialization explicit. Explicit initialization is known as *direct initialization*.
-* By default, declare a constructor that can be called with a single argument **explicit**. You need a good reason not to do so (e.g., **complex**).
-* **explicit** can also be used on constructors with zero or more than one arguments.
+* An initialization with an `=` is considered a *copy initialization*.
+* Leaving out the `=` makes the initialization explicit. Explicit initialization is known as *direct initialization*.
+* By default, declare a constructor that can be called with a single argument `explicit`. You need a good reason not to do so (e.g., `complex`).
+* `explicit` can also be used on constructors with zero or more than one arguments.
 
 #### 16.2.7 In-Class Initializers
 
@@ -1654,7 +1654,7 @@ private:
 #### 16.2.8 In-Class Function Definitions
 
 * A member function *defined* within the class definition is taken to be an inline member function.
-* If a member function is only *declared* within the class definition, it is not inline by default. However, we can change it to an inline function by adding **inline** (only) to its definition (i.e., not declaration or both).
+* If a member function is only *declared* within the class definition, it is not inline by default. However, we can change it to an inline function by adding `inline` (only) to its definition (i.e., not declaration or both).
 
 ```c++
 class person {
@@ -1691,16 +1691,16 @@ void person::print_age() const {
 }
 ```
 
-* **const** is a part of the member function's type.
-* A **const** member function can be invoked for both **const** and non-**const** objects, whereas a non-**const** member function can be invoked only for non-**const** objects.
+* `const` is a part of the member function's type.
+* A `const` member function can be invoked for both `const` and non-`const` objects, whereas a non-`const` member function can be invoked only for non-`const` objects.
 
 ##### 16.2.9.2 Physical and Logical Constness
 
-* Occasionally, a member function is logically **const**, but it still needs to change the value of a member.
+* Occasionally, a member function is logically `const`, but it still needs to change the value of a member.
 
 ##### 16.2.9.3 mutable
 
-* We can define a member of a class to be **mutable**, meaning that it can be modified even in a **const** object.
+* We can define a member of a class to be `mutable`, meaning that it can be modified even in a `const` object.
 
 ```c++
 class Foo {
@@ -1719,32 +1719,32 @@ obj.a(); // 1
 
 ##### 16.2.9.4 Mutability through Indirection
 
-* Declaring a member **mutable** is most appropriate when only a small part of a representation of a small object is allowed to change.
+* Declaring a member `mutable` is most appropriate when only a small part of a representation of a small object is allowed to change.
 * More complicated cases are often better handled by placing the changing data in a separate object and accessing it indirectly.
 
 #### 16.2.10 Self-Reference
 
-* In a non-**static** member function, the keyword **this** is pointer to the object for which the function was invoked.
-* In a non-**const** member function of class **X**, the type of **this** is **X***.
-* In a **const** member function of class **X**, the type of **this** is **const X*** to prevent modification of the object itself.
-* **this** is an rvalue.
+* In a non-`static` member function, the keyword `this` is pointer to the object for which the function was invoked.
+* In a non-`const` member function of class `X`, the type of `this` is `X*`.
+* In a `const` member function of class `X`, the type of `this` is `const X*` to prevent modification of the object itself.
+* `this` is an rvalue.
 
 #### 16.2.11 Member Access
 
-* A member of a class **X** can be accessed by applying the **.** (dot) operator to an object of class **X** or by applying the **->** (arrow) operator to a pointer to an object of class **X**.
+* A member of a class `X` can be accessed by applying the `.` (dot) operator to an object of class `X` or by applying the `->` (arrow) operator to a pointer to an object of class `X`.
 * From inside a class no operator is needed.
 * A member function can refer to the name of a member before it has been declared.
-* If we want to refer to a member in general, rather than to a member of a particular object, we qualify by the class name followed by **::**.
+* If we want to refer to a member in general, rather than to a member of a particular object, we qualify by the class name followed by `::`.
 
 #### 16.2.12 [static] Members
 
-* There is exactly one copy of a **static** member for each class.
-* **static** must appear in member declaration, but not necessarily definition.
+* There is exactly one copy of a `static` member for each class.
+* `static` must appear in member declaration, but not necessarily definition.
 
 #### 16.2.13 Member Types
 
-* A *member class* (often called a *nested class*) can refer to types and **static** members of its enclosing class.
-* A nested class has access to members of its enclosing class, even to **private** members (just as a member function has), but has no notion of a current object of the enclosing class.
+* A *member class* (often called a *nested class*) can refer to types and `static` members of its enclosing class.
+* A nested class has access to members of its enclosing class, even to `private` members (just as a member function has), but has no notion of a current object of the enclosing class.
 * A class does not have special access rights to the members of its nested class.
 
 ```c++
@@ -1833,7 +1833,7 @@ class X {
 
 #### 17.2.2 Destructors and Resources
 
-* The name of a destructor is **~** followed by the class name.
+* The name of a destructor is `~` followed by the class name.
 * A destructor does not take an argument, and a class can have only one destructor.
 * Destructor are called implicitly when an automatic variable goes out of scope, an object on the free store is deleted, etc.
 * A type that has no destructor declared, such as a built-in type, is considered to have a destructor that does nothing.\
@@ -1848,18 +1848,18 @@ class X {
 	1. first, the destructor executes its own body,
 	2. then, it invokes its member destructors, and
 	3. finally, it invokes its base class destructors.
-* A **virtual** base is constructed before any base that might use it and destroyed after all such bases.
+* A `virtual` base is constructed before any base that might use it and destroyed after all such bases.
 * Constructors execute member and base constructors in declaration order (not the order of initializers).
 
 #### 17.2.4 Calling Constructors and Destructors
 
-* A destructor is invoked implicitly upon exit from a scope or by **delete**.
+* A destructor is invoked implicitly upon exit from a scope or by `delete`.
 * It's dangerous to explicitly call a destructor.
-* We can prevent destruction of an **X** by declaring its destructor **=delete** or **private**.
+* We can prevent destruction of an `X` by declaring its destructor `=delete` or `private`.
 
 #### 17.2.5 virtual Destructors
 
-* A destructor can be declared to be **virtual**, and usually should be for a class with a virtual function (if not the wrong destructor may be called).
+* A destructor can be declared to be `virtual`, and usually should be for a class with a virtual function (if not the wrong destructor may be called).
 
 ```c++
 class A { public: ~A() { } }
@@ -1879,20 +1879,20 @@ void f(A* obj) {
 	* copy initialization, or
 	* default initialization (without an initializer or with an empty initializer list).
 * Where no constructor requiring argument is declared, it is also possible to leave out the initializer completely.
-	* For statically allocated objects, the rules are exactly as if you had used **{}**.
+	* For statically allocated objects, the rules are exactly as if you had used `{}`.
 	* For local variables and free-store objects, the default initialization is done only for members of class type, and members of built-in type are left uninitialized.
-* Naturally, memberwise initialization works only if we can access the members. If a class has a private non-**static** data member, it needs a constructor to initialize it.
+* Naturally, memberwise initialization works only if we can access the members. If a class has a private non-`static` data member, it needs a constructor to initialize it.
 
 #### 17.3.2 Initialization Using Constructors
 
 * If a constructor is declared for a class, some constructor will be used for every object.
 * The usual overload resolution rules apply for constructors.
-* The **{}** initializer notion does not allow narrowing.
+* The `{}` initializer notion does not allow narrowing.
 
 ##### 17.3.2.1 Initialization by Constructors
 
-* **()** request to use a constructor in an initialization, whereas **{}** also offers memberwise initialization.
-* Prefer **{}** instead of **()**, unless it's necessary to explicitly use constructor.
+* `()` request to use a constructor in an initialization, whereas `{}` also offers memberwise initialization.
+* Prefer `{}` instead of `()`, unless it's necessary to explicitly use constructor.
 
 ```c++
 std::vector<int> v1 {7}; // one element with value 7
@@ -1902,26 +1902,26 @@ std::vector<int> v2(7); // 7 elements with value 0
 #### 17.3.3 Default Constructors
 
 * A default argument can make a constructor that takes arguments into a default constructor.
-* References and **const**s must be initialized. Therefore, a class containing such member cannot be default constructed unless the programmer supplies in-class member initializers or defines a default constructor that initializes them.
+* References and `const`s must be initialized. Therefore, a class containing such member cannot be default constructed unless the programmer supplies in-class member initializers or defines a default constructor that initializes them.
 
 #### 17.3.4 Initializer-List Constructors
 
-* A constructor that takes a single argument of type **std::initializer_list** is called an *initializer-list constructor*.
-* The mechanism for accepting a **{}**-list is a function (often a constructor) taking an argument of type **std::initializer_list<T>**.
-* The initializer list can be of arbitrary length but must be homogeneous. That is, all elements must be of the template argument type, **T**, or implicitly convertible to **T**.
+* A constructor that takes a single argument of type `std::initializer_list` is called an *initializer-list constructor*.
+* The mechanism for accepting a `{}`-list is a function (often a constructor) taking an argument of type `std::initializer_list<T>`.
+* The initializer list can be of arbitrary length but must be homogeneous. That is, all elements must be of the template argument type, `T`, or implicitly convertible to `T`.
 
 ##### 17.3.4.1 initializer_list Constructor Disambiguation
 
 * Initializer list and other types of constructors' overloading rules:
 	* If either a default constructor or an initializer-list constructor could be invoked, prefer the default constructor.
 	* If both an initializer-list constructor and an "ordinary constructor" could be invoked, prefer the initializer-list constructor.
-* Use **()** notion to explicitly request for non-initializer-constructor.
+* Use `()` notion to explicitly request for non-initializer-constructor.
 
 #### 17.3.4.2 Use of initializer_lists
 
-* A function with an **initializer_list<T>** argument can access it as a sequence using the member functions **begin()**, **end()**, and **size()**.
-* **initializer_list** does not provide subscripting.
-* An **initializer_list<T>** is passed by value. That is required by the overload resolution rules and does not impose overhead because an **initializer_list<T>** object is just a small handle (typically two words) to an array of **T**s.
+* A function with an `initializer_list<T>` argument can access it as a sequence using the member functions `begin()`, `end()`, and `size()`.
+* `initializer_list` does not provide subscripting.
+* An `initializer_list<T>` is passed by value. That is required by the overload resolution rules and does not impose overhead because an `initializer_list<T>` object is just a small handle (typically two words) to an array of `T`s.
 
 ```c++
 void foo(std::initializer_list<int> args) {
@@ -1931,7 +1931,7 @@ void foo(std::initializer_list<int> args) {
 }
 ```
 
-* The elements of an **initializer_list** are immutable.
+* The elements of an `initializer_list` are immutable.
 
 ### 17.4 Member and Base Initialization
 
@@ -1954,7 +1954,7 @@ Matrix::Matrix(const unsigned int num_row, const unsigned int num_col, const flo
 
 ##### 17.4.1.1 Member Initialization and Assignment
 
-* A reference member or a **const** member must be initialized.
+* A reference member or a `const` member must be initialized.
 * Initializers have efficiency advantage over assignment operations (use member initializer list whenever you can).
 
 #### 17.4.2 Base Initializers
@@ -1983,13 +1983,13 @@ private:
 
 #### 17.4.4 In-Class Initializers
 
-* We can specify an initializer for a non-**static** data member in the class declaration.
-* Both **{}** and **=** initializer notions can be used for in-class member initializers, but the **()** notion cannot.
-* The value of the global variable is obtained at the point where the constructor for a new **S** object is run (bad idea to use global variable to initialize a data member).
+* We can specify an initializer for a non-`static` data member in the class declaration.
+* Both `{}` and `=` initializer notions can be used for in-class member initializers, but the `()` notion cannot.
+* The value of the global variable is obtained at the point where the constructor for a new `S` object is run (bad idea to use global variable to initialize a data member).
 
 #### 17.4.5 static Member Initialization
 
-* Generally, the **static** member declaration acts as a declaration for a definition outside the class.
+* Generally, the `static` member declaration acts as a declaration for a definition outside the class.
 
 ```c++
 class Foo {
@@ -1999,7 +1999,7 @@ class Foo {
 int Foo::x = 3;
 ```
 
-* To initialize a **static** member in the class declaration, it must be a **const** of an integral or enumeration type, or a **constexpr** of a literal type, and the initializer must be a *const-expression*.
+* To initialize a `static` member in the class declaration, it must be a `const` of an integral or enumeration type, or a `constexpr` of a literal type, and the initializer must be a *const-expression*.
 * You have to define a member somewhere before use it in a way that requires it to be stored as an object in memory.
 
 ### 17.5 Copy and Move
@@ -2024,9 +2024,9 @@ public:
 
 #### 17.5.1 Copy
 
-* Copy for a class **X** is defined by two operations:
-	* Copy constructor: **X(const X&)**
-	* Copy assignment: **X& operator=(const X&)**
+* Copy for a class `X` is defined by two operations:
+	* Copy constructor: `X(const X&)`
+	* Copy assignment: `X& operator=(const X&)`
 * Watch out for self-assignment.
 
 ##### 17.5.1.1 Beware of Default Constructors
@@ -2047,7 +2047,7 @@ public:
 ##### 17.5.1.3 The Meaning of Copy
 
 * Copy operation must meet two criteria:
-	* *Equivalence*: after **x = y**, **x == y** should be true.
+	* *Equivalence*: after `x = y`, `x == y` should be true.
 	* *Independence*: changes on one of them should not have influence on the other.
 * Sometimes it makes sense not copying everything (e.g., counters, allocators, etc.), but that should not affect the result or comparison operators. (i.e., if you don't copy it, don't compare it)
 * Most of the problems related to (lack of) independence have to do with objects that contain pointers.
@@ -2078,10 +2078,10 @@ void bar() {
 
 #### 17.5.2 Move
 
-* We can define **Matrix**'s move constructor to simply take the representation from its source and replace it with an empty **Matrix** (which is cheap to destroy).
+* We can define `Matrix`'s move constructor to simply take the representation from its source and replace it with an empty `Matrix` (which is cheap to destroy).
 * For the move assignment, we can simply do a swap.
 * The argument of a move operation must always be left in a state that the destructor can cope with (and preferably deal with very cheaply and easily).
-* **std::move()** is a standard-library function returning an rvalue reference to its argument, it does not move anything (a better name would be **std::rval()**).
+* `std::move()` is a standard-library function returning an rvalue reference to its argument, it does not move anything (a better name would be `std::rval()`).
 
 ### 17.6 Generating Default Operations
 
@@ -2105,7 +2105,7 @@ public:
 
 #### 17.6.2 Default Operations
 
-* The default meaning of each generated operation, is to apply the operation to each base and non-**static** data member of the class.
+* The default meaning of each generated operation, is to apply the operation to each base and non-`static` data member of the class.
 * Returning value from function is a move construction by default.
 
 ```c++
@@ -2135,7 +2135,7 @@ void foo() {
 * If you define a custom constructor, the generation of copy operation is only deprecated, not banned. So it's possible to get pass compiler warning, but bad idea to do so.
 * In general, if a class has a pointer member, the default copy and move operations should be considered suspicious:
 	* If that pointer member represents ownership, memberwise copy is wrong.
-	* If that pointer member does not represent ownership, memberwise copy *is* appropriate, explicit **=default** and a comment are most likely a good idea.
+	* If that pointer member does not represent ownership, memberwise copy *is* appropriate, explicit `=default` and a comment are most likely a good idea.
 
 #### 17.6.4 deleted Functions
 
@@ -2166,7 +2166,7 @@ ___
 
 ### 18.1 Introduction
 
-* The usual precedence rules for operators hold (**a + b * c** is evaluated as **a + (b * c)**).
+* The usual precedence rules for operators hold (`a + b * c` is evaluated as `a + (b * c)`).
 
 ### 18.2 Operator Functions
 
@@ -2189,7 +2189,7 @@ ___
 |      =     |         |         |          |
 
 * It is not possible to define new operator tokens.
-* The name of an operator function is the keyword **operator** followed by the operator itself.
+* The name of an operator function is the keyword `operator` followed by the operator itself.
 
 ```c++
 complex a {1};
@@ -2200,10 +2200,10 @@ complex d {a.operator+(b)}; // explicit call
 
 #### 18.2.1 Binary and Unary Operators
 
-* A binary operator can be defined by either a non-**static** member function taking one argument or a nonmember function taking two arguments.
-* A unary operator, whether prefix or postfix, can be defined by either a non-**static** member function taking no arguments or a nonmember function taking one argument.
-* The operators **operator=**, **operator[]**, **operator()**, **operator->** must be non-**static** member functions.
-* User-defined **&&** and **||** does not have lazy evaluation by default (also the first operand may not get evaluated first), they behave the same as other user defined operators.
+* A binary operator can be defined by either a non-`static` member function taking one argument or a nonmember function taking two arguments.
+* A unary operator, whether prefix or postfix, can be defined by either a non-`static` member function taking no arguments or a nonmember function taking one argument.
+* The operators `operator=`, `operator[]`, `operator()`, `operator->` must be non-`static` member functions.
+* User-defined `&&` and `||` does not have lazy evaluation by default (also the first operand may not get evaluated first), they behave the same as other user defined operators.
 
 ```c++
 class X {
@@ -2218,8 +2218,8 @@ void operator++(X); // unary
 
 #### 18.2.2 Predefined Meanings for Operators
 
-* The compiler will *not* generate **operator++** based on a user-defined **operator+** and **operator=**.
-* Operators **=**, **&**, and **,** have predefined meanings when applied to class objects, they can be eliminated by using **=delete**.
+* The compiler will *not* generate `operator++` based on a user-defined `operator+` and `operator=`.
+* Operators `=`, `&`, and `,` have predefined meanings when applied to class objects, they can be eliminated by using `=delete`.
 
 #### 18.2.3 Operators and User-Defined Types
 
@@ -2248,7 +2248,7 @@ Matrix& Matrix::operator+=(const Matrix& a) {
 #### 18.2.5 Operators in Namespaces
 
 * An operator is either a member of a class or defined in some namespace (possibly the global namespace, but bad practice; use argument lookup instead).
-* For binary operation **x @ y**, **x**'s name space will be looked up first.
+* For binary operation `x @ y`, `x`'s name space will be looked up first.
 * In operator lookup no preference is given to members over nonmembers.
 
 ### 18.3 A Complex Number Type
@@ -2256,8 +2256,8 @@ Matrix& Matrix::operator+=(const Matrix& a) {
 #### 18.3.1 Member and Nonmember Operators
 
 * A good practice:
-	* Defining only operators that inherently modify the value of their first argument, such as **+=**, in the class itself.
-	* Operators that simply produce a new value based on the values of their arguments, such as **+**, are then defined outside the class.
+	* Defining only operators that inherently modify the value of their first argument, such as `+=`, in the class itself.
+	* Operators that simply produce a new value based on the values of their arguments, such as `+`, are then defined outside the class.
 
 ##### 18.3.1.1 Conversions of Operands
 
@@ -2265,7 +2265,7 @@ Matrix& Matrix::operator+=(const Matrix& a) {
 
 #### 18.3.4 Literals
 
-* When constructors are simple and inline, and especially when they are **constexpr**, it is quit reasonable to think of constructor invocations with literal arguments as literals.
+* When constructors are simple and inline, and especially when they are `constexpr`, it is quit reasonable to think of constructor invocations with literal arguments as literals.
 
 ### 18.4 Type Conversion
 
@@ -2280,7 +2280,7 @@ Matrix& Matrix::operator+=(const Matrix& a) {
 	* An implicit conversion from a user-defined type to a built-in type.
 	* A conversion from a new class to a previously defined class.
 
-* *conversion operator*: a member function **X::operator T()**, where **T** is a type name, defines a conversion from **X** to **T**.
+* *conversion operator*: a member function `X::operator T()`, where `T` is a type name, defines a conversion from `X` to `T`.
 
 ```c++
 class Foo {
@@ -2314,7 +2314,7 @@ public:
 
 #### 18.4.3 Ambiguities
 
-* An assignment of a value type **V** to an object of class **X** is legal if there is an assignment operator **X::operator=(Z)** so that **V** is **Z** or there is a unique conversion of **V** to **Z**. Initialization is treated equivalently.
+* An assignment of a value type `V` to an object of class `X` is legal if there is an assignment operator `X::operator=(Z)` so that `V` is `Z` or there is a unique conversion of `V` to `Z`. Initialization is treated equivalently.
 * User-defined conversions are considered only if a call cannot be resolved without them (i.e., using only built-in conversions).
 * The return type is not used in overloading resolution.
 
@@ -2325,23 +2325,23 @@ ___
 
 ### 19.2 Special Operators
 
-* The operators: **[]** **()** **->** **++** **--** **new** **delete**
+* The operators: `[]` `()` `->` `++` `--` `new` `delete`
 
 #### 19.2.1 Subscripting
 
 * Return a reference so it can be modified (if in a container).
-* An **operator\[]()** must be a non-**static** member function.
+* An `operator\[]()` must be a non-`static` member function.
 
 #### 19.2.2 Function Call
 
-* The call operator, **()**, can be overloaded in the same way other operators can.
+* The call operator, `()`, can be overloaded in the same way other operators can.
 * An object that acts like a function is often called a *function-like object* or simply a *function object*.
-* An **operator\()()** must be a non-**static** member function.
+* An `operator\()()` must be a non-`static` member function.
 * Function call operators are often templates.
 
 #### 19.2.3 Dereferencing
 
-* **->**: unary postfix operator.
+* `->`: unary postfix operator.
 
 ```c++
 class Foo {
@@ -2365,7 +2365,7 @@ public:
 };
 ```
 
-* The **int** argument in postfix operator is just a dummy argument to distinguish prefix and postfix application, it's never used.
+* The `int` argument in postfix operator is just a dummy argument to distinguish prefix and postfix application, it's never used.
 * The prefix operators can return a reference to its object, but postfix operators must make a new object to return.
 
 #### 19.2.5 Allocation and Deallocation
@@ -2378,8 +2378,8 @@ void operator delete(void*, size_t);
 void operator delete[](void*, size_t);
 ```
 
-* Member **operator new()**s and **operator delete()**s are implicitly **static** members.
-* If we **delete** an object through a pointer to a base class, that base class must have a **virtual** destructor for the correct size to be given.
+* Member `operator new()`s and `operator delete()`s are implicitly `static` members.
+* If we `delete` an object through a pointer to a base class, that base class must have a `virtual` destructor for the correct size to be given.
 
 #### 19.2.6 User-defined Literals
 
@@ -2442,24 +2442,24 @@ private:
 };
 ```
 
-* Using *anonymous* **union** to implement *short string optimization* can avoid wasting of space (either on stack memory or free store).
-* In both cases, **ptr** points to the elements. This is essential for performance: the access functions do not need to test which representation is used; they simply use **ptr**. Only the constructors, assignments, moves, and the destructor must care about the two alternatives.
+* Using *anonymous* `union` to implement *short string optimization* can avoid wasting of space (either on stack memory or free store).
+* In both cases, `ptr` points to the elements. This is essential for performance: the access functions do not need to test which representation is used; they simply use `ptr`. Only the constructors, assignments, moves, and the destructor must care about the two alternatives.
 
 #### 19.3.4 Member Functions
 
-* Use **if (this == &x) return \*this;** to deal with self-assignment.
+* Use `if (this == &x) return \*this;` to deal with self-assignment.
 
 ### 19.4 Friends
 
 * Ordinary member function declaration specifies:
 	* The function can access the private part of the class declaration.
 	* The function is in the scope of the class.
-	* The function must be invoked on an object (has a **this** pointer).
+	* The function must be invoked on an object (has a `this` pointer).
 
-* By declaring a member function **static**, we can give it the first two properties only.
-* By declaring a nonmember function a **friend**, we can give it the first properties only.
-* A **friend** declaration can be placed in either the private or the public part of a class declaration, it does not matter where.
-* A **friend** function is explicitly declared in the declaration of the class of which it is a friend.
+* By declaring a member function `static`, we can give it the first two properties only.
+* By declaring a nonmember function a `friend`, we can give it the first properties only.
+* A `friend` declaration can be placed in either the private or the public part of a class declaration, it does not matter where.
+* A `friend` function is explicitly declared in the declaration of the class of which it is a friend.
 
 ```c++
 class Foo {
@@ -2520,7 +2520,7 @@ class Foo {
 };
 ```
 
-* It is possible to make a template argument a **friend**.
+* It is possible to make a template argument a `friend`.
 
 ```c++
 template<typename T>
@@ -2533,15 +2533,15 @@ class X {
 
 #### 19.4.1 Finding Friends
 
-* A friend must be previously declared in an enclosing scope or defined in the non-class scope immediately enclosing the class that is declaring it to be a **friend**.
-* Scopes outside the innermost enclosing namespace scope are not considered for a name first declared as a **friend**.
+* A friend must be previously declared in an enclosing scope or defined in the non-class scope immediately enclosing the class that is declaring it to be a `friend`.
+* Scopes outside the innermost enclosing namespace scope are not considered for a name first declared as a `friend`.
 * A friend function can be found through its arguments even if it was not declared in the immediately enclosing scope.
 * A friend function should be explicitly declared in an enclosing scope or taken an argument of its class or a class derived from that. If not, the friend cannot be called.
 
 #### 19.4.2 Friends and Members
 
 * Functions that are not a member of a class should avoid accessing the class' private members.
-* If implicit type conversion is desired for all operands of an operation, the function implementing it must be a nonmember function taking a **const** reference argument or a non-reference argument.
+* If implicit type conversion is desired for all operands of an operation, the function implementing it must be a nonmember function taking a `const` reference argument or a non-reference argument.
 * Binary operators are the most common source of friend function.
 * Operations that do not need direct access to a representation are often best represented as nonmember functions, possibly in a namespace that makes their relationship with the class explicit.
 
@@ -2599,9 +2599,9 @@ void g(const Bar& b) {
 * Rules:
 	* Objects are constructed from the bottom up (base before member and member before derived) and destroyed top-down (derived before member and member before base).
 	* Each class can initialize its members and bases (but not directly members or bases of its bases).
-	* Typically, destructors in a hierarchy need to be **virtual**.
+	* Typically, destructors in a hierarchy need to be `virtual`.
 	* Copy constructors of classes in a hierarchy should be used with care (if at all) to avoid slicing.
-	* The resolution of a virtual function call, a **dynamic_cast**, or a **typeid()** in a constructor or destructor reflects the stage of construction and destruction (rather than the type of the yet-to-be-completed object).
+	* The resolution of a virtual function call, a `dynamic_cast`, or a `typeid()` in a constructor or destructor reflects the stage of construction and destruction (rather than the type of the yet-to-be-completed object).
 
 ### 20.3 Class Hierarchies
 
@@ -2625,15 +2625,15 @@ void Bar::Print() const {
 }
 ```
 
-* The keyword **virtual** indicates that **print()** can act as an interface to the **print()** function defined in this class and **print()** functions defined in classes derived from it. When they are also defined in the derived classes, the compiler ensures that the right method is called.
+* The keyword `virtual` indicates that `print()` can act as an interface to the `print()` function defined in this class and `print()` functions defined in classes derived from it. When they are also defined in the derived classes, the compiler ensures that the right method is called.
 * A virtual member function is sometimes called a *method*.
 * A virtual function *must* be defined for the class in which it is first declared (unless it is declared to be a pure virtual function).
-* A virtual function can be **inline**, but cannot be **constexpr** (in any base or derived classes).
+* A virtual function can be `inline`, but cannot be `constexpr` (in any base or derived classes).
 * No matter what type of pointer is used to access the object, same virtual function will always be called.
 * A type with virtual functions is called a *polymorphic type* or (more precisely) *run-time polymorphic type*.
-* To get runtime polymorphic behavior in C++, the member functions called must be **virtual** and objects must be manipulated through pointers or references.
+* To get runtime polymorphic behavior in C++, the member functions called must be `virtual` and objects must be manipulated through pointers or references.
 * When manipulating an object directly (rather than through a pointer or reference), its exact type is known by the compiler so that run-time polymorphism is not needed.
-* By default, a function that overrides a virtual function itself becomes **virtual**. We can, but do not have to, repeat **virtual** in a derived class. Using **override** is better than repeating **virtual**.
+* By default, a function that overrides a virtual function itself becomes `virtual`. We can, but do not have to, repeat `virtual` in a derived class. Using `override` is better than repeating `virtual`.
 
 ```c++
 // Using classes Foo and Bar from the last code snippet
@@ -2658,15 +2658,15 @@ void g() {
 }
 ```
 
-* In a usual implementation, the compiler converts the name of a virtual function into an index into a table of pointers to functions. The table is usually called *the virtual function table* or simply the **vtbl**.
+* In a usual implementation, the compiler converts the name of a virtual function into an index into a table of pointers to functions. The table is usually called *the virtual function table* or simply the `vtbl`.
 * Virtual function calls can be made almost as efficient as the "normal function call" mechanism (within 25%).
-* Space overhead is one pointer in each object of a class with virtual functions plus one **vtbl** for each such class.
+* Space overhead is one pointer in each object of a class with virtual functions plus one `vtbl` for each such class.
 * It is a bad idea to call a virtual function from a constructor or a destructor.
 
 #### 20.3.3 Explicit Qualification
 
-* Calling a function using the scope resolution operator, **::**, as is done in **Manager::print()** ensures that the **virtual** mechanism is not used.
-* If a **virtual** function is also **inline**, then inline substitution can be used for calls specified using **::**.
+* Calling a function using the scope resolution operator, `::`, as is done in `Manager::print()` ensures that the `virtual` mechanism is not used.
+* If a `virtual` function is also `inline`, then inline substitution can be used for calls specified using `::`.
 
 ```c++
 void Bar::Print() const {
@@ -2685,17 +2685,17 @@ void g(const Bar& obj) {
 
 * If you declare a function in a derived class that has exactly the same name and type as a virtual function in a base class, then the function in the derived class overrides the one in the base class.
 * Function hierarchy controls:
-	* **virtual**: The function may be overridden.
-	* **=0**: The function must be **virtual** and must be overridden.
-	* **override**: The function is meant to override a virtual function in a base class.
-	* **final**: The function is not meant to be overridden.
-* In the absence of any of these controls, a non-**static** member function is virtual if an only if it overrides a **virtual** function in a base class.
+	* `virtual`: The function may be overridden.
+	* `=0`: The function must be `virtual` and must be overridden.
+	* `override`: The function is meant to override a virtual function in a base class.
+	* `final`: The function is not meant to be overridden.
+* In the absence of any of these controls, a non-`static` member function is virtual if an only if it overrides a `virtual` function in a base class.
 
 ##### 20.3.4.1 override
 
-* The **override** specifier comes last in a declaration, after all other parts.
-* An **override** specifier is not part of the type of a function and cannot be repeated in an out-of-class definition.
-* **override** and **final** are not keywords, they are called *contextual keyword*s.
+* The `override` specifier comes last in a declaration, after all other parts.
+* An `override` specifier is not part of the type of a function and cannot be repeated in an out-of-class definition.
+* `override` and `final` are not keywords, they are called *contextual keyword*s.
 
 ##### 20.3.4.2 final
 
@@ -2711,9 +2711,9 @@ public:
 };
 ```
 
-* We can make every **virtual** member function of a class **final** by adding **final** after the class name.
-* Adding **final** to the class not only prevents overriding, it also prevents further derivation from a class.
-* A **final** specifier is not part of the type of a function and cannot be repeated in an out-of-class definition.
+* We can make every `virtual` member function of a class `final` by adding `final` after the class name.
+* Adding `final` to the class not only prevents overriding, it also prevents further derivation from a class.
+* A `final` specifier is not part of the type of a function and cannot be repeated in an out-of-class definition.
 
 ```c++
 class Foo final {
@@ -2724,8 +2724,8 @@ class Foo final {
 #### 20.3.5 using Base Members
 
 * Functions do not overload across scopes.
-* **using**-declarations can be used to add a function to a scope.
-* Cannot use **using**-directives to bring all members of a base class into a derived class.
+* `using`-declarations can be used to add a function to a scope.
+* Cannot use `using`-directives to bring all members of a base class into a derived class.
 
 ```c++
 struct Base {
@@ -2757,19 +2757,19 @@ void use2(D2 d) {
 ##### 20.3.5.1 Inheriting Constructors
 
 * By default, constructors are not inherited into the derived class.
-* Use **using**-declaration to bring the constructor into derived class.
+* Use `using`-declaration to bring the constructor into derived class.
 
 #### 20.3.6 Return Type Relaxation
 
-* Also called *covariant return rule*: if the original return type was **B*** (or **B&**), then the return type of the overriding function may be **D*** (or **D&**), provided **B** is a public base of **D**.
-* This relaxation applies only to return types that are pointers or references, and not to "smart pointers" such as **unique_ptr**.
+* Also called *covariant return rule*: if the original return type was `B`* (or `B&`), then the return type of the overriding function may be `D*` (or `D&`), provided `B` is a public base of `D`.
+* This relaxation applies only to return types that are pointers or references, and not to "smart pointers" such as `unique_ptr`.
 * There is not a similar relaxation of the rules for argument types because that would lead to type violations.
-* Functions like **new_expr()** and **clone()** are **virtual** and they (indirectly) construct objects, they are often called *virtual constructors*. They simply use a constructor to create a suitable object.
-* A constructor cannot be **virtual** (because it needs to know the exact type of the object it is to create).
+* Functions like `new_expr()` and `clone()` are `virtual` and they (indirectly) construct objects, they are often called *virtual constructors*. They simply use a constructor to create a suitable object.
+* A constructor cannot be `virtual` (because it needs to know the exact type of the object it is to create).
 
 ### 20.4 Abstract Classes
 
-* *Pseudo initializer* **= 0**: makes a virtual function *pure virtual function*.
+* *Pseudo initializer* `= 0`: makes a virtual function *pure virtual function*.
 * A class with one or more pure virtual functions is an *abstract class*, and no objects of that abstract class can be created.
 
 ```c++
@@ -2788,7 +2788,7 @@ public:
 
 ### 20.5 Access Control
 
-* A member of a class can be **private**, **protected**, or **public**.
+* A member of a class can be `private`, `protected`, or `public`.
 
 ```c++
 template<class T>
@@ -2804,7 +2804,7 @@ template<class T>
 auto Foo<T>::next() -> Foo* { /* ... */ }
 ```
 
-* In a **class**, members are by default **private**; in a **struct**, members are by default **public**.
+* In a `class`, members are by default `private`; in a `struct`, members are by default `public`.
 * Don't use multiple access specifiers for data members without good reason.
 
 #### 20.5.1 protected Members
@@ -2813,19 +2813,19 @@ auto Foo<T>::next() -> Foo* { /* ... */ }
 
 ##### 20.5.1.1 Use of protected Members
 
-* Declaring data members **protected** is usually a design error.
+* Declaring data members `protected` is usually a design error.
 
 #### 20.5.2 Access to Base Classes
 
-* Like a member, a base class can be declared **private**, **protected**, or **public**.
-* They serve different design needs (assume **D** is derived from **B**):
-	* **public** derivation makes the derived class a subtype of its base.
-		* **B**'s public members can be used by any function. In addition, its protected members can be used by members and friends of **D** and members and friends of classes derived from **D**. Any function can convert a **D*** to **B***.
-	* **private** bases are most useful when defining a class by restricting the interface to a base so that stronger guarantees can be provided.
-		* **B**'s public and protected members can be used only by member functions and friends of **D**. Only friends and members of **D** can convert a **D*** to **B***.
-	* **protected** bases are useful in class hierarchies in which further derivation is the norm.
-		* **B**'s public and protected members can be used only by member functions and friends of **D** and by member functions and friends of classes derived from **D**. Only friends and members of **D** and friends and members of classes derived from **D** can convert a **D*** to **B***.
-* The access specifier for a base class can be left out. In that case, the base defaults to a private base for a **class** and a public base for a **struct**.
+* Like a member, a base class can be declared `private`, `protected`, or `public`.
+* They serve different design needs (assume `D` is derived from `B`):
+	* `public` derivation makes the derived class a subtype of its base.
+		* `B`'s public members can be used by any function. In addition, its protected members can be used by members and friends of `D` and members and friends of classes derived from `D`. Any function can convert a `D*` to `B*`.
+	* `private` bases are most useful when defining a class by restricting the interface to a base so that stronger guarantees can be provided.
+		* `B`'s public and protected members can be used only by member functions and friends of `D`. Only friends and members of `D` can convert a `D`* to `B*`.
+	* `protected` bases are useful in class hierarchies in which further derivation is the norm.
+		* `B`'s public and protected members can be used only by member functions and friends of `D` and by member functions and friends of classes derived from `D`. Only friends and members of `D` and friends and members of classes derived from `D` can convert a `D*` to `B*`.
+* The access specifier for a base class can be left out. In that case, the base defaults to a private base for a `class` and a public base for a `struct`.
 * These rules basically resets (narrowing) the rules for member access (for members that are derived from base class).
 
 ##### 20.5.2.1 Multiple Inheritance and Access Control
@@ -2850,16 +2850,16 @@ void g(const DD& obj) {
 
 #### 20.5.3 using-Declarations and Access Control
 
-* A **using**-declaration cannot be used to gain access to additional information.
+* A `using`-declaration cannot be used to gain access to additional information.
 
 ### 20.6 Pointers to Members
 
-* Using **->*** (or **.***), we can access a member that (conceptually) has its name stored in a pointer to member.
+* Using `->`* (or `.`*), we can access a member that (conceptually) has its name stored in a pointer to member.
 
 #### 20.6.1 Pointers to Function Members
 
-* A *pointer to member* can be obtained by applying the address-of operator, **&**, to a fully qualified class member name.
-* The function invoked through the pointer to function can be **virtual**.
+* A *pointer to member* can be obtained by applying the address-of operator, `&`, to a fully qualified class member name.
+* The function invoked through the pointer to function can be `virtual`.
 
 ```c++
 class Foo {
@@ -2881,7 +2881,7 @@ void g(const Foo& obj) {
 };
 ```
 
-* Pointers to a **static** member is simply an ordinary pointer.
+* Pointers to a `static` member is simply an ordinary pointer.
 
 #### 20.6.2 Pointers to Data Members
 
@@ -2970,7 +2970,7 @@ void g(const D& obj) {
 
 #### 21.3.5 Virtual Base Classes
 
-* We avoid replication (of grandfather-class members) by declaring a base **virtual**: every **virtual** base of a derived class is represented by the same (shared) object (not globally).
+* We avoid replication (of grandfather-class members) by declaring a base `virtual`: every `virtual` base of a derived class is represented by the same (shared) object (not globally).
 
 ```c++
 class Foo {
@@ -3002,7 +3002,7 @@ void f() {
 
 * The constructor of a base (whether virtual or not) is called before its derived classes.
 * The constructor of every virtual base is invoked (implicitly or explicitly) from the constructor for the complete object (the constructor for the most derived class).
-* If default constructor is not available for a **virtual** base class, the most derived class has to initialize it.
+* If default constructor is not available for a `virtual` base class, the most derived class has to initialize it.
 * A virtual base is always considered a direct base of its most derived class; only the initializer provided by the most derived class of this virtual base is used.
 * The constructor for a virtual base is called before the constructors for its derived classes.
 * Do not overuse virtual base classes.
@@ -3034,12 +3034,12 @@ ___
 
 #### 22.2.1 dynamic_cast
 
-* **dynamic_cast** takes a pointer or reference.
-* **nullptr** is returned by **dynamic_cast\<T*>(ptr)** if **ptr** is not of class **T** and does not have a unique base class of type **T** or **ptr** is a **nullptr**.
-* Returning pointers or references makes **dynamic_cast** able to do downcast or crosscast.
-* The target type of **dynamic_cast** need not be polymorphic.
-* A **dynamic_cast** to **void*** can be used to determine the address of the beginning of an object of polymorphic type.
-* There is no **dynamic_cast** from **void***s (because there would be no way of knowing where to find **vptr**).
+* `dynamic_cast` takes a pointer or reference.
+* `nullptr` is returned by `dynamic_cast<T*>(ptr)` if `ptr` is not of class `T` and does not have a unique base class of type `T` or `ptr` is a `nullptr`.
+* Returning pointers or references makes `dynamic_cast` able to do downcast or crosscast.
+* The target type of `dynamic_cast` need not be polymorphic.
+* A `dynamic_cast` to `void`* can be used to determine the address of the beginning of an object of polymorphic type.
+* There is no `dynamic_cast` from `void`*s (because there would be no way of knowing where to find `vptr`).
 
 ```c++
 class Foo1 { };  // not polymorphic
@@ -3058,12 +3058,12 @@ void f(Foo1* f1, Bar1* b1, Foo2* f2, Bar2* b2) {
 
 ##### 22.2.1.1 dynamic_cast to Reference
 
-* **dynamic_cast\<T&>(r)** of a reference **r** is not a question but an assertion.
-* If the operand of a **dynamic_cast** to a reference isn't of the expected type, a **bad_cast** exception is thrown.
+* `dynamic_cast<T&>(r)` of a reference `r` is not a question but an assertion.
+* If the operand of a `dynamic_cast` to a reference isn't of the expected type, a `bad_cast` exception is thrown.
 
 #### 22.2.2 Multiple Inheritance
 
-* Multiple inheritance **dynamic_cast**ing sometimes results in ambiguity, and it's not detectable at compile time, instead it results in a **nullptr** at runtime.
+* Multiple inheritance `dynamic_cast`ing sometimes results in ambiguity, and it's not detectable at compile time, instead it results in a `nullptr` at runtime.
 
 ```c++
 class A { public: virtual void Print() const = 0; };
@@ -3111,16 +3111,16 @@ g(&obj); // a is B; Print() in D
 
 #### 22.2.3 static\_cast and dynamic\_cast
 
-* A **dynamic_cast** can cast from a polymorphic virtual base class to a derived class or a sibling class. A **static_cast** does not examine the object it casts from, so it cannot do polymorphic casting.
-* The **dynamic_cast** requires a polymorphic operand.
-* **dynamic_cast** has performance overhead comparing to **static_cast**, but it's a lot safer, so prefer **dynamic_cast** where possible.
-* The compiler cannot assume anything about the memory pointed to by a **void***, so **dynamic_cast** cannot cast from a **void***, but **static_cast** can.
-* Both **dynamic_cast** and **static_cast** respect **const** and access controls.
-* It is not possible to cast to a private base class using **static_cast** or **reinterpret_cast**, and "casting away **const**" (or **volatile**) requires a **const_cast**. Even then, using the result is only safe only provided the object wasn't originally declared **const** (or **volatile**).
+* A `dynamic_cast` can cast from a polymorphic virtual base class to a derived class or a sibling class. A `static_cast` does not examine the object it casts from, so it cannot do polymorphic casting.
+* The `dynamic_cast` requires a polymorphic operand.
+* `dynamic_cast` has performance overhead comparing to `static_cast`, but it's a lot safer, so prefer `dynamic_cast` where possible.
+* The compiler cannot assume anything about the memory pointed to by a `void`*, so `dynamic_cast` cannot cast from a `void`*, but `static_cast` can.
+* Both `dynamic_cast` and `static_cast` respect `const` and access controls.
+* It is not possible to cast to a private base class using `static_cast` or `reinterpret_cast`, and "casting away `const`" (or `volatile`) requires a `const_cast`. Even then, using the result is only safe only provided the object wasn't originally declared `const` (or `volatile`).
 
 #### 22.2.4 Recovering an Interface
 
-* From a design perspective, **dynamic_cast** can be seen as a mechanism for asking for an object if it provides a given interface.
+* From a design perspective, `dynamic_cast` can be seen as a mechanism for asking for an object if it provides a given interface.
 
 ```c++
 void Use(IOObject* const obj) {
@@ -3154,14 +3154,14 @@ public:
 
 ### 22.3 Double Dispatch and Visitors
 
-* We cannot add a **virtual** function to a class hierarchy without modifying the base class(es) that provides the interface and all derived classes that should be affected.
+* We cannot add a `virtual` function to a class hierarchy without modifying the base class(es) that provides the interface and all derived classes that should be affected.
 * Workarounds:
 	*  *Double Dispatch* shows how to select a virtual function based on two types.
 	*  *Visitors* shows how to use double dispatch to add multiple functions to a class hierarchy with only a single additional virtual function in the hierarchy.
 
 #### 22.3.1 Double Dispatch
 
-* Choose the correct **virtual** method based on both argument types.
+* Choose the correct `virtual` method based on both argument types.
 
 ```c++
 class Shape {
@@ -3269,16 +3269,16 @@ void g() {
 
 ### 22.4 Construction and Destruction
 
-* It is unwise to rely on details of the order of construction and destruction, but you can observe that order by calling virtual functions, **dynamic_cast**, or **typeid** at a point where the object isn't complete.
+* It is unwise to rely on details of the order of construction and destruction, but you can observe that order by calling virtual functions, `dynamic_cast`, or `typeid` at a point where the object isn't complete.
 * Calling virtual functions from constructors or destructors is a bad idea.
 
 ### 22.5 Type Identification
 
-* **typeid()** returns a reference to a standard-library type called **type_info** defined in **\<typeinfo>**.
-* **typeid(expr)** takes an *expression* as its operand, and **expr** must refer to a completely defined type.
-* If the value of **expr** is **nullptr**, **typeid(expr)** throws a **std::bad_typeid**.
-* If the operand of **typeid()** has a nonpolymorphic type or is not an lvalue, the result is determined at compile time without evaluating the operand expression.
-* If the object denoted by a dereferenced pointer or a reference to a polymorphic type, the **type_info** returned is that of the most derived class for the object, that is, the type used when the object was defined.
+* `typeid()` returns a reference to a standard-library type called `type_info` defined in `<typeinfo>`.
+* `typeid(expr)` takes an *expression* as its operand, and `expr` must refer to a completely defined type.
+* If the value of `expr` is `nullptr`, `typeid(expr)` throws a `std::bad_typeid`.
+* If the operand of `typeid()` has a nonpolymorphic type or is not an lvalue, the result is determined at compile time without evaluating the operand expression.
+* If the object denoted by a dereferenced pointer or a reference to a polymorphic type, the `type_info` returned is that of the most derived class for the object, that is, the type used when the object was defined.
 
 ```c++
 // Declaration for type_info
@@ -3298,12 +3298,12 @@ public:
 };
 ```
 
-* It is *not* guaranteed that there is only one **type_info** object for each type in the system.
-* The character representation of a class' name is implementation-defined. If it's C-style string, it resides in memory owned by the system, so the programmer should not attempt to **delete[]** it.
+* It is *not* guaranteed that there is only one `type_info` object for each type in the system.
+* The character representation of a class' name is implementation-defined. If it's C-style string, it resides in memory owned by the system, so the programmer should not attempt to `delete[]` it.
 
 #### 22.5.1 Extended Type Information
 
-* The **type_index** is a standard-library type for comparing and hashing **type_info** objects.
+* The `type_index` is a standard-library type for comparing and hashing `type_info` objects.
 
 ```c++
 type_index{typeid(*p)};
@@ -3321,7 +3321,7 @@ ___
 
 ### 23.2 A Simple String Template
 
-* The scope of template arguments extends to the end of the declaration prefixed by **template\< /* ... */ >**.
+* The scope of template arguments extends to the end of the declaration prefixed by `template< /* ... */ >`.
 * Type aliases are useful for shortening the long names of classes generated from templates.
 
 #### 23.2.1 Defining a Template
@@ -3363,7 +3363,7 @@ T Foo<T>::GetX() const {
 ### 23.3 Type Checking
 
 * The fundamental weakness of the template mechanism is that it is not possible to directly express requirements on a template argument.
-* In C++14, [**concept**](http://en.cppreference.com/w/cpp/language/constraints) is to solve this problem.
+* In C++14, [`concept`](http://en.cppreference.com/w/cpp/language/constraints) is to solve this problem.
 
 #### 23.3.1 Type Equivalence
 
@@ -3399,7 +3399,7 @@ std::vector<Display<Shape>> v = std::vector<Display<Circle>>{}; // compile-time 
 
 #### 23.4.1 Data Members
 
-* Non-**static** data members can be **const**, but unfortunately not **constexpr**.
+* Non-`static` data members can be `const`, but unfortunately not `constexpr`.
 
 #### 23.4.2 Member Functions
 
@@ -3421,9 +3421,9 @@ public:
 
 #### 23.4.4 static Members
 
-* A **static** data or function that is not defined in-class must have a unique definition in a program.
-* As for non-template classes, a **const** or **constexpr** data member of literal type can be initialized in-class and need not be defined outside the class.
-* A **static** member need only be defined if it is used.
+* A `static` data or function that is not defined in-class must have a unique definition in a program.
+* As for non-template classes, a `const` or `constexpr` data member of literal type can be initialized in-class and need not be defined outside the class.
+* A `static` member need only be defined if it is used.
 
 ```c++
 class Foo {
@@ -3472,7 +3472,7 @@ public:
 
 ##### 23.4.6.2 Templates and virtual
 
-* A member template cannot be **virtual**.
+* A member template cannot be `virtual`.
 
 ##### 23.4.6.3 Use of Nesting
 
@@ -3527,7 +3527,7 @@ public:
 };
 ```
 
-* The **\<>** after the name of the friend function is needed to make clear that the friend is a template function. Without the **\<>**, a non-template function would have been assumed.
+* The `<>` after the name of the friend function is needed to make clear that the friend is a template function. Without the `<>`, a non-template function would have been assumed.
 * Like a member function, a friend function is instantiated only if it is used.
 * As ever, friendship is neither inherited nor transitive.
 * We cannot directly make a template a friend of a class, but we can make a friend declaration a template.
@@ -3544,7 +3544,7 @@ class Bar {
 };
 ```
 
-* Unfortunately, there is no way of saying that **Bar\<X>** should only be a friend of **Foo\<X>**.
+* Unfortunately, there is no way of saying that `Bar<X>` should only be a friend of `Foo<X>`.
 
 ### 23.5 Function Templates
 
@@ -3565,7 +3565,7 @@ void g() {
 
 * A compiler can deduce type and non-type arguments from a call, provided the function argument list uniquely identifies the set of template arguments.
 * Class template parameters are never reduced.
-* The syntax for **static_cast**, **dynamic_cast**, etc., matches the explicitly qualified function template syntax.
+* The syntax for `static_cast`, `dynamic_cast`, etc., matches the explicitly qualified function template syntax.
 
 #### 23.5.2 Function Template Argument Deduction
 
@@ -3690,7 +3690,7 @@ int main(int argc, const char* argv[]) {
 
 * If a class template should be copyable/movable, give it a non-template copy/move constructor and a non-template copy/move assignment.
 * Use function templates to deduce class template argument types.
-* There is no separate compilation of templates: **#include** template definitions in every translation unit that uses them.
+* There is no separate compilation of templates: `#include` template definitions in every translation unit that uses them.
 
 ___
 
@@ -3713,7 +3713,7 @@ ___
 	* You can copy (using assignment or initialization) with the proper copy semantics.
 	* You can default construct.
 	* Doesn't have problems with various minor technical requirements (such as taking the address of a variable).
-	* You can compare for equality (using **==** and **!=**).
+	* You can compare for equality (using `==` and `!=`).
 
 #### 24.3.2 Concepts and Constraints
 
@@ -3722,7 +3722,7 @@ ___
 
 ### 24.4 Making Concepts Concrete
 
-* In C++11, we can implement a concept as a **constexpr** function.
+* In C++11, we can implement a concept as a `constexpr` function.
 
 ```c++
 TMPL_DEF_PQ
@@ -3767,13 +3767,13 @@ ___
 
 * A template can take arguments:
   * *Type parameters* of "type type".
-  * *Value parameteres* of built-in types such as **int**s and pointers to functions.
+  * *Value parameteres* of built-in types such as `int`s and pointers to functions.
   * *Template parameters* of "type template".
 * It is common to use short names with initial uppercase letters as names of template type arguments.
 
 #### 25.3.1 Types as Arguments
 
-* A template argument is defined to be a *type parameter* by prefixing it with **typename** or **class**. The result of using either is completely equivalent.
+* A template argument is defined to be a *type parameter* by prefixing it with `typename` or `class`. The result of using either is completely equivalent.
 * Every type (built-in or user-defined) is syntactically acceptable to a template declared to take a type parameter.
 * A type argument is unconstrained (without implementation of *concepts*).
 * There is no space or time overhead implied by using either built-in or user-defined types.
@@ -3786,8 +3786,8 @@ ___
   * A pointer or a reference to an object or a function with external linkage.
   * A nonoverloaded pointer to member.
   * A null pointer.
-* A pointer used as a template argument must be of the form **&of**, where **of** is the name of an object or a function, or of the form **f**, where **f** is the name of a function.
-* A pointer to member must be of the form **&X::of**, where **of** is the name of a member.
+* A pointer used as a template argument must be of the form `&of`, where `of` is the name of an object or a function, or of the form `f`, where `f` is the name of a function.
+* A pointer to member must be of the form `&X::of`, where `of` is the name of a member.
 * A string literal is *not* acceptable as a template argument.
 
 ```c++
@@ -3888,8 +3888,8 @@ class Matrix { /* ... */ };
 
 ##### 25.2.5.1 Default Function Template Arguments
 
-* If all function template arguments are defaulted, the **\<>** can be left out (exactly as in function template specializations).
-* If all class template arguments are defaulted, the **\<>** *cannot* be left out.
+* If all function template arguments are defaulted, the `<>` can be left out (exactly as in function template specializations).
+* If all class template arguments are defaulted, the `<>` *cannot* be left out.
 
 ```c++
 template<typename T = float>
@@ -3949,11 +3949,11 @@ void g(
 }
 ```
 
-* The **template\<>** prefix says that this is a specialization that can be specified without a template parameter.
-* The **Matrix\<void*>** is a *complete specialization*. That is, there is no template parameter to specify or deduce when we use the specialization.
-* The specialization pattern **\<T*>** after the name says that this specialization is to be used for every pointer type; that is, this definition is to be used for every **Matrix** with a template argument that can be expressed as **T***.
+* The `template<>` prefix says that this is a specialization that can be specified without a template parameter.
+* The `Matrix<void*>` is a *complete specialization*. That is, there is no template parameter to specify or deduce when we use the specialization.
+* The specialization pattern `<T*>` after the name says that this specialization is to be used for every pointer type; that is, this definition is to be used for every `Matrix` with a template argument that can be expressed as `T*`.
 * A specialization with a pattern containing a template parameter is called a *partial specialization*.
-* When a partial specialization is used, a template parameter is deduced from the specialization pattern; the template parameter is not simply the actual template argument. (i.e., in **Matrix\<float*>**, **T** is **float** and not **float***)
+* When a partial specialization is used, a template parameter is deduced from the specialization pattern; the template parameter is not simply the actual template argument. (i.e., in `Matrix<float*>`, `T` is `float` and not `float*`)
 
 #### 25.3.1 Interface Specialization
 
@@ -4104,8 +4104,8 @@ void g() {
 * The language provides two mechanisms to helps the user take control when needed:
 	* Optimize the compile-and-link process by eliminating redundant replicated instantiations.
 	* Know exactly which point of instantiation is used to eliminate surprises from complicated name-binding contexts.
-* An explicit instantiation request (often simply called an *explicit instantiation*) is a declaration of a specialization prefixed by the keyword **template**.
-* A template declaration starts with **template\<**, whereas plain **template** starts an instantiation request.
+* An explicit instantiation request (often simply called an *explicit instantiation*) is a declaration of a specialization prefixed by the keyword `template`.
+* A template declaration starts with `template<`, whereas plain `template` starts an instantiation request.
 * As in template function calls, the template arguments that can be deduced from the function arguments can be omitted.
 * Explicit instantiation cannot be in a function.
 
@@ -4125,7 +4125,7 @@ void g() {
 * When a class template is explicitly instantiated, every member function is also instantiated.
 * A compiler is not required to diagnose multiple instantiations in separate compilation units.
 * If correctly used, explicit instantiation can significantly cut down build time.
-* To complement explicit instantiation requests, the language provides explicit requests *not* to instantiate (usually called **extern template**s). Instead of instantiating a template, it *assumes* the instantiation is already done in another translation unit, and uses that.
+* To complement explicit instantiation requests, the language provides explicit requests *not* to instantiate (usually called `extern template`s). Instead of instantiating a template, it *assumes* the instantiation is already done in another translation unit, and uses that.
 
 ```c++
 // File: ndarray_instantiation.hpp
@@ -4154,7 +4154,7 @@ extern template class NDArray<float>;
 #### 26.3.1 Dependent Names
 
 * Basically, the name of a called function is dependent if it is obviously dependent by looking at its arguments or at its formal parameters.
-* By default, a dependent name is assumed to name something that is not a type. So, to use a dependent name as a type, you have to say so, using the keyword **typename**.
+* By default, a dependent name is assumed to name something that is not a type. So, to use a dependent name as a type, you have to say so, using the keyword `typename`.
 
 ```c++
 template<typename T>
@@ -4173,7 +4173,7 @@ void g() {
 }
 ```
 
-* Naming a member template after a **.** (dot), **->**, or **::** requires similar use of the keyword **template**.
+* Naming a member template after a `.` (dot), `->`, or `::` requires similar use of the keyword `template`.
 
 ```c++
 class Pool {  // some allocator
@@ -4318,7 +4318,7 @@ void g() {
 
 #### 27.4.1 Composing Data Structures
 
-* *Empty-base optimization*: the language guarantees that if a base class has no non-**static** data members, no memory will be allocated for it in an object of derived class.
+* *Empty-base optimization*: the language guarantees that if a base class has no non-`static` data members, no memory will be allocated for it in an object of derived class.
 
 ### 27.5 Advice
 
@@ -4356,7 +4356,7 @@ struct MatrixSelector {
 using Matrix = typename MatrixSelector<10, 20>::Type;
 ```
 
-* The standard-library template **conditional** is a compile-time selector between two alternatives. If its first argument evaluates to **true**, the result (presented as member **type**) is the second argument; otherwise, the result is the third argument.
+* The standard-library template `conditional` is a compile-time selector between two alternatives. If its first argument evaluates to `true`, the result (presented as member `type`) is the second argument; otherwise, the result is the third argument.
 
 ```c++
 constexpr bool is_single_precision{true};
@@ -4366,7 +4366,7 @@ std::cout << typeid(NDArrayType).name() << std::endl;  // NDArray<float>
 
 #### 28.2.1 Type Aliases
 
-* Use type aliases to shorten something like **typename TypeSelector<SomeType>::type**.
+* Use type aliases to shorten something like `typename TypeSelector<SomeType>::type`.
 
 ```c++
 template<typename T>
@@ -4375,7 +4375,7 @@ using Holder = typename ObjHolder<T>::type;
 
 #### 28.2.2 Type Predicates
 
-* All standard library type predicates support **()** notion intended use of **::value**.
+* All standard library type predicates support `()` notion intended use of `::value`.
 * For language-technical reasons, this resolution is not available in the context of a template argument.
 
 ```c++
@@ -4423,7 +4423,7 @@ struct Conditional<false, T, U> { using Type = U; };
 
 ##### 28.3.1.2 Compile Time vs. Run Time
 
-* An ordinary **if**-statement is useful for ordinary expressions, but not for type selection (use **std::conditional** instead).
+* An ordinary `if`-statement is useful for ordinary expressions, but not for type selection (use `std::conditional` instead).
 
 #### 28.3.2 Iteration and Recursion
 
@@ -4460,12 +4460,12 @@ struct Factorial2<1> {
 * The most obvious constraint on metaprogramming is that code depending on complicated uses of templates can be hard to read and very hard to debug.
 * In general, look hard for ways to clean up he syntax presented to users without inventing a private language.
 * Prefer systematic techniques, such as specialization and the use of aliases, to macro hackery.
-* Prefer **constexpr** functions to templates for compile-time computation, and hide template programming implementation details in **constexpr** functions whenever feasible.
+* Prefer `constexpr` functions to templates for compile-time computation, and hide template programming implementation details in `constexpr` functions whenever feasible.
 
 ### 28.4 Conditional Definition: Enable_if
 
-* If **std::enable_if**'s condition evaluates to **true**, its result is its second argument. If **std::enable_if**'s condition evaluates to **false**, the whole function declaration of which it is part of is completely ignored.
-* **std::enable_if** is a variation of the idea of a concept: it allows a more precise specification of the requirements of a template.
+* If `std::enable_if`'s condition evaluates to `true`, its result is its second argument. If `std::enable_if`'s condition evaluates to `false`, the whole function declaration of which it is part of is completely ignored.
+* `std::enable_if` is a variation of the idea of a concept: it allows a more precise specification of the requirements of a template.
 
 ```c++
 template<bool B, typename T>
@@ -4486,8 +4486,8 @@ void g() {
 
 ### 28.4.1 Use of Enable_if
 
-* The **enable_if** techniques work for template functions (including member functions of class templates and specializations) only.
-* **enable_if** cannot be used on control declarations of classes, variables, or non-template functions.
+* The `enable_if` techniques work for template functions (including member functions of class templates and specializations) only.
+* `enable_if` cannot be used on control declarations of classes, variables, or non-template functions.
 
 ```c++
 // Use of enable_if at template argument
@@ -4510,7 +4510,7 @@ template<typename T>
 struct EnableIf<false, T> { };  // no "Type" if B is false
 ```
 
-* Note that we can leave out the type argument and get **void** by default.
+* Note that we can leave out the type argument and get `void` by default.
 
 #### 28.4.4 More Enable_if Examples
 
@@ -4592,7 +4592,7 @@ void g() {
 }
 ```
 
-* The **Args...** defines what is called a *parameter pack*. A parameter pack is a sequence of (type/value) pairs from which you can "peel off" arguments starting with the first, when the function is called with two or more arguments.
+* The `Args...` defines what is called a *parameter pack*. A parameter pack is a sequence of (type/value) pairs from which you can "peel off" arguments starting with the first, when the function is called with two or more arguments.
 * A parameter pack can have zero or more elements.
 
 ```c++
@@ -4661,7 +4661,7 @@ void g() {
 }
 ```
 
-* A **sizeof...** expression is used to obtain the number of elements in a parameter pack.
+* A `sizeof...` expression is used to obtain the number of elements in a parameter pack.
 
 ```c++
 template<typename T, std::size_t NDim, typename Allocator>
@@ -4692,11 +4692,11 @@ void g() {
 }
 ```
 
-* The **...** in **forward\<T>(t)...** is read "forward the zero or more arguments from **t**".
+* The `...` in `forward<T>(t)...` is read "forward the zero or more arguments from `t`".
 
 #### 28.6.4 The Standard-Library tuple
 
-* **std::get()** provides compile-time zero-based subscripting of **std::tuple**s.
+* `std::get()` provides compile-time zero-based subscripting of `std::tuple`s.
 
 ### 28.8 Advice
 
@@ -4711,14 +4711,14 @@ ___
 
 #### 29.1.1 Basic Matrix Uses
 
-* As for **std::vector**, we use **()** to specify sizes and **{}** to specify element values.
+* As for `std::vector`, we use `()` to specify sizes and `{}` to specify element values.
 
 ### 29.3 Matrix Arithmetic Operations
 
 #### 29.3.2 Addition
 
-* Use **std::common_type** to determine the type that preserves values for arithmetic operations.
-* There is no difference between **Matrix** and **Matrix_ref** element access: the difference between **Matrix** and **Matrix_ref** is in the initialization and ownership of elements.
+* Use `std::common_type` to determine the type that preserves values for arithmetic operations.
+* There is no difference between `Matrix` and `Matrix_ref` element access: the difference between `Matrix` and `Matrix_ref` is in the initialization and ownership of elements.
 
 ___
 ___
@@ -4750,14 +4750,14 @@ ___
 
 #### 1.1 Attitude towards Allocator
 
-* 1983: "**malloc** is awesome. Use it."
-* 1993: "**malloc** is awful. Replace it."
-* 2003: "**malloc** is great. Use it."
-* 2013: "**malloc** is wanting. Supplement it."
+* 1983: "`malloc` is awesome. Use it."
+* 1993: "`malloc` is awful. Replace it."
+* 2003: "`malloc` is great. Use it."
+* 2013: "`malloc` is wanting. Supplement it."
 
 #### 1.2 Problem with malloc
 
-* **malloc** requires **size**, but **free** doesn't. So deallocation requires searching for the size category store that contains the allocated object. ([N3536](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3536.html))
+* `malloc` requires `size`, but `free` doesn't. So deallocation requires searching for the size category store that contains the allocated object. ([N3536](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3536.html))
 
 ```c++
 // What the correct malloc implementation should've been (from
@@ -4774,13 +4774,13 @@ void free(Block block);
 
 #### 1.3 Problem with operator new
 
-* Syntactic oddities: **new int;** returns a pointer to **int**; **new int[8];** also returns a pointer to **int**, instead of **int[8]** (which is a type).
-* Had to work with **malloc**.
+* Syntactic oddities: `new int;` returns a pointer to `int`; `new int[8];` also returns a pointer to `int`, instead of `int[8]` (which is a type).
+* Had to work with `malloc`.
 * No communication with the constructor.
 
 #### 1.4 Problem with std::allocator
 
-* **std::allocator** came out at 1994, was designed to solve [near/far pointer](http://stackoverflow.com/questions/3575592/what-are-near-far-and-huge-pointers) problem, not memory allocation. It had no intent to expand scope beyond that, hence it's not a good allocator because it wasn't designed to be.
+* `std::allocator` came out at 1994, was designed to solve [near/far pointer](http://stackoverflow.com/questions/3575592/what-are-near-far-and-huge-pointers) problem, not memory allocation. It had no intent to expand scope beyond that, hence it's not a good allocator because it wasn't designed to be.
 * It takes type argument, whereas allocation isn't related to the type (except size, but that should be calculated beforehand).
 * Stateless assumption does not make sense for an allocator.
 

@@ -6,7 +6,7 @@
 
 #### 6.3.1 The Structure of Declarations
 
-* * is prefix, `[]` and `()` are postfix; the postfix declarator operators bind tighter than the prefix ones.
+* `*` is prefix, `[]` and `()` are postfix; the postfix declarator operators bind tighter than the prefix ones.
 
 ```c++
 char *arr[]; // Array of pointers to char

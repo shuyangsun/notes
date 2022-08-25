@@ -16,6 +16,8 @@
 
 [Thinking, Fast and Slow](psychology/thinking_fast_and_slow/README.md) by [Daniel Kahneman](https://scholar.princeton.edu/kahneman/home)
 
+[The Black Swan](psychology/the_black_swan/README.md) by [Nassim Nicholas Taleb](https://www.fooledbyrandomness.com/)
+
 ## Entrepreneurship
 
 [Zero to One](entrepreneurship/zero_to_one/README.md) by [Peter Thiel](https://www.linkedin.com/in/peterthiel/)

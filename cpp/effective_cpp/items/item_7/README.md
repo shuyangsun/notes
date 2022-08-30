@@ -34,7 +34,8 @@ class Widget {
 ```
 
 4. `Widget w();` is parsed as function declaration instead of object construction. Only `Widget w;` or `Widget w{};` calls the default constructor.
-5. In constructor calls:
+5. Empty braces `{}` calls default constructor, not empty `std::initializer_list` constructor.
+6. In constructor calls:
    1. If no constructor declares a parameter of `std::initializer_list`: braces and parenthesis behave the same.
    2. If one or more constructor declares a parameter of `std::initializer_list`: the overloading rule *strongly* prefers the initializer_list version. (However, narrowing conversion is not allowed inside braces, **only if there's no way to convert the types of the arguments to `initializer_list`, the compiler would fallback to other constructors**.)
 

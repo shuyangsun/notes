@@ -80,14 +80,14 @@ int main(int argc, char **argv) {
   // ------------- Fib -------------
 
   const std::size_t fib_fn_dur{BENCH(FibFn)};
-  std::cout << "Fib Function Dur: " << fib_fn_dur << "ns"; //> Fib Function Dur: 33ns
+  std::cout << "Fib Function Dur: " << fib_fn_dur << "ns"; //> Fib Function Dur: 25ns
 
   const std::size_t fib_lambda_dur{BENCH(FibLambda)};
-  std::cout << "Fib Lambda Dur: " << fib_lambda_dur << "ns"; //> Fib Lambda Dur: 43216533ns
+  std::cout << "Fib Lambda Dur: " << fib_lambda_dur << "ns"; //> Fib Lambda Dur: 43290608ns
 
   double fib_ratio{static_cast<double>(fib_lambda_dur) / static_cast<double>(fib_fn_dur)};
   fib_ratio = std::round(fib_ratio * 100) / 100;
-  std::cout << "Fib Lambda/Function Ratio: " << fib_ratio; //> Fib Lambda/Function Ratio: 1.30959e+06
+  std::cout << "Fib Lambda/Function Ratio: " << fib_ratio; //> Fib Lambda/Function Ratio: 1.73162e+06
 
   // ------------- Sum -------------
 
@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
   std::cout << "Sum Lambda (auto) Dur: " << sum_lambda_auto_dur << "ns"; //> Sum Lambda (auto) Dur: 4ns
 
   const std::size_t sum_lambda_explicit_dur{BENCH(SumLambdaExplicit)};
-  std::cout << "Sum Lambda (explicit) Dur: " << sum_lambda_explicit_dur << "ns"; //> Sum Lambda (explicit) Dur: 991987ns
+  std::cout << "Sum Lambda (explicit) Dur: " << sum_lambda_explicit_dur << "ns"; //> Sum Lambda (explicit) Dur: 994154ns
 
   double sum_ratio_1{static_cast<double>(sum_lambda_auto_dur) / static_cast<double>(sum_fn_dur)};
   sum_ratio_1 = std::round(sum_ratio_1 * 100) / 100;
@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
 
   double sum_ratio_2{static_cast<double>(sum_lambda_explicit_dur) / static_cast<double>(sum_fn_dur)};
   sum_ratio_2 = std::round(sum_ratio_2 * 100) / 100;
-  std::cout << "Sum Lambda(explicit)/Function Ratio: " << sum_ratio_2; //> Sum Lambda(explicit)/Function Ratio: 247997
+  std::cout << "Sum Lambda(explicit)/Function Ratio: " << sum_ratio_2; //> Sum Lambda(explicit)/Function Ratio: 248538
 
   #pragma cmt end
   return 0;

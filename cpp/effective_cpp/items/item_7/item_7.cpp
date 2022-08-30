@@ -69,6 +69,25 @@ class WidgetIL3 {
   }
 };
 
+class WidgetIL4 {
+ public:
+  WidgetIL4() {
+    std::cout << "calling default constructor..." << std::endl;
+  }
+
+  WidgetIL4(const WidgetIL4& other) {
+    std::cout << "calling copy constructor..." << std::endl;
+  }
+
+  WidgetIL4(std::initializer_list<float> il) {
+    std::cout << "calling (initializer_list<float>) constructor..." << std::endl;
+  }
+
+  operator float() const {
+    return 1.0f;
+  }
+};
+
 int main(int argc, char **argv) {
   #pragma cmt beg
   int x = 1;
@@ -101,6 +120,10 @@ int main(int argc, char **argv) {
 
   // WidgetIL2 w14{3, 5.5}; // *** COMPILE ERROR *** Type 'double' cannot be narrowed to 'bool' in initializer list
   WidgetIL3 w15{3, 5.5}; //> calling (int, double) constructor...
+
+  WidgetIL4 w16{};    //> calling default constructor...
+  WidgetIL4 w17(w16); //> calling copy constructor...
+  WidgetIL4 w18{w17}; //> calling copy constructor...
   #pragma cmt end
 
   return 0;

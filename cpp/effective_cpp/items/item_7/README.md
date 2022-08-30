@@ -46,7 +46,9 @@ class Widget1 {
 };
 
 Widget1 w1{2, 5.3}; // ERROR: narrowing conversion
+```
 
+```c++
 class Widget2 {
  public:
   Widget2(int a, double b) { /* ... */ }
@@ -54,4 +56,18 @@ class Widget2 {
 };
 
 Widget2 w2{2, 5.3}; // Calls the first constructor
+```
+
+*Note that in the following example, the book described a different behavior than what actually happened for `Widget3`.*
+
+```c++
+class Widget3 {
+ public:
+  Widget3(const Widget3& other) { /* ... */ }
+  Widget3(std::initializer_list<float> il) { /* ... */ }
+  operator float() const { /* ... */ }
+};
+
+Widget3 w3_1{};
+Widget3 w3_2{w3_1};  // Calls copy ctor (but the book says it calls initializer_list ctor)
 ```

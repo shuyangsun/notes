@@ -36,4 +36,22 @@ class Widget {
 4. `Widget w();` is parsed as function declaration instead of object construction. Only `Widget w;` or `Widget w{};` calls the default constructor.
 5. In constructor calls:
    1. If no constructor declares a parameter of `std::initializer_list`: braces and parenthesis behave the same.
-   2. If one or more constructor declares a parameter of `std::initializer_list`: the overloading rule *strongly* prefers the initializer_list version, even when narrowing conversion is necessary.
+   2. If one or more constructor declares a parameter of `std::initializer_list`: the overloading rule *strongly* prefers the initializer_list version. (However, narrowing conversion is not allowed inside braces, **only if there's no way to convert the types of the arguments to `initializer_list`, the compiler would fallback to other constructors**.)
+
+```c++
+class Widget1 {
+ public:
+  Widget1(int a, double b) { /* ... */ }
+  Widget1(std::initializer_list<bool> il) { /* ... */ }
+};
+
+Widget1 w1{2, 5.3}; // ERROR: narrowing conversion
+
+class Widget2 {
+ public:
+  Widget2(int a, double b) { /* ... */ }
+  Widget2(std::initializer_list<std::string> il) { /* ... */ }
+};
+
+Widget2 w2{2, 5.3}; // Calls the first constructor
+```

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <initializer_list>
 
 #include "cpp_notes/util/print.h"
@@ -27,22 +28,44 @@ class Widget {
   }
 };
 
-class WidgetWithInitList {
+class WidgetIL1 {
  public:
-  WidgetWithInitList() {
+  WidgetIL1() {
     std::cout << "calling default constructor..." << std::endl;
   }
 
-  WidgetWithInitList(int i, bool b) {
+  WidgetIL1(int i, bool b) {
     std::cout << "calling (int, bool) constructor..." << std::endl;
   }
 
-  WidgetWithInitList(int i, double d) {
+  WidgetIL1(int i, double d) {
     std::cout << "calling (int, double) constructor..." << std::endl;
   }
 
-  WidgetWithInitList(std::initializer_list<double> lst) {
+  WidgetIL1(std::initializer_list<double> il) {
     std::cout << "calling (initializer_list<double>) constructor..." << std::endl;
+  }
+};
+
+class WidgetIL2 {
+ public:
+  WidgetIL2(int i, double d) {
+    std::cout << "calling (int, double) constructor..." << std::endl;
+  }
+
+  WidgetIL2(std::initializer_list<bool> il) {
+    std::cout << "calling (initializer_list<bool>) constructor..." << std::endl;
+  }
+};
+
+class WidgetIL3 {
+ public:
+  WidgetIL3(int i, double d) {
+    std::cout << "calling (int, double) constructor..." << std::endl;
+  }
+
+  WidgetIL3(std::initializer_list<std::string> il) {
+    std::cout << "calling (initializer_list<std::string>) constructor..." << std::endl;
   }
 };
 
@@ -68,13 +91,16 @@ int main(int argc, char **argv) {
   Widget w5(1, 0.5);  //> calling (int, double) constructor...
   Widget w6{1, 0.5};  //> calling (int, double) constructor...
 
-  WidgetWithInitList w7();           // WARNING: Empty parentheses interpreted as a function declaration.
-  WidgetWithInitList w8{};           //> calling default constructor...
-  WidgetWithInitList w9(1, true);    //> calling (int, bool) constructor...
-  WidgetWithInitList w10{1, true};   //> calling (initializer_list<double>) constructor...
-  WidgetWithInitList w11(1, 0.5);    //> calling (int, double) constructor...
-  WidgetWithInitList w12{1, 0.5};    //> calling (initializer_list<double>) constructor...
-  WidgetWithInitList w13{0.5, 3.14}; //> calling (initializer_list<double>) constructor...
+  WidgetIL1 w7();           // WARNING: Empty parentheses interpreted as a function declaration.
+  WidgetIL1 w8{};           //> calling default constructor...
+  WidgetIL1 w9(1, true);    //> calling (int, bool) constructor...
+  WidgetIL1 w10{1, true};   //> calling (initializer_list<double>) constructor...
+  WidgetIL1 w11(1, 0.5);    //> calling (int, double) constructor...
+  WidgetIL1 w12{1, 0.5};    //> calling (initializer_list<double>) constructor...
+  WidgetIL1 w13{0.5, 3.14}; //> calling (initializer_list<double>) constructor...
+
+  // WidgetIL2 w14{3, 5.5}; // *** COMPILE ERROR *** Type 'double' cannot be narrowed to 'bool' in initializer list
+  WidgetIL3 w15{3, 5.5}; //> calling (int, double) constructor...
   #pragma cmt end
 
   return 0;

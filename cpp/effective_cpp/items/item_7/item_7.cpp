@@ -126,6 +126,9 @@ int main(int argc, char **argv) {
   WidgetIL4 w18{};    //> calling default constructor...
   WidgetIL4 w19(w18); //> calling copy constructor...
   WidgetIL4 w20{w18}; //> calling copy constructor...
+
+  std::vector<int> v1(10, 20); std::cout << v1.size(); //> 10
+  std::vector<int> v2{10, 20}; std::cout << v2.size(); //> 2
   #pragma cmt end
 
   return 0;

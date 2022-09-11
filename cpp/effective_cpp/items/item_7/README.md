@@ -2,6 +2,8 @@
 
 # Item 7: Distinguish between `()` and `{}` when creating objects.
 
+Design your constructors so that the client is not effected by whether they use `()` or `{}` initializer.
+
 Three main ways to initialize a variable:
 
 1. Equal sign: `int x = 1;`

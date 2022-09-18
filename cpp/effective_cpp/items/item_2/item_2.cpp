@@ -18,7 +18,7 @@ T InitVec() {
 int main(int argc, char **argv) {
 
   #pragma cmt beg
-  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 14.0.0 (clang-1400.0.29.102)
   #pragma cmt end
 
   #pragma cmt beg -1

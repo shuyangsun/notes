@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
 
   #pragma cmt beg
 
-  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 14.0.0 (clang-1400.0.29.102)
 
   std::vector<int> v{1, 2, 3};
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
   // f1() = 3; // *** COMPILE ERROR ***
   f2() = 3; // Trouble! Compiles but undefined behavior.
   // The following line also results in undefined behavior (should return 9 instead).
-  std::cout << f3(); //> 47300043
+  std::cout << f3(); //> 11746763
   #pragma cmt end
 
   return 0;

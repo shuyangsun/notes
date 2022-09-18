@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
 
   #pragma cmt beg
 
-  cppn::util::PrintPlatform(); //> Mac OS: Clang version 13.1.6 (clang-1316.0.21.2.5)
+  cppn::util::PrintPlatform(); //> Mac OS: Clang version 14.0.0 (clang-1400.0.29.102)
 
   // ------------- Fib -------------
 
@@ -83,11 +83,11 @@ int main(int argc, char **argv) {
   std::cout << "Fib Function Dur: " << fib_fn_dur << "ns"; //> Fib Function Dur: 25ns
 
   const std::size_t fib_lambda_dur{BENCH(FibLambda)};
-  std::cout << "Fib Lambda Dur: " << fib_lambda_dur << "ns"; //> Fib Lambda Dur: 43290608ns
+  std::cout << "Fib Lambda Dur: " << fib_lambda_dur << "ns"; //> Fib Lambda Dur: 41554837ns
 
   double fib_ratio{static_cast<double>(fib_lambda_dur) / static_cast<double>(fib_fn_dur)};
   fib_ratio = std::round(fib_ratio * 100) / 100;
-  std::cout << "Fib Lambda/Function Ratio: " << fib_ratio; //> Fib Lambda/Function Ratio: 1.73162e+06
+  std::cout << "Fib Lambda/Function Ratio: " << fib_ratio; //> Fib Lambda/Function Ratio: 1.66219e+06
 
   // ------------- Sum -------------
 
@@ -96,21 +96,21 @@ int main(int argc, char **argv) {
   PRINT_TYPE(SumLambda2); //> std::__1::function<unsigned long long (unsigned long long)>
 
   const std::size_t sum_fn_dur{BENCH(SumFn)};
-  std::cout << "Sum Function Dur: " << sum_fn_dur << "ns"; //> Sum Function Dur: 4ns
+  std::cout << "Sum Function Dur: " << sum_fn_dur << "ns"; //> Sum Function Dur: 0ns
 
   const std::size_t sum_lambda_auto_dur{BENCH(SumLambdaAuto)};
-  std::cout << "Sum Lambda (auto) Dur: " << sum_lambda_auto_dur << "ns"; //> Sum Lambda (auto) Dur: 4ns
+  std::cout << "Sum Lambda (auto) Dur: " << sum_lambda_auto_dur << "ns"; //> Sum Lambda (auto) Dur: 0ns
 
   const std::size_t sum_lambda_explicit_dur{BENCH(SumLambdaExplicit)};
-  std::cout << "Sum Lambda (explicit) Dur: " << sum_lambda_explicit_dur << "ns"; //> Sum Lambda (explicit) Dur: 994154ns
+  std::cout << "Sum Lambda (explicit) Dur: " << sum_lambda_explicit_dur << "ns"; //> Sum Lambda (explicit) Dur: 996829ns
 
   double sum_ratio_1{static_cast<double>(sum_lambda_auto_dur) / static_cast<double>(sum_fn_dur)};
   sum_ratio_1 = std::round(sum_ratio_1 * 100) / 100;
-  std::cout << "Sum Lambda(auto)/Function Ratio: " << sum_ratio_1; //> Sum Lambda(auto)/Function Ratio: 1
+  std::cout << "Sum Lambda(auto)/Function Ratio: " << sum_ratio_1; //> Sum Lambda(auto)/Function Ratio: nan
 
   double sum_ratio_2{static_cast<double>(sum_lambda_explicit_dur) / static_cast<double>(sum_fn_dur)};
   sum_ratio_2 = std::round(sum_ratio_2 * 100) / 100;
-  std::cout << "Sum Lambda(explicit)/Function Ratio: " << sum_ratio_2; //> Sum Lambda(explicit)/Function Ratio: 248538
+  std::cout << "Sum Lambda(explicit)/Function Ratio: " << sum_ratio_2; //> Sum Lambda(explicit)/Function Ratio: inf
 
   #pragma cmt end
   return 0;

@@ -19,3 +19,4 @@
 7. [Distinguish between `()` and `{}` when creating objects.](items/item_7)
 8. [Prefer `nullptr` to `0` and `NULL`.](items/item_8)
 9. [Prefer alias declarations to `typedef`s.](items/item_9)
+10. [Prefer scoped `enum`s to unscoped `enum`s.](items/item_10)

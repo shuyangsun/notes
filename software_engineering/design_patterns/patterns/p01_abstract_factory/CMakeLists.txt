@@ -1,0 +1,1 @@
+ADD_EXECUTABLE(p01_abstract_factory "patterns/p01_abstract_factory/abstract_factory.cc")

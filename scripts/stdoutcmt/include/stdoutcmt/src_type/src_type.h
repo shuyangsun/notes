@@ -20,6 +20,7 @@ enum class FileType {
       || extension == ".hpp"
       || extension == ".hxx"
       || extension == ".c"
+      || extension == ".cc"
       || extension == ".cpp"
       || extension == ".cxx") {
     return FileType::Cpp;

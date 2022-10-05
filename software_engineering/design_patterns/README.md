@@ -24,7 +24,7 @@ The hard part about object-oriented design is decomposing a system into objects 
 | Dependence on obj representations or impl.   | Client write code that depends on it.        | [Abstract Factory](patterns/p01_abstract_factory), [~~Bridge~~](), [~~Memento~~](), [~~Proxy~~]()                                                                       |
 | Algorithm dependencies.                      | Algorithms are likely to evolve/change.      | [~~Builder~~](), [~~Iterator~~](), [~~Strategy~~](), [~~Template Method~~](), [~~Visitor~~]()                                                                           |
 | Tight coupling.                              | Leads to monolithic systems.                 | [Abstract Factory](patterns/p01_abstract_factory), [~~Bridge~~](), [~~Chain of Responsibility~~](), [~~Command~~](), [~~Facade~~](), [~~Mediator~~](), [~~Observer~~]() |
-| Extending functionality by subclassing.      | Explosion of classes, and (too) many others. | [~~Bridge~~](), [~~Chain of Responsibility~~](), [~~Composite~~](), [~~Decorator~~](), [~~Observer~~](), [~~Strategy~~]()                                               |
+| Extending functionality by subclassing.      | Explosion of classes, and (too) many others. | [~~Bridge~~](), [~~Chain of Responsibility~~](), [Composite](patterns/p08_composite), [~~Decorator~~](), [~~Observer~~](), [~~Strategy~~]()                             |
 | Inability to alter classes conviniently.     | Often the case with commercial libraries.    | [~~Adapter~~](), [~~Decorator~~](), [~~Visitor~~]()                                                                                                                     |
 
 ## Table of Contents
@@ -38,7 +38,7 @@ The hard part about object-oriented design is decomposing a system into objects 
 |                | [~~Singleton~~]()                                 | the sole instance of  a class                                                              |
 | **Structural** | [~~Adapter~~]()                                   | interface to an object                                                                     |
 |                | [~~Bridge~~]()                                    | implementation of an object                                                                |
-|                | [~~Composite~~]()                                 | structure and composition of an object                                                     |
+|                | [Composite](patterns/p08_composite)               | structure and composition of an object                                                     |
 |                | [~~Decorator~~]()                                 | responsibilities of an object without subclassing                                          |
 |                | [~~Facade~~]()                                    | interface to a subsystem                                                                   |
 |                | [~~Flyweight~~]()                                 | storage costs of objects                                                                   |

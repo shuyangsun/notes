@@ -38,9 +38,9 @@ void f_curef(const T&& param) {
 
 template<typename T>
 void f_uref_with_init(T&& param) {
-  PRINT_DEDUCED_TYPE();
   T t_default{};
-  std::cout << "Value of T{}: " << t_default << std::endl;
+  std::cout << "T{} is " << t_default << ", ";
+  PRINT_DEDUCED_TYPE();
 }
 
 // Case 3:
@@ -134,10 +134,11 @@ int main(int argc, char **argv) {
 
   std::cout << std::endl;
 
+  f_uref_with_init(27);  //> T{} is 0, ParamType: int&&, T: int
+  f_uref_with_init(cx);  //> T{} is 0, ParamType: int const&, T: int const&
+  f_uref_with_init(rcx); //> T{} is 0, ParamType: int const&, T: int const&
   // f_uref_with_init(x);  // *** COMPILE ERROR ***
-  f_uref_with_init(cx); //> ParamType: int const&, T: int const&
   // f_uref_with_init(rx);  // *** COMPILE ERROR ***
-  f_uref_with_init(rcx); //> ParamType: int const&, T: int const&
 
   std::cout << std::endl;
   std::cout << "Case 3:" << std::endl; //> Case 3:

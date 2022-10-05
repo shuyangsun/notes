@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
   f_uref_with_init(cx);  //> T{} is 0, ParamType: int const&, T: int const&
   f_uref_with_init(rcx); //> T{} is 0, ParamType: int const&, T: int const&
   // f_uref_with_init(x);  // *** COMPILE ERROR ***
-  // f_uref_with_init(rx);  // *** COMPILE ERROR ***
+  // f_uref_with_init(rx); // *** COMPILE ERROR ***
 
   std::cout << std::endl;
   std::cout << "Case 3:" << std::endl; //> Case 3:

@@ -14,9 +14,9 @@ class IComponent {
   virtual ~IComponent() = default;
 
   [[nodiscard]] virtual absl::Status Add(std::unique_ptr<IComponent> component);
-  [[nodiscard]] virtual absl::Status Add(std::unique_ptr<IComponent> component, uint64_t* component_id);
-  [[nodiscard]] virtual absl::Status RemoveById(uint64_t component_id) = 0;
-  [[nodiscard]] virtual absl::Status RemoveByFilter(std::function<bool (const IComponent&)> predicate) = 0;
+  [[nodiscard]] virtual absl::Status Add(std::unique_ptr<IComponent> component, uint64_t& component_id);
+  [[nodiscard]] virtual absl::Status RemoveById(uint64_t component_id);
+  [[nodiscard]] virtual absl::Status RemoveByFilter(std::function<bool (const IComponent&)> predicate);
 };
 
 }  // namespace pattern

@@ -21,7 +21,7 @@ class IComponent {
   [[nodiscard]] virtual absl::Status RemoveByFilter(
       std::function<bool(const IComponent&)> predicate);
   [[nodiscard]] virtual std::unique_ptr<IIterator<const IComponent&>> Iter();
-  [[nodiscard]] virtual std::unique_ptr<std::shared_ptr<IComponent>> IterMut();
+  [[nodiscard]] virtual std::unique_ptr<IIterator<std::shared_ptr<IComponent>>> IterMut();
 };
 
 }  // namespace pattern

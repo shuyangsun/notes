@@ -12,7 +12,7 @@
 
 ## Swift
 
-[C++ Primer](swift/the_swfit_programming_language/README.md)
+[The Swift Programming Language](swift/the_swift_programming_language/README.md)
 
 ## Software Engineering
 

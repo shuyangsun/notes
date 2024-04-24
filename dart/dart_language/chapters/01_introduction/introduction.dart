@@ -24,9 +24,9 @@ class Point {
 }
 
 class Rectangle {
-  final Point center;
-  final double halfWidth;
-  final double halfHeight;
+  Point center;
+  double halfWidth;
+  double halfHeight;
 
   Point get topLeft => Point(center.x - halfWidth, center.y - halfHeight);
   Point get topRight => Point(center.x + halfWidth, center.y - halfHeight);
@@ -64,10 +64,13 @@ class Square extends Rectangle {
 void main(List<String> arguments) {
   printContains(flyByObjects, 'y');
 
-  var rect = Rectangle.tlwh(0.2, 0.4, 0.3, 0.6);
+  var rect = Rectangle.tlwh(0.2, 0.4, 0.3, 0.6)
+    ..halfWidth = 0.25
+    ..halfHeight = 0.55;
   rect.describe();
 
-  var square = Square(Point(0.2, 0.6), 0.5);
+  final square = Square(Point(0.2, 0.6), 0.5);
+  square.center.x = 0.5; // Changing final's variable's field.
   square.describe();
 
   Square? nullableSquare = square;

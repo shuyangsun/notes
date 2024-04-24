@@ -61,7 +61,7 @@ class Square extends Rectangle {
       : super(center, halfLength, halfLength);
 }
 
-void main() {
+void main(List<String> arguments) {
   printContains(flyByObjects, 'y');
 
   var rect = Rectangle.tlwh(0.2, 0.4, 0.3, 0.6);
@@ -69,4 +69,10 @@ void main() {
 
   var square = Square(Point(0.2, 0.6), 0.5);
   square.describe();
+
+  Square? nullableSquare = square;
+  if (arguments.length <= 1) {
+    nullableSquare = null;
+  }
+  print(nullableSquare?.area);
 }

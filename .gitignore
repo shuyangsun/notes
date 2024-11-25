@@ -61,3 +61,16 @@ Footer
 *.exe
 *.out
 *.app
+
+# Compiled JavaScript files
+*.js
+*.js.map
+
+# Log files
+*.log
+
+# Node modules
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo

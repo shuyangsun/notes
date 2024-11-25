@@ -10,6 +10,10 @@
 
 [C++ Primer](cpp/cpp_primer_g/README.md)
 
+## JavaScript
+
+[Eloquent JavaScript](javascript/eloquent_javascript/README.md) by [Marijn Haverbeke](https://marijnhaverbeke.nl/)
+
 ## Swift
 
 [The Swift Programming Language](swift/the_swift_programming_language/README.md)

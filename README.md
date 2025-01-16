@@ -1,5 +1,9 @@
 # Shuyang's Notes
 
+## DevOps
+
+[Nginx HTTP Server](devops/nginx/README.md) by Gabriel Ouiran
+
 ## C++
 
 "C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off." - [Bjarne Stroustrup](https://www.stroustrup.com/quotes.html)

@@ -4,7 +4,7 @@
 
 ## Example configurations
 
-[Core module](./examples/core_module/nginx.conf)
+[Core module](./examples/base_module/nginx.conf)
 
 [Static file](./examples/static_file_server/nginx.conf)
 

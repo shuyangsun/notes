@@ -55,7 +55,9 @@ RUN wget https://nginx.org/download/nginx-1.27.3.tar.gz
 RUN tar -xvzf nginx-1.27.3.tar.gz
 RUN rm nginx-1.27.3.tar.gz
 WORKDIR /build/nginx-1.27.3
-RUN ./configure --with-threads \
+RUN ./configure \
+    --debug \
+    --with-threads \
     --with-file-aio \
     --with-http_ssl_module \
     --with-http_v2_module \

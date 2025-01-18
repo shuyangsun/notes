@@ -50,10 +50,34 @@ Dimunitives for file size: `k` or `K`, `m` or `M`, `g` or `G`.
 
 Dimunitives for time: `ms`, `s`, `m`, `h`, `d`, `w`, `M`, `y`.
 
-### 3. HTTP server
+### 3. Exploring the HTTP configuration
 
-Block containing order: http -> server -> location.
+Block containing order: `http` -> `server` -> `location`.
 
 - `http`: Only needs one block, since later blocks overrides earlier ones.
-- `server`: A website.
+- `server`: A virtual host (website) identified by either hostname or IP address and port combination.
 - `location`: A Particular URI pattern within a `server` block.
+
+#### 3.1 Directives
+
+`server_name`
+
+Assigns one or more hostnames to the `server` block. When Nginx receives an HTTP request, it matches the host header of the request against all `server` blocks. The first `server` block to match this hostname is selected.
+
+If no server block matches the desired host, Nginx selects the first `server` block that matches the parameters of the `listen` directive, giving priority to the `default_server`.
+
+`server_names_in_redirect`
+
+Applies to internal redirects. If set to `on`, uses `server_name` for redirects; if `off`, use `Host` header. Default `off`.
+
+`index`
+
+List of index pages to serve if file is not specified in the request, first match is served. Absolute path starting with `/` can only be the last argument.
+
+`error_page`
+
+Specify error page for error code, optionally changing error code in response.
+
+`keepalive_requests`
+
+Max number of requets a single keep-alive connection can serve. Default value is `100`.

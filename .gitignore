@@ -63,7 +63,6 @@ Footer
 *.app
 
 # Compiled JavaScript files
-*.js
 *.js.map
 
 # Log files
@@ -71,6 +70,8 @@ Footer
 
 # Node modules
 node_modules/
+dist
+build
 
 # TypeScript cache
 *.tsbuildinfo

@@ -81,3 +81,25 @@ Specify error page for error code, optionally changing error code in response.
 `keepalive_requests`
 
 Max number of requets a single keep-alive connection can serve. Default value is `100`.
+
+#### 3.2 Location block
+
+Syntax: `location [=|~|~*|^~|@] pattern { ... }`
+
+| Modifier     | Description                                                   |
+| ------------ | ------------------------------------------------------------- |
+| No modifier. | Begins with.                                                  |
+| `=`          | Exact.                                                        |
+| `~`          | Regex.                                                        |
+| `~*`         | Regex (case-insensitive).                                     |
+| `^~`         | Begins with, and stops searching. Order matters for this one. |
+| `@`          | Named location block.                                         |
+
+Matching order and priority:
+
+1. `=` - try exact matches.
+2. No modifier - try exact matches (without modifier).
+3. `^~` - try begin with matches, ignores the rest if found.
+4. `~` - try regex mathces.
+5. `~*` - try case-insensitive regex mathces.
+6. No modifier - try begin with matches.

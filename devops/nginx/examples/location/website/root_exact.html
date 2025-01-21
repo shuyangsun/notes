@@ -2,26 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link href="style.css" rel="stylesheet" />
+    <link rel="styles.css" rel="stylesheet" />
 
     <title>Location</title>
   </head>
 
   <body>
+    <h1>Nginx Location Block</h1>
+
+    <h2>Syntax</h2>
+
+    <code>location [=|^~|~|~*|@] { ... }</code>
+
+    <p>
+      There are 6 possible modifiers for the location block (including the
+      no-moddifer option).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Modifier</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th>none</th>
+          <td>Exact match or begins with.</td>
+        </tr>
+
+        <tr>
+          <th><code>=</code></th>
+          <td>Exact match.</td>
+        </tr>
+
+        <tr>
+          <th><code>^~</code></th>
+          <td>Begins with (higher precedence than no modifier).</td>
+        </tr>
+
+        <tr>
+          <th><code>~</code></th>
+          <td>Regex.</td>
+        </tr>
+
+        <tr>
+          <th><code>~*</code></th>
+          <td>Case-insensitive regex.</td>
+        </tr>
+
+        <tr>
+          <th><code>@</code></th>
+          <td>Named location block.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Matching precedence</h2>
+
+    <ol>
+      <li><code>=</code> try exact match.</li>
+      <li><code>none</code> try exact match without modifier.</li>
+      <li><code>^~</code> try begins with.</li>
+      <li><code>~</code> try regex.</li>
+      <li><code>~*</code> try case-insensitive regex.</li>
+      <li><code>none</code> try begins with.</li>
+    </ol>
+
+    <p>
+      The order of location blocks doesn't not matter, even when
+      <code>^~</code> is present.
+    </p>
+
+    <h2>Current match</h2>
+
+    <p>URI: <code id="uri"></code></p>
+
+    <code class="location-block"
+      >location <span class="location">= /</span> {<br />
+      try_files $uri /root_exact.html;<br />}</code
+    >
+
+    <p>Rule #1 was applied.</p>
+
+    <p>
+      <a href="server.conf" target="_blank">View configuration file</a>
+    </p>
+
+    <h3>Give these URLs a try</h3>
     <nav>
       <a href="/">/</a>
       <a href="/doc">/doc</a>
-      <a href="/doc/">/doc/</a>
+      <a href="/doctor">/doctor</a>
       <a href="/document">/document</a>
+      <a href="/doc/">/doc/</a>
     </nav>
 
-    <h2>Matched</h2>
-
-    <code> location = / { index /root_exact.html; } </code>
-
-    <h2>Complete server config</h2>
-    <div>
-      <a href="server.conf">server.conf</a>
-    </div>
+    <footer>
+      <script src="script.js"></script>
+    </footer>
   </body>
 </html>

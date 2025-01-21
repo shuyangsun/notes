@@ -1,8 +1,13 @@
 nav a {
-  color: red;
-  margin: 5px 10px 5px 10px;
+  margin: 5px;
 }
 
-p {
+code#uri {
+  color: blue;
+}
+
+span.location {
   color: red;
+  font-size: 1rem;
+  font-weight: bold;
 }

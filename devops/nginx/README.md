@@ -98,8 +98,52 @@ Syntax: `location [=|~|~*|^~|@] pattern { ... }`
 Matching order and priority:
 
 1. `=` - try exact matches.
-2. No modifier - try exact matches (without modifier).
+2. None - try exact matches (without modifier).
 3. `^~` - try begin with matches, ignores the rest if found.
 4. `~` - try regex mathces.
 5. `~*` - try case-insensitive regex mathces.
-6. No modifier - try begin with matches.
+6. None - try begin with matches.
+
+### 4. Exploring Module Configuration
+
+#### 4.1 Rewrite module
+
+The `error_page` and `index` directives generate internal redirects, they do not just simply serve the page.
+
+It's possible to have recursive internal redirects, but the maximum recursion depth is 10.
+
+Conditional structure examples:
+
+```
+if ($request_method = POST) {
+  # ...
+}
+
+if ($request_method != GET) {
+  # ...
+}
+
+if ($string) {
+  # Not empty and not starting with character `0`.
+}
+
+if ($request_filename !~ "^.*txt$") {
+  # If is not requesting JavaScript file.
+}
+
+if (-f $request_filename) {
+  # If file exists.
+}
+
+if (!-f $request_filename) {
+  # If file does not exist.
+}
+
+if (-e $request_path) {
+  # If file, directory or symbolic link exists.
+}
+
+if (-x $request_file) {
+  # If exists and is executable.
+}
+```

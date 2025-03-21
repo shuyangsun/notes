@@ -227,3 +227,7 @@ message([=[Value of IDX_2 outside of "foreach" loop is: ]=] "${IDX_2}") # empty
 ```
 
 ### Commands
+
+Use `function()`, avoid using `macro()`.
+
+Functions create a local variable scope, macros don't, so they can affect global state. Variables passed into macros also behave in a strange way, they are not treated as real variables, but a find-and-replace.

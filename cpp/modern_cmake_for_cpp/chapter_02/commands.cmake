@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.26)
+
+macro(MyMacro VAR_1)
+    set(VAR_1 "value inside macro")
+    # "${VAR_1}" below will be replaced with "argument value" without being set to "value inside macro"
+    message([=[VAR_1 is: ]=] "${VAR_1}")
+endmacro()
+
+set(VAR_1 "initial value")
+message([=[VAR_1 is: ]=] "${VAR_1}")
+message([=[Calling MyMacro...]=])
+MyMacro("argument value")
+message([=[Done calling MyMacro.]=])
+message([=[VAR_1 is: ]=] "${VAR_1}")
+message([=[!!! Macros are bad, don't use them !!!]=])
+
+message("")
+
+function(MyFunction VAR_2)
+    message("Function: ${CMAKE_CURRENT_FUNCTION}")
+    message("File: ${CMAKE_CURRENT_FUNCTION_LIST_FILE}")
+    message([=[VAR_2 before set(...): ]=] "${VAR_2}")
+    set(VAR_2 "value inside function")
+    set(VAR_3 "VAR_3 inside function")
+    message([=[VAR_2 after set(...): ]=] "${VAR_2}")
+    message([=[VAR_3 is: ]=] "${VAR_3}")
+endfunction()
+
+set(VAR_2 "initial value")
+message([=[VAR_2 is: ]=] "${VAR_2}")
+message([=[Calling MyFunction...]=])
+MyFunction("argument value")
+message([=[Done calling MyFunction.]=])
+message([=[VAR_2 after MyFunction call: ]=] "${VAR_2}")
+message([=[VAR_3 is: ]=] "${VAR_3}")

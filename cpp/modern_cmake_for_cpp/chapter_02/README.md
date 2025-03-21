@@ -6,6 +6,8 @@ Four building blocks: comments, commands, variables and control structures.
 
 ## Comment
 
+Examples: [comments.cmake](./comments.cmake)
+
 ```cmake
 # This is a one-line comment.
 
@@ -31,6 +33,8 @@ message(STATUS "Hello!" message("Hello!"))
 
 ### Command arguments
 
+Examples: [arguments.cmake](./arguments.cmake)
+
 Under the hood, the only data type recognized by CMake is a `STRING`. CMake _evaluates_ every argument to a static string and pass them into the command. Evaluation means string interpolation, which includes escaping, expanding variable reference, or unpacking lists.
 
 Three types of arguments:
@@ -45,6 +49,8 @@ message(STATUS hello;WORLD)   # Output: -- helloWORLD
 ```
 
 ### Variables
+
+Examples: [variables.cmake](./variables.cmake)
 
 Variables and keywords (`VERSION` in `project(Prj VERSION 1.2.3)`) are case-sensitive.
 
@@ -126,4 +132,51 @@ $ cmake -S <source-tree> -B <build-tree>
 
 ### Scope
 
-TODO
+Examples: [scope.cmake](./scope.cmake)
+
+Two kinds of scopes:
+
+- File: used when blocks and custom functions are executed within a file.
+- Directory: used when `add_subdirectory()` is called.
+
+> NOTE: condition, loop and macro blocks don't create extra scope.
+
+When a nested scope is created, a copy of all variables from outer scope is created. Changes made to variables in the inner scope does not propagate back to outer scope. Even when a variable is `unset()`, it is only unset in the inner scope.
+
+The only way to propagate change back to outer scope is `block(PROPAGATE VAR)` or `set(VAR "val" PARENT_SCOPE)`. If `PARENT_SCOPE` is used, it doesn't change the variable in the current scope.
+
+New File scope can be created with `block()` or `function()`, but not `macro()`.
+
+```cmake
+# Creating new File scope
+block()
+  # New File scope
+endblock()
+
+function()
+  # New File scope
+endfunction()
+```
+
+### Lists
+
+Lists can be created by passing multiple arguments to `set()` or with `;` delimeter.
+
+```cmake
+set(LIST_1 this is a list)
+set(LIST_2 "this;is;also;a;list")
+set(LIST_3 here is "another;list")
+
+message(${LIST_1}) # thisisalist
+message(${LIST_2}) # thisisalsoalist
+message(${LIST_3}) # hereisanotherlist
+
+list(LENGTH LIST_1 LIST_1_LEN)
+message(${LIST_1_LEN}) # 4
+```
+
+### Control structures
+
+Note that no local variable scope is created by conditional blocks.
+
+Strings are only evaluated to `True` if they are `ON`, `Y`, `YES`, `TRUE` or a non-zero number (case-insensitive).

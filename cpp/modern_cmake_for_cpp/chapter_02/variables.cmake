@@ -12,10 +12,15 @@ set(MY_VAR_2 MY_VAR_1)
 set(${MY_VAR_2} "value of something")
 message("Value of MY_VAR_1: " \ ${MY_VAR_1}) # value of something
 message("Value of MY_VAR_2: " \ ${MY_VAR_2}) # MY_VAR_1
+message("")
+message(${MY_VAR_1}) # value of something
+message(MY_VAR_1) # MY_VAR_1
+message("MY_VAR_1") # MY_VAR_1
 
 set(MY_VAR_3 "value of MY_VAR_3")
 set(MY_VAR_4 "value of MY_VAR_4")
 set(VAR_IDX 3)
+message("")
 message(${MY_VAR_${VAR_IDX}}) # value of MY_VAR_3
 
 

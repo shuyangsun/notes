@@ -3,3 +3,4 @@
 # Modern CMake for C++ by [Rafał Świdziński](https://www.linkedin.com/in/rafalswidzinski/)
 
 1. [First Steps with CMake](./chapter_01)
+1. [The CMake Language](./chapter_02)

@@ -175,13 +175,15 @@ list(LENGTH LIST_1 LIST_1_LEN)
 message(${LIST_1_LEN}) # 4
 ```
 
-### Control structures
+### Conditional blocks
 
-Examples: [control.cmake](control.cmake)
+Examples: [condition.cmake](condition.cmake)
 
-Note that no local variable scope is created by conditional blocks.
+Note that no local variable scope is created by conditional blocks or loops.
 
-Strings are only evaluated to `True` if they are `ON`, `Y`, `YES`, `TRUE` or a non-zero number (case-insensitive).
+Strings evaluated to `True`: `ON`, `Y`, `YES`, `TRUE` or a non-zero number (case-insensitive).
+
+Strings evaluated to `False`: `OFF`, `N`, `NO`, `FALSE`, `IGNORE`, `NOTFOUND`, `.*-NOTFOUND` (string ending in `-NOTFOUND`), empty string, zero.
 
 Conditional evaluations in CMake is very tricky! There are many unintuitive behaviors. Check out examples in [control.cmake](control.cmake) and be aware of the following DOs and DON'Ts.
 
@@ -196,5 +198,32 @@ if(DEFINED VAR)
 if(DEFINED CACHE{VAR})
 if(DEFINED ENV{VAR})
 
-if(${VAR}) # checking if value of ${VAR} is ON, Y, YES, TRUE, or non-zero number.
+if("${VAR}") # checking if value of ${VAR} is ON, Y, YES, TRUE, or non-zero number.
 ```
+
+Commonly used comparison operators:
+
+- `EQUAL`, `LESS`, `LESS_EQUAL`, `GREATER`, `GREATER_EQUAL`.
+- `VERSION_LESS_EQUAL` (and other `VERSION_` comparisons).
+- `STREQUAL`.
+- `MATCHES`: `if(<VAR> MATCHES <regex>)`.
+- `INLIST`: `if(<VAR> INLIST <LIST_VAR>)`.
+- `COMMAND`, `POLICY`, `TEST`, `TARGET`.
+- Working with file system (should be avoided by preferring higher level approaches first): `EXISTS`, `IS_NEWER_THAN`, `IS_DIRECTORY`, `IS_SYMLINK`, `IS_ABSOLUTE`, `PATH_EQUAL`.
+
+### Loops
+
+The only loop that restricts new variables in the local scope is `foreach`.
+
+Examples: [loop.cmake](loop.cmake)
+
+```cmake
+set(COLORS "red;green;blue")
+# foreach(COLOR IN LISTS "${COLORS}") # does not work
+foreach(COLOR IN LISTS COLORS) # works
+    message([=[COLOR is ]=] "${WORD}")
+endforeach()
+message([=[Value of IDX_2 outside of "foreach" loop is: ]=] "${IDX_2}") # empty
+```
+
+### Commands

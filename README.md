@@ -14,6 +14,8 @@
 
 [C++ Primer](cpp/cpp_primer_g/README.md)
 
+[Modern CMake for C++](cpp/modern_cmake_for_cpp/README.md) by [Rafał Świdziński](https://www.linkedin.com/in/rafalswidzinski/)
+
 ## JavaScript
 
 [Eloquent JavaScript](javascript/eloquent_javascript/README.md) by [Marijn Haverbeke](https://marijnhaverbeke.nl/)

@@ -43,8 +43,33 @@ endif()
 message("")
 
 set(FOO BAR)
-if(FOO)
-    message([=[FOO is evaluated to: ]=] True) # printed (because FOO was defined)
+if(FOO) # same as if(DEFINED FOO)
+    message([=[FOO is evaluated to: ]=] True) # printed
 else()
     message([=[FOO is evaluated to: ]=] False)
+endif()
+
+if(DEFINED FOO)
+    message([=[DEFINED FOO is evaluated to: ]=] True) # printed
+else()
+    message([=[DEFINED FOO is evaluated to: ]=] False)
+endif()
+
+if(DEFINED "FOO")
+    message([=[DEFINED "FOO" is evaluated to: ]=] True) # printed
+else()
+    message([=[DEFINED "FOO" is evaluated to: ]=] False)
+endif()
+
+
+if(DEFINED ${FOO})
+    message([=[DEFINED ${FOO} is evaluated to: ]=] True)
+else()
+    message([=[DEFINED ${FOO} is evaluated to: ]=] False) # printed
+endif()
+
+if(DEFINED "${FOO}")
+    message([=[DEFINED "${FOO}" is evaluated to: ]=] True)
+else()
+    message([=[DEFINED "${FOO}" is evaluated to: ]=] False) # printed
 endif()

@@ -177,6 +177,24 @@ message(${LIST_1_LEN}) # 4
 
 ### Control structures
 
+Examples: [control.cmake](control.cmake)
+
 Note that no local variable scope is created by conditional blocks.
 
 Strings are only evaluated to `True` if they are `ON`, `Y`, `YES`, `TRUE` or a non-zero number (case-insensitive).
+
+Conditional evaluations in CMake is very tricky! There are many unintuitive behaviors. Check out examples in [control.cmake](control.cmake) and be aware of the following DOs and DON'Ts.
+
+```cmake
+# DON'Ts
+if(VAR) # Not evaluating value of ${VAR}, checking if VAR is defined.
+if(DEFINED ${VAR}) # Not checking if VAR is defined, but checking if variable named as value of ${VAR} is defined.
+
+# DOs
+# checking if VAR is defined
+if(DEFINED VAR)
+if(DEFINED CACHE{VAR})
+if(DEFINED ENV{VAR})
+
+if(${VAR}) # checking if value of ${VAR} is ON, Y, YES, TRUE, or non-zero number.
+```

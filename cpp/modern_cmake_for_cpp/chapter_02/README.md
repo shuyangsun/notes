@@ -48,7 +48,7 @@ message(STATUS "hello;WORLD") # Output: -- hello;WORLD
 message(STATUS hello;WORLD)   # Output: -- helloWORLD
 ```
 
-### Variables
+## Variables
 
 Examples: [variables.cmake](./variables.cmake)
 
@@ -130,7 +130,7 @@ $ cmake -S <source-tree> -B <build-tree>
 # CACHE_VAR_TEST:BOOL=True <-------- changed to True
 ```
 
-### Scope
+## Scope
 
 Examples: [scope.cmake](./scope.cmake)
 
@@ -158,7 +158,7 @@ function()
 endfunction()
 ```
 
-### Lists
+## Lists
 
 Lists can be created by passing multiple arguments to `set()` or with `;` delimeter.
 
@@ -174,6 +174,8 @@ message(${LIST_3}) # hereisanotherlist
 list(LENGTH LIST_1 LIST_1_LEN)
 message(${LIST_1_LEN}) # 4
 ```
+
+## Control structure
 
 ### Conditional blocks
 
@@ -226,7 +228,7 @@ endforeach()
 message([=[Value of IDX_2 outside of "foreach" loop is: ]=] "${IDX_2}") # empty
 ```
 
-### Commands
+## Commands
 
 Use `function()`, avoid using `macro()`.
 

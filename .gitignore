@@ -72,6 +72,8 @@ Footer
 node_modules/
 dist
 build
+cmake-build-debug
+cmake-build-release
 
 # TypeScript cache
 *.tsbuildinfo

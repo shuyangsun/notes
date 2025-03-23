@@ -1,0 +1,5 @@
+add_library(printable_api INTERFACE)
+target_include_directories(printable_api INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
+set_property(TARGET printable_api PROPERTY INTERFACE_PRINTABLE_API_VERSION 1.0.1)
+set_property(TARGET printable_api APPEND PROPERTY COMPATIBLE_INTERFACE_STRING PRINTABLE_API_VERSION)

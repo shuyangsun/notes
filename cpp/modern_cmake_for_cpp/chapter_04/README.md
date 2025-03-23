@@ -16,3 +16,9 @@ Don't use `include()`, use `add_subdirectory()` instead, which creates a new sco
 # When EXCLUDE_FROM_ALL is specified, the target won't be configured by default. This is useful for example projects.
 add_subdirectory(sourc_dir [binary_dir] [EXCLUDE_FROM_ALL])
 ```
+
+`EXCLUDE_FROM_ALL` targets should also have their own `project()` commands, so they can be built independently. Nested projects are common and useful.
+
+## Project setup
+
+See [validation.cmake](./project_setup/cmake/validation.cmake).

@@ -76,3 +76,5 @@ Propagation keywords when calling `target_link_library()` controls how far the p
 Important properties managed with the `set_target_properties()` command: `COMPILE_DEFINITIONS`, `COMPILE_FEATURES`, `COMPILE_OPTIONS`, `INCLUDE_DIRECTORIES`, `LINK_DEPENDS`, `LINK_DIRECTORIES`, `LINK_LIBRARIES`, `LINK_OPTIONS`, `POSITION_INDEPENDENT_CODE`, `PRECOMPILE_HEADERS`, `SOURCES`.
 
 ## Dealing with conflicting propagated properties
+
+See [propagation/printable_api/CMakeLists.txt](./propagation/printable_api/CMakeLists.txt) and [propagation/hello_lib/CMakeLists.txt](./propagation/hello_lib/CMakeLists.txt) as examples on how to ensure interface compatibility.

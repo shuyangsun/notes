@@ -11,5 +11,8 @@ set(CMAKE_CXX_STANDARD 23)
 add_subdirectory(printable_api)
 add_subdirectory(hello_lib)
 
+include(cmake/properties.cmake)
+
 add_executable(say_hello main.cc)
 target_link_libraries(say_hello PUBLIC printable_api hello_lib)
+target_link_libraries(say_hello PRIVATE properties_compiler_warning)

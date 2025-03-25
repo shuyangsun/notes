@@ -40,3 +40,8 @@ target_link_libraries(main PRIVATE
     absl::log_internal_check_op
     "${Protobuf_LIBRARIES}"
 )
+
+add_custom_command(TARGET main POST_BUILD
+    COMMAND cmake ARGS -E echo "Generated main file with checksum:"
+    COMMAND cmake ARGS -E sha256sum "$<TARGET_FILE:main>"
+)

@@ -81,7 +81,7 @@ See [propagation/printable_api/CMakeLists.txt](./propagation/printable_api/CMake
 
 ## Custom commands
 
-Two signatures of `add_custom_command()`:
+Two signatures of `add_custom_command()`, [custom_command/CMakeLists.txt](./custom_command/CMakeLists.txt) contains examples for both use cases.
 
 An extended version of add_custom_target, can be used for codegen.
 

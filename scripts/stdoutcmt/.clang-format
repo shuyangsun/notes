@@ -1,7 +1,0 @@
-# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
-# To disable for a line use `// clang-format off`
-Language: Cpp
-BasedOnStyle: Google # https://google.github.io/styleguide/cppguide.html
-LanguageStandard: LS_Cpp17
-
-IndentPPDirectives: BeforeHash

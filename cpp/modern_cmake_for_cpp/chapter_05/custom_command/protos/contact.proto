@@ -1,0 +1,10 @@
+edition = "2023";
+
+package phonebook;
+
+// NextID: 4
+message Contact {
+  string name = 1;
+  string email = 2;
+  string phone = 3;
+}

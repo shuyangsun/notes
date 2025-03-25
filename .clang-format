@@ -1,0 +1,12 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+NamespaceIndentation: None
+AllowShortCaseLabelsOnASingleLine: true
+IndentWidth: 2
+ColumnLimit: 80
+---
+Language: Proto
+BasedOnStyle: Google
+IndentWidth: 2
+ColumnLimit: 80

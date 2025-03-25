@@ -78,3 +78,43 @@ Important properties managed with the `set_target_properties()` command: `COMPIL
 ## Dealing with conflicting propagated properties
 
 See [propagation/printable_api/CMakeLists.txt](./propagation/printable_api/CMakeLists.txt) and [propagation/hello_lib/CMakeLists.txt](./propagation/hello_lib/CMakeLists.txt) as examples on how to ensure interface compatibility.
+
+## Custom commands
+
+Two signatures of `add_custom_command()`:
+
+An extended version of add_custom_target, can be used for codegen.
+
+```cmake
+add_custom_command(
+    OUTPUT output1 [output2 ...]
+    COMMAND command1 [ARGS args1...]
+    [COMMAND command2 [ARGS args2...] ...]
+    [MAIN_DEPENDENCY depend]
+    [DEPENDS [depends...]]
+    [BYPRODUCTS [files...]]
+    [IMPLICIT_DEPENDS <lang1> depend1 [lang2 depend2] ...]
+    [WORKING_DIRECTORY dir]
+    [COMMENT comment]
+    [DEPFILE depfile]
+    [JOB_POOL job_pool]
+    [VERBATIM] [APPEND] [USES_TERMINAL]
+    [COMMAND_EXPAND_LISTS]
+)
+```
+
+As a target hook to execute commands before or after building / linking.
+
+```cmake
+add_custom_command(
+    TARGET <target>
+    PREBUILD | PRE_PLINK | POST_BUILD
+    COMMAND command1 [ARGS] [args1...]
+    [COMMAND command2 [ARGS] [args2...] ...]
+    [BYPRODUCTS [files...]]
+    [WORKING_DIRECTORY dir]
+    [COMMENT comment]
+    [VERBATIN] [USES_TERMINAL]
+    [COMMAND_EXPAND_LISTS]
+)
+```

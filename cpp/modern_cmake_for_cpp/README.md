@@ -13,3 +13,4 @@
 1. Using CMake in Popular IDEs
 1. [Setting Up Your First CMake Project](./chapter_04)
 1. [Working with Targets](./chapter_05)
+1. [Using Generator Expressions](./chapter_06)

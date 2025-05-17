@@ -36,7 +36,7 @@
 
 ## Front end
 
-[React - The Complete Guide 2025](https://www.udemy.com/course/react-the-complete-guide-incl-redux) by [Maximilian Schwarzmüller](https://maximilian-schwarzmueller.com/)
+[React - The Complete Guide 2025](frontend/react/) by [Maximilian Schwarzmüller](https://maximilian-schwarzmueller.com/)
 
 ## Psychology & Decision Making
 

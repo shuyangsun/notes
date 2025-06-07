@@ -1,7 +1,15 @@
 import './App.css';
 
+import { Header } from './components/Header';
+import { Main } from './components/Main';
+
 function App() {
-  return <h1>The Road to React</h1>;
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  );
 }
 
 export default App;

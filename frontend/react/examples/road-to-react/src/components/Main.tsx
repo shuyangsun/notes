@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import { Search } from './Search';
-import { List, type ListItem } from './List';
+import { List } from './List';
+import { type ListItem } from './Item';
 import { logRender } from '../util/log';
 
 export function Main() {
@@ -11,19 +12,23 @@ export function Main() {
   const items: ListItem[] = [
     {
       id: 'df50ccdb-96cc-4643-a6db-2c0efde0194e',
-      name: 'Personal Website',
+      title: 'Personal Website',
+      description: 'A simple one-page personal website.',
     },
     {
       id: 'ca7e706f-6009-4632-b158-e48f46d968e0',
-      name: 'Landing Page',
+      title: 'Landing Page',
+      description: 'Landing page for your business or product.',
     },
     {
       id: '94e65127-f330-45ed-9374-ae4ca0e3d9a1',
-      name: 'E-Commerce',
+      title: 'E-Commerce',
+      description: 'Sell your stuff!',
     },
     {
       id: 'ad79a2b9-9871-4382-85f7-8dfcf5027f65',
-      name: 'Design Portfolio',
+      title: 'Design Portfolio',
+      description: 'Showcase your beautiful work.',
     },
   ];
 
@@ -40,7 +45,7 @@ export function Main() {
 
   return (
     <>
-      <Search onSearchInputChange={onSearchInputChange} />
+      <Search search={search} onSearchInputChange={onSearchInputChange} />
       <List items={items} search={search} />
     </>
   );

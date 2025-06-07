@@ -1,9 +1,5 @@
 import { logRender } from '../util/log';
-
-export interface ListItem {
-  id: string;
-  name: string;
-}
+import { Item, type ListItem } from './Item';
 
 interface Props {
   items: ListItem[];
@@ -14,13 +10,13 @@ export function List({ items, search }: Props) {
   logRender('List');
   const filteredItems: ListItem[] = search
     ? items.filter((ele: ListItem) =>
-        ele.name.toLowerCase().includes(search.toLowerCase()),
+        ele.title.toLowerCase().includes(search.toLowerCase()),
       )
     : items;
   return (
     <ul>
-      {filteredItems.map((ele: ListItem) => (
-        <li key={ele.id}>{ele.name}</li>
+      {filteredItems.map(({ id, ...item }: ListItem) => (
+        <Item key={id} {...item} />
       ))}
     </ul>
   );

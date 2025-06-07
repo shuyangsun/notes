@@ -13,10 +13,10 @@ interface Props {
 export function List({ items, search }: Props) {
   logRender('List');
   const filteredItems: ListItem[] = search
-    ? items
-    : items.filter((ele: ListItem) =>
-        search ? ele.name.toLowerCase().includes(search.toLowerCase()) : true,
-      );
+    ? items.filter((ele: ListItem) =>
+        ele.name.toLowerCase().includes(search.toLowerCase()),
+      )
+    : items;
   return (
     <ul>
       {filteredItems.map((ele: ListItem) => (

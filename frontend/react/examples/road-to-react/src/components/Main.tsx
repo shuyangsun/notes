@@ -40,7 +40,7 @@ export function Main() {
 
   return (
     <>
-      <Search search={search} onSearchInputChange={onSearchInputChange} />
+      <Search onSearchInputChange={onSearchInputChange} />
       <List items={items} search={search} />
     </>
   );

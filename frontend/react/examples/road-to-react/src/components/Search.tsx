@@ -1,8 +1,17 @@
-export function Search() {
+import type React from 'react';
+import { logRender } from '../util/log';
+
+interface Props {
+  search: string;
+  onSearchInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function Search({ search, onSearchInputChange }: Props) {
+  logRender('Search');
   return (
     <>
-      <label htmlFor="serach">Search for item</label>
-      <input id="search"></input>
+      <input id="search" type="search" onChange={onSearchInputChange}></input>
+      <label htmlFor="search">Searching for: {search} </label>
     </>
   );
 }

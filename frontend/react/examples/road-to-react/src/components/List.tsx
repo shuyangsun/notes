@@ -4,9 +4,10 @@ import { Item, type ListItem } from './Item';
 interface Props {
   items: ListItem[];
   search: string;
+  onRemove: (id: string) => void;
 }
 
-export function List({ items, search }: Props) {
+export function List({ items, search, onRemove }: Props) {
   logRender('List');
   const filteredItems: ListItem[] = search
     ? items.filter((ele: ListItem) =>
@@ -15,8 +16,8 @@ export function List({ items, search }: Props) {
     : items;
   return (
     <ul>
-      {filteredItems.map(({ id, ...item }: ListItem) => (
-        <Item key={id} {...item} />
+      {filteredItems.map(({ ...item }: ListItem) => (
+        <Item key={item.id} {...item} onRemove={onRemove} />
       ))}
     </ul>
   );

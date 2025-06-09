@@ -1,17 +1,15 @@
 export interface ListItem {
   id: string;
   title: string;
-  description: string;
 }
 
-type Props = Omit<ListItem, 'id'>;
+type Props = ListItem & { onRemove: (id: string) => void };
 
-export function Item({ title, description }: Props) {
+export function Item({ id, title, onRemove }: Props) {
   return (
     <li>
-      <span className="title">{title}</span>
-      {' - '}
-      <span className="description">{description}</span>
+      <span className="title">{title + ' '}</span>
+      <button onClick={() => onRemove(id)}>X</button>
     </li>
   );
 }

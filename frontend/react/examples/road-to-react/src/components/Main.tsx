@@ -37,12 +37,24 @@ const initialItems: ListItem[] = [
   },
 ];
 
+function getItems(): Promise<ListItem[]> {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(initialItems), 2000);
+  });
+}
+
 export function Main() {
   logRender('Main');
 
   const [search, setSearch] = useStorageState<string>('search', '');
-  const [items, setItems] = useState<ListItem[]>(initialItems);
+  const [items, setItems] = useState<ListItem[]>([]);
   const [addItemName, setAddItemName] = useState<string>('');
+
+  useEffect(() => {
+    getItems().then((result) => {
+      setItems(result);
+    });
+  });
 
   function onSearchQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value);

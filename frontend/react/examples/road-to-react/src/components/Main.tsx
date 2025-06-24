@@ -49,11 +49,18 @@ export function Main() {
   const [search, setSearch] = useStorageState<string>('search', '');
   const [items, setItems] = useState<ListItem[]>([]);
   const [addItemName, setAddItemName] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    getItems().then((result) => {
-      setItems(result);
-    });
+    getItems()
+      .then((result) => {
+        setItems(result);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(`${err}`);
+      });
   });
 
   function onSearchQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -90,7 +97,13 @@ export function Main() {
       >
         <strong>Filter</strong>
       </TextInput>
-      <List items={items} search={search} onRemove={onRemoveItem} />
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : error ? (
+        <h2>{`Error: ${error}`}</h2>
+      ) : (
+        <List items={items} search={search} onRemove={onRemoveItem} />
+      )}
       <TextInput
         id="add-item"
         placeholder="Item name"

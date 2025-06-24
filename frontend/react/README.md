@@ -1,4 +1,4 @@
-[Home](../../README.md) >> [Frontend](../../README.md#c++) >> [React - The Complete Guide 2025](./README.md)
+[Home](../../README.md) >> [Frontend](../../README.md#frontend) >> [React - The Complete Guide 2025](./README.md)
 
 # React - The Complete Guide 2025 by [Maximilian Schwarzmüller](https://maximilian-schwarzmueller.com/)
 

@@ -9,7 +9,51 @@
 
     <style>
       /* Type (element) selector */
-      h1 {
+      /* Grouping (separated by commas) */
+      h1,
+      h2 {
+        color: yellow;
+        background-color: gray;
+      }
+      /* Class selectors are case-sentive. */
+      p.First {
+        color: blue; /* not applied */
+      }
+      p.first {
+        color: red; /* applied */
+      }
+
+      .note {
+        font-style: italic;
+      }
+      .warning {
+        background-color: orange;
+      }
+      .note.warning {
+        color: blue;
+      }
+
+      /* Only suppose to have once occurance. */
+      #grouping-footer {
+        color: gray;
+      }
+
+      p[lan] {
+        background-color: cyan;
+      }
+      p[lan][class] {
+        color: orange;
+      }
+      /* Should not match anything. */
+      p[lan='fr en'] {
+        color: blue;
+      }
+      p[lan='en fr'] {
+        color: red;
+      }
+
+      /* Should match `lan="zh fr"` */
+      p[lan~='fr'][lan~='zh'] {
         color: blue;
       }
     </style>
@@ -17,5 +61,21 @@
 
   <body>
     <h1>Chapter 2: Selectors</h1>
+    <h2>2.1 Type selector</h2>
+    <p class="first">Previously known as element selectors.</p>
+
+    <h2>2.2 Grouping</h2>
+    <p class="note">This is only a note.</p>
+    <p class="warning">This is only a warning.</p>
+    <p class="note warning">
+      Note and warning: CSS class seelctors are case-sensitive.
+    </p>
+    <p id="grouping-footer">This is a footer.</p>
+
+    <h2>2.2 Attribute Selectors</h2>
+    <p lan="en">lan="en"</p>
+    <p lan="fr" class="fr">lan="fr" class="fr"</p>
+    <p lan="en fr">lan="en fr"</p>
+    <p lan="zh fr">lan="zh fr"</p>
   </body>
 </html>

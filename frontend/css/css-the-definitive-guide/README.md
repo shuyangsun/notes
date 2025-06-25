@@ -54,3 +54,36 @@ Demo: [02_selectors.html](./02_selectors.html)
 ### Type Selectors
 
 _Type selectors_, previously known as _element selectors_, often select HTML elements, but not always (works with XML too).
+
+### Grouping
+
+Select elements with all classes by chaining class selectors together without any delimeter.
+
+```css
+/* Select elements with class="note warning ..." */
+.note.warning {
+  color: red;
+}
+```
+
+IDs carry more weight than classes when trying to determine which style should be applied.
+
+### Attribute Selectors
+
+It's possible to chain attributes: `h2[attr1][attr2]`.
+
+Different types of attribute selectors:
+
+| Type                           | Syntax           | Example                | Description                                                                                                    |
+| ------------------------------ | ---------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Simple                         | `[attr]`         | `h1[class]`            | All `h1` elements with `class` attribute.                                                                      |
+| Exact                          | `[attr="val"]`   | `p[lang="en fr"]`      | All `p` elements with `lang` attribute being exactly `"en fr"` (in this order).                                |
+| Partial (space separated)      | `[attr~="val"]`  | `img[title~="Figure"]` | All image elements with `title` attribute having value `Figure` in a space-separated list.                     |
+| Partial (substring)            | `[attr*="val"]`  | `span[class*="tran"]`  | All `span` elements with `class` attribute's value having substring `tran` (`transparent`, `transition`, etc.) |
+| Partial (begins)               | `[attr^="val"]`  | `a[href^="https://"]`  | All `a` elements with `href` attribute's value beginning with `https://`.                                      |
+| Partial (ends)                 | `[attr$="val"]`  | `img[src$=".jpg"]`     | All JPEG image elements.                                                                                       |
+| Partial (starts with then bar) | `[attr\|="val"]` | `p[lang\|="en"]`       | All `p` elements with `lang` attribute's value starting with `en-` (e.g., `en-us`) or equals to `en`.          |
+
+Including an `i` before the closing bracket of attribute selector changes value matching to be case-insensitive. For example: `img[src$=".jpg" i]` or `p[lang|="en" i]`.
+
+### Using Document Structure

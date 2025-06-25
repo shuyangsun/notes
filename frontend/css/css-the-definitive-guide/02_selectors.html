@@ -49,12 +49,43 @@
         color: blue;
       }
       p[lan='en fr'] {
-        color: red;
+        color: peru;
       }
 
       /* Should match `lan="zh fr"` */
       p[lan~='fr'][lan~='zh'] {
         color: blue;
+      }
+
+      /* Should match all <em> elements inside <body>, regardless of nesting level. */
+      body em {
+        color: chocolate;
+      }
+
+      div:not(.help) p {
+        color: gray;
+      }
+
+      div.help p {
+        color: cadetblue;
+      }
+
+      /* Combining descendent and child selectors, both rules are applied. */
+      div.grandparent div.child > p.content {
+        color: brown;
+      }
+      div.grandparent > div.parent p.content {
+        font-weight: bold;
+      }
+
+      ul li + li {
+        font-style: italic;
+      }
+      ul li.first + li {
+        color: purple;
+      }
+      ul li.second ~ li {
+        border: gray 1px solid;
       }
     </style>
   </head>
@@ -77,5 +108,33 @@
     <p lan="fr" class="fr">lan="fr" class="fr"</p>
     <p lan="en fr">lan="en fr"</p>
     <p lan="zh fr">lan="zh fr"</p>
+
+    <h2>2.3 Using Document Structure</h2>
+    <p>This is an <em>emphasize</em> element.</p>
+
+    <div class="help">
+      <div class="container">
+        <p>This is a child of div.container, a descendent of div.help.</p>
+      </div>
+    </div>
+
+    <div class="grandparent">
+      <div class="parent">
+        <div class="child">
+          <p class="content">Inner most paragraph.</p>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li class="first">Item one.</li>
+      Random text 1.
+      <li class="second">Item two.</li>
+      Random text 2.
+      <li>Item three.</li>
+      Random text 3.
+      <li>Item four.</li>
+      Random text 4.
+    </ul>
   </body>
 </html>

@@ -164,4 +164,13 @@ Pure text content inbetween elements does not interfere with sibling relationshi
 </ul>
 ```
 
-## 3. Pseudo-Class and Pseudo-Element Selectors
+## 3. Pseudo-Class and -Element Selectors
+
+Demo: [03_pseudo_class_and_element.html](./03_pseudo_class_and_element.html)
+
+Pseudo-classes are phantom classes inferred by the state of elements, markup patterns, or the state of the document.
+
+Without exception, all pseudo-classes start with a colon (`:`) followed by a word or words separated by hyphen (`-`).
+
+Pseudo-classes refer to the element they are attached to, and no other. For example, `ol:first-child` selects the `<ol>` element that is the first child of its parent, not the first child `<li>` element. To select the first direct
+child element inside of an `<ol>` element, use `ol > li:first-child`.

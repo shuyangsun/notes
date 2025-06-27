@@ -168,9 +168,31 @@ Pure text content inbetween elements does not interfere with sibling relationshi
 
 Demo: [03_pseudo_class_and_element.html](./03_pseudo_class_and_element.html)
 
+### Pseudo-Class Selectors
+
 Pseudo-classes are phantom classes inferred by the state of elements, markup patterns, or the state of the document.
 
 Without exception, all pseudo-classes start with a colon (`:`) followed by a word or words separated by hyphen (`-`).
 
 Pseudo-classes refer to the element they are attached to, and no other. For example, `ol:first-child` selects the `<ol>` element that is the first child of its parent, not the first child `<li>` element. To select the first direct
 child element inside of an `<ol>` element, use `ol > li:first-child`.
+
+Pseudo-classes can be combined by chaining multiple ones without any delimiter. For example, `a:visited:hover:lang(en)`.
+
+#### Structural Pseudo-Classes
+
+| Syntax            | Description                                                                       |
+| ----------------- | --------------------------------------------------------------------------------- |
+| `:root`           | Root of the document, `<html>` for HTML documents.                                |
+| `:empty`          | Elements with no children at all, not even text nodes like whitespace characters. |
+| `:only-child`     | The only child of its parent.                                                     |
+| `:fist-child`     | First child of its parent.                                                        |
+| `:last-child`     | Last child of its parent.                                                         |
+| `:only-of-type`   | The only child with of its parent that is the same type.                          |
+| `:first-of-type`  | The first child with of its parent that is the same type.                         |
+| `:last-of-type`   | The last child with of its parent that is the same type.                          |
+| `:nth-child(...)` | The second child: `:nth-child(2)`.                                                |
+
+The syntax of `:nth-child` is `:nth-child(an +/- b)`, where `a` can be both postiive or negative integers, but `b` can only be positive integers. The first child is indexed as 1, the 0-th child is an invisible child before the first child.
+
+See [03_pseudo_class_and_element.html](./03_pseudo_class_and_element.html) for a comprehensive list of examples.

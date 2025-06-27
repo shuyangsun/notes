@@ -13,21 +13,190 @@
         border: 0.2rem dotted gray;
       }
 
+      h2 {
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+
+      p.note {
+        font-style: italic;
+      }
+
+      p.note > em {
+        font-weight: bold;
+      }
+
       ol:only-of-type {
         border: 0.1rem solid black;
       }
 
-      li:first-child {
+      ol#table-1 > li:first-child {
         font-weight: bold;
+        background-color: lightgray;
+      }
+
+      ol#table-2 > li:nth-child(2) {
+        background-color: lightgray;
+      }
+
+      ol#table-3 > li:nth-child(2n) {
+        background-color: lightgray;
+      }
+
+      ol#table-4 > li:nth-child(2n + 0) {
+        background-color: lightgray;
+      }
+
+      ol#table-5 > li:nth-child(2n + 1) {
+        background-color: lightgray;
+      }
+
+      ol#table-6 > li:nth-child(2n - 1) {
+        background-color: lightgray;
+      }
+
+      ol#table-7 > li:nth-child(3n) {
+        background-color: lightgray;
+      }
+
+      ol#table-8 > li:nth-child(3n + 1) {
+        background-color: lightgray;
+      }
+
+      ol#table-9 > li:nth-child(3n - 1) {
+        background-color: lightgray;
+      }
+
+      ol#table-10 > li:nth-child(-3n) {
+        background-color: lightgray;
+      }
+
+      ol#table-11 > li:nth-child(-3n + 5) {
+        background-color: lightgray;
+      }
+
+      ol#table-12 > li:nth-child(-3n - 5) {
+        background-color: lightgray;
       }
     </style>
   </head>
   <body>
     <h1>3. Pseudo-Class and -Element Selectors</h1>
-    <ol>
-      <li>Child 1</li>
-      <li>Child 2</li>
-      <li>Child 3</li>
+
+    <p class="note">
+      <em>*</em> Rows expected to be highlighted with gray background color.
+    </p>
+
+    <div>
+      <h2>:only-of-type and :first-child</h2>
+      <ol id="table-1">
+        <li>Header (Child 1) *</li>
+        <li>Child 2</li>
+        <li>Child 3</li>
+      </ol>
+    </div>
+
+    <h2>:nth-child(2)</h2>
+    <ol id="table-2">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+    </ol>
+
+    <h2>:nth-child(2n)</h2>
+    <ol id="table-3">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+      <li>Row 4 *</li>
+      <li>Row 5</li>
+    </ol>
+
+    <h2>:nth-child(2n + 0)</h2>
+    <ol id="table-4">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+      <li>Row 4 *</li>
+      <li>Row 5</li>
+    </ol>
+
+    <h2>:nth-child(2n + 1)</h2>
+    <ol id="table-5">
+      <li>Row 1 *</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
+      <li>Row 5 *</li>
+    </ol>
+
+    <h2>:nth-child(2n - 1)</h2>
+    <ol id="table-6">
+      <li>Row 1 *</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
+      <li>Row 5 *</li>
+    </ol>
+
+    <h2>:nth-child(3n)</h2>
+    <ol id="table-7">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
+      <li>Row 5</li>
+      <li>Row 6 *</li>
+    </ol>
+
+    <h2>:nth-child(3n + 1)</h2>
+    <ol id="table-8">
+      <li>Row 1 *</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
+      <li>Row 4 *</li>
+      <li>Row 5</li>
+      <li>Row 6</li>
+    </ol>
+
+    <h2>:nth-child(3n - 1)</h2>
+    <ol id="table-9">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+      <li>Row 5 *</li>
+      <li>Row 6</li>
+    </ol>
+
+    <h2>:nth-child(-3n)</h2>
+    <ol id="table-10">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+      <li>Row 5</li>
+      <li>Row 6</li>
+    </ol>
+
+    <h2>:nth-child(-3n + 5)</h2>
+    <ol id="table-11">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+      <li>Row 5 *</li>
+      <li>Row 6</li>
+    </ol>
+
+    <h2>:nth-child(-3n - 5)</h2>
+    <ol id="table-12">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+      <li>Row 5</li>
+      <li>Row 6</li>
     </ol>
   </body>
 </html>

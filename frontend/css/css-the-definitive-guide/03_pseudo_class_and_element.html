@@ -212,12 +212,27 @@
     </ol>
 
     <style>
-      ol#table-13 > li:nth-last-child(2) {
+      ol#table-13 > li:nth-child(-n + 4) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-child(-n + 4)</h2>
+    <ol id="table-13">
+      <li>Row 1 *</li>
+      <li>Row 2 *</li>
+      <li>Row 3 *</li>
+      <li>Row 4 *</li>
+      <li>Row 5</li>
+      <li>Row 6</li>
+    </ol>
+
+    <style>
+      ol#table-14 > li:nth-last-child(2) {
         background-color: lightgray;
       }
     </style>
     <h2>:nth-last-child(2)</h2>
-    <ol id="table-13">
+    <ol id="table-14">
       <li>Row 1</li>
       <li>Row 2</li>
       <li>Row 3 *</li>
@@ -225,12 +240,12 @@
     </ol>
 
     <style>
-      ol#table-14 > li:nth-last-child(-2) {
+      ol#table-15 > li:nth-last-child(-2) {
         background-color: lightgray;
       }
     </style>
     <h2>:nth-last-child(-2)</h2>
-    <ol id="table-14">
+    <ol id="table-15">
       <li>Row 1</li>
       <li>Row 2</li>
       <li>Row 3</li>
@@ -238,15 +253,109 @@
     </ol>
 
     <style>
-      ol#table-15 > li:nth-last-child(2n) {
+      ol#table-16 > li:nth-last-child(2n) {
         background-color: lightgray;
       }
     </style>
     <h2>:nth-last-child(2n)</h2>
-    <ol id="table-15">
+    <ol id="table-16">
       <li>Row 1 *</li>
       <li>Row 2</li>
       <li>Row 3 *</li>
+      <li>Row 4</li>
+    </ol>
+
+    <style>
+      ol#table-17 > li:nth-last-child(3n) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(3n)</h2>
+    <ol id="table-17">
+      <li>Row 1 *</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
+      <li>Row 4 *</li>
+      <li>Row 5</li>
+      <li>Row 6</li>
+    </ol>
+
+    <style>
+      ol#table-18 > li:nth-last-child(3n + 1) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(3n + 1)</h2>
+    <ol id="table-18">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
+      <li>Row 5</li>
+      <li>Row 6 *</li>
+    </ol>
+
+    <style>
+      ol#table-19 > li:nth-last-child(3n - 1) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(3n - 1)</h2>
+    <ol id="table-19">
+      <li>Row 1</li>
+      <li>Row 2 *</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+      <li>Row 5 *</li>
+      <li>Row 6</li>
+    </ol>
+
+    <style>
+      ol#table-20 > li:nth-last-child(-n + 4) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(-n + 4)</h2>
+    <ol id="table-20">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4 *</li>
+      <li>Row 5 *</li>
+      <li>Row 6 *</li>
+    </ol>
+
+    <style>
+      /* Is the third child, also the last child (parent has 3 children). */
+      ol#table-21 > li:nth-child(1):nth-last-child(3),
+      li:nth-child(1):nth-last-child(3) ~ li {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>
+      li:nth-child(1):nth-last-child(3), li:nth-child(1):nth-last-child(3) ~ li
+    </h2>
+    <p>Selects tables with only 3 items.</p>
+    <ol id="table-21">
+      <li>Row 1 *</li>
+      <li>Row 2 *</li>
+      <li>Row 3 *</li>
+    </ol>
+
+    <style>
+      /* Is the third child, also the last child (parent has 3 children). */
+      ol#table-22 > li:nth-child(1):nth-last-child(3),
+      li:nth-child(1):nth-last-child(3) ~ li {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>
+      li:nth-child(1):nth-last-child(3), li:nth-child(1):nth-last-child(3) ~ li
+    </h2>
+    <ol id="table-22">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
       <li>Row 4</li>
     </ol>
   </body>

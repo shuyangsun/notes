@@ -29,55 +29,6 @@
       ol:only-of-type {
         border: 0.1rem solid black;
       }
-
-      ol#table-1 > li:first-child {
-        font-weight: bold;
-        background-color: lightgray;
-      }
-
-      ol#table-2 > li:nth-child(2) {
-        background-color: lightgray;
-      }
-
-      ol#table-3 > li:nth-child(2n) {
-        background-color: lightgray;
-      }
-
-      ol#table-4 > li:nth-child(2n + 0) {
-        background-color: lightgray;
-      }
-
-      ol#table-5 > li:nth-child(2n + 1) {
-        background-color: lightgray;
-      }
-
-      ol#table-6 > li:nth-child(2n - 1) {
-        background-color: lightgray;
-      }
-
-      ol#table-7 > li:nth-child(3n) {
-        background-color: lightgray;
-      }
-
-      ol#table-8 > li:nth-child(3n + 1) {
-        background-color: lightgray;
-      }
-
-      ol#table-9 > li:nth-child(3n - 1) {
-        background-color: lightgray;
-      }
-
-      ol#table-10 > li:nth-child(-3n) {
-        background-color: lightgray;
-      }
-
-      ol#table-11 > li:nth-child(-3n + 5) {
-        background-color: lightgray;
-      }
-
-      ol#table-12 > li:nth-child(-3n - 5) {
-        background-color: lightgray;
-      }
     </style>
   </head>
   <body>
@@ -87,6 +38,12 @@
       <em>*</em> Rows expected to be highlighted with gray background color.
     </p>
 
+    <style>
+      ol#table-1 > li:first-child {
+        font-weight: bold;
+        background-color: lightgray;
+      }
+    </style>
     <div>
       <h2>:only-of-type and :first-child</h2>
       <ol id="table-1">
@@ -96,6 +53,11 @@
       </ol>
     </div>
 
+    <style>
+      ol#table-2 > li:nth-child(2) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(2)</h2>
     <ol id="table-2">
       <li>Row 1</li>
@@ -103,6 +65,11 @@
       <li>Row 3</li>
     </ol>
 
+    <style>
+      ol#table-3 > li:nth-child(2n) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(2n)</h2>
     <ol id="table-3">
       <li>Row 1</li>
@@ -112,6 +79,11 @@
       <li>Row 5</li>
     </ol>
 
+    <style>
+      ol#table-4 > li:nth-child(2n + 0) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(2n + 0)</h2>
     <ol id="table-4">
       <li>Row 1</li>
@@ -121,6 +93,11 @@
       <li>Row 5</li>
     </ol>
 
+    <style>
+      ol#table-5 > li:nth-child(2n + 1) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(2n + 1)</h2>
     <ol id="table-5">
       <li>Row 1 *</li>
@@ -130,6 +107,11 @@
       <li>Row 5 *</li>
     </ol>
 
+    <style>
+      ol#table-6 > li:nth-child(2n - 1) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(2n - 1)</h2>
     <ol id="table-6">
       <li>Row 1 *</li>
@@ -139,6 +121,11 @@
       <li>Row 5 *</li>
     </ol>
 
+    <style>
+      ol#table-7 > li:nth-child(3n) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(3n)</h2>
     <ol id="table-7">
       <li>Row 1</li>
@@ -149,6 +136,11 @@
       <li>Row 6 *</li>
     </ol>
 
+    <style>
+      ol#table-8 > li:nth-child(3n + 1) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(3n + 1)</h2>
     <ol id="table-8">
       <li>Row 1 *</li>
@@ -159,6 +151,11 @@
       <li>Row 6</li>
     </ol>
 
+    <style>
+      ol#table-9 > li:nth-child(3n - 1) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(3n - 1)</h2>
     <ol id="table-9">
       <li>Row 1</li>
@@ -169,6 +166,11 @@
       <li>Row 6</li>
     </ol>
 
+    <style>
+      ol#table-10 > li:nth-child(-3n) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(-3n)</h2>
     <ol id="table-10">
       <li>Row 1</li>
@@ -179,6 +181,11 @@
       <li>Row 6</li>
     </ol>
 
+    <style>
+      ol#table-11 > li:nth-child(-3n + 5) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(-3n + 5)</h2>
     <ol id="table-11">
       <li>Row 1</li>
@@ -189,6 +196,11 @@
       <li>Row 6</li>
     </ol>
 
+    <style>
+      ol#table-12 > li:nth-child(-3n - 5) {
+        background-color: lightgray;
+      }
+    </style>
     <h2>:nth-child(-3n - 5)</h2>
     <ol id="table-12">
       <li>Row 1</li>
@@ -197,6 +209,45 @@
       <li>Row 4</li>
       <li>Row 5</li>
       <li>Row 6</li>
+    </ol>
+
+    <style>
+      ol#table-13 > li:nth-last-child(2) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(2)</h2>
+    <ol id="table-13">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
+    </ol>
+
+    <style>
+      ol#table-14 > li:nth-last-child(-2) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(-2)</h2>
+    <ol id="table-14">
+      <li>Row 1</li>
+      <li>Row 2</li>
+      <li>Row 3</li>
+      <li>Row 4</li>
+    </ol>
+
+    <style>
+      ol#table-15 > li:nth-last-child(2n) {
+        background-color: lightgray;
+      }
+    </style>
+    <h2>:nth-last-child(2n)</h2>
+    <ol id="table-15">
+      <li>Row 1 *</li>
+      <li>Row 2</li>
+      <li>Row 3 *</li>
+      <li>Row 4</li>
     </ol>
   </body>
 </html>

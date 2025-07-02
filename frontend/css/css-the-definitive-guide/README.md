@@ -181,18 +181,21 @@ Pseudo-classes can be combined by chaining multiple ones without any delimiter. 
 
 #### Structural Pseudo-Classes
 
-| Syntax            | Description                                                                       |
-| ----------------- | --------------------------------------------------------------------------------- |
-| `:root`           | Root of the document, `<html>` for HTML documents.                                |
-| `:empty`          | Elements with no children at all, not even text nodes like whitespace characters. |
-| `:only-child`     | The only child of its parent.                                                     |
-| `:fist-child`     | First child of its parent.                                                        |
-| `:last-child`     | Last child of its parent.                                                         |
-| `:only-of-type`   | The only child with of its parent that is the same type.                          |
-| `:first-of-type`  | The first child with of its parent that is the same type.                         |
-| `:last-of-type`   | The last child with of its parent that is the same type.                          |
-| `:nth-child(...)` | The second child: `:nth-child(2)`.                                                |
+| Syntax                   | Description                                                                       |
+| ------------------------ | --------------------------------------------------------------------------------- |
+| `:root`                  | Root of the document, `<html>` for HTML documents.                                |
+| `:empty`                 | Elements with no children at all, not even text nodes like whitespace characters. |
+| `:only-child`            | The only child of its parent.                                                     |
+| `:fist-child`            | First child of its parent.                                                        |
+| `:last-child`            | Last child of its parent.                                                         |
+| `:only-of-type`          | The only child with of its parent that is the same type.                          |
+| `:first-of-type`         | The first child with of its parent that is the same type.                         |
+| `:last-of-type`          | The last child with of its parent that is the same type.                          |
+| `:nth-child(...)`        | The second child: `:nth-child(2)`.                                                |
+| `:nth-last-child(...)`   | The second-last child: `:nth-last-child(2)`.                                      |
+| `:nth-of-type(...)`      | The second `<li>`: `li:nth-of-type(2)`.                                           |
+| `:nth-last-of-type(...)` | The second-last `<li>`: `li:nth-last-of-type(2)`.                                 |
 
-The syntax of `:nth-child` is `:nth-child(an +/- b)`, where `a` can be both postiive or negative integers, but `b` can only be positive integers. The first child is indexed as 1, the 0-th child is an invisible child before the first child.
+The syntax of `:nth-child` is `:nth-child(an +/- b)`, where `a` can be both postiive or negative integers, but `b` can only be positive integers. The first child is indexed as 1, the 0-th child is an invisible child before the first child. The same rule applies to `:nth-of-type`.
 
 See [03_pseudo_class_and_element.html](./03_pseudo_class_and_element.html) for a comprehensive list of examples.

@@ -32,13 +32,15 @@
 
 [Dart Language](dart/dart_language/README.md)
 
+## Protocols
+
+[OAuth 2 in Action](protocols/oauth_2_in_action/README.md) by [Justin Richer](https://www.manning.com/authors/justin-richer) and [Antonio Sanso](https://www.manning.com/authors/antonio-sanso)
+
 ## Software Engineering
 
 [Design Patterns](software_engineering/design_patterns/README.md) by [Erich Gamma](https://www.google.com/search?newwindow=1&rlz=1C5CHFA_enUS983US983&sxsrf=ALiCzsaB_94pXs0S2sz9_nRSbqncpjaWxA:1664738898246&q=Erich+Gamma&stick=H4sIAAAAAAAAAOPgE-LQz9U3SDIyLFDiBLGMi5PScrVkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixaxcrsWZSZnKLgn5uYm7mBl3MXOxMEIAOIl3rVLAAAA&sa=X&ved=2ahUKEwi1u7HVo8L6AhWOEFkFHebgAUEQmxMoAHoECFgQAg), [Richard Helm](https://www.google.com/search?newwindow=1&rlz=1C5CHFA_enUS983US983&sxsrf=ALiCzsaB_94pXs0S2sz9_nRSbqncpjaWxA:1664738898246&q=Richard+Helm&stick=H4sIAAAAAAAAAOPgE-LQz9U3SDIyLFDiBLHMknNzcrVkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixax8gRlJmckFqUoeKTm5O5gZdzFzsTBCAA0-B00TAAAAA&sa=X&ved=2ahUKEwi1u7HVo8L6AhWOEFkFHebgAUEQmxMoA3oECFgQBQ), [Ralph Johnson](https://www.google.com/search?newwindow=1&rlz=1C5CHFA_enUS983US983&sxsrf=ALiCzsaB_94pXs0S2sz9_nRSbqncpjaWxA:1664738898246&q=Ralph+Johnson+computer+scientist&stichttps://www.google.com/search?newwindow=1&rlz=1C5CHFA_enUS983US983&sxsrf=ALiCzsaB_94pXs0S2sz9_nRSbqncpjaWxA:1664738898246&q=Ralph+Johnson+computer+scientist&stick=H4sIAAAAAAAAAOPgE-LQz9U3SDIyLFDiBLEsjNPLU7RkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixaxKgUl5hRkKHjlZ-QV5-cpaCTn5xaUlqQWKRQnZ6bmlWQWl2juYGXcxc7EwQgAnbxn82IAAAA&sa=X&ved=2ahUKEwi1u7HVo8L6AhWOEFkFHebgAUEQmxMoAnoECFgQBAk=H4sIAAAAAAAAAOPgE-LQz9U3SDIyLFDiBLEsjNPLU7RkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixaxKgUl5hRkKHjlZ-QV5-cpaCTn5xaUlqQWKRQnZ6bmlWQWl2juYGXcxc7EwQgAnbxn82IAAAA&sa=X&ved=2ahUKEwi1u7HVo8L6AhWOEFkFHebgAUEQmxMoAnoECFgQBA) & [John Vlissides](https://www.google.com/search?newwindow=1&rlz=1C5CHFA_enUS983US983&sxsrf=ALiCzsaB_94pXs0S2sz9_nRSbqncpjaWxA:1664738898246&q=John+Vlissides&stick=H4sIAAAAAAAAAOPgE-LQz9U3SDIyLFDiBLEszMvKjLRkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixax8nnlZ-QphOVkFhdnpqQW72Bl3MXOxMEIAKer1XpOAAAA&sa=X&ved=2ahUKEwi1u7HVo8L6AhWOEFkFHebgAUEQmxMoAXoECFgQAw)
 
 [Software Engineering at Google](software_engineering/software_engineering_at_google/README.md) by [Titus Winters](https://www.linkedin.com/in/tituswinters/), [Tom Manshreck](https://www.linkedin.com/in/thomas-manshreck-0111a11/) & [Hyrum Wright](https://www.linkedin.com/in/hyrum-wright-0905427/)
-
-[OAuth 2 in Action](software_engineering/oauth_2_in_action/README.md) by [Justin Richer](https://www.manning.com/authors/justin-richer) and [Antonio Sanso](https://www.manning.com/authors/antonio-sanso)
 
 ## Psychology & Decision Making
 

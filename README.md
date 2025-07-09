@@ -38,6 +38,8 @@
 
 [Software Engineering at Google](software_engineering/software_engineering_at_google/README.md) by [Titus Winters](https://www.linkedin.com/in/tituswinters/), [Tom Manshreck](https://www.linkedin.com/in/thomas-manshreck-0111a11/) & [Hyrum Wright](https://www.linkedin.com/in/hyrum-wright-0905427/)
 
+[OAuth 2 in Action](software_engineering/oauth_2_in_action/README.md) by [Justin Richer](https://www.manning.com/authors/justin-richer) and [Antonio Sanso](https://www.manning.com/authors/antonio-sanso)
+
 ## Psychology & Decision Making
 
 [Thinking, Fast and Slow](psychology/thinking_fast_and_slow/README.md) by [Daniel Kahneman](https://scholar.princeton.edu/kahneman/home)

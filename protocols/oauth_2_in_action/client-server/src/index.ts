@@ -1,6 +1,26 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 
 const app = new Hono();
+
+app.use(
+  '/*',
+  cors({
+    origin: (origin) => {
+      if (!origin) return origin;
+      const url = new URL(origin);
+      if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+        return origin;
+      }
+      return null;
+    },
+    allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
+    allowMethods: ['GET', 'POST'],
+    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+    maxAge: 600,
+    credentials: true,
+  })
+);
 
 interface ClientConfig {
   clientId: string;

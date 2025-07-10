@@ -44,6 +44,10 @@ const authServerConf: AuthServerConfig = {
   tokenEndpoint: 'http://localhost:9001/token',
 };
 
+app.get('/ping', (c) => {
+  return c.text('pong');
+});
+
 app.get('/client-info', (c) => {
   return c.json(clientConf);
 });

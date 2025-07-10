@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+bun.lockb
+
+# Build
+dist/
+build/
+
+# Cache
+.vite/
+*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.log
+coverage/
+.DS_Store
+

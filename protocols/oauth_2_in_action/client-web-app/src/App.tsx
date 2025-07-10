@@ -1,10 +1,106 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+interface ClientConfig {
+  clientId: string;
+  clientSecret: string;
+  redirectUris: string[];
+}
+
+interface AuthServerConfig {
+  authEndpoint: string;
+  tokenEndpoint: string;
+}
+
+function ClientInfo({ clientId, clientSecret, redirectUris }: ClientConfig) {
   return (
     <>
-      <h1>Hello, OAuth client!</h1>
-      <button>Get Prompts</button>
+      <ul>
+        <li>Client ID: {clientId}</li>
+        <li>Client Secret: {clientSecret}</li>
+        <li>
+          Redirect URIs:
+          <ul>
+            {redirectUris.map((uri) => (
+              <li key={uri}>{uri}</li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </>
+  );
+}
+
+function AuthServerInfo({ authEndpoint, tokenEndpoint }: AuthServerConfig) {
+  return (
+    <>
+      <ul>
+        <li>Auth endpoint: {authEndpoint}</li>
+        <li>Token endpoint: {tokenEndpoint}</li>
+      </ul>
+    </>
+  );
+}
+
+function App() {
+  const [clientConfig, setClientConfig] = useState<ClientConfig | undefined>(
+    undefined
+  );
+  const [authServerConfig, setAuthServerConfig] = useState<
+    AuthServerConfig | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        const clientInfoResponse = await fetch(
+          'http://localhost:9001/client-info'
+        );
+        if (!clientInfoResponse.ok) {
+          throw new Error(
+            `HTTP error fetching client info! Status: ${clientInfoResponse.status}`
+          );
+        }
+        const clientConf = (await clientInfoResponse.json()) as ClientConfig;
+        setClientConfig(clientConf);
+
+        const serverInfoResponse = await fetch(
+          'http://localhost:9001/auth-server-info'
+        );
+        if (!serverInfoResponse.ok) {
+          throw new Error(
+            `HTTP error fetching auth server info! Status: ${serverInfoResponse.status}`
+          );
+        }
+        const serverConf =
+          (await serverInfoResponse.json()) as AuthServerConfig;
+        setAuthServerConfig(serverConf);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    void fetchData();
+
+    return () => controller.abort();
+  }, []);
+
+  return (
+    <>
+      <h1>OAuth 2.0 Web Client</h1>
+      <h2>Client Info</h2>
+      {clientConfig ? (
+        <ClientInfo {...clientConfig} />
+      ) : (
+        <p>Could not get client info.</p>
+      )}
+      <h2>Auth Server Info</h2>
+      {authServerConfig ? (
+        <AuthServerInfo {...authServerConfig} />
+      ) : (
+        <p>Could not get auth server info.</p>
+      )}
     </>
   );
 }

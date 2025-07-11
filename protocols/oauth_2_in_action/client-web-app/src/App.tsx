@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ServerStatus } from './ServerStatus';
+import { EndpointStatus } from './EndpointStatus';
 import './App.css';
 
 interface ClientConfig {
@@ -136,7 +136,7 @@ function App() {
         {Object.entries(serverStatus).map(([uri, isOnline]) => {
           return (
             <li key={uri}>
-              <ServerStatus uri={uri} online={isOnline} />
+              <EndpointStatus uri={uri} online={isOnline} />
             </li>
           );
         })}

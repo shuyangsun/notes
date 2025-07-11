@@ -3,7 +3,7 @@ interface Props {
   online: boolean;
 }
 
-export function ServerStatus({ uri, online }: Props) {
+export function EndpointStatus({ uri, online }: Props) {
   try {
     const origin = new URL(uri).origin;
     return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { EndpointStatus } from './EndpointStatus';
+import { ServerStatus } from './ServerStatus';
 import './App.css';
 
 interface ClientConfig {
@@ -43,15 +43,6 @@ function AuthServerInfo({ authEndpoint, tokenEndpoint }: AuthServerConfig) {
   );
 }
 
-async function checkServerStatus(uri: string) {
-  try {
-    const response = await fetch(`${uri}/ping`);
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
 function App() {
   const clientInfoEndpoint = 'http://localhost:9000/client-info';
   const authServerInfoEndpoint = 'http://localhost:9000/auth-server-info';
@@ -62,7 +53,6 @@ function App() {
   const [authServerConfig, setAuthServerConfig] = useState<
     AuthServerConfig | undefined
   >(undefined);
-  const [serverStatus, setServerStatus] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -96,51 +86,18 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  useEffect(() => {
-    const pingServers = async () => {
-      const allUrisSet = new Set<string>([
-        new URL(clientInfoEndpoint).origin,
-        new URL(authServerInfoEndpoint).origin,
-      ]);
-      if (authServerConfig !== undefined) {
-        allUrisSet.add(new URL(authServerConfig.authEndpoint).origin);
-        allUrisSet.add(new URL(authServerConfig.tokenEndpoint).origin);
-      }
-      try {
-        for (const uri of clientConfig?.redirectUris ?? []) {
-          allUrisSet.add(new URL(uri).origin);
-        }
-      } catch (error) {
-        console.log(`Error creating URI: ${String(error)}`);
-      }
-
-      const statusUpdates: Record<string, boolean> = {};
-      for (const uri of allUrisSet) {
-        statusUpdates[uri] = await checkServerStatus(uri);
-        console.log(`ASDF: ${uri}: ${statusUpdates[uri]}`);
-      }
-      setServerStatus(statusUpdates);
-    };
-
-    const interval = setInterval(pingServers, 5000);
-    void pingServers();
-
-    return () => clearInterval(interval);
-  }, [clientConfig, authServerConfig]);
+  const uris = new Set<string>([clientInfoEndpoint, authServerInfoEndpoint]);
+  if (authServerConfig !== undefined) {
+    uris.add(new URL(authServerConfig.authEndpoint).origin);
+    uris.add(new URL(authServerConfig.tokenEndpoint).origin);
+  }
 
   return (
     <>
       <h1>OAuth 2.0 Web Client</h1>
-      <h2>Server Status</h2>
-      <ul>
-        {Object.entries(serverStatus).map(([uri, isOnline]) => {
-          return (
-            <li key={uri}>
-              <EndpointStatus uri={uri} online={isOnline} />
-            </li>
-          );
-        })}
-      </ul>
+
+      <ServerStatus uris={uris} />
+
       <h2>Client Info</h2>
       {clientConfig ? (
         <ClientInfo {...clientConfig} />

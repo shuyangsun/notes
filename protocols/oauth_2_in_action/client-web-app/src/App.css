@@ -13,3 +13,7 @@ header > * {
   border: 1px black solid;
   border-radius: 1rem;
 }
+
+main {
+  margin: 1rem;
+}

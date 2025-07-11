@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { buildGetTokenURL, encodeClientCredentials } from './helper';
 
 const app = new Hono();
 
@@ -33,15 +34,23 @@ interface AuthServerConfig {
   tokenEndpoint: string;
 }
 
+interface TokenResponse {
+  access_token: string;
+  token_type: string;
+}
+
+const clientBaseUri = 'http://localhost:9000';
+const authServerBaseUri = 'http://localhost:9001';
+
 const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
-  redirectUris: ['http://localhost:9000/callback'],
+  redirectUris: [`${clientBaseUri}/callback`],
 };
 
 const authServerConf: AuthServerConfig = {
-  authEndpoint: 'http://localhost:9001/authorize',
-  tokenEndpoint: 'http://localhost:9001/token',
+  authEndpoint: `${authServerBaseUri}/authorize`,
+  tokenEndpoint: `${authServerBaseUri}/token`,
 };
 
 app.get('/ping', (c) => {
@@ -53,6 +62,58 @@ app.get('/server-config', (c) => {
     client: clientConf,
     auth: authServerConf,
   });
+});
+
+app.get('/authorize', (c) => {
+  // Send the user to the authorization server.
+  const url = buildGetTokenURL(
+    authServerConf.authEndpoint,
+    clientConf.clientId,
+    clientConf.redirectUris[0]
+  );
+  console.log(`Auth URL: ${url}`);
+  return c.redirect(url);
+});
+
+app.get('/callback', async (c) => {
+  // Parse the response from the authorization server and get a token.
+  const code = c.req.query('code');
+  if (!code) {
+    return c.text('Missing authorization code', 400);
+  }
+  const formData = new URLSearchParams({
+    grant_type: 'authorization_code',
+    code: code,
+    redirect_uri: clientConf.redirectUris[0],
+  });
+  const credentials = encodeClientCredentials(clientConf.clientId, clientConf.clientSecret);
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Basic ${credentials}`,
+  };
+
+  const response = await fetch(authServerConf.tokenEndpoint, {
+    method: 'POST',
+    headers,
+    body: formData.toString(),
+  });
+
+  const data = (await response.json()) as TokenResponse;
+
+  c.header(
+    'Set-Cookie',
+    `access_token=${data.access_token}; HttpOnly; Secure; Path=/; SameSite=Strict`
+  );
+  c.header(
+    'Set-Cookie',
+    `token_type=${data.token_type}; HttpOnly; Secure; Path=/; SameSite=Strict`
+  );
+  return c.redirect(`${clientBaseUri}/token`);
+});
+
+app.get('/fetch-resource', (c) => {
+  // Use the access token to call the resource server.
+  return c.json({});
 });
 
 export default app;

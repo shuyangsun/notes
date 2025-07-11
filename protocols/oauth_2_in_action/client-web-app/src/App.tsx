@@ -42,6 +42,10 @@ function App() {
           <AuthServerInfo authServerConfig={serverConfig?.auth} />
         </div>
       </header>
+
+      <main>
+        <a href="http://localhost:9000/authorize">Get Access Token</a>
+      </main>
     </>
   );
 }

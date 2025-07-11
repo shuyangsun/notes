@@ -1,3 +1,5 @@
+import './EndpointStatus.css';
+
 interface Props {
   uri: string;
   online: boolean;
@@ -9,16 +11,7 @@ export function EndpointStatus({ uri, online }: Props) {
     return (
       <>
         <a href={`${origin}/ping`}>{origin}</a>
-        <span
-          style={{
-            display: 'inline-block',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: online ? 'green' : 'red',
-            marginLeft: '8px',
-          }}
-        ></span>
+        <span className={`indicator ${online ? 'online' : 'offline'}`}></span>
       </>
     );
   } catch (error) {

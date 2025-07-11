@@ -48,12 +48,11 @@ app.get('/ping', (c) => {
   return c.text('pong');
 });
 
-app.get('/client-info', (c) => {
-  return c.json(clientConf);
-});
-
-app.get('/auth-server-info', (c) => {
-  return c.json(authServerConf);
+app.get('/server-config', (c) => {
+  return c.json({
+    client: clientConf,
+    auth: authServerConf,
+  });
 });
 
 export default app;

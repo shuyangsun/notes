@@ -42,3 +42,5 @@ _The auth server authenticates both the client and the resource owner,_ then it 
 In OAuth 2.0, the refresh token replaces long-lived token, which was a common bad practice.
 
 ## Chapter 3. Building a simple OAuth client
+
+The _Authorization Code_ grant type sends the resource owner to authorization server's authorization endpoint. It is the most fundamental and complex core grant type, all other grant types are optimizations of this one.

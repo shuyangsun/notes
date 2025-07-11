@@ -14,7 +14,7 @@ async function checkServerStatus(uri: string) {
   }
 }
 
-export function ServerStatus({ uris }: ServerStatusProps) {
+function useServersOnlineStatus(uris: Set<string>): Record<string, boolean> {
   const [serverStatus, setServerStatus] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -35,12 +35,16 @@ export function ServerStatus({ uris }: ServerStatusProps) {
     const interval = setInterval(pingServers, 5000);
     return () => clearInterval(interval);
   }, [uris]);
+  return serverStatus;
+}
 
+export function ServerStatus({ uris }: ServerStatusProps) {
+  const serversOnlineStatus = useServersOnlineStatus(uris);
   return (
     <>
       <h2>Server Status</h2>
       <ul>
-        {Object.entries(serverStatus)
+        {Object.entries(serversOnlineStatus)
           .sort(([a], [b]) => a.localeCompare(b))
           .map(([uri, online]) => (
             <li key={uri}>

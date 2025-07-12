@@ -83,6 +83,7 @@ app.get('/authorize', (c) => {
 
 app.get('/callback', async (c) => {
   // Parse the response from the authorization server and get a token.
+  console.log(`ASDF: ${c.req}`);
   const code = c.req.query('code');
   if (!code) {
     return c.text('Missing authorization code', 400);

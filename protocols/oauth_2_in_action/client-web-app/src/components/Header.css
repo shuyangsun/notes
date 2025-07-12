@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+}
+
+header > * {
+  flex: 1;
+  padding: 1rem;
+  min-height: 100%;
+  border: 1px black solid;
+  border-radius: 1rem;
+}

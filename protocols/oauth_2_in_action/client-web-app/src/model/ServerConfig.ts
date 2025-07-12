@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { AuthServerConfig } from './AuthServerConfig';
 import type { ClientConfig } from './ClientConfig';
 
+export const serverConfigEndpoint = 'http://localhost:9000/server-config';
+
 export interface ServerConfigResponse {
   client: ClientConfig;
   auth: AuthServerConfig;

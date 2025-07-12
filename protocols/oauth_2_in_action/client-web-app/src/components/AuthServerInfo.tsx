@@ -1,4 +1,4 @@
-import { type AuthServerConfig } from './model/AuthServerConfig';
+import { type AuthServerConfig } from '../model/AuthServerConfig';
 
 function AuthServerInfoList(authServerConfig: AuthServerConfig) {
   const authUri = authServerConfig.authEndpoint;

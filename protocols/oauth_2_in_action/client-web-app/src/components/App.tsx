@@ -3,7 +3,7 @@ import { ClientInfo } from './ClientInfo';
 import {
   useServerConfig,
   type ServerConfigResponse,
-} from './model/ServerConfig';
+} from '../model/ServerConfig';
 import './App.css';
 import { AuthServerInfo } from './AuthServerInfo';
 

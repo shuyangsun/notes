@@ -8,7 +8,7 @@ import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 
 export default tseslint.config([
-  globalIgnores(['dist', 'node_modules', '.vite']),
+  globalIgnores(['dist', 'node_modules', '.vite', 'src/routeTree.gen.ts']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

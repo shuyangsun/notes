@@ -23,7 +23,7 @@ function useOriginUris(
   return result;
 }
 
-function App() {
+export function App() {
   const serverConfig = useServerConfig(serverConfigEndpoint);
   const uris = useOriginUris(serverConfig);
 

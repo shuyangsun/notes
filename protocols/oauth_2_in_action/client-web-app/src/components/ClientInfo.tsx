@@ -1,4 +1,4 @@
-import { type ClientConfig } from './model/ClientConfig';
+import { type ClientConfig } from '../model/ClientConfig';
 
 function ClientInfoList({
   clientId,

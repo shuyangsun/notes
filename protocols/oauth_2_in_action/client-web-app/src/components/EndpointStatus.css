@@ -6,6 +6,10 @@ span.indicator {
   margin-left: 8px;
 }
 
+span.indicator.unknown {
+  background-color: gray;
+}
+
 span.indicator.online {
   background-color: green;
 }

@@ -1,17 +1,17 @@
+import type { OnlineStatus } from '../stores/serverStatus';
 import './EndpointStatus.css';
 
 interface Props {
   uri: string;
-  online: boolean;
+  status: OnlineStatus;
 }
 
-export function EndpointStatus({ uri, online }: Props) {
+export function EndpointStatus({ uri, status }: Props) {
   try {
-    const origin = new URL(uri).origin;
     return (
       <>
-        <a href={`${origin}/ping`}>{origin}</a>
-        <span className={`indicator ${online ? 'online' : 'offline'}`}></span>
+        <a href={`${uri}/ping`}>{uri}</a>
+        <span className={`indicator ${status}`}></span>
       </>
     );
   } catch (error) {

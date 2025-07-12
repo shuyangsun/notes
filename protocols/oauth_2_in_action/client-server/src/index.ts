@@ -39,6 +39,7 @@ interface TokenResponse {
   token_type: string;
 }
 
+const clientWebAppBaseUri = 'http://localhost:5173';
 const clientBaseUri = 'http://localhost:9000';
 const authServerBaseUri = 'http://localhost:9001';
 
@@ -99,16 +100,10 @@ app.get('/callback', async (c) => {
   });
 
   const data = (await response.json()) as TokenResponse;
-
-  c.header(
-    'Set-Cookie',
-    `access_token=${data.access_token}; HttpOnly; Secure; Path=/; SameSite=Strict`
+  // Do NOT expose tokens! This is a terrible security practice.
+  return c.redirect(
+    `${clientWebAppBaseUri}/tokens/${encodeClientCredentials(`${data.token_type} `, data.access_token)}`
   );
-  c.header(
-    'Set-Cookie',
-    `token_type=${data.token_type}; HttpOnly; Secure; Path=/; SameSite=Strict`
-  );
-  return c.redirect(`${clientBaseUri}/token`);
 });
 
 app.get('/fetch-resource', (c) => {

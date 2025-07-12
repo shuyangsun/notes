@@ -37,11 +37,14 @@ interface AuthServerConfig {
 interface TokenResponse {
   access_token: string;
   token_type: string;
+  state?: string;
 }
 
 const clientWebAppBaseUri = 'http://localhost:5173';
 const clientBaseUri = 'http://localhost:9000';
 const authServerBaseUri = 'http://localhost:9001';
+
+let state: string | undefined = undefined;
 
 const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
@@ -66,11 +69,13 @@ app.get('/server-config', (c) => {
 });
 
 app.get('/authorize', (c) => {
+  state = Math.random().toString(36).substring(2, 15);
   // Send the user to the authorization server.
   const url = buildGetTokenURL(
     authServerConf.authEndpoint,
     clientConf.clientId,
-    clientConf.redirectUris[0]
+    clientConf.redirectUris[0],
+    state
   );
   console.log(`Auth URL: ${url}`);
   return c.redirect(url);
@@ -81,6 +86,9 @@ app.get('/callback', async (c) => {
   const code = c.req.query('code');
   if (!code) {
     return c.text('Missing authorization code', 400);
+  }
+  if (c.req.query('state') !== state) {
+    return c.text('Unauthorized, state does not match', 401);
   }
   const formData = new URLSearchParams({
     grant_type: 'authorization_code',

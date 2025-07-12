@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "PORT=9000 bun run --hot src/index.ts",
     "start": "PORT=9000 bun run src/index.ts",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,md}\"",
+    "fix": "bun run lint:fix && bun run format",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

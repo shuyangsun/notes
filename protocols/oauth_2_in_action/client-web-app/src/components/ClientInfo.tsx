@@ -30,7 +30,7 @@ export function ClientInfo({
 }) {
   return (
     <>
-      <h2>Client Info</h2>
+      <h2>Client</h2>
       {clientConfig ? (
         <ClientInfoList {...clientConfig} />
       ) : (

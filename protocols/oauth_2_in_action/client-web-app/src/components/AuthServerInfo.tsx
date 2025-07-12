@@ -24,7 +24,7 @@ export function AuthServerInfo({
 }) {
   return (
     <>
-      <h2>Auth Server Info</h2>
+      <h2>Auth Server</h2>
       {authServerConfig ? (
         <AuthServerInfoList {...authServerConfig} />
       ) : (

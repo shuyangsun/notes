@@ -141,6 +141,9 @@ app.get('/callback', async (c) => {
     'Content-Type': 'application/x-www-form-urlencoded',
     Authorization: `Basic ${credentials}`,
   };
+  logger.log(
+    `encoded client ID "${clientConf.clientId}" and client secret "${clientConf.clientSecret}" for Authorization header.`
+  );
 
   logger.log(
     `sending POST request to auth server token endpoint:\n  Header: ${JSON.stringify(headers)}\n  Body: ${formData.toString()}`
@@ -173,13 +176,15 @@ app.get('/fetch-resource', async (c) => {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  logger.log(`Sending POST request to protected resource server.\n  Header: ${headers}`);
+  logger.log(
+    `Sending POST request to protected resource server.\n  Header: ${JSON.stringify(headers)}`
+  );
   const response = await fetch(resourceServerConf.resourceEndpoint, {
     method: 'POST',
     headers,
   });
   const data = (await response.json()) as ResourceResponse;
-  logger.log(`Got response from protected resource server:\n  ${data}`);
+  logger.log(`Got response from protected resource server:\n  ${JSON.stringify(data)}`);
   logger.logDelimiterEnd();
   return c.json(data);
 });

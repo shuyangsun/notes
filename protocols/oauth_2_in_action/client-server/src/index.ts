@@ -90,7 +90,7 @@ app.get('/server-config', (c) => {
 app.get('/authorize', (c) => {
   const logger = loggerFactory.loggerForEndpoint('authorize');
   logger.logDelimiterBegin();
-  logger.logStep(1, 'Send resource owner to authorization server.');
+  logger.log('Send resource owner to authorization server.');
 
   // Set state before sending request.
   state = Math.random().toString(36).substring(2, 15);
@@ -102,7 +102,7 @@ app.get('/authorize', (c) => {
     clientConf.redirectUris[0],
     state
   );
-  logger.logStep(1.1, `Redirecting user to auth server authorization endpoint:\n  ${url}`);
+  logger.log(`Redirecting user to auth server authorization endpoint:\n  ${url}`);
   logger.logDelimiterEnd();
   return c.redirect(url);
 });
@@ -110,22 +110,22 @@ app.get('/authorize', (c) => {
 app.get('/callback', async (c) => {
   const logger = loggerFactory.loggerForEndpoint('callback');
   logger.logDelimiterBegin();
-  logger.logStep(2, 'Got authorization code from auth server, get token.');
+  logger.log('Got authorization code from auth server, need to get access token now.');
 
   // Make sure state matches.
   if (c.req.query('state') !== state) {
-    logger.logStep(2.1, '!ERROR! state values did not match.');
+    logger.log('!ERROR! state values did not match.');
     return c.text('Unauthorized, state does not match', 401);
   }
-  logger.logStep(2.1, `state values ("${state}") matched.`);
+  logger.log(`state values ("${state}") matched.`);
 
   // Make sure the authorization code from auth server is present.
   const code = c.req.query('code');
   if (!code) {
-    logger.logStep(2.2, '!ERROR! auth server did not provide authorization code.');
+    logger.log('!ERROR! auth server did not provide authorization code.');
     return c.text('Missing authorization code', 400);
   }
-  logger.logStep(2.2, `auth server returned authorization code "${code}"`);
+  logger.log(`auth server returned authorization code "${code}"`);
 
   const formData = new URLSearchParams({
     grant_type: 'authorization_code',
@@ -138,9 +138,7 @@ app.get('/callback', async (c) => {
     Authorization: `Basic ${credentials}`,
   };
 
-  logger.logStep(
-    2.3,
-
+  logger.log(
     `sending POST request to auth server token endpoint:\n  Header: ${JSON.stringify(headers)}\n  Body: ${formData.toString()}`
   );
   const response = await fetch(authServerConf.tokenEndpoint, {
@@ -150,17 +148,13 @@ app.get('/callback', async (c) => {
   });
 
   const data = (await response.json()) as TokenResponse;
-  logger.logStep(
-    2.4,
-
+  logger.log(
     `Got access token from auth server:\n  token_type: ${data.token_type}\n  access_token: ${data.access_token}`
   );
   accessToken = data.access_token;
 
   const tokenDisplayURL = `${clientWebAppBaseUri}/tokens/${encodeClientCredentials(`${data.token_type} `, data.access_token)}`;
-  logger.logStep(
-    2.5,
-
+  logger.log(
     `Redirecting user to display access token.\n  DO NOT DO THIS IN A REAL CLIENT! Token should be opaque from the client, and it should be securely stored as a secret.\n  Redirect URL: ${tokenDisplayURL}`
   );
   logger.logDelimiterEnd();
@@ -175,13 +169,13 @@ app.get('/fetch-resource', async (c) => {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  logger.logStep(3.1, `Sending POST request to protected resource server.\n  Header: ${headers}`);
+  logger.log(`Sending POST request to protected resource server.\n  Header: ${headers}`);
   const response = await fetch(resourceServerConf.resourceEndpoint, {
     method: 'POST',
     headers,
   });
   const data = (await response.json()) as ResourceResponse;
-  logger.logStep(3.2, `Got response from protected resource server:\n  ${data}`);
+  logger.log(`Got response from protected resource server:\n  ${data}`);
   logger.logDelimiterEnd();
   return c.json(data);
 });

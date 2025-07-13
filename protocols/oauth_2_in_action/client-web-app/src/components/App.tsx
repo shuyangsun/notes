@@ -1,7 +1,10 @@
 import { Header } from './Header';
+import { useServerConfig } from '../stores/serverStatus';
+
 import './App.css';
 
 export function App() {
+  const serverConfig = useServerConfig();
   return (
     <>
       <h1>OAuth 2.0 Web Client</h1>
@@ -9,7 +12,12 @@ export function App() {
       <Header />
 
       <main>
-        <a href="http://localhost:9000/authorize">Get Access Token</a>
+        <a
+          href="http://localhost:9000/authorize"
+          className={serverConfig ? '' : 'hidden'}
+        >
+          Get Access Token
+        </a>
       </main>
     </>
   );

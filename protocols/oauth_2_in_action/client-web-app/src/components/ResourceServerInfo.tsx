@@ -5,7 +5,7 @@ function ResourceServerInfoList(resourceServerConfig: ResourceServerConfig) {
   return (
     <ul>
       <li key={resourceUri}>
-        Resrouce endpoint:&nbsp;
+        Resource endpoint:&nbsp;
         <a href={resourceUri}>{resourceUri}</a>
       </li>
     </ul>

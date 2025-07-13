@@ -4,7 +4,7 @@ import './App.css';
 export function App() {
   return (
     <>
-      <h1>OAuth 2.0 Web Client Home</h1>
+      <h1>OAuth 2.0 Web Client</h1>
 
       <Header />
 

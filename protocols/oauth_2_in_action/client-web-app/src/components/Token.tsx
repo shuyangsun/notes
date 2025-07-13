@@ -8,7 +8,7 @@ export function Token({ token }: Props) {
   const decoded = atob(token).split(':');
   return (
     <>
-      <h1>OAuth 2.0 Web Client Token</h1>
+      <h1>Token Page</h1>
       <Header />
       <p className="warning">
         <em>This is a terrible security practice!</em>

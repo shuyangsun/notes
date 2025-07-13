@@ -34,6 +34,11 @@ interface TokenResponse {
   state?: string;
 }
 
+interface ResourceResponse {
+  name: string;
+  description: string;
+}
+
 const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
@@ -163,9 +168,22 @@ app.get('/callback', async (c) => {
   return c.redirect(tokenDisplayURL);
 });
 
-app.get('/fetch-resource', (c) => {
-  // Use the access token to call the resource server.
-  return c.json({});
+app.get('/fetch-resource', async (c) => {
+  const logger = loggerFactory.loggerForEndpoint('fetch-resource');
+  logger.logDelimiterBegin();
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  logger.logStep(3.1, `Sending POST request to protected resource server.\n  Header: ${headers}`);
+  const response = await fetch(resourceServerConf.resourceEndpoint, {
+    method: 'POST',
+    headers,
+  });
+  const data = (await response.json()) as ResourceResponse;
+  logger.logStep(3.2, `Got response from protected resource server:\n  ${data}`);
+  logger.logDelimiterEnd();
+  return c.json(data);
 });
 
 export default app;

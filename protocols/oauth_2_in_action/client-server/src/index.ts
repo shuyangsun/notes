@@ -10,6 +10,9 @@ const resourceServerBaseUri = 'http://localhost:9002';
 
 const loggerFactory = new LoggerFactory('CLIENT');
 
+let state: string | undefined = undefined;
+let accessToken: string | undefined = undefined;
+
 interface ClientConfig {
   clientId: string;
   clientSecret: string;
@@ -30,8 +33,6 @@ interface TokenResponse {
   token_type: string;
   state?: string;
 }
-
-let state: string | undefined = undefined;
 
 const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
@@ -149,6 +150,8 @@ app.get('/callback', async (c) => {
 
     `Got access token from auth server:\n  token_type: ${data.token_type}\n  access_token: ${data.access_token}`
   );
+  accessToken = data.access_token;
+
   const tokenDisplayURL = `${clientWebAppBaseUri}/tokens/${encodeClientCredentials(`${data.token_type} `, data.access_token)}`;
   logger.logStep(
     2.5,

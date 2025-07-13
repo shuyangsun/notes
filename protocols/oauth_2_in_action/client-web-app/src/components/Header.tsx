@@ -10,6 +10,11 @@ export function Header() {
   const serverConfig = useServerConfig();
   return serverConfig ? (
     <header>
+      <nav>
+        {' '}
+        <a href="/">Home</a>{' '}
+      </nav>
+
       <div>
         <ServerStatus />
       </div>

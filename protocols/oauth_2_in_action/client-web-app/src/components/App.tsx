@@ -13,7 +13,7 @@ export function App() {
 
       <main>
         <a
-          href="http://localhost:9000/authorize"
+          href={serverConfig ? serverConfig.client.authorizeEndpoint : '/error'}
           className={serverConfig ? '' : 'hidden'}
         >
           Get Access Token

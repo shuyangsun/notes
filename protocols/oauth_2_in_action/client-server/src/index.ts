@@ -16,6 +16,8 @@ let accessToken: string | undefined = undefined;
 interface ClientConfig {
   clientId: string;
   clientSecret: string;
+  authorizeEndpoint: string;
+  fetchResourceEndpoint: string;
   redirectUris: string[];
 }
 
@@ -42,6 +44,8 @@ interface ResourceResponse {
 const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
+  authorizeEndpoint: `${clientBaseUri}/authorize`,
+  fetchResourceEndpoint: `${clientBaseUri}/fetch-resource`,
   redirectUris: [`${clientBaseUri}/callback`],
 };
 

@@ -23,6 +23,7 @@ export function setServerConfig(config: ServerConfigResponse) {
   }
   addUriToServerStatusStore(config.auth.authEndpoint);
   addUriToServerStatusStore(config.auth.tokenEndpoint);
+  addUriToServerStatusStore(config.resource.resourceEndpoint);
 }
 
 export function useServersStatus(): [

@@ -3,8 +3,52 @@ import { cors } from 'hono/cors';
 import { buildGetTokenURL, encodeClientCredentials } from './helper';
 import { LoggerFactory } from './logging';
 
-const app = new Hono();
+const clientWebAppBaseUri = 'http://localhost:5173';
+const clientBaseUri = 'http://localhost:9000';
+const authServerBaseUri = 'http://localhost:9001';
+const resourceServerBaseUri = 'http://localhost:9002';
+
 const loggerFactory = new LoggerFactory('CLIENT');
+
+interface ClientConfig {
+  clientId: string;
+  clientSecret: string;
+  redirectUris: string[];
+}
+
+interface AuthServerConfig {
+  authEndpoint: string;
+  tokenEndpoint: string;
+}
+
+interface ResourceServerConfig {
+  resourceEndpoint: string;
+}
+
+interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  state?: string;
+}
+
+let state: string | undefined = undefined;
+
+const clientConf: ClientConfig = {
+  clientId: 'oauth-client-1',
+  clientSecret: 'oauth-client-secret-1',
+  redirectUris: [`${clientBaseUri}/callback`],
+};
+
+const authServerConf: AuthServerConfig = {
+  authEndpoint: `${authServerBaseUri}/authorize`,
+  tokenEndpoint: `${authServerBaseUri}/token`,
+};
+
+const resourceServerConf: ResourceServerConfig = {
+  resourceEndpoint: `${resourceServerBaseUri}/resource`,
+};
+
+const app = new Hono();
 
 app.use(
   '/*',
@@ -25,40 +69,6 @@ app.use(
   })
 );
 
-interface ClientConfig {
-  clientId: string;
-  clientSecret: string;
-  redirectUris: string[];
-}
-
-interface AuthServerConfig {
-  authEndpoint: string;
-  tokenEndpoint: string;
-}
-
-interface TokenResponse {
-  access_token: string;
-  token_type: string;
-  state?: string;
-}
-
-const clientWebAppBaseUri = 'http://localhost:5173';
-const clientBaseUri = 'http://localhost:9000';
-const authServerBaseUri = 'http://localhost:9001';
-
-let state: string | undefined = undefined;
-
-const clientConf: ClientConfig = {
-  clientId: 'oauth-client-1',
-  clientSecret: 'oauth-client-secret-1',
-  redirectUris: [`${clientBaseUri}/callback`],
-};
-
-const authServerConf: AuthServerConfig = {
-  authEndpoint: `${authServerBaseUri}/authorize`,
-  tokenEndpoint: `${authServerBaseUri}/token`,
-};
-
 app.get('/ping', (c) => {
   return c.text('pong');
 });
@@ -67,6 +77,7 @@ app.get('/server-config', (c) => {
   return c.json({
     client: clientConf,
     auth: authServerConf,
+    resource: resourceServerConf,
   });
 });
 

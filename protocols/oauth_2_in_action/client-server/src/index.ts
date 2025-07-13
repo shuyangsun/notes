@@ -1,8 +1,10 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { buildGetTokenURL, encodeClientCredentials } from './helper';
+import { LoggerFactory } from './logging';
 
 const app = new Hono();
+const loggerFactory = new LoggerFactory('CLIENT');
 
 app.use(
   '/*',
@@ -69,7 +71,13 @@ app.get('/server-config', (c) => {
 });
 
 app.get('/authorize', (c) => {
+  const logger = loggerFactory.loggerForEndpoint('authorize');
+  logger.logDelimiterBegin();
+  logger.logStep(1, 'Send resource owner to authorization server.');
+
+  // Set state before sending request.
   state = Math.random().toString(36).substring(2, 15);
+
   // Send the user to the authorization server.
   const url = buildGetTokenURL(
     authServerConf.authEndpoint,
@@ -77,19 +85,31 @@ app.get('/authorize', (c) => {
     clientConf.redirectUris[0],
     state
   );
-  console.log(`Auth URL: ${url}`);
+  logger.logStep(1.1, `Redirecting user to auth server authorization endpoint:\n  ${url}`);
+  logger.logDelimiterEnd();
   return c.redirect(url);
 });
 
 app.get('/callback', async (c) => {
-  // Parse the response from the authorization server and get a token.
-  const code = c.req.query('code');
-  if (!code) {
-    return c.text('Missing authorization code', 400);
-  }
+  const logger = loggerFactory.loggerForEndpoint('callback');
+  logger.logDelimiterBegin();
+  logger.logStep(2, 'Got authorization code from auth server, get token.');
+
+  // Make sure state matches.
   if (c.req.query('state') !== state) {
+    logger.logStep(2.1, '!ERROR! state values did not match.');
     return c.text('Unauthorized, state does not match', 401);
   }
+  logger.logStep(2.1, `state values ("${state}") matched.`);
+
+  // Make sure the authorization code from auth server is present.
+  const code = c.req.query('code');
+  if (!code) {
+    logger.logStep(2.2, '!ERROR! auth server did not provide authorization code.');
+    return c.text('Missing authorization code', 400);
+  }
+  logger.logStep(2.2, `auth server returned authorization code "${code}"`);
+
   const formData = new URLSearchParams({
     grant_type: 'authorization_code',
     code: code,
@@ -101,6 +121,11 @@ app.get('/callback', async (c) => {
     Authorization: `Basic ${credentials}`,
   };
 
+  logger.logStep(
+    2.3,
+
+    `sending POST request to auth server token endpoint:\n  Header: ${JSON.stringify(headers)}\n  Body: ${formData.toString()}`
+  );
   const response = await fetch(authServerConf.tokenEndpoint, {
     method: 'POST',
     headers,
@@ -108,10 +133,20 @@ app.get('/callback', async (c) => {
   });
 
   const data = (await response.json()) as TokenResponse;
-  // Do NOT expose tokens! This is a terrible security practice.
-  return c.redirect(
-    `${clientWebAppBaseUri}/tokens/${encodeClientCredentials(`${data.token_type} `, data.access_token)}`
+  logger.logStep(
+    2.4,
+
+    `Got access token from auth server:\n  token_type: ${data.token_type}\n  access_token: ${data.access_token}`
   );
+  const tokenDisplayURL = `${clientWebAppBaseUri}/tokens/${encodeClientCredentials(`${data.token_type} `, data.access_token)}`;
+  logger.logStep(
+    2.5,
+
+    `Redirecting user to display access token.\n  DO NOT DO THIS IN A REAL CLIENT! Token should be opaque from the client, and it should be securely stored as a secret.\n  Redirect URL: ${tokenDisplayURL}`
+  );
+  logger.logDelimiterEnd();
+  // Do NOT expose tokens! This is a terrible security practice.
+  return c.redirect(tokenDisplayURL);
 });
 
 app.get('/fetch-resource', (c) => {

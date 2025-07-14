@@ -60,7 +60,9 @@ export async function GET(request: NextRequest) {
 
   logger.log(
     `sending POST request to auth server token endpoint:\n  Header: ${
-      JSON.stringify(headers)
+      JSON.stringify(
+        headers,
+      )
     }\n  Body: ${formData.toString()}`,
   );
 

@@ -1,0 +1,19 @@
+span.indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+span.indicator.unknown {
+  background-color: gray;
+}
+
+span.indicator.online {
+  background-color: green;
+}
+
+span.indicator.offline {
+  background-color: red;
+}

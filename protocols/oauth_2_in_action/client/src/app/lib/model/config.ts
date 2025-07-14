@@ -1,8 +1,9 @@
-export const clientBaseUri = 'http://localhost:9000';
-export const authServerBaseUri = 'http://localhost:9001';
-export const resourceServerBaseUri = 'http://localhost:9002';
+const clientBaseUri = 'http://localhost:9000';
+const authServerBaseUri = 'http://localhost:9001';
+const resourceServerBaseUri = 'http://localhost:9002';
 
 export interface ClientConfig {
+  baseUri: string;
   clientId: string;
   clientSecret: string;
   authorizeEndpoint: string;
@@ -11,15 +12,18 @@ export interface ClientConfig {
 }
 
 export interface AuthServerConfig {
+  baseUri: string;
   authEndpoint: string;
   tokenEndpoint: string;
 }
 
-export interface ResourceServerConfig {
+export interface ProtectedResourceServerConfig {
+  baseUri: string;
   resourceEndpoint: string;
 }
 
 export const clientConf: ClientConfig = {
+  baseUri: clientBaseUri,
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
   authorizeEndpoint: `${clientBaseUri}/authorize`,
@@ -28,10 +32,12 @@ export const clientConf: ClientConfig = {
 };
 
 export const authServerConf: AuthServerConfig = {
+  baseUri: authServerBaseUri,
   authEndpoint: `${authServerBaseUri}/authorize`,
   tokenEndpoint: `${authServerBaseUri}/token`,
 };
 
-export const resourceServerConf: ResourceServerConfig = {
+export const protectedResourceServerConf: ProtectedResourceServerConfig = {
+  baseUri: resourceServerBaseUri,
   resourceEndpoint: `${resourceServerBaseUri}/resource`,
 };

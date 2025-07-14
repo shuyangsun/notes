@@ -1,6 +1,6 @@
 import loggerFactory from '@/app/lib/logging/logger';
 import { buildGetTokenURL, } from '@/app/lib/utils/url';
-import { authServerConf, clientConf, } from '@/app/lib/model/config';
+import { serverConfigs, } from '@/app/lib/model/config';
 
 let state: string | undefined = undefined;
 
@@ -14,9 +14,9 @@ export function GET() {
 
   // Send the user to the authorization server.
   const url = buildGetTokenURL(
-    authServerConf.authEndpoint,
-    clientConf.clientId,
-    clientConf.redirectUris[0],
+    serverConfigs.authServerConfig.authEndpoint,
+    serverConfigs.clientConfig.clientId,
+    serverConfigs.clientConfig.redirectUris[0],
     state,
   );
   logger.log(

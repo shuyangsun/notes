@@ -22,7 +22,13 @@ export interface ProtectedResourceServerConfig {
   resourceEndpoint: string;
 }
 
-export const clientConf: ClientConfig = {
+export interface ServerConfigs {
+  clientConfig: ClientConfig;
+  authServerConfig: AuthServerConfig;
+  protectedResourceServerConfig: ProtectedResourceServerConfig;
+}
+
+const clientConf: ClientConfig = {
   baseUri: clientBaseUri,
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
@@ -31,13 +37,19 @@ export const clientConf: ClientConfig = {
   redirectUris: [`${clientBaseUri}/callback`,],
 };
 
-export const authServerConf: AuthServerConfig = {
+const authServerConf: AuthServerConfig = {
   baseUri: authServerBaseUri,
   authEndpoint: `${authServerBaseUri}/authorize`,
   tokenEndpoint: `${authServerBaseUri}/token`,
 };
 
-export const protectedResourceServerConf: ProtectedResourceServerConfig = {
+const protectedResourceServerConf: ProtectedResourceServerConfig = {
   baseUri: resourceServerBaseUri,
   resourceEndpoint: `${resourceServerBaseUri}/resource`,
+};
+
+export const serverConfigs: ServerConfigs = {
+  clientConfig: clientConf,
+  authServerConfig: authServerConf,
+  protectedResourceServerConfig: protectedResourceServerConf,
 };

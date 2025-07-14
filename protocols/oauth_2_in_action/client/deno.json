@@ -7,9 +7,20 @@
     "jsx": "preserve"
   },
   "tasks": {
-    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev",
+    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev -p 9000",
     "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
     "start": "deno run -A --unstable-detect-cjs npm:next@latest start",
-    "lint": "deno run -A --unstable-detect-cjs npm:next@latest lint"
+    "lint": "deno run -A --unstable-detect-cjs npm:next@latest lint",
+    "format": "deno fmt",
+    "fix": "deno run lint && deno fmt"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "always",
+    "trailingCommas": "always"
   }
 }

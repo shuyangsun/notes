@@ -1,16 +1,28 @@
-import loggerFactory from '@/app/lib/logging/logger';
 import { buildGetTokenURL } from '@/app/lib/utils/url';
 import { serverConfigs } from '@/app/lib/model/config';
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+
+import loggerFactory from '@/app/lib/logging/logger';
+
+const { randomBytes } = await import('node:crypto');
 
 let state: string | undefined = undefined;
 
-export function GET() {
-  const logger = loggerFactory.loggerForEndpoint('authorize');
+export async function GET() {
+  const logger = loggerFactory.loggerForEndpoint('api/auth/authorize');
   logger.logDelimiterBegin();
   logger.log('Send resource owner to authorization server.');
 
   // Set state before sending request.
-  state = Math.random().toString(36).substring(2, 15);
+  state = randomBytes(32).toString('base64url');
+  (await cookies()).set('state', state, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax',
+    maxAge: 60, // 1 minute
+    path: '/',
+  });
 
   // Send the user to the authorization server.
   const url = buildGetTokenURL(
@@ -24,5 +36,5 @@ export function GET() {
   );
 
   logger.logDelimiterEnd();
-  return Response.redirect(url);
+  return NextResponse.redirect(url);
 }

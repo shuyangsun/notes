@@ -20,7 +20,7 @@ export default function useServerStatus(pingEndpoint: string): ServerStatus {
     };
 
     void checkStatus();
-    const interval = setInterval(checkStatus, 3000);
+    const interval = setInterval(checkStatus, 5000);
 
     return () => {
       isMounted = false;

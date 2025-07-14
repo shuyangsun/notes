@@ -1,4 +1,4 @@
-import { AuthServerConfig, } from '@/app/lib/model/config';
+import { AuthServerConfig } from '@/app/lib/model/config';
 import ServerStatusHeader from './ServerInfoHeader';
 import useServerStatus from '@/app/hooks/use-server-status';
 
@@ -6,8 +6,8 @@ interface AuthServerStatusProps {
   config: AuthServerConfig;
 }
 
-export default function AuthServerInfo({ config, }: AuthServerStatusProps,) {
-  const status = useServerStatus(config.baseUri,);
+export default function AuthServerInfo({ config }: AuthServerStatusProps) {
+  const status = useServerStatus(`${config.baseUri}/ping`);
 
   return (
     <section>

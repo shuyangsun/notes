@@ -1,4 +1,4 @@
-import { ProtectedResourceServerConfig, } from '@/app/lib/model/config';
+import { ProtectedResourceServerConfig } from '@/app/lib/model/config';
 import ServerStatusHeader from './ServerInfoHeader';
 import useServerStatus from '@/app/hooks/use-server-status';
 
@@ -8,8 +8,8 @@ interface ProtectedResourceServerStatusProps {
 
 export default function ProtectedResourceServerInfo({
   config,
-}: ProtectedResourceServerStatusProps,) {
-  const status = useServerStatus(config.baseUri,);
+}: ProtectedResourceServerStatusProps) {
+  const status = useServerStatus(`${config.baseUri}/ping`);
   return (
     <section>
       <ServerStatusHeader

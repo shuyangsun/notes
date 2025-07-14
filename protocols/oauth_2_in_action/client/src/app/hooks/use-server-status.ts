@@ -1,34 +1,32 @@
-import { useEffect, useState, } from 'react';
-import { ServerStatus, } from '../lib/model/status';
+import { useEffect, useState } from 'react';
+import { ServerStatus } from '../lib/model/status';
 
-export default function useServerStatus(uri: string,): ServerStatus {
-  const [status, setStatus,] = useState<ServerStatus>('unknown',);
-  const origin = new URL(uri,).origin;
-  const ping = `${origin}/ping`;
+export default function useServerStatus(pingEndpoint: string): ServerStatus {
+  const [status, setStatus] = useState<ServerStatus>('unknown');
 
   useEffect(() => {
     let isMounted = true;
     const checkStatus = async () => {
       try {
-        const res = await fetch(ping,);
+        const res = await fetch(pingEndpoint);
         if (isMounted) {
-          setStatus(res.ok ? 'online' : 'offline',);
+          setStatus(res.ok ? 'online' : 'offline');
         }
       } catch {
         if (isMounted) {
-          setStatus('offline',);
+          setStatus('offline');
         }
       }
     };
 
-    checkStatus();
-    const interval = setInterval(checkStatus, 5000,);
+    void checkStatus();
+    const interval = setInterval(checkStatus, 3000);
 
     return () => {
       isMounted = false;
-      clearInterval(interval,);
+      clearInterval(interval);
     };
-  }, [ping,],);
+  }, [pingEndpoint]);
 
   return status;
 }

@@ -6,12 +6,12 @@ export function buildGetTokenURL(
   responseType: string = 'code',
   hash: string | undefined = undefined,
 ) {
-  const url = new URL(endpoint,);
+  const url = new URL(endpoint);
   url.search = '';
-  url.searchParams.set('response_type', responseType,);
-  url.searchParams.set('client_id', clientId,);
-  url.searchParams.set('redirect_uri', redirectUri,);
-  url.searchParams.set('state', state,);
+  url.searchParams.set('response_type', responseType);
+  url.searchParams.set('client_id', clientId);
+  url.searchParams.set('redirect_uri', redirectUri);
+  url.searchParams.set('state', state);
   if (hash !== undefined) {
     url.hash = hash;
   }
@@ -22,8 +22,8 @@ export function encodeClientCredentials(
   clientId: string,
   clientSecret: string,
 ): string {
-  const encoded = `${encodeURIComponent(clientId,)}:${
-    encodeURIComponent(clientSecret,)
+  const encoded = `${encodeURIComponent(clientId)}:${
+    encodeURIComponent(clientSecret)
   }`;
-  return Buffer.from(encoded,).toString('base64',);
+  return Buffer.from(encoded).toString('base64');
 }

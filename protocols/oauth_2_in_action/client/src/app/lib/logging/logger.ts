@@ -13,7 +13,7 @@ class LoggerFactory {
     private width: number = 80,
   ) {}
 
-  loggerForEndpoint(endpoint: string,): Logger {
+  loggerForEndpoint(endpoint: string): Logger {
     this.stepMajor += 1;
     return new Logger(
       this.stepMajor,
@@ -53,20 +53,20 @@ class Logger {
       ` ${this.component.toUpperCase()} Step ${this.stepMajor} `;
     const sideLength = Math.max(
       0,
-      Math.floor((this.width - titleWithSpaces.length) / 2,),
+      Math.floor((this.width - titleWithSpaces.length) / 2),
     );
-    const left = this.char.repeat(sideLength,);
+    const left = this.char.repeat(sideLength);
     const right = this.char.repeat(
       this.width - sideLength - titleWithSpaces.length,
     );
-    console.log(`${left}${titleWithSpaces}${right}\n`,);
+    console.log(`${left}${titleWithSpaces}${right}\n`);
   }
 
   /**
    * Logs the end of a delimiter line to the console.
    */
   logDelimiterEnd() {
-    console.log(`${this.char.repeat(this.width,)}\n`,);
+    console.log(`${this.char.repeat(this.width)}\n`);
   }
 
   /**
@@ -75,7 +75,7 @@ class Logger {
    * @param step Step number, can be either only major number (e.g., "2") or major.minor (e.g., "2.5", "3.12").
    * @param message Message following the step number.
    */
-  log(message: string,) {
+  log(message: string) {
     this.stepMinor += 1;
     console.log(
       `[${this.component}/${this.endpoint}] ${this.stepMajor}.${this.stepMinor}: ${message}\n`,
@@ -83,5 +83,5 @@ class Logger {
   }
 }
 
-const loggerFactory = new LoggerFactory('CLIENT',);
+const loggerFactory = new LoggerFactory('CLIENT');
 export default loggerFactory;

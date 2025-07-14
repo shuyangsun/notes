@@ -1,4 +1,4 @@
-import { ServerStatus, } from '@/app/lib/model/status';
+import { ServerStatus } from '@/app/lib/model/status';
 import './ServerInfoHeader.css';
 
 interface ServerInfoHeaderProps {
@@ -11,7 +11,7 @@ export default function ServerInfoHeader({
   name,
   baseUri,
   status,
-}: ServerInfoHeaderProps,) {
+}: ServerInfoHeaderProps) {
   return (
     <>
       <div>

@@ -20,7 +20,6 @@
     "indentWidth": 2,
     "semiColons": true,
     "singleQuote": true,
-    "proseWrap": "always",
-    "trailingCommas": "always"
+    "proseWrap": "always"
   }
 }

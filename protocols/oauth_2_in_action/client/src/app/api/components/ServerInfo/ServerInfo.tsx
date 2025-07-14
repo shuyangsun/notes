@@ -7,7 +7,7 @@ import { serverConfigs } from '@/app/lib/model/config';
 
 export default function ServerInfo() {
   return (
-    <aside>
+    <aside id='server-info'>
       <ClientServerInfo config={serverConfigs.clientConfig} />
       <AuthServerInfo config={serverConfigs.authServerConfig} />
       <ProtectedResourceServerInfo

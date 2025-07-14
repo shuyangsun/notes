@@ -7,7 +7,7 @@
     "jsx": "preserve"
   },
   "tasks": {
-    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev -p 9000",
+    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev --turbo -p 9000",
     "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
     "start": "deno run -A --unstable-detect-cjs npm:next@latest start",
     "lint": "deno run -A --unstable-detect-cjs npm:next@latest lint",

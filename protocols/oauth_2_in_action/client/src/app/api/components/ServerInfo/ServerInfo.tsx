@@ -1,36 +1,15 @@
-import { ServerConfigs } from '@/app/lib/model/config';
-
 import ClientServerInfo from './ClientServerInfo';
 import AuthServerInfo from './AuthServerInfo';
 import ProtectedResourceServerInfo from './ProtectedResourceServerInfo';
-import { ServerStatus } from '@/app/lib/model/status';
+import { serverConfigs, } from '@/app/lib/model/config';
 
-interface ServerInfoProps {
-  serverConfigs: ServerConfigs;
-  clientServerStatus: ServerStatus;
-  authServerStatus: ServerStatus;
-  protectedResourceServerStatus: ServerStatus;
-}
-
-export default function ServerInfo({
-  serverConfigs,
-  clientServerStatus,
-  authServerStatus,
-  protectedResourceServerStatus,
-}: ServerInfoProps) {
+export default function ServerInfo() {
   return (
     <aside>
-      <ClientServerInfo
-        config={serverConfigs.clientConfig}
-        status={clientServerStatus}
-      />
-      <AuthServerInfo
-        config={serverConfigs.authServerConfig}
-        status={authServerStatus}
-      />
+      <ClientServerInfo config={serverConfigs.clientConfig} />
+      <AuthServerInfo config={serverConfigs.authServerConfig} />
       <ProtectedResourceServerInfo
         config={serverConfigs.protectedResourceServerConfig}
-        status={protectedResourceServerStatus}
       />
     </aside>
   );

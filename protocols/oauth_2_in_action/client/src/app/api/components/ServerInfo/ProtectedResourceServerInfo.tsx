@@ -1,16 +1,15 @@
 import { ProtectedResourceServerConfig, } from '@/app/lib/model/config';
-import { ServerStatus, } from '@/app/lib/model/status';
 import ServerStatusHeader from './ServerInfoHeader';
+import useServerStatus from '@/app/hooks/use-server-status';
 
 interface ProtectedResourceServerStatusProps {
   config: ProtectedResourceServerConfig;
-  status: ServerStatus;
 }
 
 export default function ProtectedResourceServerInfo({
   config,
-  status,
 }: ProtectedResourceServerStatusProps,) {
+  const status = useServerStatus(config.baseUri,);
   return (
     <section>
       <ServerStatusHeader

@@ -33,7 +33,7 @@ const clientConf: ClientConfig = {
   clientId: 'oauth-client-1',
   clientSecret: 'oauth-client-secret-1',
   authorizeEndpoint: `${clientBaseUri}/api/auth/authorize`,
-  fetchResourceEndpoint: `${clientBaseUri}/api/auth/fetch-resource`,
+  fetchResourceEndpoint: `${clientBaseUri}/api/fetch-resource`,
   redirectUris: [`${clientBaseUri}/api/auth/callback`],
 };
 

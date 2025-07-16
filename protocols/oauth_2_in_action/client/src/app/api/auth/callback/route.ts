@@ -78,13 +78,23 @@ export async function GET(request: NextRequest) {
     `Got access token from auth server:\n  token_type: ${data.token_type}\n  access_token: ${data.access_token}`,
   );
 
-  const tokenUrl = new URL(clientConfig.baseUri);
-  tokenUrl.searchParams.append('token-type', data.token_type);
-  tokenUrl.searchParams.append('access-token', data.access_token);
+  const cookieStore = await cookies();
+  cookieStore.set('access_token', data.access_token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    path: '/',
+  });
+  cookieStore.set('token_type', data.token_type, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    path: '/',
+  });
 
   logger.log(
-    `Redirecting user to display access token.\n  DO NOT DO THIS IN A REAL CLIENT! Token should be opaque from the client, and it should be securely stored as a secret.\n  Redirect URL: ${tokenUrl}`,
+    `Redirecting user to display access token.\n  DO NOT DO THIS IN A REAL CLIENT! Token should be opaque from the client, and it should be securely stored as a secret.\n  Redirect URL: ${clientConfig.baseUri}`,
   );
   logger.logDelimiterEnd();
-  return Response.redirect(tokenUrl);
+  return Response.redirect(clientConfig.baseUri);
 }

@@ -1,12 +1,18 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-
 export function OAuthInfo() {
-  const searchParams = useSearchParams();
-  const tokenType = searchParams.get('token-type');
-  const accessToken = searchParams.get('access-token');
-  const refreshToken = searchParams.get('refresh-token');
+  const cookies = typeof window !== 'undefined'
+    ? document.cookie.split('; ')
+    : [];
+  const accessToken = cookies
+    .find((row) => row.startsWith('access_token='))
+    ?.split('=')[1];
+  const tokenType = cookies
+    .find((row) => row.startsWith('token_type='))
+    ?.split('=')[1];
+  const refreshToken = cookies
+    .find((row) => row.startsWith('refresh_token='))
+    ?.split('=')[1];
 
   return (
     <section>

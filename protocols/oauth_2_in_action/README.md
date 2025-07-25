@@ -15,7 +15,7 @@ Even though authentication methods can be built on top of the OAuth protocol, th
 - _Client_: software that accesses the protected resource on behalf of the resource owner.
 - _Scope_: a set of rights at a protected resoure represented by a space-separated list in string format.
 
-### Key points
+### Key takeaways
 
 - OAuth is about how to get a token and how to use a token.
 - OAuth doesn't define a token format, the content of the token is completely opaque to the client application.
@@ -43,4 +43,25 @@ In OAuth 2.0, the refresh token replaces long-lived token, which was a common ba
 
 ## Chapter 3. Building a simple OAuth client
 
-The _Authorization Code_ grant type sends the resource owner to authorization server's authorization endpoint. It is the most fundamental and complex core grant type, all other grant types are optimizations of this one.
+### 3.1. Register the client
+
+- The client and auth server knows about each other, the protocal does not specify how this happens. Usually the auth server assigns client ID and client secret.
+
+### 3.2 The authorization code grant type
+
+Call `/authorize` first to get an authorization code.
+
+- Redirect URIs, scopes to request are determined by the client, not auth server.
+- The _Authorization Code_ grant type sends the resource owner to authorization server's authorization endpoint. It is the most fundamental and complex core grant type, all other grant types are optimizations of this one.
+
+Call `/token` endpoint with the code.
+
+- The OAuth protocol requires the same redirect URI to be present for the `/token` endpoint if they were set for the `/authorize` endpoint. This prevents attackers from stealing authorization code and change to a malicious redirect URI.
+
+An attacker can call the `/callback` endpoint to fish for authorization codes, protect against it with the `state` parameter.
+
+### 3.4 Refresh token
+
+OAuth 2.1 requires a new refresh token to be sent with a new access token every time the token is refreshed.
+
+## Chapter 4. Building a simple OAuth protected resource

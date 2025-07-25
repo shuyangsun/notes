@@ -1,12 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { serverConfigs } from '@/app/lib/model/config';
 import { cookies } from 'next/headers';
-import { encodeClientCredentials } from '@/app/lib/utils/credential';
+import { buildAuthHeaders } from '@/app/lib/utils/credential';
 import loggerFactory from '@/app/lib/logging/logger';
 
 interface TokenResponse {
   access_token: string;
   token_type: string;
+}
+
+interface CallbackArguments {
+  authorizationCode: string | undefined;
+}
+
+async function parseCallbackRequest(
+  req: NextRequest,
+): Promise<[CallbackArguments, ResponseError[]]> {
+  const errors: ResponseError[] = [];
+
+  const storedState = (await cookies()).get('state')?.value;
+  (await cookies()).delete('state');
+
+  const { searchParams } = new URL(req.url);
+  const authState = searchParams.get('state');
+
+  // Make sure state matches.
+  if (authState !== storedState) {
+    errors.push({
+      message: 'unauthorized, state does not match.',
+      status: 401,
+    });
+  }
+
+  // Make sure the authorization code from auth server is present.
+  const code = searchParams.get('code');
+  if (!code) {
+    errors.push({
+      message: 'auth server did not provide authorization code',
+      status: 400,
+    });
+  }
+  return [{ authorizationCode: code ?? undefined }, errors];
 }
 
 export async function GET(request: NextRequest) {
@@ -16,28 +50,16 @@ export async function GET(request: NextRequest) {
     'Got authorization code from auth server, need to get access token now.',
   );
 
-  const storedState = (await cookies()).get('state')?.value;
-  (await cookies()).delete('state');
-
-  const { searchParams } = new URL(request.url);
-  const authState = searchParams.get('state');
-
-  // Make sure state matches.
-  if (authState !== storedState) {
-    logger.log('!ERROR! state values did not match.');
+  const errors = await parseCallbackRequest(request);
+  if (errors) {
+    const errorMessages = errors.map((err) => err.message);
+    logger.log(`!ERROR!\n  ${errorMessages.join('  \n')}`);
     logger.logDelimiterEnd();
-    return new NextResponse('Unauthorized, state does not match', {
-      status: 401,
+    return new NextResponse(errorMessages.join('\n'), {
+      status: errors[0].status,
     });
   }
-  logger.log(`state values ("${authState}") matched.`);
 
-  // Make sure the authorization code from auth server is present.
-  const code = searchParams.get('code');
-  if (!code) {
-    logger.log('!ERROR! auth server did not provide authorization code.');
-    return new NextResponse('Missing authorization code', { status: 400 });
-  }
   logger.log(`auth server returned authorization code "${code}"`);
 
   const clientConfig = serverConfigs.clientConfig;
@@ -46,24 +68,17 @@ export async function GET(request: NextRequest) {
     code: code,
     redirect_uri: clientConfig.redirectUris[0],
   });
-  const credentials = encodeClientCredentials(
+  const headers = buildAuthHeaders(
     clientConfig.clientId,
     clientConfig.clientSecret,
   );
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    Authorization: `Basic ${credentials}`,
-  };
   logger.log(
     `encoded client ID "${clientConfig.clientId}" and client secret "${clientConfig.clientSecret}" for Authorization header.`,
   );
-
   logger.log(
-    `sending POST request to auth server token endpoint:\n  Header: ${
-      JSON.stringify(
-        headers,
-      )
-    }\n  Body: ${formData.toString()}`,
+    `sending POST request to auth server token endpoint:\n  Header: ${JSON.stringify(
+      headers,
+    )}\n  Body: ${formData.toString()}`,
   );
 
   const authServerConfig = serverConfigs.authServerConfig;
@@ -74,9 +89,7 @@ export async function GET(request: NextRequest) {
   });
 
   const data = (await response.json()) as TokenResponse;
-  logger.log(
-    `Got access token from auth server:\n  token_type: ${data.token_type}\n  access_token: ${data.access_token}`,
-  );
+  logger.log(`Got tokens from auth server:\n  ${JSON.stringify(data)}`);
 
   const cookieStore = await cookies();
   cookieStore.set('access_token', data.access_token, {

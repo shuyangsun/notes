@@ -17,9 +17,9 @@ export async function GET() {
   };
 
   logger.log(
-    `Sending POST request to protected resource server.\n  Header: ${
-      JSON.stringify(headers)
-    }`,
+    `Sending POST request to protected resource server.\n  Header: ${JSON.stringify(
+      headers,
+    )}`,
   );
   const response = await fetch(
     serverConfigs.protectedResourceServerConfig.resourceEndpoint,
@@ -55,5 +55,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
 }

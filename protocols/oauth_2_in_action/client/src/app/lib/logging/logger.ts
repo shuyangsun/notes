@@ -49,8 +49,7 @@ class Logger {
    * Logs the beginning of a delimiter line to the console.
    */
   logDelimiterBegin() {
-    const titleWithSpaces =
-      ` ${this.component.toUpperCase()} Step ${this.stepMajor} `;
+    const titleWithSpaces = ` ${this.component.toUpperCase()} Step ${this.stepMajor} `;
     const sideLength = Math.max(
       0,
       Math.floor((this.width - titleWithSpaces.length) / 2),

@@ -45,9 +45,13 @@ In OAuth 2.0, the refresh token replaces long-lived token, which was a common ba
 
 ### 3.1. Register the client
 
+[ch-3-ex-1](https://github.com/shuyangsun/oauth-2-in-action-code-ts/blob/main/exercises/ch-3-ex-1/completed/client.tsx)
+
 - The client and auth server knows about each other, the protocal does not specify how this happens. Usually the auth server assigns client ID and client secret.
 
 ### 3.2 The authorization code grant type
+
+[ch-3-ex-1](https://github.com/shuyangsun/oauth-2-in-action-code-ts/blob/main/exercises/ch-3-ex-1/completed/client.tsx)
 
 Call `/authorize` first to get an authorization code.
 
@@ -62,6 +66,16 @@ An attacker can call the `/callback` endpoint to fish for authorization codes, p
 
 ### 3.4 Refresh token
 
+[ch-3-ex-2](https://github.com/shuyangsun/oauth-2-in-action-code-ts/blob/main/exercises/ch-3-ex-2/completed/client.tsx)
+
 OAuth 2.1 requires a new refresh token to be sent with a new access token every time the token is refreshed.
 
 ## Chapter 4. Building a simple OAuth protected resource
+
+Most of the time, the protected resource server is only responsible for parsing the token and determine what this token is good for (scopes).
+
+### 4.1 Parsing the OAuth token
+
+[ch-4-ex-1](https://github.com/shuyangsun/oauth-2-in-action-code-ts/blob/main/exercises/ch-4-ex-1/completed/protectedResource.tsx)
+
+The Bearer token should be either part of the Authorization header, or form-encoded post body.

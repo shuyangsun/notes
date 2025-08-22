@@ -1,5 +1,9 @@
 # Shuyang's Notes
 
+## Machine Learing
+
+[Build a Large Language Model (From Scratch)](ml/build_llm_from_scratch) by [Sebastian Raschka](https://sebastianraschka.com/)
+
 ## DevOps
 
 [Nginx HTTP Server](devops/nginx/README.md) by Gabriel Ouiran

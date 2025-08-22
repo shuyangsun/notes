@@ -1,1 +1,92 @@
-.venv
+# .gitignore for a Python + JupyterLab project
+# Ignore virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions and build artifacts
+*.so
+*.dylib
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+wheels/
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Packaging
+develop-eggs/
+parts/
+sdist/
+var/
+.installed.cfg
+
+# Test / coverage reports
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+coverage.xml
+
+# Type checker caches
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Jupyter
+.ipynb_checkpoints/
+# Do not commit Jupyter runtime files or per-user workspace state
+.jupyter/
+jupyterlab-workspaces/
+.local/share/jupyter/runtime/
+
+# IPython
+profile_default/
+ipython_config.py
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.history/
+
+# Environment / secret files
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Binary / database / large files often not committed
+*.sqlite3
+*.db
+*.ckpt
+*.pth
+
+# Wheels
+*.whl

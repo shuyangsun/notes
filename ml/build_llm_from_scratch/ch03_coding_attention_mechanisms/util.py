@@ -21,7 +21,7 @@ class GPTDatasetV1(Dataset):
         self._input_ids = []
         self._target_ids = []
 
-        token_ids = tokenizer.encode(content)
+        token_ids = tokenizer.encode(content, allowed_special={'<|endoftext|>'})
 
         for i in range(0, len(token_ids) - context_window_size, stride):
             input_chunk = token_ids[i:i + context_window_size]

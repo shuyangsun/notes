@@ -9,6 +9,9 @@ def text_corpus() -> str:
     with open('The_Verdict.txt', 'r', encoding='utf-8') as txt_file:
         return txt_file.read()
 
+def text_to_token_ids(text: str, tokenizer: tiktoken.Encoding) -> list[int]:
+    return tokenizer.encode(content, allowed_special={'<|endoftext|>'})
+
 class GPTDatasetV1(Dataset):
     _input_ids: list[torch.Tensor]
     _target_ids: list[torch.Tensor]
@@ -248,15 +251,28 @@ class GPTModel(nn.Module):
     def f32_param_size_gb(self) -> int:
         return self.num_params() * 4 / 1024 ** 3
 
-def predict_text(model: GPTModel, tokenizer: tiktoken.Encoding, text: str, max_len: int = 1024) -> str:
+def predict_text(model: GPTModel, device: torch.device, tokenizer: tiktoken.Encoding, text: str, max_len: int = 1024) -> str:
     eos = '<|endoftext|>'
     next_token: str | None = None
     encoded_len: int = 0
-    while next_token != eos and encoded_len < max_len:
-        encoded = tokenizer.encode(text, allowed_special={eos})
-        encoded_len = len(encoded)
-        next_tok_logits = model(torch.tensor(encoded).unsqueeze(0)).squeeze(0)[-1]
-        next_tok_probs = torch.softmax(next_tok_logits, dim=0)
-        next_token = tokenizer.decode([torch.argmax(next_tok_probs).item()])
-        text += next_token
+    model.eval()
+    with torch.no_grad():
+        while next_token != eos and encoded_len < max_len:
+            encoded = tokenizer.encode(text, allowed_special={eos})
+            encoded_len = len(encoded)
+            next_tok_logits = model(torch.tensor(encoded).unsqueeze(0).to(device)).squeeze(0)[-1]
+            next_tok_probs = torch.softmax(next_tok_logits, dim=0)
+            next_token = tokenizer.decode([torch.argmax(next_tok_probs).item()])
+            text += next_token
+    model.train()
     return text
+
+def auto_device() -> torch.device:
+    if torch.cuda.is_available():
+        print('Using CUDA backend.')
+        return torch.device('cuda')
+    if torch.backends.mps.is_available():
+        print('Using MPS backend.')
+        return torch.device('mps')
+    print('Using CPU backend.')
+    return torch.device('cpu')

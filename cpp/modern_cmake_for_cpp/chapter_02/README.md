@@ -187,7 +187,7 @@ Strings evaluated to `True`: `ON`, `Y`, `YES`, `TRUE` or a non-zero number (case
 
 Strings evaluated to `False`: `OFF`, `N`, `NO`, `FALSE`, `IGNORE`, `NOTFOUND`, `.*-NOTFOUND` (string ending in `-NOTFOUND`), empty string, zero.
 
-Conditional evaluations in CMake is very tricky! There are many unintuitive behaviors. Check out examples in [control.cmake](control.cmake) and be aware of the following DOs and DON'Ts.
+Conditional evaluations in CMake is very tricky! There are many unintuitive behaviors. Check out examples in [condition.cmake](condition.cmake) and be aware of the following DOs and DON'Ts.
 
 ```cmake
 # DON'Ts

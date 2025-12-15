@@ -2,8 +2,12 @@
   "name": "notes",
   "type": "module",
   "private": true,
+  "scripts": {
+    "format": "bunx prettier . --write && terraform fmt -recursive"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "prettier": "3.7.4"
   },
   "peerDependencies": {
     "typescript": "^5"

@@ -7,6 +7,7 @@
 ## DevOps
 
 [Nginx HTTP Server](devops/nginx/README.md) by Gabriel Ouiran
+[Terraform: Up and Running](devops/terraform_up_and_running/README.md) by [Yevgeniy Brikman](https://www.ybrikman.com/)
 
 ## C++
 

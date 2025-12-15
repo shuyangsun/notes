@@ -1,6 +1,6 @@
-const clientBaseUri = 'http://localhost:9000';
-const authServerBaseUri = 'http://localhost:9001';
-const resourceServerBaseUri = 'http://localhost:9002';
+const clientBaseUri = "http://localhost:9000";
+const authServerBaseUri = "http://localhost:9001";
+const resourceServerBaseUri = "http://localhost:9002";
 
 export interface ClientConfig {
   baseUri: string;
@@ -30,8 +30,8 @@ export interface ServerConfigs {
 
 const clientConf: ClientConfig = {
   baseUri: clientBaseUri,
-  clientId: 'oauth-client-1',
-  clientSecret: 'oauth-client-secret-1',
+  clientId: "oauth-client-1",
+  clientSecret: "oauth-client-secret-1",
   authorizeEndpoint: `${clientBaseUri}/api/auth/authorize`,
   fetchResourceEndpoint: `${clientBaseUri}/api/fetch-resource`,
   redirectUris: [`${clientBaseUri}/api/auth/callback`],

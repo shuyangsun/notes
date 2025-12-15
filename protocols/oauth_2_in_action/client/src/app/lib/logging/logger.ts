@@ -9,7 +9,7 @@ class LoggerFactory {
    */
   constructor(
     private component: string,
-    private char: string = '=',
+    private char: string = "=",
     private width: number = 80,
   ) {}
 
@@ -41,7 +41,7 @@ class Logger {
     private stepMajor: number,
     private component: string,
     private endpoint: string,
-    private char: string = '=',
+    private char: string = "=",
     private width: number = 80,
   ) {}
 
@@ -82,5 +82,5 @@ class Logger {
   }
 }
 
-const loggerFactory = new LoggerFactory('CLIENT');
+const loggerFactory = new LoggerFactory("CLIENT");
 export default loggerFactory;

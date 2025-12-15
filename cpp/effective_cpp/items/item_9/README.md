@@ -2,7 +2,7 @@
 
 # Item 9: Prefer alias declarations to `typedef`s.
 
-Alias declarations are easier to read and can be used with templates which `typedef`s cannot. Using types defined with `typedef`s inside of a template requires prefixing with `typename` (it is a *dependent type*), this is not the case for alias declarations.
+Alias declarations are easier to read and can be used with templates which `typedef`s cannot. Using types defined with `typedef`s inside of a template requires prefixing with `typename` (it is a _dependent type_), this is not the case for alias declarations.
 
 ## Type Traits
 

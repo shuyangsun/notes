@@ -29,10 +29,10 @@ std::unordered_map<std::string, int> m{};
 
 // Should be std::pair<const std::string, int>
 for (const std::pari<std::string, int>& p: m) { // Implicit copy
-  // .. 
+  // ..
 }
 
 for (const auto& [k, v]: m) { // Much easier to read
-  
+
 }
 ```

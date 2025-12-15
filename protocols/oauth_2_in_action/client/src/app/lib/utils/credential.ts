@@ -5,7 +5,7 @@ export function encodeClientCredentials(
   const encoded = `${encodeURIComponent(clientId)}:${encodeURIComponent(
     clientSecret,
   )}`;
-  return Buffer.from(encoded).toString('base64');
+  return Buffer.from(encoded).toString("base64");
 }
 
 export function buildAuthHeaders(
@@ -14,7 +14,7 @@ export function buildAuthHeaders(
 ): Record<string, string> {
   const credentials = encodeClientCredentials(clientId, clientSecret);
   return {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    "Content-Type": "application/x-www-form-urlencoded",
     Authorization: `Basic ${credentials}`,
   };
 }

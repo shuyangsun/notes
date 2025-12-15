@@ -4,11 +4,11 @@
 
 **Design patterns should not be applied indiscriminately. Often they achieve flexibility and variability by introducing additional levels of indirection, and that can complicate a design and/or cost you some performance.**
 
-One thing expert designers know *not* to do is solve every problem from first principles. Rather, they reuse solutions that have worked for them in the past. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it.
+One thing expert designers know _not_ to do is solve every problem from first principles. Rather, they reuse solutions that have worked for them in the past. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it.
 
-An **object** packs both data and the procedures (methods or operations) that operate on that data, an object performs an operation when it receives a **request** (or **message**) from a **client**. Requests are the *only* way to get an object to execute an operation, operations are the *only* way to change an object's internal data.
+An **object** packs both data and the procedures (methods or operations) that operate on that data, an object performs an operation when it receives a **request** (or **message**) from a **client**. Requests are the _only_ way to get an object to execute an operation, operations are the _only_ way to change an object's internal data.
 
-An object's *class* defines its implementation, an object's *type* defines its interface. They are not the same. Class (implementation) inheritance is discouraged, type (interface) inheritance is encouraged (also called **subtyping**). **Favor object composition over class inheritance,** designers often overuse inheritance as a reuse technique.
+An object's _class_ defines its implementation, an object's _type_ defines its interface. They are not the same. Class (implementation) inheritance is discouraged, type (interface) inheritance is encouraged (also called **subtyping**). **Favor object composition over class inheritance,** designers often overuse inheritance as a reuse technique.
 
 An object-oriented program's run-time structure often bears little resemblance to its code structure.
 
@@ -17,7 +17,7 @@ The hard part about object-oriented design is decomposing a system into objects 
 ## Common Causes of Redesign
 
 | Mistake                                      | Downside                                     | Patterns to Rescue                                                                                                                                                      |
-|----------------------------------------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Creating obj by specifying class explicitly. | Commits to class impl.                       | [Abstract Factory](patterns/p01_abstract_factory), [~~Factory Method~~](), [~~Prototype~~]()                                                                            |
 | Dependence on specific operations.           | Commit to one way of satisfying a request.   | [~~Change of Responsibility~~](), [~~Command~~]()                                                                                                                       |
 | Dependence on hardware/software platform.    | Obvious.                                     | [Abstract Factory](patterns/p01_abstract_factory), [~~Bridge~~]()                                                                                                       |
@@ -30,12 +30,12 @@ The hard part about object-oriented design is decomposing a system into objects 
 ## Table of Contents
 
 | Purpose        | Design Pattern                                    | Aspects That Can Vary                                                                      |
-|----------------|---------------------------------------------------|--------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | **Creational** | [Abstract Factory](patterns/p01_abstract_factory) | families of product objects                                                                |
 |                | [~~Builder~~]()                                   | how a composite object gets created                                                        |
 |                | [~~Factory Method~~]()                            | subclass of object that is instantiated                                                    |
 |                | [~~Prototype~~]()                                 | class of object that is instantiated                                                       |
-|                | [~~Singleton~~]()                                 | the sole instance of  a class                                                              |
+|                | [~~Singleton~~]()                                 | the sole instance of a class                                                               |
 | **Structural** | [~~Adapter~~]()                                   | interface to an object                                                                     |
 |                | [~~Bridge~~]()                                    | implementation of an object                                                                |
 |                | [Composite](patterns/p08_composite)               | structure and composition of an object                                                     |

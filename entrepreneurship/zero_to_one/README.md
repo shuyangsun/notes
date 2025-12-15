@@ -15,7 +15,7 @@ An interesting categorization in this chapter is by the four quadrants of defini
 high <--------------- Investment ---------------> low
 
 |             | Definite          | Indefinite         | (Savings) |
-|-------------|-------------------|--------------------|-----------|
+| ----------- | ----------------- | ------------------ | --------- |
 | Optimistic  | U.S., 1950s-1960s | U.S., 1982-present | low       |
 | Pessimistic | China, present    | Europe, present    | high      |
 
@@ -31,7 +31,7 @@ This chapter is mostly about the phenomenon that startups follow the power law. 
 
 ## 8. Secrets
 
-There are plenty of secrets (opportunities) to be discovered. The chapter has some interesting takes on why most people nowadays act like there are no more secrets left to be discovered (e.g., globalization and "other smarter people would've done it already"). *DON'T THINK LIKE THAT!*
+There are plenty of secrets (opportunities) to be discovered. The chapter has some interesting takes on why most people nowadays act like there are no more secrets left to be discovered (e.g., globalization and "other smarter people would've done it already"). _DON'T THINK LIKE THAT!_
 
 Once you find a secret, only tell the people who need to know, and no more.
 
@@ -41,11 +41,11 @@ I do find the HP example in this chapter is quite narrative-ish and a classic ex
 
 ## 9. Foundations
 
-This chapter emphasizes the importance of foundation, which *should* be obvious. One of the important ideas are the separation of ownership, possession and control (possession is a confusing word choice here IMO, it sounds too similar to ownership, it's more like "operation").
+This chapter emphasizes the importance of foundation, which _should_ be obvious. One of the important ideas are the separation of ownership, possession and control (possession is a confusing word choice here IMO, it sounds too similar to ownership, it's more like "operation").
 
-* Ownership: who legally owns a company's equity? (founders, early employees and investors)
-* Possession: who actually runs the company on a day-to-day basis? (managers and employees)
-* Control: who formally governs the company's affairs? (board of directors, usually founders and investors)
+- Ownership: who legally owns a company's equity? (founders, early employees and investors)
+- Possession: who actually runs the company on a day-to-day basis? (managers and employees)
+- Control: who formally governs the company's affairs? (board of directors, usually founders and investors)
 
 It is important to align the direction across different roles. A couple good quotes from this chapter:
 
@@ -57,7 +57,7 @@ It is important to align the direction across different roles. A couple good quo
 
 ## 10. The Mechanics of Mafia
 
-"No company has a culture, every company *is* a culture."
+"No company has a culture, every company _is_ a culture."
 
 I like the message in this chapter about it is extremely important to hiring the right people and pick the right partners, and recruiting is a company's core competency.
 
@@ -67,8 +67,8 @@ It's fine to not question the mission or end goal too much, but it is encouraged
 
 ## 11. If You Build It, Will They Come?
 
-This chapter described someone exactly like me: "advertising matters because it works. It works on *nerds*, and it works on *you*". I have always been the nerd described in this chapter: having a distaste about sales because it's all about putting on a show, whereas engineering provides irreplaceable value, they are almost the opposite of each other. I've also believed that good products sell themselves, no sales should be required for good products. The phrase "nerds who instinctively mistrust the media often make the mistake of trying to ignore it".
+This chapter described someone exactly like me: "advertising matters because it works. It works on _nerds_, and it works on _you_". I have always been the nerd described in this chapter: having a distaste about sales because it's all about putting on a show, whereas engineering provides irreplaceable value, they are almost the opposite of each other. I've also believed that good products sell themselves, no sales should be required for good products. The phrase "nerds who instinctively mistrust the media often make the mistake of trying to ignore it".
 
-Unfortunately, that is simply not true. *It takes hard work to make sales look easy.* The grandmaster salesmen do not appear as salesmen.
+Unfortunately, that is simply not true. _It takes hard work to make sales look easy._ The grandmaster salesmen do not appear as salesmen.
 
 Next time if I try to ignore sales, ask myself the question: "how many great products you could actually benefit from you missed out on?" The answer is probably "too many", because the companies built great products but didn't have good distribution never made it to your ear before they went bankrupt.

@@ -12,6 +12,7 @@ f(expr);
 Deduced type for `T` and `ParamType` varies based on how they are specified and what is `expr`. There are three main scenarios categorized by `ParamType`.
 
 `ParamType` is:
+
 1. Pointer or reference type, but not a universal reference (`T&` or `T*`).
 2. Universal reference (`T&&`).
 3. Neither a pointer nor a reference (`T`).
@@ -31,7 +32,7 @@ void f(T& param);
 ```
 
 | expr                 | Deduced `ParamType` | Deduced `T`      |
-|----------------------|---------------------|------------------|
+| -------------------- | ------------------- | ---------------- |
 | `int x = 27;`        | `int&`              | `int`            |
 | `const int cx = x;`  | `const int&`        | `const int`      |
 | `const int& rx = x;` | `const int&`        | `const int`      |
@@ -45,7 +46,7 @@ void f(const T& param);
 ```
 
 | expr                 | Deduced `ParamType` | Deduced `T` |
-|----------------------|---------------------|-------------|
+| -------------------- | ------------------- | ----------- |
 | `int x = 27;`        | `const int&`        | `int`       |
 | `const int cx = x;`  | `const int&`        | `int`       |
 | `const int& rx = x;` | `const int&`        | `int`       |
@@ -68,7 +69,7 @@ void f(T&& param);
 ```
 
 | expr                 | Deduced `ParamType` | Deduced `T`  |
-|----------------------|---------------------|--------------|
+| -------------------- | ------------------- | ------------ |
 | `int x = 27;`        | `int&`              | `int&`       |
 | `const int cx = x;`  | `const int&`        | `const int&` |
 | `const int& rx = x;` | `const int&`        | `const int&` |
@@ -89,12 +90,13 @@ void f(T param);
 ```
 
 | expr                 | Deduced `ParamType` | Deduced `T` |
-|----------------------|---------------------|-------------|
+| -------------------- | ------------------- | ----------- |
 | `int x = 27;`        | `int`               | `int`       |
 | `const int cx = x;`  | `int`               | `int`       |
 | `const int& rx = x;` | `int`               | `int`       |
 
 ## Summary
+
 `ParamType` determines how types get deduced. Simple cases like `T` and `T&` behave as expected intuitively: `T` always makes a copy (thus the lost of `const` and `volatile`) and `T&` just does pattern matching. The tricky scenario is when `ParamType` is `T&&` (universal reference) and `expr` is an lvalue reference. In this case, both `ParamType` and `T` are deduced to lvalue reference type, this is also the only situation where `T` is deduced to be reference type.
 
 Refer to [item_1.cpp](item_1.cpp) for actual program output in different situations.

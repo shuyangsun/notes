@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta chatset="utf-8" />
@@ -45,15 +45,15 @@
         color: orange;
       }
       /* Should not match anything. */
-      p[lan='fr en'] {
+      p[lan="fr en"] {
         color: blue;
       }
-      p[lan='en fr'] {
+      p[lan="en fr"] {
         color: peru;
       }
 
       /* Should match `lan="zh fr"` */
-      p[lan~='fr'][lan~='zh'] {
+      p[lan~="fr"][lan~="zh"] {
         color: blue;
       }
 

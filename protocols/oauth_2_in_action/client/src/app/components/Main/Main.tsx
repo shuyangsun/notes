@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { OAuthInfo } from './OAuthInfo';
-import { ProtectedResourceInfo } from './ProtectedResourceInfo';
+import { OAuthInfo } from "./OAuthInfo";
+import { ProtectedResourceInfo } from "./ProtectedResourceInfo";
 
 export function Main() {
   return (

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { ServerStatus } from '../lib/model/status';
+import { useEffect, useState } from "react";
+import { ServerStatus } from "../lib/model/status";
 
 export default function useServerStatus(pingEndpoint: string): ServerStatus {
-  const [status, setStatus] = useState<ServerStatus>('unknown');
+  const [status, setStatus] = useState<ServerStatus>("unknown");
 
   useEffect(() => {
     let isMounted = true;
@@ -10,11 +10,11 @@ export default function useServerStatus(pingEndpoint: string): ServerStatus {
       try {
         const res = await fetch(pingEndpoint);
         if (isMounted) {
-          setStatus(res.ok ? 'online' : 'offline');
+          setStatus(res.ok ? "online" : "offline");
         }
       } catch {
         if (isMounted) {
-          setStatus('offline');
+          setStatus("offline");
         }
       }
     };

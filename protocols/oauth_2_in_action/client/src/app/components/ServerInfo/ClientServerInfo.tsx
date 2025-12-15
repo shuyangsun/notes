@@ -1,6 +1,6 @@
-import { ClientConfig } from '@/app/lib/model/config';
-import ServerStatusHeader from './ServerInfoHeader';
-import useServerStatus from '@/app/hooks/use-server-status';
+import { ClientConfig } from "@/app/lib/model/config";
+import ServerStatusHeader from "./ServerInfoHeader";
+import useServerStatus from "@/app/hooks/use-server-status";
 
 interface ClientServerStatusProps {
   config: ClientConfig;
@@ -11,7 +11,7 @@ export default function ClientServerInfo({ config }: ClientServerStatusProps) {
   return (
     <section>
       <ServerStatusHeader
-        name='Client'
+        name="Client"
         baseUri={config.baseUri}
         status={status}
       />

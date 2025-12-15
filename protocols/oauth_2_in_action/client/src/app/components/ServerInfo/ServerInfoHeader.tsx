@@ -1,5 +1,5 @@
-import { ServerStatus } from '@/app/lib/model/status';
-import './ServerInfoHeader.css';
+import { ServerStatus } from "@/app/lib/model/status";
+import "./ServerInfoHeader.css";
 
 interface ServerInfoHeaderProps {
   name: string;

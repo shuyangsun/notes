@@ -1,16 +1,16 @@
-import { NextResponse } from 'next/server';
-import loggerFactory from '@/app/lib/logging/logger';
-import { cookies } from 'next/headers';
-import { serverConfigs } from '@/app/lib/model/config';
-import { ProtectedResource } from '@/app/lib/model/protected-resource';
+import { NextResponse } from "next/server";
+import loggerFactory from "@/app/lib/logging/logger";
+import { cookies } from "next/headers";
+import { serverConfigs } from "@/app/lib/model/config";
+import { ProtectedResource } from "@/app/lib/model/protected-resource";
 
 export async function GET() {
-  const logger = loggerFactory.loggerForEndpoint('fetch-resource');
+  const logger = loggerFactory.loggerForEndpoint("fetch-resource");
   logger.logDelimiterBegin();
   const cookieStore = await cookies();
-  const accessToken = cookieStore.get('access_token')?.value;
+  const accessToken = cookieStore.get("access_token")?.value;
   if (!accessToken) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const headers = {
     Authorization: `Bearer ${accessToken}`,
@@ -24,22 +24,22 @@ export async function GET() {
   const response = await fetch(
     serverConfigs.protectedResourceServerConfig.resourceEndpoint,
     {
-      method: 'POST',
+      method: "POST",
       headers,
     },
   );
 
   if (!response.ok) {
     return NextResponse.json(
-      { error: 'Failed to fetch protected resource.' },
+      { error: "Failed to fetch protected resource." },
       { status: response.status },
     );
   }
 
   const text = await response.text();
   if (!text) {
-    console.error('Empty response');
-    return NextResponse.json({ error: 'Empty response' }, { status: 500 });
+    console.error("Empty response");
+    return NextResponse.json({ error: "Empty response" }, { status: 500 });
   }
 
   try {
@@ -51,7 +51,7 @@ export async function GET() {
     return NextResponse.json(data);
   } catch {
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: "Internal Server Error" },
       { status: 500 },
     );
   }

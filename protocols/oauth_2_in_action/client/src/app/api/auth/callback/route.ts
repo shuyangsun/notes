@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { serverConfigs } from '@/app/lib/model/config';
-import { cookies } from 'next/headers';
-import { buildAuthHeaders } from '@/app/lib/utils/credential';
-import loggerFactory from '@/app/lib/logging/logger';
+import { NextRequest, NextResponse } from "next/server";
+import { serverConfigs } from "@/app/lib/model/config";
+import { cookies } from "next/headers";
+import { buildAuthHeaders } from "@/app/lib/utils/credential";
+import loggerFactory from "@/app/lib/logging/logger";
 
 interface TokenResponse {
   access_token: string;
@@ -18,25 +18,25 @@ async function parseCallbackRequest(
 ): Promise<[CallbackArguments, ResponseError[]]> {
   const errors: ResponseError[] = [];
 
-  const storedState = (await cookies()).get('state')?.value;
-  (await cookies()).delete('state');
+  const storedState = (await cookies()).get("state")?.value;
+  (await cookies()).delete("state");
 
   const { searchParams } = new URL(req.url);
-  const authState = searchParams.get('state');
+  const authState = searchParams.get("state");
 
   // Make sure state matches.
   if (authState !== storedState) {
     errors.push({
-      message: 'unauthorized, state does not match.',
+      message: "unauthorized, state does not match.",
       status: 401,
     });
   }
 
   // Make sure the authorization code from auth server is present.
-  const code = searchParams.get('code');
+  const code = searchParams.get("code");
   if (!code) {
     errors.push({
-      message: 'auth server did not provide authorization code',
+      message: "auth server did not provide authorization code",
       status: 400,
     });
   }
@@ -44,18 +44,18 @@ async function parseCallbackRequest(
 }
 
 export async function GET(request: NextRequest) {
-  const logger = loggerFactory.loggerForEndpoint('api/auth/callback');
+  const logger = loggerFactory.loggerForEndpoint("api/auth/callback");
   logger.logDelimiterBegin();
   logger.log(
-    'Got authorization code from auth server, need to get access token now.',
+    "Got authorization code from auth server, need to get access token now.",
   );
 
   const errors = await parseCallbackRequest(request);
   if (errors) {
     const errorMessages = errors.map((err) => err.message);
-    logger.log(`!ERROR!\n  ${errorMessages.join('  \n')}`);
+    logger.log(`!ERROR!\n  ${errorMessages.join("  \n")}`);
     logger.logDelimiterEnd();
-    return new NextResponse(errorMessages.join('\n'), {
+    return new NextResponse(errorMessages.join("\n"), {
       status: errors[0].status,
     });
   }
@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
 
   const clientConfig = serverConfigs.clientConfig;
   const formData = new URLSearchParams({
-    grant_type: 'authorization_code',
+    grant_type: "authorization_code",
     code: code,
     redirect_uri: clientConfig.redirectUris[0],
   });
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
 
   const authServerConfig = serverConfigs.authServerConfig;
   const response = await fetch(authServerConfig.tokenEndpoint, {
-    method: 'POST',
+    method: "POST",
     headers,
     body: formData.toString(),
   });
@@ -92,17 +92,17 @@ export async function GET(request: NextRequest) {
   logger.log(`Got tokens from auth server:\n  ${JSON.stringify(data)}`);
 
   const cookieStore = await cookies();
-  cookieStore.set('access_token', data.access_token, {
+  cookieStore.set("access_token", data.access_token, {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
-    path: '/',
+    sameSite: "strict",
+    path: "/",
   });
-  cookieStore.set('token_type', data.token_type, {
+  cookieStore.set("token_type", data.token_type, {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
-    path: '/',
+    sameSite: "strict",
+    path: "/",
   });
 
   logger.log(

@@ -1,5 +1,5 @@
-import Square from './Square';
-import React, { useState } from 'react';
+import Square from "./Square";
+import React, { useState } from "react";
 
 function calculateWinner(squares) {
   const lines = [
@@ -15,7 +15,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (
-      squares[a] != ' ' &&
+      squares[a] != " " &&
       squares[a] &&
       squares[a] === squares[b] &&
       squares[a] === squares[c]
@@ -27,25 +27,25 @@ function calculateWinner(squares) {
 }
 
 export default function Board() {
-  const [values, setValues] = useState(Array(9).fill(' '));
-  const [turn, setTurn] = useState('O');
+  const [values, setValues] = useState(Array(9).fill(" "));
+  const [turn, setTurn] = useState("O");
 
   function onClick(idx) {
     return function () {
-      if (values[idx] !== ' ' || calculateWinner(values)) {
+      if (values[idx] !== " " || calculateWinner(values)) {
         return;
       }
       setValues(values.map((value, index) => (index === idx ? turn : value)));
-      setTurn(turn === 'O' ? 'X' : 'O');
+      setTurn(turn === "O" ? "X" : "O");
     };
   }
 
   const winner = calculateWinner(values);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + turn;
+    status = "Next player: " + turn;
   }
 
   return (

@@ -93,7 +93,5 @@ $<PATH:RELATIVE_PATH,path...,base_directory>
 $<PATH:ABSOLUTE_PATH[,NORMALIZE],path...,base_directory>
 
 # After CMake 3.27:
-# TODO
-$<LIST:LENGTH>
-$<LIST:GET>
+https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html
 ```

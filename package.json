@@ -3,7 +3,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "format": "bunx prettier . --write && terraform fmt -recursive"
+    "format": "bunx prettier . --write && terraform fmt -recursive",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/bun": "latest",

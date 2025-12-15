@@ -79,3 +79,8 @@ cmake-build-release
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup

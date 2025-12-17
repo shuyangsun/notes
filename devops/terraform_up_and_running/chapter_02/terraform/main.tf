@@ -2,12 +2,18 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "server_port" {
+  description = "The port number to receive HTTP requests."
+  type        = number
+  default     = 8080
+}
+
 resource "aws_security_group" "instance" {
   name = "terraform-example-instance"
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = var.server_port
+    to_port     = var.server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -34,11 +40,12 @@ resource "aws_instance" "example" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, world" > index.html
-              nohup busybox httpd -f -p 8080 &
+              nohup busybox httpd -f -p ${var.server_port} &
               EOF
 }
 
 output "public_uri" {
-  value       = "http://${aws_instance.example.public_ip}:8080"
-  description = "The public URI to access the webpage"
+  description = "The public URI to access the webpage."
+  # Use `curl $(tf output public_uri | tr -d '"')` to test.
+  value = "http://${aws_instance.example.public_ip}:${var.server_port}"
 }

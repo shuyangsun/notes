@@ -84,3 +84,9 @@ cmake-build-release
 .terraform/
 *.tfstate
 *.tfstate.backup
+
+# Environment variables
+
+.env
+.env.*
+.envrc

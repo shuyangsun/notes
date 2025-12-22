@@ -8,7 +8,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": "prettier --write --log-level warn",
-    "*.tf": "terraform fmt"
+    "*.tf": [
+      "terraform fmt",
+      "./scripts/lint-terraform.sh"
+    ]
   },
   "devDependencies": {
     "@types/bun": "latest",

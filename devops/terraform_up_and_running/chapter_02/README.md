@@ -15,3 +15,5 @@ terraform {
   }
 }
 ```
+
+Use `terraform destroy -target=<PROVIDER>_<TYPE>.<NAME>` to destroy a specific resource.

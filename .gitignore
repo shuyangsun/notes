@@ -88,5 +88,4 @@ cmake-build-release
 # Environment variables
 
 .env
-.env.*
 .envrc

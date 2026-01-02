@@ -13,6 +13,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
+locals {
+  env_app_name = var.environment == "prod" ? var.app_name : "${var.environment}-${var.app_name}"
+}
+
 # ------------------------------- Networking -----------------------------------
 
 data "aws_vpc" "default" {
@@ -26,14 +30,8 @@ data "aws_subnets" "default" {
   }
 }
 
-variable "server_port" {
-  description = "The port number to receive HTTP requests."
-  type        = number
-  default     = 8080
-}
-
 resource "aws_security_group" "instance" {
-  name = "terraform-example-instance"
+  name = "${local.env_app_name}-instance"
 
   ingress {
     from_port   = var.server_port
@@ -53,7 +51,7 @@ resource "aws_security_group" "instance" {
 # ------------------------------ Load Balancer ---------------------------------
 
 resource "aws_security_group" "alb" {
-  name = "terraform-example-alb"
+  name = "${local.env_app_name}-alb"
 
   ingress {
     from_port   = 80
@@ -71,7 +69,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_lb" "example" {
-  name               = "terraform-asg-example"
+  name               = "${local.env_app_name}-lb"
   load_balancer_type = "application"
   subnets            = data.aws_subnets.default.ids
   security_groups    = [aws_security_group.alb.id]
@@ -93,7 +91,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_lb_target_group" "asg" {
-  name     = "terraform-asg-example"
+  name     = "${local.env_app_name}-target"
   port     = var.server_port
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default.id
@@ -129,7 +127,7 @@ resource "aws_lb_listener_rule" "asg" {
 # ------------------------------ Launch Template ---------------------------------
 
 resource "aws_launch_template" "example" {
-  name_prefix   = "terraform-example-"
+  name_prefix   = "${local.env_app_name}-"
   image_id      = "ami-0ecb62995f68bb549"
   instance_type = "t2.nano"
 
@@ -165,7 +163,7 @@ resource "aws_autoscaling_group" "example" {
 
   tag {
     key                 = "Name"
-    value               = "terraform-asg-example"
+    value               = "${local.env_app_name}-asg"
     propagate_at_launch = true
   }
 }

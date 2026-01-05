@@ -16,5 +16,9 @@ variable "names" {
 
 output "all_names" {
   description = "All user names."
-  value       = "%{for idx, name in var.names}(${idx}) ${name}, %{endfor}"
+  value       = <<EOF
+%{~for idx, name in var.names~}
+(${idx}) ${name}%{if idx < length(var.names) - 1}, %{else}.%{endif}
+%{~endfor~}
+EOF
 }

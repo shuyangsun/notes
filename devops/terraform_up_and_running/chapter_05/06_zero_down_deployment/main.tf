@@ -42,6 +42,8 @@ module "asg" {
   max_size = 3
 
   subnet_ids = module.subnets.private_ids
+
+  target_group_arns = [module.lb.target_group_arn]
 }
 
 module "lb" {

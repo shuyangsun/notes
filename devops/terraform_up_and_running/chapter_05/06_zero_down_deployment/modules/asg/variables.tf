@@ -27,3 +27,8 @@ variable "subnet_ids" {
   description = "VPC subnet IDs."
   type        = list(string)
 }
+
+variable "target_group_arns" {
+  description = "Target group ARNs to register with this ASG."
+  type        = list(string)
+}

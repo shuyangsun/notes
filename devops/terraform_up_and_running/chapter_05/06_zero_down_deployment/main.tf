@@ -22,11 +22,26 @@ module "ec2_sg" {
   ingress_security_group_id = module.lb_sg.security_group_id
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 module "launch_template" {
   source = "./modules/launch_template"
 
   instance_type = "t2.micro"
-  ami           = "ami-08d7aabbb50c2c24e"
+  ami           = data.aws_ami.ubuntu.id
   server_port   = var.hosting_port
   page_title    = "Zero-Downtime Deployment Test"
 

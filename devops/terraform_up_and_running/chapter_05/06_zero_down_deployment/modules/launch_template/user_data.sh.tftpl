@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cat > index.html <<EOF
+mkdir -p /var/www/html
+cat > /var/www/html/index.html <<EOF
 <!doctype html>
 <html lang=en>
 <head>
@@ -13,4 +14,4 @@ cat > index.html <<EOF
 </html>
 EOF
 
-nohup busybox httpd -f -p ${server_port} &
+nohup python3 -m http.server ${server_port} --directory /var/www/html &

@@ -77,8 +77,9 @@ build
 cmake-build-debug
 cmake-build-release
 
-# TypeScript cache
+# JS & TS cache
 *.tsbuildinfo
+*.jsc
 
 # Terraform
 .terraform/

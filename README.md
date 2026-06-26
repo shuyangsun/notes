@@ -37,6 +37,10 @@
 
 [Dart Language](dart/dart_language/README.md)
 
+## Kotlin
+
+[Kotlin in Action](kotlin/kotlin_in_action/README.md) by [Sebastian Aigner](https://www.manning.com/authors/sebastian-aigner), [Roman Elizarov](https://www.manning.com/authors/roman-elizarov), [Svetlana Isakova](https://www.manning.com/authors/svetlana-isakova), and [Dmitry Jemerov](https://www.manning.com/authors/dmitry-jemerov)
+
 ## Protocols
 
 [OAuth 2 in Action](protocols/oauth_2_in_action/README.md) by [Justin Richer](https://www.manning.com/authors/justin-richer) and [Antonio Sanso](https://www.manning.com/authors/antonio-sanso)

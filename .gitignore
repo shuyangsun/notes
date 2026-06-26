@@ -87,6 +87,8 @@ cmake-build-release
 *.tfstate.backup
 
 # Environment variables
-
 .env
 .envrc
+
+# VCS
+.jj/

@@ -92,3 +92,6 @@ cmake-build-release
 
 # VCS
 .jj/
+
+# Kotlin
+*.jar

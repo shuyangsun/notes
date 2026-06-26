@@ -20,6 +20,8 @@ comment.
 
 ## Command
 
+Examples: [commands.cmake](./commands.cmake)
+
 Commands aren't case-sensitive, but `snake_case` commands are preferred.
 
 Command invocations in CMake are not expressions, everything inside of the parenthesis is treated as an argument.
@@ -160,6 +162,8 @@ endfunction()
 
 ## Lists
 
+Examples: [lists.cmake](./lists.cmake)
+
 Lists can be created by passing multiple arguments to `set()` or with `;` delimeter.
 
 ```cmake
@@ -179,7 +183,7 @@ message(${LIST_1_LEN}) # 4
 
 ### Conditional blocks
 
-Examples: [condition.cmake](condition.cmake)
+Examples: [condition.cmake](condition.cmake), [big_endian.cmake](./big_endian.cmake)
 
 Note that no local variable scope is created by conditional blocks or loops.
 
@@ -215,9 +219,9 @@ Commonly used comparison operators:
 
 ### Loops
 
-The only loop that restricts new variables in the local scope is `foreach`.
-
 Examples: [loop.cmake](loop.cmake)
+
+The only loop that restricts new variables in the local scope is `foreach`.
 
 ```cmake
 set(COLORS "red;green;blue")

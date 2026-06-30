@@ -1,4 +1,4 @@
-package com.shuyangsun.notes.ktinaction.ch02.util
+package com.shuyangsun.notes.ktinaction.ch02.sec1
 
 /**
  * Returns the maximum of two integers.

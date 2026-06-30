@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.3.21"
 }
 
-group = "org.example"
+group = "com.shuyangsun.notes.ktinaction.ch02"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -5,3 +5,4 @@
 ## Table of contents
 
 1. [Kotlin: what and why](./chapters/chapter_01)
+2. [Kotlin basics](./chapters/ch02_kotlin_basics)

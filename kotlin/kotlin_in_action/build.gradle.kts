@@ -1,3 +1,4 @@
+import java.io.File
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
@@ -17,10 +18,8 @@ abstract class KtfmtStdinTask @Inject constructor(private val execOperations: Ex
     @TaskAction
     fun format() {
         val path = project.providers.gradleProperty("ktfmtPath").orNull.orEmpty()
-        val sourceFile =
-            temporaryDir.resolve(
-                if (path.endsWith(".gradle.kts")) "stdin.gradle.kts" else "stdin.kt"
-            )
+        val suffix = if (path.endsWith(".gradle.kts")) ".gradle.kts" else ".kt"
+        val sourceFile = File.createTempFile("stdin-", suffix, temporaryDir)
         sourceFile.writeBytes(System.`in`.readBytes())
 
         execOperations.javaexec {
@@ -34,7 +33,7 @@ abstract class KtfmtStdinTask @Inject constructor(private val execOperations: Ex
     }
 }
 
-group = "com.shuyangsun.notes.ktinaction.ch02"
+group = "com.shuyangsun.notes.ktinaction"
 
 version = "1.0-SNAPSHOT"
 
@@ -58,7 +57,7 @@ kotlin {
 
 spotless {
     kotlin {
-        target("../**/*.kt")
+        target("src/**/*.kt")
         ktfmt("0.64").kotlinlangStyle()
     }
 

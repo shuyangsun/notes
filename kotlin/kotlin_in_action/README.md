@@ -4,5 +4,11 @@
 
 ## Table of contents
 
-1. [Kotlin: what and why](./chapters/chapter_01)
-2. [Kotlin basics](./chapters/ch02_kotlin_basics)
+1. [Kotlin: what and why](./docs/chapters/chapter_01)
+2. [Kotlin basics](./docs/chapters/chapter_02)
+
+## Code organization
+
+This directory is one Gradle project for the book. Put chapter examples under
+`src/main/kotlin/com/shuyangsun/notes/ktinaction/chXX`, and keep chapter notes
+under `docs/chapters/chapter_XX`.
